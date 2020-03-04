@@ -2,8 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.atguigu.atcrowdfunding.manager.dao.UserMapper">
 
+	<!-- 用户维护模块的mapper映射文件 -->
 
-
+	<!-- 封装结果集 -->
 	<resultMap id="BaseResultMap" type="com.atguigu.atcrowdfunding.bean.User">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="loginacct" property="loginacct" jdbcType="VARCHAR" />
@@ -12,51 +13,58 @@
 		<result column="email" property="email" jdbcType="VARCHAR" />
 		<result column="createtime" property="createtime" jdbcType="CHAR" />
 	</resultMap>
+
+	<!-- 根据id删除 -->
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from t_user
+		delete
+		from t_user
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
+
+	<!-- 添加用户 -->
 	<insert id="insert" parameterType="com.atguigu.atcrowdfunding.bean.User">
-		insert into t_user (id,
-		loginacct, userpswd,
-		username, email, createtime
-		)
+		insert
+		into t_user (id,loginacct, userpswd,username, email, createtime)
 		values
-		(#{id,jdbcType=INTEGER}, #{loginacct,jdbcType=VARCHAR},
-		#{userpswd,jdbcType=CHAR},
-		#{username,jdbcType=VARCHAR},
-		#{email,jdbcType=VARCHAR}, #{createtime,jdbcType=CHAR}
-		)
+		(#{id,jdbcType=INTEGER},
+		 #{loginacct,jdbcType=VARCHAR},
+		 #{userpswd,jdbcType=CHAR},
+		 #{username,jdbcType=VARCHAR},
+		 #{email,jdbcType=VARCHAR},
+		 #{createtime,jdbcType=CHAR})
 	</insert>
+
+	<!-- 根据id修改 -->
 	<update id="updateByPrimaryKey" parameterType="com.atguigu.atcrowdfunding.bean.User">
 		update t_user
 		set
-		loginacct = #{loginacct,jdbcType=VARCHAR},
-		userpswd =
-		#{userpswd,jdbcType=CHAR},
-		username = #{username,jdbcType=VARCHAR},
-		email = #{email,jdbcType=VARCHAR},
-		createtime =
-		#{createtime,jdbcType=CHAR}
+			loginacct = #{loginacct,jdbcType=VARCHAR},
+			userpswd =#{userpswd,jdbcType=CHAR},
+			username = #{username,jdbcType=VARCHAR},
+			email = #{email,jdbcType=VARCHAR},
+			createtime =#{createtime,jdbcType=CHAR}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
+
+	<!-- 根据id查询 -->
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
-		select id, loginacct, userpswd, username, email,
-		createtime
+		select id, loginacct, userpswd, username, email, createtime
 		from t_user
 		where id = #{id,jdbcType=INTEGER}
 	</select>
+
+	<!-- 查询所有 -->
 	<select id="selectAll" resultMap="BaseResultMap">
-		select id, loginacct, userpswd,
-		username, email, createtime
+		select id, loginacct, userpswd, username, email, createtime
 		from t_user
 	</select>
 
-	<select id="queryUserlogin" parameterType="map" resultMap="BaseResultMap">
-		select id, loginacct, userpswd,
-		username, email, createtime
-		from t_user where loginacct=#{loginacct} and userpswd=#{userpswd}
+	<!-- 查询用户数据，用于登录校验 -->
+	<select id="queryUserLogin" parameterType="map" resultMap="BaseResultMap">
+		select id, loginacct, userpswd, username, email, createtime
+		from t_user
+		where loginacct=#{loginacct} and userpswd=#{userpswd}
 	</select>
 
 </mapper>

@@ -32,18 +32,18 @@
     <form id="loginForm" action="${APP_PATH }/doLogin.do" method="POST" class="form-signin" role="form">
         <h2 class="form-signin-heading"><i class="glyphicon glyphicon-log-in"></i> 用户登录</h2>
         <div class="form-group has-success has-feedback">
-            <input type="text" class="form-control" id="inputSuccess4" name="loginacct" value="superadmin" placeholder="请输入登录账号" autofocus>
+            <input type="text" class="form-control" id="floginacct" name="loginacct" value="superadmin" placeholder="请输入登录账号" autofocus>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
         <div class="form-group has-success has-feedback">
-            <input type="password" class="form-control" id="inputSuccess4" name="userpswd" value="123456" placeholder="请输入登录密码" style="margin-top:10px;">
+            <input type="password" class="form-control" id="fuserpswd" name="userpswd" value="123456" placeholder="请输入登录密码" style="margin-top:10px;">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
 
         <div class="form-group has-success has-feedback">
             <div class="row">
                 <div class="col-md-6">
-                    <input type="text" class="form-control" id="inputSuccess4" placeholder="请输入验证码">
+                    <input type="text" class="form-control" id="fcheckCode" name="checkCode" placeholder="请输入验证码">
                 </div>
                 <%--<div id="vcode" class="col-md-6"><img src="${pageContext.request.contextPath}/CheckCodeServlet" alt="点击刷新" onclick="refreshCode()"/></div>--%>
                 <a href="javascript:refreshCode();">
@@ -53,7 +53,7 @@
             </div>
         </div>
         <div class="form-group has-success has-feedback">
-            <select class="form-control" >
+            <select class="form-control" id="ftype" name="type" >
                 <option value="member">会员</option>
                 <option value="user" selected>管理</option>
             </select>
@@ -88,9 +88,47 @@
     }*/
 
     //同步提交方式
-    function dologin() {
+   /* function dologin() {
         $("#loginForm").submit();
+    }*/
+
+    //异步请求方式
+    function dologin() {
+        //获取用户输入的登录信息
+        var loginacct = $("#floginacct").val();
+        var userpswd = $("#fuserpswd").val();
+        var checkCode = $("#fcheckCode").val();
+        var type = $("#ftype").val();
+
+
+        //使用ajax封装做异步请求
+        $.ajax({
+            type : "POST",
+            data : {
+                "loginacct" : loginacct,
+                "userpswd" : userpswd,
+                "checkCode" : checkCode,
+                "type" : type
+            },
+            url : "${APP_PATH}/doLogin.do",
+            beforeSend : function () {
+                //一般做表单数据校验
+                return true;
+            },
+            success : function (result) {
+                if (result.success){
+                    alert("登录成功");
+                }else {
+                    alert("登录失败");
+                }
+            },
+            error : function () {
+                alert("error");
+            }
+        });
     }
+
+
 </script>
 
 <%-- 切换验证码 --%>
