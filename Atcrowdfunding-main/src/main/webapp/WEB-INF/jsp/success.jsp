@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-SUCCESS,成功
+<h1 align="center">SUCCESS,成功</h1>
 </body>
 </html>

@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-ERROR.
+<h1 align="center">出现不明错误请联系管理员</h1>ERROR
 </body>
 </html>

@@ -59,8 +59,18 @@ public class DispatcherController {
         return "main";
     }
 
-    //登录同步请求方式
     /**
+     * 注销功能（退出系统）
+     * @return 重定向到系统主页面
+     */
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();  //销毁session或者清理session域
+        return "redirect:index.htm";  //使用重定向方法，封装用户写法提交请求
+    }
+
+    //登录同步请求方式
+    /*
      * 处理登录请求
      * @param loginacct  接收用户输入的登录名
      * @param userpswd   接收用户输入的登录密码
@@ -103,11 +113,6 @@ public class DispatcherController {
     @RequestMapping("/doLogin")
     public Object doLogin(String loginacct,String userpswd, String checkCode, String type,HttpSession session){
 
-        System.out.printf("用户数据");
-        System.out.printf(loginacct);
-        System.out.printf(userpswd);
-        System.out.printf(checkCode);
-
         //请求结果封装对象
         AjaxResult result = new AjaxResult();
 
@@ -136,7 +141,7 @@ public class DispatcherController {
             result.setSuccess(true);
         } catch (Exception e) {
             e.printStackTrace();
-            result.setMessage("登录失败");
+            result.setMessage("登录失败，请检查用户名和密码！");
             result.setSuccess(false);
         }
         return result;

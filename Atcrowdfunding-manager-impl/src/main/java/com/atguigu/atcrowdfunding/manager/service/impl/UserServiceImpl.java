@@ -26,6 +26,7 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public User queryUserLogin(Map<String, Object> paramMap) {
+
 		//调用dao层
 		User user = userMapper.queryUserLogin(paramMap);
 		//判断用户输入数据是否为空

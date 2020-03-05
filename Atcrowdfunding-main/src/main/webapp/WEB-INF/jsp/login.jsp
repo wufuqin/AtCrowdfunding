@@ -1,3 +1,7 @@
+<%--
+    登录页面
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -76,6 +80,7 @@
 </div>
 <script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
+<script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script>
     /*静态测试数据*/
     /*function dologin() {
@@ -102,21 +107,25 @@
 
         //对表单用户名数据进行校验
         if ($.trim(loginacct.val()) == "") {
-            alert("用户名不能为空！");
+            //alert("用户名不能为空！");
+            layer.msg("用户名不能为空", {time:2000, icon:null, shift:6});
+
             loginacct.val("");   //输入框重新设置为空
             loginacct.focus();   //重新获取焦点
             return false;
         }
         //对表单密码数据进行校验
         if ($.trim(userpswd.val()) == "") {
-            alert("密码不能为空！");
+            //alert("密码不能为空！");
+            layer.msg("密码不能为空", {time:2000, icon:null, shift:6});
             userpswd.val("");   //输入框重新设置为空
             userpswd.focus();   //重新获取焦点
             return false;
         }
         //对表单验证码数据进行校验
         if ($.trim(checkCode.val()) == "") {
-            alert("验证码不能为空！");
+            //alert("验证码不能为空！");
+            layer.msg("验证码不能为空", {time:2000, icon:null, shift:6});
             checkCode.val("");   //输入框重新设置为空
             checkCode.focus();   //重新获取焦点
             return false;
@@ -133,21 +142,27 @@
             },
             url : "${APP_PATH}/doLogin.do",
             beforeSend : function () {
+                //给出登录是提示
+                loadingIndex = layer.msg('登录中', {icon: 16});
                 //一般做表单数据校验
                 return true;
             },
             success : function (result) {
                 if (result.success){
                     //alert("登录成功");
+                    layer.close(loadingIndex);
+                    //layer.msg("登录成功", {time:3000, icon:6, shift:6});
                     //跳转到后台主页面
-                    window.location.href = "${APP_PATH}/main.htm"
+                    window.location.href = "${APP_PATH}/main.htm";
                 }else {
-                    alert("登录失败");
+                    //alert("登录失败");
+                    //alert(result.message);
+                    layer.msg(result.message, {time:2000, icon:5, shift:6});
                     refreshCode(); //自动切换验证码
                 }
             },
             error : function () {
-                alert("error");
+                layer.msg("登录失败", {time:2000, icon:5, shift:6});
             }
         });
     }
