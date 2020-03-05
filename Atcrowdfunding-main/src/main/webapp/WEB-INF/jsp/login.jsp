@@ -71,7 +71,7 @@
                 <a href="reg.htm">我要注册</a>
             </label>
         </div>
-        <a class="btn btn-lg btn-success btn-block" onclick="dologin()" > 登录</a>
+        <a class="btn btn-lg btn-success btn-block" onclick="doLogin()" > 登录</a>
     </form>
 </div>
 <script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>
@@ -93,21 +93,42 @@
     }*/
 
     //异步请求方式
-    function dologin() {
+    function doLogin() {
         //获取用户输入的登录信息
-        var loginacct = $("#floginacct").val();
-        var userpswd = $("#fuserpswd").val();
-        var checkCode = $("#fcheckCode").val();
+        var loginacct = $("#floginacct");
+        var userpswd = $("#fuserpswd");
+        var checkCode = $("#fcheckCode");
         var type = $("#ftype").val();
 
+        //对表单用户名数据进行校验
+        if ($.trim(loginacct.val()) == "") {
+            alert("用户名不能为空！");
+            loginacct.val("");   //输入框重新设置为空
+            loginacct.focus();   //重新获取焦点
+            return false;
+        }
+        //对表单密码数据进行校验
+        if ($.trim(userpswd.val()) == "") {
+            alert("密码不能为空！");
+            userpswd.val("");   //输入框重新设置为空
+            userpswd.focus();   //重新获取焦点
+            return false;
+        }
+        //对表单验证码数据进行校验
+        if ($.trim(checkCode.val()) == "") {
+            alert("验证码不能为空！");
+            checkCode.val("");   //输入框重新设置为空
+            checkCode.focus();   //重新获取焦点
+            return false;
+        }
 
         //使用ajax封装做异步请求
         $.ajax({
             type : "POST",
             data : {
-                "loginacct" : loginacct,
-                "userpswd" : userpswd,
-                "checkCode" : checkCode,
+                "loginacct" : loginacct.val(),
+                "userpswd" : userpswd.val(),
+                "checkCode" : checkCode.val(),
                 "type" : type
             },
             url : "${APP_PATH}/doLogin.do",
@@ -117,9 +138,12 @@
             },
             success : function (result) {
                 if (result.success){
-                    alert("登录成功");
+                    //alert("登录成功");
+                    //跳转到后台主页面
+                    window.location.href = "${APP_PATH}/main.htm"
                 }else {
                     alert("登录失败");
+                    refreshCode(); //自动切换验证码
                 }
             },
             error : function () {
@@ -127,7 +151,6 @@
             }
         });
     }
-
 
 </script>
 
@@ -138,9 +161,28 @@
         var vcode = document.getElementById("vcode");
         //2.设置其src属性，加时间戳
         vcode.src = "${pageContext.request.contextPath}/CheckCodeServlet?time="+new Date().getTime();
-
     }
 </script>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -11,32 +11,12 @@
     <meta name="description" content="">
     <meta name="keys" content="">
     <meta name="author" content="">
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="${APP_PATH}/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${APP_PATH}/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${APP_PATH}/css/login.css">
     <style>
 
     </style>
-    <%-- 校验注册表单 --%>
-    <script>
-        //校验登录名
-        function checkLoginacct() {
-            alert("校验登录名");
-            return false;
-        }
-
-        //定义入口函数
-        $(function () {
-            //当表单提交时，调用所有的校验方法
-            $("#registerForm").submit(function () {
-                return checkLoginacct();
-                //如果方法没有返回值，或者返回值为true则提交表单，false则不提交
-            });
-            //当组件失去焦点时，调用对应校验方法。
-
-        });
-
-    </script>
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -87,14 +67,14 @@
                 忘记密码
             </label>
             <label style="float:right">
-                <a href="login.htm">我有账号</a>
+                <a href="${APP_PATH}/login.htm">我有账号</a>
             </label>
         </div>
         <a class="btn btn-lg btn-success btn-block" href="member.html" > 注册</a>
     </form>
 </div>
-<script src="jquery/jquery-2.1.1.min.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>
+<script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
 
 <%-- 切换验证码 --%>
 <script>
@@ -103,7 +83,6 @@
         var vcode = document.getElementById("vcode");
         //2.设置其src属性，加时间戳
         vcode.src = "${pageContext.request.contextPath}/CheckCodeServlet?time="+new Date().getTime();
-
     }
 </script>
 

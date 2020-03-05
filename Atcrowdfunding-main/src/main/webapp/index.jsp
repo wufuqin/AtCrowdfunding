@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%-- 自动跳转到系统首页 --%>
 <jsp:forward page="${APP_PATH }/index.htm"></jsp:forward>
 </body>
 </html>

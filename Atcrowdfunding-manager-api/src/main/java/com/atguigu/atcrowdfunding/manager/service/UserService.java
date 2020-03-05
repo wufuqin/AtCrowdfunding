@@ -5,11 +5,11 @@ import java.util.Map;
 import com.atguigu.atcrowdfunding.bean.User;
 
 /**
- * ÓÃ»§µÄÒµÎñ²ã½Ó¿Ú
+ * ç”¨æˆ·çš„ä¸šåŠ¡å±‚æ¥å£
  */
 public interface UserService {
 
-	//²éÑ¯ÓÃ»§£¬Ğ£ÑéÓÃ»§ÊÇ·ñ´æÔÚ
+	//æŸ¥è¯¢ç”¨æˆ·ï¼Œæ ¡éªŒç”¨æˆ·æ˜¯å¦å­˜åœ¨
 	User queryUserLogin(Map<String, Object> paramMap);
 
 }

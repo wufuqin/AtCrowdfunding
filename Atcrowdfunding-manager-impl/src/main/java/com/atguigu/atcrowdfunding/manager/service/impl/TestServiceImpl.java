@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 import com.atguigu.atcrowdfunding.manager.dao.TestDao;
 import com.atguigu.atcrowdfunding.manager.service.TestService;
 
+/**
+ * 测试数据
+ */
 @Service
 public class TestServiceImpl implements TestService {
 

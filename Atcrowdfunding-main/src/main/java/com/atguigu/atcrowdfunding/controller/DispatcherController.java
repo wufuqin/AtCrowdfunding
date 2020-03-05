@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import com.atguigu.atcrowdfunding.exception.LoginFailException;
 import com.atguigu.atcrowdfunding.util.AjaxResult;
+import com.atguigu.atcrowdfunding.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,55 +18,55 @@ import com.atguigu.atcrowdfunding.util.Const;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * Ö÷web¿ØÖÆÆ÷
+ * ä¸»webæ§åˆ¶å™¨
  */
 @Controller
 public class DispatcherController {
 
-	//ÓÃ»§µÄÒµÎñ²ã¶ÔÏó£¬°´×Ô¶¯ÀàĞÍ×¢Èë
-	@Autowired
-	private UserService userService ;
+    //ç”¨æˆ·çš„ä¸šåŠ¡å±‚å¯¹è±¡ï¼ŒæŒ‰è‡ªåŠ¨ç±»å‹æ³¨å…¥
+    @Autowired
+    private UserService userService ;
 
-	/**
-	 * È¥µ½Ö÷Ò³Ãæ
-	 */
-	@RequestMapping("/index")
-	public String index(){		
-		return "index";
-	}
+    /**
+     * å»åˆ°ä¸»é¡µé¢
+     */
+    @RequestMapping("/index")
+    public String index(){
+        return "index";
+    }
 
-	/**
-	 * È¥µ½µÇÂ¼Ò³Ãæ
-	 */
-	@RequestMapping("/login")
-	public String login(){		
-		return "login";
-	}
+    /**
+     * å»åˆ°ç™»å½•é¡µé¢
+     */
+    @RequestMapping("/login")
+    public String login(){
+        return "login";
+    }
 
-	/**
-	 * È¥µ½×¢²áÒ³Ãæ
-	 */
-	@RequestMapping("/reg")
-	public String reg(){
-		return "reg";
-	}
+    /**
+     * å»åˆ°æ³¨å†Œé¡µé¢
+     */
+    @RequestMapping("/reg")
+    public String reg(){
+        return "reg";
+    }
 
-	/**
-	 * È¥µ½ºóÌ¨Ö÷Ò³Ãæ
-	 */
-	@RequestMapping("/main")
-	public String main(){		
-		return "main";
-	}
+    /**
+     * å»åˆ°åå°ä¸»é¡µé¢
+     */
+    @RequestMapping("/main")
+    public String main(){
+        return "main";
+    }
 
-	//µÇÂ¼Í¬²½ÇëÇó·½Ê½
-	/**
-	 * ´¦ÀíµÇÂ¼ÇëÇó
-	 * @param loginacct  ½ÓÊÕÓÃ»§ÊäÈëµÄµÇÂ¼Ãû
-	 * @param userpswd   ½ÓÊÕÓÃ»§ÊäÈëµÄµÇÂ¼ÃÜÂë
-	 * @param type		  ½ÓÊÕÓÃ»§ÊäÈëµÄÓÃ»§ÀàĞÍ
-	 * @param session	  ½ÓÊÕÓÃ»§ÊäÈëµÄÑéÖ¤Âë£¬½«ÓÃ»§¶ÔÏó´æÈëµ½sessionÓòÖĞ
-	 */
+    //ç™»å½•åŒæ­¥è¯·æ±‚æ–¹å¼
+    /**
+     * å¤„ç†ç™»å½•è¯·æ±‚
+     * @param loginacct  æ¥æ”¶ç”¨æˆ·è¾“å…¥çš„ç™»å½•å
+     * @param userpswd   æ¥æ”¶ç”¨æˆ·è¾“å…¥çš„ç™»å½•å¯†ç 
+     * @param type		  æ¥æ”¶ç”¨æˆ·è¾“å…¥çš„ç”¨æˆ·ç±»å‹
+     * @param session	  æ¥æ”¶ç”¨æˆ·è¾“å…¥çš„éªŒè¯ç ï¼Œå°†ç”¨æˆ·å¯¹è±¡å­˜å…¥åˆ°sessionåŸŸä¸­
+     */
 	/*@RequestMapping("/doLogin")
 	public String doLogin(String loginacct,String userpswd, String checkCode, String type,HttpSession session){
 		Map<String,Object> paramMap = new HashMap<String,Object>();
@@ -73,66 +74,71 @@ public class DispatcherController {
 		paramMap.put("userpswd", userpswd);
 		paramMap.put("type", type);
 
-		//´ÓsessionÓòÖĞ»ñÈ¡³ÌĞòÉú³ÉµÄÑéÖ¤Âë
+		//ä»sessionåŸŸä¸­è·å–ç¨‹åºç”Ÿæˆçš„éªŒè¯ç 
 		String checkCode_server = (String) session.getAttribute("CHECKCODE_SERVER");
-		//Ïú»ÙÑéÖ¤Âë£¬È·±£ÑéÖ¤ÂëÒ»´ÎĞÔ
+		//é”€æ¯éªŒè¯ç ï¼Œç¡®ä¿éªŒè¯ç ä¸€æ¬¡æ€§
 		session.removeAttribute("CHECKCODE_SERVER");
-		//ÅĞ¶ÏÓÃ»§ÊäÈëµÄÑéÖ¤ÂëºÍÊµ¼ÊÉú³ÉµÄÑéÖ¤ÂëÊÇ·ñÒ»ÖÂ£¬²»Çø·Ö´óĞ¡Ğ´
+		//åˆ¤æ–­ç”¨æˆ·è¾“å…¥çš„éªŒè¯ç å’Œå®é™…ç”Ÿæˆçš„éªŒè¯ç æ˜¯å¦ä¸€è‡´ï¼Œä¸åŒºåˆ†å¤§å°å†™
 		if(!checkCode_server.equalsIgnoreCase(checkCode)){
-			//ÑéÖ¤Âë²»ÕıÈ·(Å×³öÒì³£ĞÅÏ¢)
-			throw new LoginFailException("ÑéÖ¤Âë´íÎó");
+			//éªŒè¯ç ä¸æ­£ç¡®(æŠ›å‡ºå¼‚å¸¸ä¿¡æ¯)
+			throw new LoginFailException("éªŒè¯ç é”™è¯¯");
 		}
 
-		//½«²éÑ¯µ½µÄÓÃ»§Êı¾İ·â×°µ½map¼¯ºÏÖĞ
+		//å°†æŸ¥è¯¢åˆ°çš„ç”¨æˆ·æ•°æ®å°è£…åˆ°mapé›†åˆä¸­
 		User user = userService.queryUserLogin(paramMap);
 		session.setAttribute(Const.LOGIN_USER, user);
-		//Ê¹ÓÃÖØ¶¨Ïò²»Ê¹ÓÃÇëÇó×ª·¢£¬¿ÉÒÔ±ÜÃâÒ³ÃæË¢ĞÂÊ±ÖØ¸´·¢ÆğÇëÇó
+		//ä½¿ç”¨é‡å®šå‘ä¸ä½¿ç”¨è¯·æ±‚è½¬å‘ï¼Œå¯ä»¥é¿å…é¡µé¢åˆ·æ–°æ—¶é‡å¤å‘èµ·è¯·æ±‚
 		return "redirect:/main.htm";
 	}*/
 
-	//µÇÂ¼Òì²½ÇëÇó·½Ê½
-	/**
-     * ´¦ÀíµÇÂ¼ÇëÇó
-	 * @ResponseBody ½áºÏJackson×é¼ş, ½«·µ»Ø½á¹û×ª»»Îª×Ö·û´®.
-     * ½«JSON´®ÒÔÁ÷µÄĞÎÊ½·µ»Ø¸ø¿Í»§¶Ë.
-     *      ·µ»ØÊı¾İ¸ñÊ½£º {"success":false,"message":"µÇÂ¼Ê§°Ü!"}
+    //ç™»å½•å¼‚æ­¥è¯·æ±‚æ–¹å¼
+    /**
+     * å¤„ç†ç™»å½•è¯·æ±‚
+     * @ResponseBody ç»“åˆJacksonç»„ä»¶, å°†è¿”å›ç»“æœè½¬æ¢ä¸ºå­—ç¬¦ä¸².
+     * å°†JSONä¸²ä»¥æµçš„å½¢å¼è¿”å›ç»™å®¢æˆ·ç«¯.
+     *      è¿”å›æ•°æ®æ ¼å¼ï¼š {"success":false,"message":"ç™»å½•å¤±è´¥!"}
      *
      */
-	@ResponseBody
-	@RequestMapping("/doLogin")
-	public Object doLogin(String loginacct,String userpswd, String checkCode, String type,HttpSession session){
+    @ResponseBody
+    @RequestMapping("/doLogin")
+    public Object doLogin(String loginacct,String userpswd, String checkCode, String type,HttpSession session){
 
-	    //ÇëÇó½á¹û·â×°¶ÔÏó
+        System.out.printf("ç”¨æˆ·æ•°æ®");
+        System.out.printf(loginacct);
+        System.out.printf(userpswd);
+        System.out.printf(checkCode);
+
+        //è¯·æ±‚ç»“æœå°è£…å¯¹è±¡
         AjaxResult result = new AjaxResult();
 
         try {
-            //Ê¹ÓÃmap¼¯ºÏ¶ÔÓÃ»§ÊäÈëµÄĞÅÏ¢½øĞĞ·â×°
+            //ä½¿ç”¨mapé›†åˆå¯¹ç”¨æˆ·è¾“å…¥çš„ä¿¡æ¯è¿›è¡Œå°è£…
             Map<String,Object> paramMap = new HashMap<String,Object>();
             paramMap.put("loginacct", loginacct);
-            paramMap.put("userpswd", userpswd);
+            paramMap.put("userpswd", MD5Util.digest(userpswd)); //ä½¿ç”¨MD5å¯¹å¯†ç è¿›è¡ŒåŠ å¯†
             paramMap.put("type", type);
 
-            //´ÓsessionÓòÖĞ»ñÈ¡³ÌĞòÉú³ÉµÄÑéÖ¤Âë
+            //ä»sessionåŸŸä¸­è·å–ç¨‹åºç”Ÿæˆçš„éªŒè¯ç 
             String checkCode_server = (String) session.getAttribute("CHECKCODE_SERVER");
-            //Ïú»ÙÑéÖ¤Âë£¬È·±£ÑéÖ¤ÂëÒ»´ÎĞÔ
+            //é”€æ¯éªŒè¯ç ï¼Œç¡®ä¿éªŒè¯ç ä¸€æ¬¡æ€§
             session.removeAttribute("CHECKCODE_SERVER");
-            //ÅĞ¶ÏÓÃ»§ÊäÈëµÄÑéÖ¤ÂëºÍÊµ¼ÊÉú³ÉµÄÑéÖ¤ÂëÊÇ·ñÒ»ÖÂ£¬²»Çø·Ö´óĞ¡Ğ´
+            //åˆ¤æ–­ç”¨æˆ·è¾“å…¥çš„éªŒè¯ç å’Œå®é™…ç”Ÿæˆçš„éªŒè¯ç æ˜¯å¦ä¸€è‡´ï¼Œä¸åŒºåˆ†å¤§å°å†™
             if(!checkCode_server.equalsIgnoreCase(checkCode)){
-                //ÑéÖ¤Âë²»ÕıÈ·(Å×³öÒì³£ĞÅÏ¢)
-                result.setMessage("ÑéÖ¤Âë´íÎó£¡");
+                //éªŒè¯ç ä¸æ­£ç¡®(æŠ›å‡ºå¼‚å¸¸ä¿¡æ¯)
+                result.setMessage("éªŒè¯ç é”™è¯¯ï¼");
                 result.setSuccess(false);
                 return result;
             }
 
-            //½«²éÑ¯µ½µÄÓÃ»§Êı¾İ·â×°µ½map¼¯ºÏÖĞ
+            //å°†æŸ¥è¯¢åˆ°çš„ç”¨æˆ·æ•°æ®å°è£…åˆ°mapé›†åˆä¸­
             User user = userService.queryUserLogin(paramMap);
             session.setAttribute(Const.LOGIN_USER, user);
             result.setSuccess(true);
         } catch (Exception e) {
             e.printStackTrace();
-            result.setMessage("µÇÂ¼Ê§°Ü");
+            result.setMessage("ç™»å½•å¤±è´¥");
             result.setSuccess(false);
         }
         return result;
-	}
+    }
 }

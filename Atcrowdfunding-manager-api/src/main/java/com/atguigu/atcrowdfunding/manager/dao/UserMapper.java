@@ -7,26 +7,26 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * ÓÃ»§µÄdao²ã½Ó¿Ú
+ * ç”¨æˆ·çš„daoå±‚æ¥å£
  */
 @Repository
 public interface UserMapper {
 
-    //¸ù¾İidÉ¾³ı
+    //æ ¹æ®idåˆ é™¤
     int deleteByPrimaryKey(Integer id);
 
-    //Ìí¼ÓÓÃ»§
+    //æ·»åŠ ç”¨æˆ·
     int insert(User record);
 
-    //¸ù¾İid²éÑ¯
+    //æ ¹æ®idæŸ¥è¯¢
     User selectByPrimaryKey(Integer id);
 
-    //²éÑ¯ËùÓĞ
+    //æŸ¥è¯¢æ‰€æœ‰
     List<User> selectAll();
 
-    //¸ù¾İidĞŞ¸Ä
+    //æ ¹æ®idä¿®æ”¹
     int updateByPrimaryKey(User record);
 
-    //²éÑ¯ÓÃ»§ĞÅÏ¢,Ğ£ÑéµÇÂ¼ĞÅÏ¢
-	User queryUserLogin(Map<String, Object> paramMap);
+    //æŸ¥è¯¢ç”¨æˆ·ä¿¡æ¯,æ ¡éªŒç™»å½•ä¿¡æ¯
+    User queryUserLogin(Map<String, Object> paramMap);
 }

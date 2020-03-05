@@ -4,6 +4,9 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+/**
+ * 服务器启动时监听
+ */
 public class StartSystemListener implements ServletContextListener {
 
 	//在服务器启动时,创建application对象时需要执行的方法.
@@ -13,7 +16,7 @@ public class StartSystemListener implements ServletContextListener {
 		ServletContext application = sce.getServletContext();
 		String contextPath = application.getContextPath();
 		application.setAttribute("APP_PATH", contextPath);
-		System.out.println("APP_PATH...");
+		//System.out.println("APP_PATH...");
 		
 		//2.
 	}
