@@ -21,7 +21,7 @@ public class TestServiceImpl implements TestService {
 	@Override
 	public void insert() {
 		Map map = new HashMap();
-		map.put("name", "zhang3");
+		map.put("name", "张三");
 		testDao.insert(map);
 	}
 

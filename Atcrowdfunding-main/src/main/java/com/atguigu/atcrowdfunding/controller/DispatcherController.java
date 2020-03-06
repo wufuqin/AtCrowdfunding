@@ -60,6 +60,14 @@ public class DispatcherController {
     }
 
     /**
+     * 去到忘记密码页面
+     */
+    @RequestMapping("/forget")
+    public String forget(){
+        return "forget/forget";
+    }
+
+    /**
      * 注销功能（退出系统）
      * @return 重定向到系统主页面
      */

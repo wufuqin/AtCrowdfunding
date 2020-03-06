@@ -16,7 +16,8 @@ public class StartSystemListener implements ServletContextListener {
 		ServletContext application = sce.getServletContext();
 		String contextPath = application.getContextPath();
 		application.setAttribute("APP_PATH", contextPath);
-		//System.out.println("APP_PATH...");
+		//System.out.println("APP_PATH取到的路径是...");
+		//System.out.println(contextPath);
 		
 		//2.
 	}

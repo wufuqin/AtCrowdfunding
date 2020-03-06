@@ -10,6 +10,7 @@ import java.util.Map;
 @Repository
 public interface TestDao {
 
+	//添加数据
 	public void insert(Map map);
 	
 }

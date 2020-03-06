@@ -51,7 +51,7 @@
                 </div>
                 <%--<div id="vcode" class="col-md-6"><img src="${pageContext.request.contextPath}/CheckCodeServlet" alt="点击刷新" onclick="refreshCode()"/></div>--%>
                 <a href="javascript:refreshCode();">
-                    <img src="${pageContext.request.contextPath}/CheckCodeServlet" title="看不清" id="vcode"/>
+                    <img src="${APP_PATH}/CheckCodeServlet" title="看不清" id="vcode"/>
                 </a>
 
             </div>
@@ -69,10 +69,15 @@
             </label>
             <br>
             <label>
-                忘记密码
+                <a href="${APP_PATH}/forget.htm">忘记密码</a>
             </label>
+           <%-- <label>
+                <a href="${APP_PATH}/test.htm">测试</a>
+            </label>--%>
+
+
             <label style="float:right">
-                <a href="reg.htm">我要注册</a>
+                <a href="${APP_PATH}/reg.htm">我要注册</a>
             </label>
         </div>
         <a class="btn btn-lg btn-success btn-block" onclick="doLogin()" > 登录</a>

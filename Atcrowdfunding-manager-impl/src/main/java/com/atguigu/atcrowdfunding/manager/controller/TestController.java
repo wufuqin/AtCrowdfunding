@@ -10,7 +10,6 @@ import com.atguigu.atcrowdfunding.manager.service.TestService;
 @Controller
 public class TestController {
 
-	
 	/**
 	 * @Autowired
 	 * 首先根据byType进行类型查找:
@@ -34,11 +33,18 @@ public class TestController {
 	@Autowired
 	private TestService testService; //依赖倒转原则.
 
-	@RequestMapping("/test")
+	/*@RequestMapping("/test")
 	public String test(String name) {
 		System.out.println("TestController");
 		testService.insert();
-		return "success";
-	}
+		return "success/success";
+	}*/
 
+	/**
+	 * 测试获取上下文路径
+	 */
+	@RequestMapping("/test")
+	public String test(){
+		return "alert/test";
+	}
 }

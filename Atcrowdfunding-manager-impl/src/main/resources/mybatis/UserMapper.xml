@@ -67,4 +67,19 @@
 		where loginacct=#{loginacct} and userpswd=#{userpswd}
 	</select>
 
+	<!-- 查询分页数据 -->
+	<select id="queryList" resultMap="BaseResultMap">
+		select id, loginacct, userpswd, username, email, createtime
+		from t_user
+		limit #{startIndex},#{pagesize}
+	</select>
+
+	<!-- 查询总的记录条数 -->
+	<select id="queryCount"  resultType="int">
+		select count(*)
+		from t_user
+	</select>
+
+
+
 </mapper>

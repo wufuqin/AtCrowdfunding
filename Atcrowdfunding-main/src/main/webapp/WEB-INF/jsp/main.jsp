@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <%--
 		登录成功之后跳转的页面，后台主页面
 --%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -39,21 +39,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
-
-				<!-- HTML注释:参与编译,会生成到源码中. 所以,不能使用html注释EL表达式和JSTL标签库 -->
-				<%-- JSP注释:注释的内容不参与编译,不会生成到源码中. --%>
-
-				<!--
-					动态包含:
-						被包含的页面也会独立编译,生成字节码文件，一般包含页面信息频繁变化的页面
-						注意：因为两个越来需要分开编译,所以会存在一定的效率问题 -->
+                <%-- 包含页面头部 --%>
 				 <jsp:include page="/WEB-INF/jsp/common/top.jsp"/>
-				<!--
-					静态包含:
-					    被包含的页面不会生成独立字节码文件.将所包含的页面内容加入到当前页面,一起进行编译效率相对高与动态包含.
-					    一般包含不经常发生变化的公共页面。
-                 -->
-				<%--<%@include file="/WEB-INF/common/top.jsp"%>--%>
 			</ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="查询">
