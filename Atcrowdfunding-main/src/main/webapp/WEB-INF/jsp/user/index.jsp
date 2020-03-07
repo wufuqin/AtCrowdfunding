@@ -51,12 +51,16 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
+
+        <%--菜单区--%>
+        <div class="col-sm-3 col-md-2 sidebar" >
             <div class="tree">
                 <%--包含左侧菜单页面--%>
                 <jsp:include page="/WEB-INF/jsp/common/menu.jsp"/>
             </div>
         </div>
+
+        <%--数据展示区--%>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -78,91 +82,32 @@
                     <hr style="clear:both;">
                     <div class="table-responsive">
                         <table class="table  table-bordered">
+                            <%-- 表格头部信息 --%>
                             <thead>
-                            <tr >
-                                <th width="30">#</th>
-                                <th width="30"><input type="checkbox"></th>
-                                <th>账号</th>
-                                <th>名称</th>
-                                <th>邮箱地址</th>
-                                <th width="100">操作</th>
-                            </tr>
+                                <tr >
+                                    <th width="30">#</th>
+                                    <th width="30"><input type="checkbox"></th>
+                                    <th>账号</th>
+                                    <th>名称</th>
+                                    <th>邮箱地址</th>
+                                    <th width="200">操作</th>
+                                </tr>
                             </thead>
-                            <tbody>
 
-                            <%--
-                                使用jstl标签中的foreach遍历得到的分页数据
-                                items="" : 迭代的集合(从request域对象中获取)
-                                var=""   : 变量,自己随便定义
-                                varStatus="status" : 状态,status.index:从0开始  status.count:从1开始
-                            --%>
-                            <c:forEach items="${page.datas}" var="user" varStatus="status">
-                                <tr>
-                                    <td>${status.count}</td>
-                                    <td><input type="checkbox"></td>
-                                    <td>${user.loginacct}</td>
-                                    <td>${user.username}</td>
-                                    <td>${user.email}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
-                                        <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
-                                        <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
+                            <%-- 查询出的数据 --%>
+                            <tbody>
+                                <%-- 查询出来的数据展示区 --%>
+                            </tbody>
+
+                            <%-- 分页导航条 --%>
+                            <tfoot>
+                                <tr >
+                                    <td colspan="6" align="center">
+                                        <ul class="pagination"></ul>
                                     </td>
                                 </tr>
-                            </c:forEach>
-
-                            </tbody>
-                            <tfoot>
-                            <tr >
-                                <td colspan="6" align="center">
-                                    <ul class="pagination">
-                                        <%-- 当前页为第一页时,设置其不可点 --%>
-                                        <c:if test="${page.pageno == 1}">
-                                            <li class="disabled">
-                                                <a href="#">上一页</a>
-                                            </li>
-                                        </c:if>
-
-                                        <%--如果当前页不为第一页时--%>
-                                        <c:if test="${page.pageno != 1}">
-                                            <li>
-                                               <a href="#" onclick="pageChange(${page.pageno - 1})">上一页</a>
-                                            </li>
-                                        </c:if>
-
-                                        <%--
-                                            循环生产页码标签连接，并且将当前页的按钮添加active属性
-                                        --%>
-                                        <%-- 从第一页开始循环到最后一页判断是否为当前页 --%>
-                                        <c:forEach begin="1" end="${page.totalno}" var="num">
-                                            <li
-                                                <%-- 匹配到当前页，为当前页添加属性 class = "active" --%>
-                                                <c:if test="${page.pageno == num}">
-                                                    class = "active";
-                                                </c:if>>
-                                                <a href="#" onclick="pageChange(${num})">${num}</a>
-                                            </li>
-                                        </c:forEach>
-
-                                        <%-- 当前页为最后一页时,设置其不可点 --%>
-                                        <c:if test="${page.pageno == page.totalno}">
-                                            <li class="disabled">
-                                                <a href="#">下一页</a>
-                                            </li>
-                                        </c:if>
-
-                                        <%--如果当前页不为最后一页时--%>
-                                        <c:if test="${page.pageno != page.totalno}">
-                                            <li>
-                                                <a href="#" onclick="pageChange(${page.pageno + 1})">下一页</a>
-                                            </li>
-                                        </c:if>
-
-                                    </ul>
-                                </td>
-                            </tr>
-
                             </tfoot>
+
                         </table>
                     </div>
                 </div>
@@ -174,7 +119,9 @@
 <script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${APP_PATH}/script/docs.min.js"></script>
+<script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script type="text/javascript">
+    /*入口函数*/
     $(function () {
         $(".list-group-item").click(function(){
             if ( $(this).find("ul") ) {
@@ -186,22 +133,90 @@
                 }
             }
         });
+        //调用查询用户数据方法
+        queryPageUser(1);
     });
-    $("tbody .btn-success").click(function(){
-        window.location.href = "assignRole.html";
-    });
-    $("tbody .btn-primary").click(function(){
-        window.location.href = "edit.html";
-    });
+
 </script>
 
-<%-- 分页查询数据方法 --%>
+<%-- 异步查询用户数据 --%>
 <script>
-    function pageChange(pageno) {
-        window.location.href="${APP_PATH}/user/index.do?pageno="+pageno;
+    function queryPageUser(pageno) {
+        $.ajax({
+           type : "POST",
+           data : {
+               "pageno" : pageno,
+               "pagesize" : 5
+           },
+            url : "${APP_PATH}/user/doIndex.do",
+            beforeSend : function () {
+                loadingIndex = layer.msg('数据加载中...', {icon: 16});
+                return true;
+            },
+            success : function (result) {
+                layer.close(loadingIndex);
+                if (result.success){
+                    //查询数据成功
+                    var page = result.page;
+                    var data = page.datas;
+                    layer.msg("数据加载成功",{time:2000, icon:6, shift:6});
+                    var content = '';
+
+                    /* 对后台返回的数据进行拼串展示 */
+                    $.each(data,function(i,n){
+                        content+='<tr>';
+                        content+='  <td>'+(i+1)+'</td>';
+                        content+='  <td><input type="checkbox"></td>';
+                        content+='  <td>'+n.loginacct+'</td>';
+                        content+='  <td>'+n.username+'</td>';
+                        content+='  <td>'+n.email+'</td>';
+                        content+='  <td>';
+                        content+='	  <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i>分配权限</button>';
+                        content+='	  <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i>修改</button>';
+                        content+='	  <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
+                        content+='  </td>';
+                        content+='</tr>';
+                    });
+                    // 将拼接到的数据放入 tbody标签的指定位置
+                    $("tbody").html(content);
+
+                    /* 分页导航条拼串 */
+                    var contentBar = '';
+                    /* 判断是否为第一页 */
+                    if(page.pageno==1 ){
+                        contentBar+='<li class="disabled"><a href="#">上一页</a></li>';
+                    }else{
+                        contentBar+='<li><a href="#" onclick="queryPageUser('+(page.pageno-1)+')">上一页</a></li>';
+                    }
+
+                    /* 将所在也页设置 active属性 */
+                    for(var i = 1 ; i<= page.totalno ; i++ ){
+                        contentBar+='<li';
+                        if(page.pageno==i){
+                            contentBar+=' class="active"';
+                        }
+                        contentBar+='><a href="#" onclick="queryPageUser('+i+')">'+i+'</a></li>';
+                    }
+
+                    /* 判断是否为最后一页 */
+                    if(page.pageno==page.totalno ){
+                        contentBar+='<li class="disabled"><a href="#">下一页</a></li>';
+                    }else{
+                        contentBar+='<li><a href="#" onclick="queryPageUser('+(page.pageno+1)+')">下一页</a></li>';
+                    }
+                    $(".pagination").html(contentBar);
+
+                } else {
+                    //查询数据失败
+                    layer.msg(result.message,{time:2000, icon:5, shift:6});
+                }
+            },
+            error : function () {
+                layer.msg("数据加载失败",{time:2000, icon:5, shift:6});
+            }
+        });
     }
 </script>
-
 </body>
 </html>
 

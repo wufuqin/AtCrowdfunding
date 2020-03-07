@@ -87,15 +87,6 @@
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script>
-    /*静态测试数据*/
-    /*function dologin() {
-        var type = $(":selected").val();
-        if ( type == "user" ) {
-            window.location.href = "main.html";
-        } else {
-            window.location.href = "index.html";
-        }
-    }*/
 
     //同步提交方式
    /* function dologin() {

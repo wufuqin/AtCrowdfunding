@@ -15,6 +15,7 @@ public class Page {
     private Integer totalsize; //总数据条数
     private Integer totalno;   //总页数
 
+
     //只提供有参构造器，要求在查询数据的时候必须传递参数
     public Page(Integer pageno, Integer pagesize) {
         if (pageno <= 0) {

@@ -3,7 +3,7 @@
 <%--
     左侧菜单页面
 --%>
-<ul style="padding-left:0px;" class="list-group">
+<ul style="padding-left:0px;" class="list-group" >
 <li class="list-group-item tree-closed" >
     <a href="main.html"><i class="glyphicon glyphicon-dashboard"></i> 控制面板</a>
 </li>
@@ -11,7 +11,11 @@
     <span><i class="glyphicon glyphicon glyphicon-tasks"></i> 权限管理 <span class="badge" style="float:right">3</span></span>
     <ul style="margin-top:10px;">
         <li style="height:30px;">
-            <a href="${APP_PATH}/user/index.do" style="color:red;"><i class="glyphicon glyphicon-user"></i> 用户维护</a>
+            <%--同步实现方式--%>
+            <%--<a href="${APP_PATH}/user/index.do" style="color:red;"><i class="glyphicon glyphicon-user"></i> 用户维护</a>--%>
+            <%--异步实现方式--%>
+            <a href="${APP_PATH}/user/index.htm" style="color:red;"><i class="glyphicon glyphicon-user"></i> 用户维护</a>
+
         </li>
         <li style="height:30px;">
             <a href="${APP_PATH}/role/index.htm"><i class="glyphicon glyphicon-king"></i> 角色维护</a>
