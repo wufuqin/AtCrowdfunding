@@ -1,9 +1,11 @@
 package com.atguigu.atcrowdfunding.manager.dao;
 
 import com.atguigu.atcrowdfunding.bean.User;
+import com.atguigu.atcrowdfunding.util.Page;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,4 +40,9 @@ public interface UserMapper {
     //查询总的记录条数
     Integer queryCount();
 
+    //获取模糊查询分页数据
+    List queryListLike(HashMap<String, Object> paramMap);
+
+    //模糊查询总记录数
+    Integer queryCountLike(HashMap<String, Object> paramMap);
 }

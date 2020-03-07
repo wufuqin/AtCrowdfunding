@@ -1,10 +1,10 @@
 package com.atguigu.atcrowdfunding.manager.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.atguigu.atcrowdfunding.util.Page;
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,12 +72,40 @@ public class UserServiceImpl implements UserService {
 
 	/**
 	 * 保存用户
-	 * @param user
-	 * @return
 	 */
 	@Override
 	public int saveUser(User user) {
 		return userMapper.insert(user);
+	}
+
+	/**
+	 * 模糊查询
+	 * @param paramMap 封装好的模糊查询条件
+	 */
+	@Override
+	public Page queryPage(HashMap<String, Object> paramMap) {
+		//创建一个分页对象，将查询的对应分页信息传入
+		Page page = new Page((Integer) paramMap.get("pageno"), (Integer) paramMap.get("pagesize"));
+
+		//获取索引
+		Integer startIndex = page.getStartIndex();
+		//将索引信息存入map集合
+		paramMap.put("startIndex",startIndex);
+
+		//获取查询出来的分页数据
+		List datas = userMapper.queryListLike(paramMap);
+
+		//设置分页数据到Page分页对象中
+		page.setDatas(datas);
+
+		//查询总的记录条数
+		Integer totalsize = userMapper.queryCountLike(paramMap);
+
+		//设置总记录数到Page分页对象中
+		page.setTotalsize(totalsize);
+		page.setTotalno(totalsize);
+
+		return page;
 	}
 
 }

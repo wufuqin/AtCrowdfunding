@@ -80,6 +80,44 @@
 		from t_user
 	</select>
 
+	<!-- 查询分页数据 -->
+	<select id="queryListLike" resultMap="BaseResultMap">
+		select id, loginacct, userpswd, username, email, createtime
+		from t_user
+		<where>
+			<if test="queryText != null">loginacct like '%${queryText}%'</if>
+		</where>
+		limit #{startIndex},#{pagesize}
+	</select>
+
+	<!-- 查询总的记录条数 -->
+	<select id="queryCountLike"  resultType="int">
+		select count(*)
+		from t_user
+		<where>
+			<if test="queryText != null">loginacct like '%${queryText}%'</if>
+		</where>
+	</select>
+
 
 
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

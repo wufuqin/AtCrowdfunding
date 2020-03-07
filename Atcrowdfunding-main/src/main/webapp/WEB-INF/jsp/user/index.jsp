@@ -71,10 +71,10 @@
                         <div class="form-group has-feedback">
                             <div class="input-group">
                                 <div class="input-group-addon">查询条件</div>
-                                <input class="form-control has-success" type="text" placeholder="请输入查询条件">
+                                <input id="queryText" class="form-control has-success" type="text" placeholder="请输入查询条件">
                             </div>
                         </div>
-                        <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
+                        <button id="queryBtn" onclick="queryPageUserLike(1)" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
                     </form>
                     <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
                     <button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='add.html'"><i class="glyphicon glyphicon-plus"></i> 新增</button>
@@ -165,16 +165,99 @@
                     /* 对后台返回的数据进行拼串展示 */
                     $.each(data,function(i,n){
                         content+='<tr>';
-                        content+='  <td>'+(i+1)+'</td>';
-                        content+='  <td><input type="checkbox"></td>';
-                        content+='  <td>'+n.loginacct+'</td>';
-                        content+='  <td>'+n.username+'</td>';
-                        content+='  <td>'+n.email+'</td>';
-                        content+='  <td>';
-                        content+='	  <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i>分配权限</button>';
-                        content+='	  <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i>修改</button>';
-                        content+='	  <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
-                        content+='  </td>';
+                        content+='<td>'+(i+1)+'</td>';
+                        content+='<td><input type="checkbox"></td>';
+                        content+='<td>'+n.loginacct+'</td>';
+                        content+='<td>'+n.username+'</td>';
+                        content+='<td>'+n.email+'</td>';
+                        content+='<td>';
+                        content+='<button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i>分配权限</button>';
+                        content+='<button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i>修改</button>';
+                        content+='<button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
+                        content+='</td>';
+                        content+='</tr>';
+                    });
+                    // 将拼接到的数据放入 tbody标签的指定位置
+                    $("tbody").html(content);
+
+                    /* 分页导航条拼串 */
+                    var contentBar = '';
+                    /* 判断是否为第一页 */
+                    if(page.pageno==1 ){
+                        contentBar+='<li class="disabled"><a href="#">上一页</a></li>';
+                    }else{
+                        contentBar+='<li><a href="#" onclick="queryPageUser('+(page.pageno-1)+')">上一页</a></li>';
+                    }
+
+                    /* 将所在也页设置 active属性 */
+                    for(var i = 1 ; i<= page.totalno ; i++ ){
+                        contentBar+='<li';
+                        if(page.pageno==i){
+                            contentBar+=' class="active"';
+                        }
+                        contentBar+='><a href="#" onclick="queryPageUser('+i+')">'+i+'</a></li>';
+                    }
+
+                    /* 判断是否为最后一页 */
+                    if(page.pageno==page.totalno ){
+                        contentBar+='<li class="disabled"><a href="#">下一页</a></li>';
+                    }else{
+                        contentBar+='<li><a href="#" onclick="queryPageUser('+(page.pageno+1)+')">下一页</a></li>';
+                    }
+                    $(".pagination").html(contentBar);
+
+                } else {
+                    //查询数据失败
+                    layer.msg(result.message,{time:2000, icon:5, shift:6});
+                }
+            },
+            error : function () {
+                layer.msg("数据加载失败",{time:2000, icon:5, shift:6});
+            }
+        });
+    }
+</script>
+
+<%-- 模糊查询 --%>
+<script>
+    //获取模糊查询条件
+
+
+    function queryPageUserLike(pageno) {
+        $.ajax({
+           type : "POST",
+           data : {
+               "pageno" : pageno,
+               "pagesize" : 5,
+               "queryText" : $("#queryText").val()
+           },
+            url : "${APP_PATH}/user/doLike.do",
+            beforeSend : function () {
+                loadingIndex = layer.msg('数据加载中...', {icon: 16});
+                return true;
+            },
+            success : function (result) {
+                layer.close(loadingIndex);
+                if (result.success){
+                    //查询数据成功
+                    var page = result.page;
+                    var data = page.datas;
+                    layer.msg("数据加载成功",{time:2000, icon:6, shift:6});
+                    var content = '';
+
+                    /* 对后台返回的数据进行拼串展示 */
+                    $.each(data,function(i,n){
+                        content+='<tr>';
+                        content+='<td>'+(i+1)+'</td>';
+                        content+='<td><input type="checkbox"></td>';
+                        content+='<td>'+n.loginacct+'</td>';
+                        content+='<td>'+n.username+'</td>';
+                        content+='<td>'+n.email+'</td>';
+                        content+='<td>';
+                        content+='<button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i>分配权限</button>';
+                        content+='<button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i>修改</button>';
+                        content+='<button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
+                        content+='</td>';
                         content+='</tr>';
                     });
                     // 将拼接到的数据放入 tbody标签的指定位置

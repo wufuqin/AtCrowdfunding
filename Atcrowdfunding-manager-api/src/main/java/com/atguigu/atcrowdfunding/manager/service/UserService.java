@@ -1,5 +1,6 @@
 package com.atguigu.atcrowdfunding.manager.service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.atguigu.atcrowdfunding.bean.User;
@@ -18,4 +19,7 @@ public interface UserService {
 
 	//保存用户
 	int saveUser(User user);
+
+	//模糊查询
+    Page queryPage(HashMap<String, Object> paramMap);
 }
