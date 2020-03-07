@@ -15,4 +15,7 @@ public interface UserService {
 
 	//分页查询数据
 	Page queryPage(Integer pageno, Integer pagesize);
+
+	//保存用户
+	int saveUser(User user);
 }

@@ -116,13 +116,48 @@
                             <tr >
                                 <td colspan="6" align="center">
                                     <ul class="pagination">
-                                        <li class="disabled"><a href="#">上一页</a></li>
-                                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#">下一页</a></li>
+                                        <%-- 当前页为第一页时,设置其不可点 --%>
+                                        <c:if test="${page.pageno == 1}">
+                                            <li class="disabled">
+                                                <a href="#">上一页</a>
+                                            </li>
+                                        </c:if>
+
+                                        <%--如果当前页不为第一页时--%>
+                                        <c:if test="${page.pageno != 1}">
+                                            <li>
+                                               <a href="#" onclick="pageChange(${page.pageno - 1})">上一页</a>
+                                            </li>
+                                        </c:if>
+
+                                        <%--
+                                            循环生产页码标签连接，并且将当前页的按钮添加active属性
+                                        --%>
+                                        <%-- 从第一页开始循环到最后一页判断是否为当前页 --%>
+                                        <c:forEach begin="1" end="${page.totalno}" var="num">
+                                            <li
+                                                <%-- 匹配到当前页，为当前页添加属性 class = "active" --%>
+                                                <c:if test="${page.pageno == num}">
+                                                    class = "active";
+                                                </c:if>>
+                                                <a href="#" onclick="pageChange(${num})">${num}</a>
+                                            </li>
+                                        </c:forEach>
+
+                                        <%-- 当前页为最后一页时,设置其不可点 --%>
+                                        <c:if test="${page.pageno == page.totalno}">
+                                            <li class="disabled">
+                                                <a href="#">下一页</a>
+                                            </li>
+                                        </c:if>
+
+                                        <%--如果当前页不为最后一页时--%>
+                                        <c:if test="${page.pageno != page.totalno}">
+                                            <li>
+                                                <a href="#" onclick="pageChange(${page.pageno + 1})">下一页</a>
+                                            </li>
+                                        </c:if>
+
                                     </ul>
                                 </td>
                             </tr>
@@ -159,6 +194,31 @@
         window.location.href = "edit.html";
     });
 </script>
+
+<%-- 分页查询数据方法 --%>
+<script>
+    function pageChange(pageno) {
+        window.location.href="${APP_PATH}/user/index.do?pageno="+pageno;
+    }
+</script>
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

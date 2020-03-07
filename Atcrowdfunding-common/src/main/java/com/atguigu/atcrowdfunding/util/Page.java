@@ -16,18 +16,17 @@ public class Page {
     private Integer totalno;   //总页数
 
     //只提供有参构造器，要求在查询数据的时候必须传递参数
-    public Page(Integer pageno, Integer pagesize){
-        if (pageno <= 1){
+    public Page(Integer pageno, Integer pagesize) {
+        if (pageno <= 0) {
             this.pageno = 1;
-        }else {
+        } else {
             this.pageno = pageno;
         }
-        if (pagesize <= 0){
-            this.pagesize = 1;
-        }else {
+        if (pagesize <= 0) {
+            this.pagesize = 10;
+        } else {
             this.pagesize = pagesize;
         }
-
     }
 
     public Integer getPageno() {
@@ -46,11 +45,11 @@ public class Page {
         this.pagesize = pagesize;
     }
 
-    public List<T> getDatas() {
+    public List getDatas() {
         return datas;
     }
 
-    public void setDatas(List<T> datas) {
+    public void setDatas(List datas) {
         this.datas = datas;
     }
 
@@ -60,20 +59,20 @@ public class Page {
 
     public void setTotalsize(Integer totalsize) {
         this.totalsize = totalsize;
-        //计算总记录数
-        this.totalno = (totalsize % pagesize ) == 0 ? (totalsize/pagesize) : (totalsize/pagesize + 1);
+
     }
 
-    private Integer getTotalno() {
+    public Integer getTotalno() {
         return totalno;
     }
 
-    private void setTotalno(Integer totalno) {
-        this.totalno = totalno;
+    //计算总数据条数
+    public void setTotalno(Integer totalsize) {
+        this.totalno = (totalsize % pagesize) == 0 ? (totalsize / pagesize) : (totalsize / pagesize + 1);
     }
 
     //获取开始索引
-    public Integer getStartIndex(){
+    public Integer getStartIndex() {
         return (this.pageno - 1) * pagesize;
     }
 }

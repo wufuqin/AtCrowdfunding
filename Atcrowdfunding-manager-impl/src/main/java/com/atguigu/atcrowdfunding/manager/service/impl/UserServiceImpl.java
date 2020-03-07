@@ -65,8 +65,19 @@ public class UserServiceImpl implements UserService {
 
 		//设置总记录数到Page分页对象中
 		page.setTotalsize(totalsize);
+		page.setTotalno(totalsize);
 
 		return page;
+	}
+
+	/**
+	 * 保存用户
+	 * @param user
+	 * @return
+	 */
+	@Override
+	public int saveUser(User user) {
+		return userMapper.insert(user);
 	}
 
 }

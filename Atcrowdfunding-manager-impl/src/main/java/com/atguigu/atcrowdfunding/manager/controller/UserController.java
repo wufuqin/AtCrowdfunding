@@ -19,7 +19,20 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /*//异步方式查询用户数据
+    *//**
+     * 去到用户维护模块首页面
+     * @return
+     *//*
+    @RequestMapping("/index")
+    public String index(){
+        return "user/index";
+    }*/
+
+
+    //同步请求方式,查询用户数据
     /**
+     *
      * 去到用户维护模块页面，并且查询出用户数据
      * @param pageno    当前页数
      * @param pagesize  每页显示的数据条数
@@ -27,7 +40,7 @@ public class UserController {
      * @return
      */
     @RequestMapping("index")
-    public String index(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "10") Integer pagesize, Map map){
+    public String index(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "5") Integer pagesize, Map map){
 
         //调用service层查询方法，返回一个分页数据对象
         Page page = userService.queryPage(pageno, pagesize);
