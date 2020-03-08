@@ -77,7 +77,7 @@
                         <button id="queryBtn" onclick="queryPageUserLike(1)" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
                     </form>
                     <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
-                    <button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='add.html'"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+                    <button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='${APP_PATH}/user/add.htm'"><i class="glyphicon glyphicon-plus"></i> 新增</button>
                     <br>
                     <hr style="clear:both;">
                     <div class="table-responsive">
@@ -220,9 +220,6 @@
 
 <%-- 模糊查询 --%>
 <script>
-    //获取模糊查询条件
-
-
     function queryPageUserLike(pageno) {
         $.ajax({
            type : "POST",
@@ -269,7 +266,7 @@
                     if(page.pageno==1 ){
                         contentBar+='<li class="disabled"><a href="#">上一页</a></li>';
                     }else{
-                        contentBar+='<li><a href="#" onclick="queryPageUser('+(page.pageno-1)+')">上一页</a></li>';
+                        contentBar+='<li><a href="#" onclick="queryPageUserLike('+(page.pageno-1)+')">上一页</a></li>';
                     }
 
                     /* 将所在也页设置 active属性 */
@@ -278,14 +275,14 @@
                         if(page.pageno==i){
                             contentBar+=' class="active"';
                         }
-                        contentBar+='><a href="#" onclick="queryPageUser('+i+')">'+i+'</a></li>';
+                        contentBar+='><a href="#" onclick="queryPageUserLike('+i+')">'+i+'</a></li>';
                     }
 
                     /* 判断是否为最后一页 */
                     if(page.pageno==page.totalno ){
                         contentBar+='<li class="disabled"><a href="#">下一页</a></li>';
                     }else{
-                        contentBar+='<li><a href="#" onclick="queryPageUser('+(page.pageno+1)+')">下一页</a></li>';
+                        contentBar+='<li><a href="#" onclick="queryPageUserLike('+(page.pageno+1)+')">下一页</a></li>';
                     }
                     $(".pagination").html(contentBar);
 

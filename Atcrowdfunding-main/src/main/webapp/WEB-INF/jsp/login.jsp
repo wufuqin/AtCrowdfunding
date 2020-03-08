@@ -1,7 +1,6 @@
 <%--
     登录页面
 --%>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -15,12 +14,7 @@
     <link rel="stylesheet" href="${APP_PATH}/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${APP_PATH}/css/font-awesome.min.css">
     <link rel="stylesheet" href="${APP_PATH}/css/login.css">
-    <style>
-
-    </style>
 </head>
-
-
 
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -30,9 +24,7 @@
         </div>
     </div>
 </nav>
-
 <div class="container">
-
     <form id="loginForm" action="${APP_PATH }/doLogin.do" method="POST" class="form-signin" role="form">
         <h2 class="form-signin-heading"><i class="glyphicon glyphicon-log-in"></i> 用户登录</h2>
         <div class="form-group has-success has-feedback">
@@ -49,7 +41,6 @@
                 <div class="col-md-6">
                     <input type="text" class="form-control" id="fcheckCode" name="checkCode" placeholder="请输入验证码">
                 </div>
-                <%--<div id="vcode" class="col-md-6"><img src="${pageContext.request.contextPath}/CheckCodeServlet" alt="点击刷新" onclick="refreshCode()"/></div>--%>
                 <a href="javascript:refreshCode();">
                     <img src="${APP_PATH}/CheckCodeServlet" title="看不清" id="vcode"/>
                 </a>
@@ -71,10 +62,6 @@
             <label>
                 <a href="${APP_PATH}/forget.htm">忘记密码</a>
             </label>
-           <%-- <label>
-                <a href="${APP_PATH}/test.htm">测试</a>
-            </label>--%>
-
 
             <label style="float:right">
                 <a href="${APP_PATH}/reg.htm">我要注册</a>
@@ -88,11 +75,6 @@
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script>
 
-    //同步提交方式
-   /* function dologin() {
-        $("#loginForm").submit();
-    }*/
-
     //异步请求方式
     function doLogin() {
         //获取用户输入的登录信息
@@ -105,7 +87,6 @@
         if ($.trim(loginacct.val()) == "") {
             //alert("用户名不能为空！");
             layer.msg("用户名不能为空", {time:2000, icon:null, shift:6});
-
             loginacct.val("");   //输入框重新设置为空
             loginacct.focus();   //重新获取焦点
             return false;
@@ -162,7 +143,6 @@
             }
         });
     }
-
 </script>
 
 <%-- 切换验证码 --%>

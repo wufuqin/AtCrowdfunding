@@ -1,5 +1,6 @@
 package com.atguigu.atcrowdfunding.manager.controller;
 
+import com.atguigu.atcrowdfunding.bean.User;
 import com.atguigu.atcrowdfunding.manager.service.UserService;
 import com.atguigu.atcrowdfunding.util.AjaxResult;
 import com.atguigu.atcrowdfunding.util.Page;
@@ -22,16 +23,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    //异步方式查询用户数据
-    /**
-     * 去到用户维护模块首页面
-     */
+    //去到用户维护模块首页面
     @RequestMapping("/index")
     public String index(){
         return "user/index";
     }
 
-    //异步请求
+    //查询用户数据
     /**
      * 查询用户数据
      * @param pageno    当前页数
@@ -58,9 +56,6 @@ public class UserController {
     }
 
     //模糊查询
-    /**
-     * 模糊查询
-     */
     @ResponseBody
     @RequestMapping("doLike")
     public Object doLike(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "5") Integer pagesize, String queryText){
@@ -90,28 +85,33 @@ public class UserController {
     }
 
 
-
-    //同步请求方式,查询用户数据
-    /*
-     *
-     * 去到用户维护模块页面，并且查询出用户数据
-     * @param pageno    当前页数
-     * @param pagesize  每页显示的数据条数
-     * @param map       存储分页数据，返回前台
-     * @return
-     */
-    /*@RequestMapping("index")
-    public String index(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "5") Integer pagesize, Map map){
-
-        //调用service层查询方法，返回一个分页数据对象
-        Page page = userService.queryPage(pageno, pagesize);
-
-        //将分页数据放入map集合中，方便前台页面获取，springMVC框架会自动将map集合封装到域对象中
-        map.put("page",page);
-
-        return "user/index";
+    //去到添加用户页面
+    @RequestMapping("/add")
+    public String add(){
+        return "user/add";
     }
-*/
+
+    //添加用户数据
+    /**
+     * 添加用户
+     * @param user 将前台返回的数据使用user实体对象封装
+     */
+    @ResponseBody
+    @RequestMapping("/doAdd")
+    public Object doAdd(User user){
+        //用来封装ajax请求结果
+        AjaxResult result = new AjaxResult();
+        try {
+            //调用业务层方法,返回一个影响数据库行数的int数值
+            int count = userService.saveUser(user);
+            result.setSuccess(true);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("保存用户数据失败");
+            e.printStackTrace();
+        }
+        return result;
+    }
 
 }
 
