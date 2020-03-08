@@ -22,4 +22,13 @@ public interface UserService {
 
 	//模糊查询
     Page queryPage(HashMap<String, Object> paramMap);
+
+    //根据id查询用户信息
+	User getUserById(Integer id);
+
+	//修改用户
+    int updateUser(User user);
+
+    //删除用户
+    int deleteUser(Integer id);
 }

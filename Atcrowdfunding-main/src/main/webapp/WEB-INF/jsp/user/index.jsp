@@ -1,10 +1,5 @@
 <%--
     用户维护模块的首页面
-  Created by IntelliJ IDEA.
-  User: wfq
-  Date: 2020/3/6
-  Time: 22:39
-  To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -120,8 +115,8 @@
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
+<%--入口函数--%>
 <script type="text/javascript">
-    /*入口函数*/
     $(function () {
         $(".list-group-item").click(function(){
             if ( $(this).find("ul") ) {
@@ -172,8 +167,8 @@
                         content+='<td>'+n.email+'</td>';
                         content+='<td>';
                         content+='<button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i>分配权限</button>';
-                        content+='<button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i>修改</button>';
-                        content+='<button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
+                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/user/update.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i>修改</button>';
+                        content+='<button type="button" onclick="doDelete('+n.id+',\''+n.loginacct+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
                         content+='</td>';
                         content+='</tr>';
                     });
@@ -252,8 +247,8 @@
                         content+='<td>'+n.email+'</td>';
                         content+='<td>';
                         content+='<button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i>分配权限</button>';
-                        content+='<button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i>修改</button>';
-                        content+='<button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
+                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/user/update.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i>修改</button>';
+                        content+='<button type="button" onclick="doDelete('+n.id+',\''+n.loginacct+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
                         content+='</td>';
                         content+='</tr>';
                     });
@@ -297,6 +292,44 @@
         });
     }
 </script>
+
+<%-- 删除功能 --%>
+<script>
+    function doDelete(id,loginacct) {
+        layer.confirm("确认删除["+loginacct+"]用户？", {icon: 3, title: '提示'}, function (cindex) {
+            $.ajax({
+                type : "POST",
+                data : {
+                    "id" : id
+                },
+                url : "${APP_PATH}/user/doDelete.do",
+                beforeSend : function () {
+                    layer.close(cindex);
+                    loadingIndex = layer.msg('数据删除中...', {icon: 16});
+                    //对表单数据进行校验
+                    return true;
+                },
+
+                success : function (result) {
+                    layer.close(loadingIndex);
+                    if (result.success) {
+                        loadingIndex = layer.msg('数据删除成功,正在更新数据...', {icon: 16});
+                        //设置定时，让提示框显示一定时间
+                        setTimeout(function () {{window.location.href="${APP_PATH}/user/index.htm"}},2000);
+                    }else {
+                        layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    }
+                },
+                error : function () {
+                    layer.msg("数据删除失败",{time:2000, icon:5, shift:6});
+                }
+            });
+        }, function (cindex) {
+            layer.close(cindex);
+        })
+    }
+</script>
+
 </body>
 </html>
 

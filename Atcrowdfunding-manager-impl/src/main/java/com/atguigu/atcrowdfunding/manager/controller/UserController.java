@@ -84,7 +84,6 @@ public class UserController {
         return result;
     }
 
-
     //去到添加用户页面
     @RequestMapping("/add")
     public String add(){
@@ -108,6 +107,60 @@ public class UserController {
         } catch (Exception e) {
             result.setSuccess(false);
             result.setMessage("保存用户数据失败");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    //去到修改页面
+    /**
+     * 去到修改页面
+     * @param id   需要修改的用户id
+     * @param map  封装根据id从数据库将用户信息查询出来的用户信息
+     */
+    @RequestMapping("/update")
+    public String update(Integer id, Map map){
+        User user = userService.getUserById(id);
+        //将查询到的用户信息封装到map集合中
+        map.put("user",user);
+        return "user/update";
+    }
+
+    //修改用户数据
+    /**
+     * 修改用户数据
+     * @param user 将前台返回的数据使用user实体对象封装
+     */
+    @ResponseBody
+    @RequestMapping("/doUpdate")
+    public Object doUpdate(User user){
+        //用来封装ajax请求结果
+        AjaxResult result = new AjaxResult();
+        try {
+            //调用业务层方法,返回一个影响数据库行数的int数值
+            int count = userService.updateUser(user);
+            result.setSuccess(true);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("修改用户数据失败");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    //删除用户数据
+    @ResponseBody
+    @RequestMapping("/doDelete")
+    public Object doDelete(Integer id){
+        //用来封装ajax请求结果
+        AjaxResult result = new AjaxResult();
+        try {
+            //调用业务层方法,返回一个影响数据库行数的int数值
+            int count = userService.deleteUser(id);
+            result.setSuccess(true);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("删除用户数据失败");
             e.printStackTrace();
         }
         return result;

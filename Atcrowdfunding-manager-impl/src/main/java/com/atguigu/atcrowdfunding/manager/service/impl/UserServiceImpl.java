@@ -107,7 +107,19 @@ public class UserServiceImpl implements UserService {
 		return page;
 	}
 
-	//保存用户
+	//根据id查询用户信息
+    @Override
+    public User getUserById(Integer id) {
+        return userMapper.selectByPrimaryKey(id);
+    }
+
+    //修改用户
+    @Override
+    public int updateUser(User user) {
+        return userMapper.updateByPrimaryKey(user);
+    }
+
+    //保存用户
 	@Override
 	public int saveUser(User user) {
 		//设置时间格式
@@ -120,6 +132,12 @@ public class UserServiceImpl implements UserService {
 		user.setUserpswd(MD5Util.digest(Const.PASSWORD));
 		return userMapper.insert(user);
 	}
+
+    //删除用户
+    @Override
+    public int deleteUser(Integer id) {
+        return userMapper.deleteByPrimaryKey(id);
+    }
 
 }
 

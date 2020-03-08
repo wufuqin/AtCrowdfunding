@@ -1,9 +1,5 @@
 <%--
-  Created by IntelliJ IDEA.
-  User: wfq
-  Date: 2020/3/8
-  Time: 12:10
-  To change this template use File | Settings | File Templates.
+    修改用户信息页面
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -58,26 +54,26 @@
             <ol class="breadcrumb">
                 <li><a href="#">首页</a></li>
                 <li><a href="#">数据列表</a></li>
-                <li class="active">新增</li>
+                <li class="active">修改</li>
             </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
                 <div class="panel-body">
-                    <form id="addForm">
+                    <form id="updateForm">
                         <div class="form-group">
                             <label for="floginacct">登陆账号</label>
-                            <input type="text" class="form-control" id="floginacct" placeholder="请输入登陆账号">
+                            <input type="text" class="form-control" id="floginacct" value="${user.loginacct}">
                         </div>
                         <div class="form-group">
                             <label for="fusername">用户名称</label>
-                            <input type="text" class="form-control" id="fusername" placeholder="请输入用户名称">
+                            <input type="text" class="form-control" id="fusername" value="${user.username}">
                         </div>
                         <div class="form-group">
                             <label for="femail">邮箱地址</label>
-                            <input type="email" class="form-control" id="femail" placeholder="请输入邮箱地址">
+                            <input type="email" class="form-control" id="femail" value="${user.email}">
                             <p class="help-block label label-warning">请输入合法的邮箱地址, 格式为： xxxx@xxxx.com</p>
                         </div>
-                        <button onclick="addUser()" type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+                        <button onclick="updateUser()" type="button" class="btn btn-success"><i class="glyphicon glyphicon-edit"></i> 修改</button>
                         <button onclick="resetForm()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
                     </form>
                 </div>
@@ -109,32 +105,41 @@
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
+<%--入口函数--%>
 <script type="text/javascript">
-    /*入口函数*/
     $(function () {
-
+        $(".list-group-item").click(function(){
+            if ( $(this).find("ul") ) {
+                $(this).toggleClass("tree-closed");
+                if ( $(this).hasClass("tree-closed") ) {
+                    $("ul", this).hide("fast");
+                } else {
+                    $("ul", this).show("fast");
+                }
+            }
+        });
     });
-
 </script>
 
-<%--添加用户--%>
+<%--修改用户数据--%>
 <script>
-    function addUser() {
+    function updateUser() {
         //获取添加的用户的信息
         var floginacct = $("#floginacct");
         var fusername = $("#fusername");
         var femail = $("#femail");
 
         $.ajax({
-           type : "POST",
-           data : {
-               "loginacct" : floginacct.val(),
-               "username" : fusername.val(),
-               "email" : femail.val()
-           },
-            url : "${APP_PATH}/user/doAdd.do",
+            type : "POST",
+            data : {
+                "loginacct" : floginacct.val(),
+                "username" : fusername.val(),
+                "email" : femail.val(),
+                "id" : "${user.id}"
+            },
+            url : "${APP_PATH}/user/doUpdate.do",
             beforeSend : function () {
-                loadingIndex = layer.msg('数据保存中...', {icon: 16});
+                loadingIndex = layer.msg('数据修改中...', {icon: 16});
                 //对表单数据进行校验
                 return true;
             },
@@ -142,14 +147,14 @@
             success : function (result) {
                 layer.close(loadingIndex);
                 if (result.success) {
-                    layer.msg("数据保存成功",{time:2000, icon:6, shift:6});
+                    layer.msg("数据修改成功",{time:2000, icon:6, shift:6});
                     setTimeout(function () {{window.location.href="${APP_PATH}/user/index.htm"}},2000);
                 }else {
                     layer.msg(result.message,{time:2000, icon:5, shift:6});
                 }
             },
             error : function () {
-                layer.msg("数据保存失败",{time:2000, icon:5, shift:6});
+                layer.msg("数据修改失败",{time:2000, icon:5, shift:6});
             }
         });
     }
@@ -159,27 +164,10 @@
 <script>
     function resetForm() {
         //jQuery没有reset函数，使用需要性转换为dom对象使用 [0]
-        $("#addForm")[0].reset();
+        $("#updateForm")[0].reset();
     }
 </script>
 
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
