@@ -74,7 +74,6 @@
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script>
-
     //异步请求方式
     function doLogin() {
         //获取用户输入的登录信息

@@ -154,6 +154,11 @@
                     //查询数据成功
                     var page = result.page;
                     var data = page.datas;
+                    /*判断返回的集合中是否有数据*/
+                    if (data.length == 0){
+                        layer.msg("目前没有查询到用户信息",{time:2000, icon:6, shift:6});
+                        return false;
+                    }
                     //layer.msg("数据加载成功",{time:2000, icon:6, shift:6});
                     var content = '';
 
@@ -234,6 +239,11 @@
                     //查询数据成功
                     var page = result.page;
                     var data = page.datas;
+                    /*判断返回的集合中是否有数据*/
+                    if (data.length == 0){
+                        layer.msg("没有您要查询的用户信息",{time:2000, icon:6, shift:6});
+                        return false;
+                    }
                     //layer.msg("数据加载成功",{time:2000, icon:6, shift:6});
                     var content = '';
 
@@ -283,7 +293,7 @@
 
                 } else {
                     //查询数据失败
-                    layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    layer.msg(result.message, {time:2000, icon:5, shift:6});
                 }
             },
             error : function () {
