@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import com.atguigu.atcrowdfunding.exception.LoginFailException;
 import com.atguigu.atcrowdfunding.util.AjaxResult;
 import com.atguigu.atcrowdfunding.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,46 +26,37 @@ public class DispatcherController {
     @Autowired
     private UserService userService ;
 
-    /**
-     * 去到主页面
-     */
+    //去到系统主页面
     @RequestMapping("/index")
     public String index(){
         return "index";
     }
 
-    /**
-     * 去到登录页面
-     */
+    //去到登录页面
     @RequestMapping("/login")
     public String login(){
         return "login";
     }
 
-    /**
-     * 去到注册页面
-     */
+    //去到注册页面
     @RequestMapping("/reg")
     public String reg(){
         return "reg";
     }
 
-    /**
-     * 去到后台主页面
-     */
+    //去到后台主页面
     @RequestMapping("/main")
     public String main(){
         return "main";
     }
 
-    /**
-     * 去到忘记密码页面
-     */
+    //去到忘记密码页面
     @RequestMapping("/forget")
     public String forget(){
         return "forget/forget";
     }
 
+    //注销功能（退出系统）
     /**
      * 注销功能（退出系统）
      * @return 重定向到系统主页面
@@ -77,45 +67,12 @@ public class DispatcherController {
         return "redirect:index.htm";  //使用重定向方法，封装用户写法提交请求
     }
 
-    //登录同步请求方式
-    /*
-     * 处理登录请求
-     * @param loginacct  接收用户输入的登录名
-     * @param userpswd   接收用户输入的登录密码
-     * @param type		  接收用户输入的用户类型
-     * @param session	  接收用户输入的验证码，将用户对象存入到session域中
-     */
-	/*@RequestMapping("/doLogin")
-	public String doLogin(String loginacct,String userpswd, String checkCode, String type,HttpSession session){
-		Map<String,Object> paramMap = new HashMap<String,Object>();
-		paramMap.put("loginacct", loginacct);
-		paramMap.put("userpswd", userpswd);
-		paramMap.put("type", type);
-
-		//从session域中获取程序生成的验证码
-		String checkCode_server = (String) session.getAttribute("CHECKCODE_SERVER");
-		//销毁验证码，确保验证码一次性
-		session.removeAttribute("CHECKCODE_SERVER");
-		//判断用户输入的验证码和实际生成的验证码是否一致，不区分大小写
-		if(!checkCode_server.equalsIgnoreCase(checkCode)){
-			//验证码不正确(抛出异常信息)
-			throw new LoginFailException("验证码错误");
-		}
-
-		//将查询到的用户数据封装到map集合中
-		User user = userService.queryUserLogin(paramMap);
-		session.setAttribute(Const.LOGIN_USER, user);
-		//使用重定向不使用请求转发，可以避免页面刷新时重复发起请求
-		return "redirect:/main.htm";
-	}*/
-
     //登录异步请求方式
     /**
      * 处理登录请求
-     * @ResponseBody 结合Jackson组件, 将返回结果转换为字符串.
+     * ResponseBody注解： 结合Jackson组件, 将返回结果转换为字符串.
      * 将JSON串以流的形式返回给客户端.
      *      返回数据格式： {"success":false,"message":"登录失败!"}
-     *
      */
     @ResponseBody
     @RequestMapping("/doLogin")
@@ -154,4 +111,27 @@ public class DispatcherController {
         }
         return result;
     }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

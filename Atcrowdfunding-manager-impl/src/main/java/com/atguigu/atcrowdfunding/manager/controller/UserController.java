@@ -166,6 +166,26 @@ public class UserController {
         return result;
     }
 
+    //批量删除用户
+    /**
+     * 批量删除用户
+     * @param id  选中的用户id
+     */
+    @ResponseBody
+    @RequestMapping("/doDeleteBatch")
+    public Object doDeleteBatch(Integer[] id){
+        AjaxResult result = new AjaxResult();
+        try {
+            int count = userService.deleteBatchUser(id);
+            result.setSuccess(count == id.length);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("删除数据失败");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }
 
 

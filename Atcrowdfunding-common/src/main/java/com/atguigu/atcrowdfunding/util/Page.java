@@ -1,13 +1,11 @@
 package com.atguigu.atcrowdfunding.util;
 
-import org.apache.poi.ss.formula.functions.T;
-
 import java.util.List;
 
 /**
  * 数据分页工具类
  */
-public class Page {
+public class Page<T> {
 
     private Integer pageno;    //当前页,要查询的页数
     private Integer pagesize;  //每页数据条数

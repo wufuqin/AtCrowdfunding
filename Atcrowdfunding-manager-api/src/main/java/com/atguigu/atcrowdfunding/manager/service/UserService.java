@@ -31,4 +31,7 @@ public interface UserService {
 
     //删除用户
     int deleteUser(Integer id);
+
+    //批量删除用户
+    int deleteBatchUser(Integer[] id);
 }

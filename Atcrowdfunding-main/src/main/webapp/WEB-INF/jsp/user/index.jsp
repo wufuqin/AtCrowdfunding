@@ -71,7 +71,7 @@
                         </div>
                         <button id="queryBtn" onclick="queryPageUserLike(1)" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
                     </form>
-                    <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
+                    <button onclick="deleteBatchBtn()" type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
                     <button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='${APP_PATH}/user/add.htm'"><i class="glyphicon glyphicon-plus"></i> 新增</button>
                     <br>
                     <hr style="clear:both;">
@@ -81,11 +81,11 @@
                             <thead>
                                 <tr >
                                     <th width="30">#</th>
-                                    <th width="30"><input type="checkbox"></th>
+                                    <th width="30"><input id="checkAll" type="checkbox"></th>
                                     <th>账号</th>
                                     <th>名称</th>
                                     <th>邮箱地址</th>
-                                    <th width="200">操作</th>
+                                    <th width="200">操作</th>C
                                 </tr>
                             </thead>
 
@@ -154,14 +154,14 @@
                     //查询数据成功
                     var page = result.page;
                     var data = page.datas;
-                    layer.msg("数据加载成功",{time:2000, icon:6, shift:6});
+                    //layer.msg("数据加载成功",{time:2000, icon:6, shift:6});
                     var content = '';
 
                     /* 对后台返回的数据进行拼串展示 */
                     $.each(data,function(i,n){
                         content+='<tr>';
                         content+='<td>'+(i+1)+'</td>';
-                        content+='<td><input type="checkbox"></td>';
+                        content+='<td><input type="checkbox" id="'+n.id+'"/></td>';
                         content+='<td>'+n.loginacct+'</td>';
                         content+='<td>'+n.username+'</td>';
                         content+='<td>'+n.email+'</td>';
@@ -234,14 +234,14 @@
                     //查询数据成功
                     var page = result.page;
                     var data = page.datas;
-                    layer.msg("数据加载成功",{time:2000, icon:6, shift:6});
+                    //layer.msg("数据加载成功",{time:2000, icon:6, shift:6});
                     var content = '';
 
                     /* 对后台返回的数据进行拼串展示 */
                     $.each(data,function(i,n){
                         content+='<tr>';
                         content+='<td>'+(i+1)+'</td>';
-                        content+='<td><input type="checkbox"></td>';
+                        content+='<td><input type="checkbox" id="'+n.id+'" /></td>';
                         content+='<td>'+n.loginacct+'</td>';
                         content+='<td>'+n.username+'</td>';
                         content+='<td>'+n.email+'</td>';
@@ -293,7 +293,7 @@
     }
 </script>
 
-<%-- 删除功能 --%>
+<%-- 单条数据删除功能 --%>
 <script>
     function doDelete(id,loginacct) {
         layer.confirm("确认删除["+loginacct+"]用户？", {icon: 3, title: '提示'}, function (cindex) {
@@ -315,7 +315,69 @@
                     if (result.success) {
                         loadingIndex = layer.msg('数据删除成功,正在更新数据...', {icon: 16});
                         //设置定时，让提示框显示一定时间
-                        setTimeout(function () {{window.location.href="${APP_PATH}/user/index.htm"}},2000);
+                        setTimeout(function () {{window.location.href="${APP_PATH}/user/index.htm"}},1000);
+                    }else {
+                        layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    }
+                },
+                error : function () {
+                    layer.msg("数据删除失败",{time:2000, icon:5, shift:6});
+                }
+            });
+        }, function (cindex) {
+            layer.close(cindex);
+        })
+    }
+</script>
+
+<%--实现复选框的联动效果--%>
+<script>
+    $("#checkAll").click(function () {
+        var checkedStatus = this.checked;
+        //通过后代元素设置input的chenkbox属性
+        $("tbody tr td input[type='checkbox']").prop("checked",checkedStatus);
+    });
+</script>
+
+<%--批量删除--%>
+<script>
+    function deleteBatchBtn() {
+        //获取被选中的复选框数据的id值
+        var selectCheckbox = $("tbody tr td input:checked");
+        
+        //判断是否有选中的数据
+        if (selectCheckbox.length==0) {
+            layer.msg("请选择要删除的用户",{time:2000, icon:6, shift:6});
+            return false;
+        }
+        
+        //遍历id数组，进行循环拼串
+        var idStr = "";
+        $.each(selectCheckbox,function (i,n) {
+            if (i != 0) {
+                idStr += "&";
+            }
+            idStr += "id="+n.id;
+        });
+        //alert(idStr);
+        layer.confirm("确认删除这些用户？", {icon: 3, title: '提示'}, function (cindex) {
+            $.ajax({
+                type : "POST",
+                data : idStr,
+                url : "${APP_PATH}/user/doDeleteBatch.do",
+                beforeSend : function () {
+                    layer.close(cindex);
+                    loadingIndex = layer.msg('数据删除中...', {icon: 16});
+                    //对表单数据进行校验
+                    return true;
+                },
+
+                success : function (result) {
+                    layer.close(loadingIndex);
+                    if (result.success) {
+                        loadingIndex = layer.msg('数据删除成功,正在更新数据...', {icon: 16});
+                        //设置定时，让提示框显示一定时间
+                        setTimeout(function () {{window.location.href="${APP_PATH}/user/index.htm"}},1000);
                     }else {
                         layer.msg(result.message,{time:2000, icon:5, shift:6});
                     }
