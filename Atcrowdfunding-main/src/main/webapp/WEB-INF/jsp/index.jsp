@@ -133,13 +133,13 @@
     </ol>
     <div class="carousel-inner" role="listbox">
         <div class="item active" onclick="window.location.href='project.html'" style="cursor:pointer;">
-            <img src="img/carousel-1.jpg" alt="First slide">
+            <img src="${APP_PATH}/img/my_carousel-1.jpg" alt="First slide">
         </div>
         <div class="item" onclick="window.location.href='project.html'" style="cursor:pointer;">
-            <img src="img/carousel-2.jpg" alt="Second slide">
+            <img src="${APP_PATH}/img/my_carousel-2.jpg" alt="Second slide">
         </div>
         <div class="item" onclick="window.location.href='project.html'" style="cursor:pointer;">
-            <img src="img/carousel-3.jpg" alt="Third slide">
+            <img src="${APP_PATH}/img/my_carousel-3.jpg" alt="Third slide">
         </div>
     </div>
     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -598,23 +598,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- FOOTER -->
-    <div class="container">
-        <div class="row clearfix">
-            <div class="col-md-12 column">
-                <div id="footer">
-                    <div class="footerNav">
-                        <a rel="nofollow" href="http://www.atguigu.com">关于我们</a> | <a rel="nofollow" href="http://www.atguigu.com">服务条款</a> | <a rel="nofollow" href="http://www.atguigu.com">免责声明</a> | <a rel="nofollow" href="http://www.atguigu.com">网站地图</a> | <a rel="nofollow" href="http://www.atguigu.com">联系我们</a>
-                    </div>
-                    <div class="copyRight">
-                        Copyright ?2017-2017atguigu.com 版权所有
                     </div>
                 </div>
 

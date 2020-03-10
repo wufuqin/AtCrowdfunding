@@ -1,19 +1,21 @@
 <%--
-  Created by IntelliJ IDEA.
-  User: wfq
-  Date: 2020/3/6
-  Time: 13:39
-  To change this template use File | Settings | File Templates.
+  测试
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>测试获取上下文路径</title>
+    <title>测试</title>
 </head>
 <body>
-<script>
+
+<%--测试获取上下文路径--%>
+<%--<script>
     alert(${APP_PATH});
     alert(${pageContext.request.contextPath})
-</script>
+</script>--%>
+
+<%----%>
+
+
 </body>
 </html>

@@ -64,7 +64,7 @@ public class DispatcherController {
     @RequestMapping("/logout")
     public String logout(HttpSession session){
         session.invalidate();  //销毁session或者清理session域
-        return "redirect:index.htm";  //使用重定向方法，封装用户写法提交请求
+        return "redirect:index.htm";  //使用重定向方法，避免用户重复提交请求
     }
 
     //登录异步请求方式
