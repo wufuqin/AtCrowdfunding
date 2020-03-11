@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.atguigu.atcrowdfunding.manager.dao.PermissionMapper" >
+
+  <!--许可维护模块的映射配置文件-->
+
+  <!--封装结果集-->
   <resultMap id="BaseResultMap" type="com.atguigu.atcrowdfunding.bean.Permission" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="pid" property="pid" jdbcType="INTEGER" />
@@ -8,31 +12,67 @@
     <result column="icon" property="icon" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
   </resultMap>
+
+  <!--根据id删除-->
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_permission
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
+  <!--添加许可-->
   <insert id="insert" parameterType="com.atguigu.atcrowdfunding.bean.Permission" >
-    insert into t_permission (id, pid, name, 
-      icon, url)
-    values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{icon,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR})
+    insert into t_permission (id, pid, name, icon, url)
+    values (#{id,jdbcType=INTEGER},
+            #{pid,jdbcType=INTEGER},
+            #{name,jdbcType=VARCHAR},
+            #{icon,jdbcType=VARCHAR},
+            #{url,jdbcType=VARCHAR})
   </insert>
+
+  <!--根据id修改-->
   <update id="updateByPrimaryKey" parameterType="com.atguigu.atcrowdfunding.bean.Permission" >
     update t_permission
-    set pid = #{pid,jdbcType=INTEGER},
+    set
+      pid = #{pid,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
       icon = #{icon,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--根据id查询-->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select id, pid, name, icon, url
     from t_permission
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <!--查询所有许可-->
   <select id="selectAll" resultMap="BaseResultMap" >
     select id, pid, name, icon, url
     from t_permission
   </select>
+
+
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

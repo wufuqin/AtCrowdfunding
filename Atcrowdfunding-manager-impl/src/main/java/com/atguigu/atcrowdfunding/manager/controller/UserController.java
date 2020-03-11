@@ -1,17 +1,18 @@
 package com.atguigu.atcrowdfunding.manager.controller;
 
+import com.atguigu.atcrowdfunding.bean.Role;
 import com.atguigu.atcrowdfunding.bean.User;
 import com.atguigu.atcrowdfunding.manager.service.UserService;
 import com.atguigu.atcrowdfunding.util.AjaxResult;
 import com.atguigu.atcrowdfunding.util.Page;
+import com.atguigu.atcrowdfunding.vo.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 用户角色维护模块的controller
@@ -185,6 +186,74 @@ public class UserController {
         }
         return result;
     }
+
+    //去到分配权限页面
+    @RequestMapping("/assignRole")
+    public String assignRole(Integer id, Map map){
+        //查询所有的角色
+        List<Role> allListRole = userService.queryAllRole();
+        //根据用户id查询用户拥有的角色的id
+        List<Integer> roleIds = userService.queryRoleByUserId(id);
+        //存储未分配角色
+        List<Role> leftRoleList = new ArrayList<Role>();
+        //存储已分配角色
+        List<Role> rightRoleList = new ArrayList<Role>();
+
+        //将所有角色添加到两个集合中
+        for (Role role : allListRole) {
+            if (roleIds.contains(role.getId())){
+                //添加到已分配集合
+                rightRoleList.add(role);
+            } else {
+                //添加到未分配集合
+                leftRoleList.add(role);
+            }
+        }
+        map.put("leftRoleList",leftRoleList);
+        map.put("rightRoleList",rightRoleList);
+
+        return "user/assignRole";
+    }
+
+    //分配角色
+    @ResponseBody
+    @RequestMapping("/doAddAssignRole")
+    public Object doAddAssignRole(Integer userid, Data data){
+        //用来封装ajax请求结果
+        AjaxResult result = new AjaxResult();
+        try {
+            //调用业务层方法,返回一个影响数据库行数的int数值
+            userService.addAssignRole(userid, data);
+            result.setSuccess(true);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("分配权限失败");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+    //取消权限
+    @ResponseBody
+    @RequestMapping("/doDeleteAssignRole")
+    public Object doDeleteAssignRole(Integer userid, Data data){
+        //用来封装ajax请求结果
+        AjaxResult result = new AjaxResult();
+        try {
+            //调用业务层方法,返回一个影响数据库行数的int数值
+            userService.deleteAssignRole(userid, data);
+            result.setSuccess(true);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("取消权限失败");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+
 
 }
 

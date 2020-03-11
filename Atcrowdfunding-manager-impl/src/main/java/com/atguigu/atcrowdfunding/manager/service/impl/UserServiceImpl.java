@@ -6,9 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.atguigu.atcrowdfunding.bean.Role;
 import com.atguigu.atcrowdfunding.util.Const;
 import com.atguigu.atcrowdfunding.util.MD5Util;
 import com.atguigu.atcrowdfunding.util.Page;
+import com.atguigu.atcrowdfunding.vo.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -153,6 +155,30 @@ public class UserServiceImpl implements UserService {
 			throw new  RuntimeException("批量删除数据失败");
 		}
 		return totalCount;
+	}
+
+	//查询所有的角色
+	@Override
+	public List<Role> queryAllRole() {
+		return userMapper.queryAllRole();
+	}
+
+	//根据用户id查询用户拥有的角色的id
+	@Override
+	public List<Integer> queryRoleByUserId(Integer id) {
+		return userMapper.queryRoleByUserId(id);
+	}
+
+	//分配角色
+	@Override
+	public void addAssignRole(Integer userid, Data data) {
+		userMapper.addAssignRole(userid,data);
+	}
+
+	//取消权限
+	@Override
+	public void deleteAssignRole(Integer userid, Data data) {
+		userMapper.deleteAssignRole(userid,data);
 	}
 
 }

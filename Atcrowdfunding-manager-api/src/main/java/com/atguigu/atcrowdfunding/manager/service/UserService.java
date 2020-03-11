@@ -1,10 +1,13 @@
 package com.atguigu.atcrowdfunding.manager.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.atguigu.atcrowdfunding.bean.Role;
 import com.atguigu.atcrowdfunding.bean.User;
 import com.atguigu.atcrowdfunding.util.Page;
+import com.atguigu.atcrowdfunding.vo.Data;
 
 /**
  * 用户的业务层接口
@@ -34,4 +37,16 @@ public interface UserService {
 
     //批量删除用户
     int deleteBatchUser(Integer[] id);
+
+    //查询所有的角色
+    List<Role> queryAllRole();
+
+    //根据用户id查询用户拥有的角色的id
+	List<Integer> queryRoleByUserId(Integer id);
+
+    //分配角色
+    void addAssignRole(Integer userid, Data data);
+
+    //取消权限
+    void deleteAssignRole(Integer userid, Data data);
 }

@@ -174,6 +174,13 @@ public class RoleController {
         return result;
     }
 
+    //去到分配许可页面
+    @RequestMapping("/assignPermission")
+    public String assignPermission(){
+        return "role/assignPermission";
+    }
+
+
 }
 
 

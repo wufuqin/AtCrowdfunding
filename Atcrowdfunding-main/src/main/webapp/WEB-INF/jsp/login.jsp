@@ -73,8 +73,9 @@
 <script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
+
+<%--登录请求--%>
 <script>
-    //异步请求方式
     function doLogin() {
         //获取用户输入的登录信息
         var loginacct = $("#floginacct");

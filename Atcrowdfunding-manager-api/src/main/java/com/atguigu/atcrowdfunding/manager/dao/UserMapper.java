@@ -1,7 +1,9 @@
 package com.atguigu.atcrowdfunding.manager.dao;
 
+import com.atguigu.atcrowdfunding.bean.Role;
 import com.atguigu.atcrowdfunding.bean.User;
 import com.atguigu.atcrowdfunding.util.Page;
+import com.atguigu.atcrowdfunding.vo.Data;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -45,4 +47,16 @@ public interface UserMapper {
 
     //模糊查询总记录数
     Integer queryCountLike(HashMap<String, Object> paramMap);
+
+    //查询所有的角色
+    List<Role> queryAllRole();
+
+    //根据用户id查询用户拥有的角色的id
+    List<Integer> queryRoleByUserId(Integer id);
+
+    //分配角色
+    void addAssignRole(@Param("userid") Integer userid, @Param("data") Data data);
+
+    //取消权限
+    void deleteAssignRole(@Param("userid") Integer userid, @Param("data") Data data);
 }

@@ -65,12 +65,12 @@
                             <%-- 表格头部信息 --%>
                             <thead>
                                 <tr >
-                                    <th width="50">序号</th>
-                                    <th width="30" ><input id="checkAll" type="checkbox"></th>
-                                    <th>账号</th>
-                                    <th>名称</th>
-                                    <th>邮箱地址</th>
-                                    <th width="200">操作</th>C
+                                    <th class="text-center" width="50">序号</th>
+                                    <th class="text-center" width="30"><input id="checkAll" type="checkbox"></th>
+                                    <th class="text-center">账号</th>
+                                    <th class="text-center">名称</th>
+                                    <th class="text-center">邮箱地址</th>
+                                    <th class="text-center" width="200">操作</th>C
                                 </tr>
                             </thead>
 
@@ -150,13 +150,13 @@
                     /* 对后台返回的数据进行拼串展示 */
                     $.each(data,function(i,n){
                         content+='<tr>';
-                        content+='<td>'+(i+1)+'</td>';
-                        content+='<td><input type="checkbox" id="'+n.id+'"/></td>';
-                        content+='<td>'+n.loginacct+'</td>';
-                        content+='<td>'+n.username+'</td>';
-                        content+='<td>'+n.email+'</td>';
+                        content+='<td class="text-center" >'+(i+1)+'</td>';
+                        content+='<td class="text-center" ><input type="checkbox" id="'+n.id+'"/></td>';
+                        content+='<td class="text-center" >'+n.loginacct+'</td>';
+                        content+='<td class="text-center" style="color: #0f0f0f">'+n.username+'</td>';
+                        content+='<td class="text-center" >'+n.email+'</td>';
                         content+='<td>';
-                        content+='<button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i>分配权限</button>';
+                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/user/assignRole.htm?id='+n.id+'\'" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i>分配权限</button>';
                         content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/user/update.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i>修改</button>';
                         content+='<button type="button" onclick="doDelete('+n.id+',\''+n.loginacct+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
                         content+='</td>';
@@ -235,13 +235,13 @@
                     /* 对后台返回的数据进行拼串展示 */
                     $.each(data,function(i,n){
                         content+='<tr>';
-                        content+='<td>'+(i+1)+'</td>';
-                        content+='<td><input type="checkbox" id="'+n.id+'" /></td>';
-                        content+='<td>'+n.loginacct+'</td>';
-                        content+='<td>'+n.username+'</td>';
-                        content+='<td>'+n.email+'</td>';
+                        content+='<td class="text-center" >'+(i+1)+'</td>';
+                        content+='<td class="text-center" ><input type="checkbox" id="'+n.id+'" /></td>';
+                        content+='<td class="text-center" >'+n.loginacct+'</td>';
+                        content+='<td class="text-center" style="color: #0f0f0f">'+n.username+'</td>';
+                        content+='<td class="text-center" >'+n.email+'</td>';
                         content+='<td>';
-                        content+='<button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i>分配权限</button>';
+                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/user/assignRole.htm?id='+n.id+'\'" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i>分配权限</button>';
                         content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/user/update.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i>修改</button>';
                         content+='<button type="button" onclick="doDelete('+n.id+',\''+n.loginacct+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
                         content+='</td>';

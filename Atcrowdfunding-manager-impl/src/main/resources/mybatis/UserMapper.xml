@@ -21,10 +21,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 
-	<!--
-		添加用户
-			useGeneratedKeys="true" keyProperty="id" : 主键回填，将得到的主键值回填到身体对象中返回前台
-	-->
+	<!--添加用户    useGeneratedKeys="true" keyProperty="id" : 主键回填，将得到的主键值回填到身体对象中返回前台-->
 	<insert id="insert" parameterType="com.atguigu.atcrowdfunding.bean.User" useGeneratedKeys="true" keyProperty="id">
 		insert
 		into t_user (id,loginacct, userpswd,username, email, createtime)
@@ -82,10 +79,7 @@
 		from t_user
 	</select>
 
-	<!--
-		查询分页数据
-			避免sql注入采用 concat进行拼串
-	-->
+	<!--查询分页数据,避免sql注入采用 concat进行拼串-->
 	<select id="queryListLike" resultMap="BaseResultMap">
 		select id, loginacct, userpswd, username, email, createtime
 		from t_user
@@ -106,6 +100,38 @@
 			<if test="queryText != null">loginacct like concat("%",#{queryText},"%")</if>
 		</where>
 	</select>
+
+	<!--查询所有的角色-->
+	<select id="queryAllRole" resultType="role">
+		select id,name
+		from t_role
+	</select>
+
+	<!--根据用户id查询用户拥有的角色的id-->
+	<select id="queryRoleByUserId" parameterType="int" resultType="int">
+		select roleid
+		from t_user_role
+		where userid=#{id}
+	</select>
+
+	<!--分配角色-->
+	<insert id="addAssignRole">
+		<foreach collection="data.ids" item="roleid" separator=";">
+			insert
+			into t_user_role(userid,roleid)
+			values(#{userid},#{roleid})
+		</foreach>
+	</insert>
+
+	<!--取消权限-->
+	<delete id="deleteAssignRole">
+		delete
+		from t_user_role
+		where userid = #{userid} and roleid in
+		<foreach collection="data.ids" item="roleid" open="(" separator="," close=")">
+			#{roleid}
+		</foreach>
+	</delete>
 
 </mapper>
 
