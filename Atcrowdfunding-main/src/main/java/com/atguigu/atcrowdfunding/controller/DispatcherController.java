@@ -56,6 +56,18 @@ public class DispatcherController {
         return "forget/forget";
     }
 
+    //点击短信注册去到功能为完成提示页面
+    @RequestMapping("/unfinished")
+    public String unfinished(){
+        return "error/unfinished";
+    }
+
+    //去到功能为完成提示页面
+    @RequestMapping("/member")
+    public String member(){
+        return "error/unfinished";
+    }
+
     //注销功能（退出系统）
     /**
      * 注销功能（退出系统）
@@ -111,7 +123,6 @@ public class DispatcherController {
         }
         return result;
     }
-
 
 }
 

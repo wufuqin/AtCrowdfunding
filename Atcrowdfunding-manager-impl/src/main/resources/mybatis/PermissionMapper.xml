@@ -33,7 +33,6 @@
   <update id="updateByPrimaryKey" parameterType="com.atguigu.atcrowdfunding.bean.Permission" >
     update t_permission
     set
-      pid = #{pid,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
       icon = #{icon,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR}
@@ -48,9 +47,30 @@
   </select>
 
   <!--查询所有许可-->
-  <select id="selectAll" resultMap="BaseResultMap" >
+  <select id="queryAllPermission" resultMap="BaseResultMap" >
     select id, pid, name, icon, url
     from t_permission
+  </select>
+
+  <!--查询父节点-->
+  <select id="getRootPermission" resultType="Permission">
+		select id, pid, name, icon, url
+		from t_permission
+		where pid is null
+	</select>
+
+  <!--查询子节点-->
+  <select id="getChildrenPermissionByPid" parameterType="int" resultMap="BaseResultMap">
+		select id, pid, name, icon, url
+		from t_permission
+		where pid = #{id}
+	</select>
+
+  <!--根据角色id查询该角色之前所分配过的许可-->
+  <select id="queryPermissionIdByRoleId" parameterType="int" resultType="int">
+      select permissionid
+      from t_role_permission
+      where roleid = #{roleid}
   </select>
 
 

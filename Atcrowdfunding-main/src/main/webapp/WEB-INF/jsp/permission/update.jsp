@@ -1,5 +1,5 @@
 <%--
-    修改用户信息页面
+    修改许可
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -28,7 +28,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <div><a class="navbar-brand" style="font-size:32px;" href="user.html">众筹平台 - 用户维护</a></div>
+            <div><a class="navbar-brand" style="font-size:32px;" href="${APP_PATH}/permission/index.htm">众筹平台 - 许可维护</a></div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -50,31 +50,29 @@
                 <jsp:include page="/WEB-INF/jsp/common/menu.jsp"/>
             </div>
         </div>
+
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <ol class="breadcrumb">
                 <li><a href="#">首页</a></li>
                 <li><a href="#">数据列表</a></li>
-                <li class="active">修改</li>
+                <li class="active">修改许可</li>
             </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
                 <div class="panel-body">
-                    <form id="updateForm">
+                    <form id="updatePermissionForm">
                         <div class="form-group">
-                            <label for="floginacct">登陆账号</label>
-                            <input type="text" class="form-control" id="floginacct" value="${user.loginacct}">
+                            <label for="fname">许可名称</label>
+                            <input type="text" class="form-control" id="fname" value="${permission.name }" placeholder="请输入许可名称">
                         </div>
                         <div class="form-group">
-                            <label for="fusername">用户名称</label>
-                            <input type="text" class="form-control" id="fusername" value="${user.username}">
+                            <label for="furl">许可URL</label>
+                            <input type="email" class="form-control" id="furl" value="${permission.url }" placeholder="请输入许可URL">
+                            <p class="help-block label label-warning">请输入许可URL</p>
                         </div>
-                        <div class="form-group">
-                            <label for="femail">邮箱地址</label>
-                            <input type="email" class="form-control" id="femail" value="${user.email}">
-                            <p class="help-block label label-warning">请输入合法的邮箱地址, 格式为： xxxx@xxxx.com</p>
-                        </div>
-                        <button onclick="updateUser()" type="button" class="btn btn-success"><i class="glyphicon glyphicon-edit"></i> 修改</button>
-                        <button onclick="resetForm()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+
+                        <button id="updatePermissionBtn" type="button" class="btn btn-success"><i class="glyphicon glyphicon-pencil"></i> 修改</button>
+                        <button onclick="resetPermissionBtn()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
                     </form>
                 </div>
             </div>
@@ -105,7 +103,6 @@
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
-<%--入口函数--%>
 <script type="text/javascript">
     $(function () {
         $(".list-group-item").click(function(){
@@ -121,53 +118,69 @@
     });
 </script>
 
-<%--修改用户数据--%>
+<%--修改许可--%>
 <script>
-    function updateUser() {
-        //获取添加的用户的信息
-        var floginacct = $("#floginacct");
-        var fusername = $("#fusername");
-        var femail = $("#femail");
+    $("#updatePermissionBtn").click(function(){
+
+        var fname = $("#fname");
+        var furl = $("#furl");
 
         $.ajax({
             type : "POST",
             data : {
-                "loginacct" : floginacct.val(),
-                "username" : fusername.val(),
-                "email" : femail.val(),
-                "id" : "${user.id}"
+                "name" : fname.val(),
+                "url" : furl.val(),
+                "icon" : "glyphicon glyphicon-user",
+                "id" :  "${permission.id}"
             },
-            url : "${APP_PATH}/user/doUpdate.do",
-            beforeSend : function () {
+            url : "${APP_PATH}/permission/doUpdate.do",
+            beforeSend : function() {
                 loadingIndex = layer.msg('数据修改中...', {icon: 16});
-                //对表单数据进行校验
-                return true;
+                return true ;
             },
-
-            success : function (result) {
+            success : function(result){
                 layer.close(loadingIndex);
-                if (result.success) {
-                    layer.msg("数据修改成功...",{time:2000, icon:6, shift:6});
-                    setTimeout(function () {{window.location.href="${APP_PATH}/user/index.htm"}},2000);
-                }else {
-                    layer.msg("数据修改失败...",{time:2000, icon:5, shift:6});
+                if(result.success){
+                    layer.msg("保存成功...", {time:1000, icon:6, shift:6});
+                    setTimeout(function () {{window.location.href="${APP_PATH}/permission/index.htm"}},2000);
+                }else{
+                    layer.msg("保存数据失败...", {time:1000, icon:5, shift:6});
                 }
             },
-            error : function () {
-                layer.msg("数据修改失败...",{time:2000, icon:5, shift:6});
+            error : function(){
+                layer.msg("保存失败...", {time:1000, icon:5, shift:6});
             }
         });
-    }
+
+    });
+
 </script>
 
 <%--重置表单数据--%>
 <script>
-    function resetForm() {
-        //jQuery没有reset函数，使用需要性转换为dom对象使用 [0]
-        $("#updateForm")[0].reset();
-    }
+function resetPermissionBtn() {
+    //jQuery没有reset函数，使用需要性转换为dom对象使用 [0]
+    $("#updatePermissionForm")[0].reset();
+}
 </script>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -1,9 +1,11 @@
 package com.atguigu.atcrowdfunding.manager.service.impl;
 
 import com.atguigu.atcrowdfunding.bean.Role;
+import com.atguigu.atcrowdfunding.bean.RolePermission;
 import com.atguigu.atcrowdfunding.manager.dao.RoleMapper;
 import com.atguigu.atcrowdfunding.manager.service.RoleService;
 import com.atguigu.atcrowdfunding.util.Page;
+import com.atguigu.atcrowdfunding.vo.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -119,5 +121,26 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role getRoleById(Integer id) {
         return roleMapper.selectByPrimaryKey(id);
+    }
+
+    //完成分配许可
+    @Override
+    public int saveRolePermissionRelationship(Integer roleid, Data datas) {
+
+        //删除原来已经有的权限
+        roleMapper.deleteRolePermissionRelationship(roleid);
+
+        int totalCount = 0 ;
+        List<Integer> ids = datas.getIds();
+        //将选中的权限分配
+        for (Integer permissionid : ids) {
+            RolePermission rp = new RolePermission();
+            rp.setRoleid(roleid);
+            rp.setPermissionid(permissionid);
+            int count = roleMapper.insertRolePermission(rp);
+            totalCount += count ;
+        }
+
+        return totalCount;
     }
 }

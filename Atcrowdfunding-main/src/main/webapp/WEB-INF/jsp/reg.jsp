@@ -64,13 +64,13 @@
         </div>
         <div class="checkbox">
             <label>
-                忘记密码
+                <a href="${APP_PATH}/unfinished.htm">短信注册</a>
             </label>
             <label style="float:right">
                 <a href="${APP_PATH}/login.htm">我有账号</a>
             </label>
         </div>
-        <a class="btn btn-lg btn-success btn-block" href="member.html" > 注册</a>
+        <a class="btn btn-lg btn-success btn-block" href="${APP_PATH}/member.htm" > 注册</a>
     </form>
 </div>
 <script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>

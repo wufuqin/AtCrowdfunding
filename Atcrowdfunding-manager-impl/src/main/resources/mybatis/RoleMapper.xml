@@ -3,6 +3,7 @@
 <mapper namespace="com.atguigu.atcrowdfunding.manager.dao.RoleMapper" >
 
     <!-- 用户维护模块的映射配置文件 -->
+
     <!--封装结果集-->
     <resultMap id="BaseResultMap" type="com.atguigu.atcrowdfunding.bean.Role" >
         <id column="id" property="id" jdbcType="INTEGER" />
@@ -54,10 +55,7 @@
 		from t_role
 	</select>
 
-    <!--
-		查询分页数据
-			避免sql注入采用 concat进行拼串
-	-->
+    <!-- 查询分页数据避免sql注入采用 concat进行拼串-->
     <select id="queryListLike" resultMap="BaseResultMap">
         select id, name
         from t_role
@@ -78,14 +76,19 @@
         </where>
     </select>
 
+    <!--删除用户所具有的所有权限-->
+    <delete id="deleteRolePermissionRelationship">
+        delete
+        from t_role_permission
+        where roleid = #{roleid}
+    </delete>
 
-
-
-
-
-
-
-
+    <!-- 给角色分配许可 -->
+    <insert id="insertRolePermission">
+        insert
+        into t_role_permission(roleid, permissionid)
+        values (#{roleid},#{permissionid})
+    </insert>
 </mapper>
 
 

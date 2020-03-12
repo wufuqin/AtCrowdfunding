@@ -2,6 +2,7 @@ package com.atguigu.atcrowdfunding.manager.service;
 
 import com.atguigu.atcrowdfunding.bean.Role;
 import com.atguigu.atcrowdfunding.util.Page;
+import com.atguigu.atcrowdfunding.vo.Data;
 
 import java.util.HashMap;
 
@@ -29,6 +30,9 @@ public interface RoleService {
 
     //根据id查询角色
     Role getRoleById(Integer id);
+
+    //完成分配许可
+    int saveRolePermissionRelationship(Integer roleid, Data datas);
 }
 
 

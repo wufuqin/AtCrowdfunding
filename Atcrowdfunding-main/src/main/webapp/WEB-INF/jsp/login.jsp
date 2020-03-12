@@ -20,7 +20,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <div><a class="navbar-brand" href="index.html" style="font-size:32px;">众筹网-创意产品众筹平台</a></div>
+            <div><a class="navbar-brand" href="${APP_PATH}/index.htm" style="font-size:32px;">众筹网-创意产品众筹平台</a></div>
         </div>
     </div>
 </nav>
@@ -83,32 +83,31 @@
         var checkCode = $("#fcheckCode");
         var type = $("#ftype").val();
 
-        //对表单用户名数据进行校验
+        //对用户名数据进行校验
         if ($.trim(loginacct.val()) == "") {
             //alert("用户名不能为空！");
-            layer.msg("用户名不能为空", {time:2000, icon:null, shift:6});
+            layer.msg("用户名不能为空", {time:1000, icon:5, shift:5});
             loginacct.val("");   //输入框重新设置为空
             loginacct.focus();   //重新获取焦点
             return false;
         }
-        //对表单密码数据进行校验
+        //对密码数据进行校验
         if ($.trim(userpswd.val()) == "") {
             //alert("密码不能为空！");
-            layer.msg("密码不能为空", {time:2000, icon:null, shift:6});
+            layer.msg("密码不能为空", {time:1000, icon:5, shift:5});
             userpswd.val("");   //输入框重新设置为空
             userpswd.focus();   //重新获取焦点
             return false;
         }
-        //对表单验证码数据进行校验
+        //对验证码数据进行校验
         if ($.trim(checkCode.val()) == "") {
             //alert("验证码不能为空！");
-            layer.msg("验证码不能为空", {time:2000, icon:null, shift:6});
+            layer.msg("验证码不能为空", {time:1000, icon:5, shift:5});
             checkCode.val("");   //输入框重新设置为空
             checkCode.focus();   //重新获取焦点
             return false;
         }
 
-        //使用ajax封装做异步请求
         $.ajax({
             type : "POST",
             data : {
@@ -119,27 +118,20 @@
             },
             url : "${APP_PATH}/doLogin.do",
             beforeSend : function () {
-                //给出登录是提示
                 loadingIndex = layer.msg('登录中', {icon: 16});
-                //一般做表单数据校验
                 return true;
             },
             success : function (result) {
                 if (result.success){
-                    //alert("登录成功");
                     layer.close(loadingIndex);
-                    //layer.msg("登录成功", {time:3000, icon:6, shift:6});
-                    //跳转到后台主页面
-                    window.location.href = "${APP_PATH}/main.htm";
+                    window.location.href = "${APP_PATH}/main.htm";   //跳转到后台主页面
                 }else {
-                    //alert("登录失败");
-                    //alert(result.message);
-                    layer.msg(result.message, {time:2000, icon:5, shift:6});
+                    layer.msg(result.message, {time:2000, icon:5, shift:5});
                     refreshCode(); //自动切换验证码
                 }
             },
             error : function () {
-                layer.msg("登录失败", {time:2000, icon:5, shift:6});
+                layer.msg("登录失败", {time:2000, icon:5, shift:5});
             }
         });
     }
@@ -148,10 +140,8 @@
 <%-- 切换验证码 --%>
 <script>
     function refreshCode(){
-        //1.获取验证码图片对象
-        var vcode = document.getElementById("vcode");
-        //2.设置其src属性，加时间戳
-        vcode.src = "${pageContext.request.contextPath}/CheckCodeServlet?time="+new Date().getTime();
+        var vcode = document.getElementById("vcode");  //1.获取验证码图片对象
+        vcode.src = "${pageContext.request.contextPath}/CheckCodeServlet?time="+new Date().getTime();   //2.设置其src属性，加时间戳
     }
 </script>
 

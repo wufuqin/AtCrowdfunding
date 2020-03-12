@@ -1,6 +1,7 @@
 package com.atguigu.atcrowdfunding.manager.dao;
 
 import com.atguigu.atcrowdfunding.bean.Role;
+import com.atguigu.atcrowdfunding.bean.RolePermission;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -40,4 +41,10 @@ public interface RoleMapper {
 
     //模糊查询总记录数
     Integer queryCountLike(HashMap<String, Object> paramMap);
+
+    //删除原来已经有的权限
+    void deleteRolePermissionRelationship(Integer roleid);
+
+    //分配权限
+    int insertRolePermission(RolePermission rp);
 }

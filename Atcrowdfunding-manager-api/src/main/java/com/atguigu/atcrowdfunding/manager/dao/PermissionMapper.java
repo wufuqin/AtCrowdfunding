@@ -21,10 +21,19 @@ public interface PermissionMapper {
     Permission selectByPrimaryKey(Integer id);
 
     //查询所有许可
-    List<Permission> selectAll();
+    List<Permission> queryAllPermission();
 
     //根据id修改
     int updateByPrimaryKey(Permission record);
+
+    //查询父节点
+    Permission getRootPermission();
+
+    //查询子节点
+    List<Permission> getChildrenPermissionByPid(Integer id);
+
+    //根据角色id查询该角色之前所分配过的许可
+    List<Integer> queryPermissionIdByRoleId(Integer roleid);
 }
 
 

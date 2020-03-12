@@ -144,7 +144,7 @@
                         content+='<td class="text-center" ><input type="checkbox" id="'+n.id+'"></td>';
                         content+='<td class="text-center" >'+n.name+'</td>';
                         content+='<td>';
-                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/role/assignPermission.htm\'" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i>分配许可</button>';
+                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/role/assignPermission.htm?roleid='+n.id+'\'" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i>分配许可</button>';
                         content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/role/update.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i>修改</button>';
                         content+='<button type="button" onclick="doDeleteRole('+n.id+',\''+n.name+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
                         content+='</td>';
@@ -217,7 +217,6 @@
                         layer.msg("没有您要查询的用户信息",{time:2000, icon:6, shift:6});
                         return false;
                     }
-                    //layer.msg("数据加载成功",{time:2000, icon:6, shift:6});
                     var content = '';
 
                     /* 对后台返回的数据进行拼串展示 */
@@ -227,7 +226,7 @@
                         content+='<td class="text-center" ><input type="checkbox" id="'+n.id+'"></td>';
                         content+='<td class="text-center" >'+n.name+'</td>';
                         content+='<td>';
-                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/role/assignPermission.htm\'" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i>分配权限</button>';
+                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/role/assignPermission.htm?roleid='+n.id+'\'" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i>分配权限</button>';
                         content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/role/update.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i>修改</button>';
                         content+='<button type="button" onclick="doDeleteRole('+n.id+',\''+n.name+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
                         content+='</td>';

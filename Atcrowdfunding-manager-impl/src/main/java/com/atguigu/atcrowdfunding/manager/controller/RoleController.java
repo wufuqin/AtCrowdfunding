@@ -1,9 +1,12 @@
 package com.atguigu.atcrowdfunding.manager.controller;
 
+import com.atguigu.atcrowdfunding.bean.Permission;
 import com.atguigu.atcrowdfunding.bean.Role;
+import com.atguigu.atcrowdfunding.manager.service.PermissionService;
 import com.atguigu.atcrowdfunding.manager.service.RoleService;
 import com.atguigu.atcrowdfunding.util.AjaxResult;
 import com.atguigu.atcrowdfunding.util.Page;
+import com.atguigu.atcrowdfunding.vo.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,6 +28,9 @@ public class RoleController {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private PermissionService permissionService;
 
     //去到角色维护主页面
     @RequestMapping("/index")
@@ -178,6 +186,60 @@ public class RoleController {
     @RequestMapping("/assignPermission")
     public String assignPermission(){
         return "role/assignPermission";
+    }
+
+    /**
+     * 显示权限树
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/loadDataAsync")
+    public Object loadDataAsync(Integer roleid){
+        //存储父节点
+        List<Permission> root = new ArrayList<Permission>();
+        //存储子节点
+        List<Permission> childredPermissons =  permissionService.queryAllPermission();
+        //根据角色id查询该角色之前所分配过的许可.
+        List<Integer> permissonIdsForRoleid = permissionService.queryPermissionIdByRoleId(roleid);
+
+        Map<Integer,Permission> map = new HashMap<Integer,Permission>();
+
+        for (Permission innerpermission : childredPermissons) {
+            map.put(innerpermission.getId(), innerpermission);
+            //将分配个的权限的checked属性设置为true
+            if(permissonIdsForRoleid.contains(innerpermission.getId())){
+                innerpermission.setChecked(true);
+            }
+        }
+        for (Permission permission : childredPermissons) {
+            //通过子查找父
+            //子菜单
+            Permission child = permission ; //假设为子菜单
+            if(child.getPid() == null ){
+                root.add(permission);
+            }else{
+                //父节点
+                Permission parent = map.get(child.getPid());
+                parent.getChildren().add(child);
+            }
+        }
+        return root ;
+    }
+
+    //完成分配许可
+    @ResponseBody
+    @RequestMapping("/doAssignPermission")
+    public Object doAssignPermission(Integer roleid, Data datas){
+        AjaxResult result = new AjaxResult();
+        try {
+            //保存数据，返回一个影响数据库的行数
+            int count = roleService.saveRolePermissionRelationship(roleid,datas);
+            result.setSuccess(count==datas.getIds().size());
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.setSuccess(false);
+        }
+        return result;
     }
 
 
