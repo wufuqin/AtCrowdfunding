@@ -90,6 +90,8 @@
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/ztree/jquery.ztree.all-3.5.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
+<script src="${APP_PATH}/script/menu.js"></script>
+
 <script type="text/javascript">
     $(function () {
         $(".list-group-item").click(function(){
@@ -102,7 +104,7 @@
                 }
             }
         });
-
+        showMenu();
         //加载许可树
         loadData();
     });

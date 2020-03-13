@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.atguigu.atcrowdfunding.bean.Permission;
 import com.atguigu.atcrowdfunding.bean.Role;
 import com.atguigu.atcrowdfunding.bean.User;
 import com.atguigu.atcrowdfunding.util.Page;
@@ -49,4 +50,7 @@ public interface UserService {
 
     //取消权限
     void deleteAssignRole(Integer userid, Data data);
+
+    //查询用户拥有的权限
+    List<Permission> queryPermissionByUserId(Integer id);
 }

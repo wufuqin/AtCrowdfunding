@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.atguigu.atcrowdfunding.bean.Permission;
 import com.atguigu.atcrowdfunding.bean.Role;
 import com.atguigu.atcrowdfunding.util.Const;
 import com.atguigu.atcrowdfunding.util.MD5Util;
@@ -180,6 +181,12 @@ public class UserServiceImpl implements UserService {
 	public void deleteAssignRole(Integer userid, Data data) {
 		userMapper.deleteAssignRole(userid,data);
 	}
+
+	//查询用户拥有的权限
+    @Override
+    public List<Permission> queryPermissionByUserId(Integer id) {
+        return userMapper.queryPermissionByUserId(id);
+    }
 
 }
 

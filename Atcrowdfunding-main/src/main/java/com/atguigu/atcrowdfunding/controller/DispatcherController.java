@@ -1,10 +1,12 @@
 package com.atguigu.atcrowdfunding.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import com.atguigu.atcrowdfunding.bean.Permission;
 import com.atguigu.atcrowdfunding.util.AjaxResult;
 import com.atguigu.atcrowdfunding.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +48,30 @@ public class DispatcherController {
 
     //去到后台主页面
     @RequestMapping("/main")
-    public String main(){
+    public String main(HttpSession session){
+
+        //从session域中获取当前登录的用户信息
+        User user = (User)session.getAttribute(Const.LOGIN_USER);
+        //当前用户所拥有的许可权限
+        List<Permission> myPermissions = userService.queryPermissionByUserId(user.getId()); //当前用户所拥有的许可权限
+        Permission permissionRoot = null;
+        Map<Integer,Permission> map = new HashMap<Integer,Permission>();
+
+        for (Permission innerPermission : myPermissions) {     //将用户拥有的权限存储到mao集合中
+            map.put(innerPermission.getId(), innerPermission);
+        }
+        for (Permission permission : myPermissions) {
+            //通过子查找父
+            Permission child = permission ; //假设为子菜单
+            if(child.getPid() == null ){
+                permissionRoot = permission;
+            }else{
+                //父节点
+                Permission parent = map.get(child.getPid());
+                parent.getChildren().add(child);
+            }
+        }
+        session.setAttribute("permissionRoot", permissionRoot);
         return "main";
     }
 
@@ -79,7 +104,7 @@ public class DispatcherController {
         return "redirect:index.htm";  //使用重定向方法，避免用户重复提交请求
     }
 
-    //登录异步请求方式
+    //登录请求
     /**
      * 处理登录请求
      * ResponseBody注解： 结合Jackson组件, 将返回结果转换为字符串.

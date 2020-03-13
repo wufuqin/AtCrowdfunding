@@ -44,7 +44,7 @@
                 <a href="javascript:refreshCode();">
                     <img src="${APP_PATH}/CheckCodeServlet" title="看不清" id="vcode"/>
                 </a>
-
+                <%--<button type="button" class="btn btn-success btn-lg"><i class="glyphicon glyphicon-envelope"></i> 获取验证码</button>--%>
             </div>
         </div>
         <div class="form-group has-success has-feedback">

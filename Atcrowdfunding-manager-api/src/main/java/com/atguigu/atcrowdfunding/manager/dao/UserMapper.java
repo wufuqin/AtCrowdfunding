@@ -1,5 +1,6 @@
 package com.atguigu.atcrowdfunding.manager.dao;
 
+import com.atguigu.atcrowdfunding.bean.Permission;
 import com.atguigu.atcrowdfunding.bean.Role;
 import com.atguigu.atcrowdfunding.bean.User;
 import com.atguigu.atcrowdfunding.util.Page;
@@ -59,4 +60,7 @@ public interface UserMapper {
 
     //取消权限
     void deleteAssignRole(@Param("userid") Integer userid, @Param("data") Data data);
+
+    //查询用户拥有的权限
+    List<Permission> queryPermissionByUserId(Integer id);
 }

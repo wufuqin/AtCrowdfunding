@@ -218,6 +218,14 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+
+            <!--阿里云短信服务依赖-->
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <version>4.4.6</version>
+            </dependency>
+
         </dependencies>
 
     </dependencyManagement>

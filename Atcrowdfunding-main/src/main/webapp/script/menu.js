@@ -9,8 +9,6 @@ function showMenu(){
 	
 	var alink = $(".list-group a[href*='"+pathAddress+"']");
 	
-	alink.css("color","red");
-	
 	alink.parent().parent().parent().removeClass("tree-closed");
 	alink.parent().parent().show();
 }
