@@ -1,5 +1,8 @@
 package com.atguigu.atcrowdfunding.bean;
 
+/**
+ * 资质维护实体类
+ */
 public class Cert {
     private Integer id;
 

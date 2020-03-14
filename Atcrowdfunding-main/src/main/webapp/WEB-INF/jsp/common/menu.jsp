@@ -7,7 +7,7 @@
         只加载用户拥有的权限
 --%>
 
-<ul style="padding-left:0px;" class="list-group">
+<%--<ul style="padding-left:0px;" class="list-group">
     <c:forEach items="${sessionScope.permissionRoot.children }" var="permission">
     <c:if test="${empty permission.children}">
     <li class="list-group-item tree-closed" >
@@ -27,16 +27,16 @@
     </li>
     </c:if>
     </c:forEach>
-</ul>
+</ul>--%>
 
-<%--<li class="list-group-item tree-closed" >
+<li class="list-group-item tree-closed" >
     <a href="${APP_PATH}/main.htm"><i class="glyphicon glyphicon-dashboard"></i> 控制面板</a>
 </li>
 <li class="list-group-item tree-closed">
     <span><i class="glyphicon glyphicon glyphicon-tasks"></i> 权限管理 <span class="badge" style="float:right">3</span></span>
     <ul style="margin-top:10px;">
         <li style="height:30px;">
-           &lt;%&ndash;异步实现方式&ndash;%&gt;
+           <%--异步实现方式--%>
             <a href="${APP_PATH}/user/index.htm"><i class="glyphicon glyphicon-user"></i> 用户维护</a>
         </li>
         <li style="height:30px;">
@@ -51,7 +51,7 @@
     <span><i class="glyphicon glyphicon-ok"></i> 业务审核 <span class="badge" style="float:right">3</span></span>
     <ul style="margin-top:10px;display:none;">
         <li style="height:30px;">
-            <a href="auth_cert.html"><i class="glyphicon glyphicon-check"></i> 实名认证审核</a>
+            <a href="auth_cert.html"><i class="glyphicon glyphicon-check"></i> 实名审核</a>
         </li>
         <li style="height:30px;">
             <a href="auth_adv.html"><i class="glyphicon glyphicon-check"></i> 广告审核</a>
@@ -65,7 +65,7 @@
     <span><i class="glyphicon glyphicon-th-large"></i> 业务管理 <span class="badge" style="float:right">7</span></span>
     <ul style="margin-top:10px;display:none;">
         <li style="height:30px;">
-            <a href="cert.html"><i class="glyphicon glyphicon-picture"></i> 资质维护</a>
+            <a href="${APP_PATH}/cert/index.htm"><i class="glyphicon glyphicon-picture"></i> 资质维护</a>
         </li>
         <li style="height:30px;">
             <a href="type.html"><i class="glyphicon glyphicon-equalizer"></i> 分类管理</a>
@@ -89,7 +89,7 @@
 </li>
 <li class="list-group-item tree-closed" >
     <a href="param.html"><i class="glyphicon glyphicon-list-alt"></i> 参数管理</a>
-</li>--%>
+</li>
 
 
 

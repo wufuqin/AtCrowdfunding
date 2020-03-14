@@ -50,7 +50,7 @@ public class DispatcherController {
     @RequestMapping("/main")
     public String main(HttpSession session){
 
-        //从session域中获取当前登录的用户信息
+        /*//从session域中获取当前登录的用户信息
         User user = (User)session.getAttribute(Const.LOGIN_USER);
         //当前用户所拥有的许可权限
         List<Permission> myPermissions = userService.queryPermissionByUserId(user.getId()); //当前用户所拥有的许可权限
@@ -72,7 +72,8 @@ public class DispatcherController {
                 parent.getChildren().add(child);
             }
         }
-        session.setAttribute("permissionRoot", permissionRoot);
+        session.setAttribute("permissionRoot", permissionRoot);*/
+
         return "main";
     }
 
