@@ -14,7 +14,7 @@ public class Data {
 	private List<User> userList = new ArrayList<User>();
 	private List<User> datas = new ArrayList<User>();
 
-	private List<Integer> ids ;
+	private List<Integer> ids = new ArrayList<Integer>();
 	
 	private List<MemberCert> certimgs = new ArrayList<MemberCert>();
 

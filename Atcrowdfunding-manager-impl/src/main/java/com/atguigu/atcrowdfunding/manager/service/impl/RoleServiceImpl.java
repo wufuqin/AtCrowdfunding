@@ -131,16 +131,19 @@ public class RoleServiceImpl implements RoleService {
         roleMapper.deleteRolePermissionRelationship(roleid);
 
         int totalCount = 0 ;
-        List<Integer> ids = datas.getIds();
-        //将选中的权限分配
-        for (Integer permissionid : ids) {
-            RolePermission rp = new RolePermission();
-            rp.setRoleid(roleid);
-            rp.setPermissionid(permissionid);
-            int count = roleMapper.insertRolePermission(rp);
-            totalCount += count ;
+        if (datas.getIds().size() == 0){
+            return 0;
+        }else {
+            List<Integer> ids = datas.getIds();
+            //将选中的权限分配
+            for (Integer permissionid : ids) {
+                RolePermission rp = new RolePermission();
+                rp.setRoleid(roleid);
+                rp.setPermissionid(permissionid);
+                int count = roleMapper.insertRolePermission(rp);
+                totalCount += count ;
+            }
         }
-
         return totalCount;
     }
 }

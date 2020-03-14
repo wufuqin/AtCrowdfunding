@@ -4,6 +4,7 @@
 
 <%--
     左侧菜单页面
+        只加载用户拥有的权限
 --%>
 
 <ul style="padding-left:0px;" class="list-group">

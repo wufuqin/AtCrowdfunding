@@ -146,11 +146,6 @@
 		order by t_permission.id
 	</select>
 
-
-
-
-
-
 </mapper>
 
 

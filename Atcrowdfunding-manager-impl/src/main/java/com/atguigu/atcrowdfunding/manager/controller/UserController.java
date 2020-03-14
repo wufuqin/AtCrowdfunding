@@ -233,7 +233,6 @@ public class UserController {
         return result;
     }
 
-
     //取消权限
     @ResponseBody
     @RequestMapping("/doDeleteAssignRole")
@@ -251,9 +250,6 @@ public class UserController {
         }
         return result;
     }
-
-
-
 
 }
 

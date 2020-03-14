@@ -14,13 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
- * 生成6位随机数
+ * 生成6位随机数,并且获得前台填写的数据好，发送短信
  */
 @WebServlet("/CheckCode")
 public class CheckCode extends HttpServlet {
 
+    //生成6位验证码并且存储session域中，接收前台传回的手机号，
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response) {
         //生成随机验证码
@@ -33,9 +33,11 @@ public class CheckCode extends HttpServlet {
 
         //获取前台传回来手机号码
         String phone = request.getParameter("phone");
+        //发送短信
         sendMsg(phone,str);
     }
 
+    //实现短信发送工具类
     private void sendMsg(String phone, String str){
         //定义两个字符串,相当于短信发送服务的账号和密码
         String accessKeyId = "LTAI4Fh9j6rH7F9Ndxr1i5FZ";

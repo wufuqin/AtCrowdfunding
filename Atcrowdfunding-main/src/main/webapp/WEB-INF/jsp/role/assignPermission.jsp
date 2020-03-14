@@ -149,9 +149,6 @@
             jsonObj["ids["+i+"]"] = n.id;
         });
 
-        if(checkedNodes.length == 0){
-            layer.msg("请选择分配许可,至少分配一个许可!", {time:1000, icon:5, shift:6});
-        }else{
             var loadingIndex = -1 ;
             $.ajax({
                 type : "POST",
@@ -166,7 +163,6 @@
                     if(result.success){
                         layer.msg("分配成功", {time:2000, icon:6, shift:5});
                         setTimeout(function () {{window.location.href="${APP_PATH}/role/index.htm"}},1500);
-
                     }else{
                         layer.msg("分配失败", {time:1000, icon:5, shift:5});
                     }
@@ -175,7 +171,6 @@
                     layer.msg("操作失败!", {time:1000, icon:5, shift:5});
                 }
             });
-        }
     });
 </script>
 

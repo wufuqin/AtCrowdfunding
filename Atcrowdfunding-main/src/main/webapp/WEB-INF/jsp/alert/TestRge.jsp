@@ -100,7 +100,7 @@
             return;
         }
 
-        var xhr = new XMLHttpRequest();
+        /*var xhr = new XMLHttpRequest();
         xhr.open("get", "CheckCode?phone=" +document.getElementById("fphone").value, true);
         //监听请求状态
         xhr.onreadystatechange = function () {
@@ -108,7 +108,8 @@
                 alert(xhr.responseText);
             }
         };
-        xhr.send(null);
+        xhr.send(null);*/
+
         timer();
 
     };
@@ -129,6 +130,7 @@
 
 </body>
 </html>
+
 
 
 

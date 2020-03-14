@@ -57,7 +57,8 @@ public class DispatcherController {
         Permission permissionRoot = null;
         Map<Integer,Permission> map = new HashMap<Integer,Permission>();
 
-        for (Permission innerPermission : myPermissions) {     //将用户拥有的权限存储到mao集合中
+        //将用户拥有的权限存储到map集合中
+        for (Permission innerPermission : myPermissions) {
             map.put(innerPermission.getId(), innerPermission);
         }
         for (Permission permission : myPermissions) {
