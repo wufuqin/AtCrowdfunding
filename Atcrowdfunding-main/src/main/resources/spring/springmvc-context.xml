@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-
+    <!--开启扫描包-->
     <context:component-scan base-package="com.atguigu.atcrowdfunding.*" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
@@ -18,8 +18,12 @@
     
     <!-- <mvc:annotation-driven /> -->
     <!-- <mvc:default-servlet-handler /> -->
-    
-    
+
+    <!--登录拦截器-->
+    <mvc:interceptors>
+        <bean id="loginInterceptor" class="com.atguigu.atcrowdfunding.interceptor.LoginInterceptor" />
+    </mvc:interceptors>
+
     <!-- 字符串字符编码转换 -->
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >
         <property name="messageConverters">   
@@ -34,18 +38,17 @@
 	         </list>   
 	    </property>
     </bean>
-    
 
-	
+    <!--视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
-        <property name="prefix" value="/WEB-INF/jsp/"></property>
-        <property name="suffix" value=".jsp"></property>
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
     </bean>
-    
+
+    <!--异常解析器-->
     <bean id="exceptionResolver"   class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"> 
-    	<!-- <property name="exceptionAttribute" value="exception"/>  --><!-- 异常解析器捕获异常后,会将异常对象存放到request域.属性名称默认为:exception -->
-        <property name="exceptionMappings">  
+        <property name="exceptionMappings">
             <props>            	
                 <prop key="java.lang.Exception">error/error</prop>
                 <prop key="com.atguigu.atcrowdfunding.exception.LoginFailException">login</prop>
@@ -53,8 +56,10 @@
         </property>  
     </bean>
 
+    <!--文件上传解析器-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" p:defaultEncoding="UTF-8">
         <property name="maxUploadSize" value="2097152"/>
         <property name="resolveLazily" value="true"/>
     </bean>
+
 </beans>

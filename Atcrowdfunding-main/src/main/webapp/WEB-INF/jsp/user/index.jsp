@@ -54,7 +54,7 @@
                                 <input id="queryText" class="form-control has-success" type="text" placeholder="请输入查询条件">
                             </div>
                         </div>
-                        <button id="queryBtn" onclick="queryPageUserLike(1)" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
+                        <button id="queryBtn" onclick="queryPageUserLike(0)" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
                     </form>
                     <button onclick="deleteBatchBtn()" type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
                     <button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='${APP_PATH}/user/add.htm'"><i class="glyphicon glyphicon-plus"></i> 新增</button>
@@ -83,7 +83,13 @@
                             <tfoot>
                                 <tr >
                                     <td colspan="6" align="center">
-                                        <ul class="pagination"></ul>
+                                        <%--未使用pagination分页插件--%>
+                                        <%--<ul class="pagination"></ul>--%>
+
+                                        <%--使用pagination分页插件--%>
+                                        <%--显示分页的容器--%>
+                                        <div id="Pagination" class="pagination"></div>
+
                                     </td>
                                 </tr>
                             </tfoot>
@@ -114,19 +120,19 @@
         });
         showMenu();
         //调用查询用户数据方法
-        queryPageUser(1);
+        queryPageUser(0);
     });
 
 </script>
 
 <%-- 异步查询用户数据 --%>
 <script>
-    function queryPageUser(pageno) {
+    function queryPageUser(pageIndex) {
         $.ajax({
            type : "POST",
            data : {
-               "pageno" : pageno,
-               "pagesize" : 5
+               "pageno" : pageIndex + 1,
+               "pagesize" : 8
            },
             url : "${APP_PATH}/user/doIndex.do",
             beforeSend : function () {
@@ -144,7 +150,6 @@
                         layer.msg("目前没有查询到用户信息",{time:2000, icon:6, shift:6});
                         return false;
                     }
-                    //layer.msg("数据加载成功",{time:2000, icon:6, shift:6});
                     var content = '';
 
                     /* 对后台返回的数据进行拼串展示 */
@@ -166,15 +171,16 @@
                     $("tbody").html(content);
 
                     /* 分页导航条拼串 */
-                    var contentBar = '';
-                    /* 判断是否为第一页 */
+                    /*没有使用pagination插件*/
+                    /* var contentBar = '';
+                    /!* 判断是否为第一页 *!/
                     if(page.pageno==1 ){
                         contentBar+='<li class="disabled"><a href="#">上一页</a></li>';
                     }else{
                         contentBar+='<li><a href="#" onclick="queryPageUser('+(page.pageno-1)+')">上一页</a></li>';
                     }
 
-                    /* 将所在也页设置 active属性 */
+                    /!* 将所在也页设置 active属性 *!/
                     for(var i = 1 ; i<= page.totalno ; i++ ){
                         contentBar+='<li';
                         if(page.pageno==i){
@@ -183,16 +189,28 @@
                         contentBar+='><a href="#" onclick="queryPageUser('+i+')">'+i+'</a></li>';
                     }
 
-                    /* 判断是否为最后一页 */
+                    /!* 判断是否为最后一页 *!/
                     if(page.pageno==page.totalno ){
                         contentBar+='<li class="disabled"><a href="#">下一页</a></li>';
                     }else{
                         contentBar+='<li><a href="#" onclick="queryPageUser('+(page.pageno+1)+')">下一页</a></li>';
                     }
-                    $(".pagination").html(contentBar);
+                    $(".pagination").html(contentBar);*/
+
+                    /*使用pagination插件*/
+                    // 创建分页
+                    $("#Pagination").pagination(page.totalsize, {
+                        num_edge_entries: 2, //边缘页数
+                        num_display_entries: 4, //主体页数
+                        callback: queryPageUser, //当前函数
+                        items_per_page:8, //每页显示多少条
+                        current_page :(page.pageno-1), //当前页
+                        prev_text : "上一页",
+                        next_text : "下一页"
+                    });
+
 
                 } else {
-                    //查询数据失败
                     layer.msg(result.message,{time:2000, icon:5, shift:6});
                 }
             },
@@ -205,12 +223,12 @@
 
 <%-- 模糊查询 --%>
 <script>
-    function queryPageUserLike(pageno) {
+    function queryPageUserLike(pageIndex) {
         $.ajax({
            type : "POST",
            data : {
-               "pageno" : pageno,
-               "pagesize" : 5,
+               "pageno" : pageIndex + 1,
+               "pagesize" : 8,
                "queryText" : $("#queryText").val()
            },
             url : "${APP_PATH}/user/doLike.do",
@@ -251,15 +269,15 @@
                     $("tbody").html(content);
 
                     /* 分页导航条拼串 */
-                    var contentBar = '';
-                    /* 判断是否为第一页 */
+                    /*var contentBar = '';
+                    /!* 判断是否为第一页 *!/
                     if(page.pageno==1 ){
                         contentBar+='<li class="disabled"><a href="#">上一页</a></li>';
                     }else{
                         contentBar+='<li><a href="#" onclick="queryPageUserLike('+(page.pageno-1)+')">上一页</a></li>';
                     }
 
-                    /* 将所在也页设置 active属性 */
+                    /!* 将所在也页设置 active属性 *!/
                     for(var i = 1 ; i<= page.totalno ; i++ ){
                         contentBar+='<li';
                         if(page.pageno==i){
@@ -268,13 +286,25 @@
                         contentBar+='><a href="#" onclick="queryPageUserLike('+i+')">'+i+'</a></li>';
                     }
 
-                    /* 判断是否为最后一页 */
+                    /!* 判断是否为最后一页 *!/
                     if(page.pageno==page.totalno ){
                         contentBar+='<li class="disabled"><a href="#">下一页</a></li>';
                     }else{
                         contentBar+='<li><a href="#" onclick="queryPageUserLike('+(page.pageno+1)+')">下一页</a></li>';
                     }
-                    $(".pagination").html(contentBar);
+                    $(".pagination").html(contentBar);*/
+
+                    /*使用pagination插件*/
+                    // 创建分页
+                    $("#Pagination").pagination(page.totalsize, {
+                        num_edge_entries: 2, //边缘页数
+                        num_display_entries: 4, //主体页数
+                        callback: queryPageUserLike, //当前函数
+                        items_per_page:8, //每页显示多少条
+                        current_page :(page.pageno-1), //当前页
+                        prev_text : "上一页",
+                        next_text : "下一页"
+                    });
 
                 } else {
                     //查询数据失败

@@ -7,4 +7,5 @@
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script src="${APP_PATH}/script/menu.js"></script>
+<script src="${APP_PATH}/jquery/pagination/jquery.pagination.js"></script>
 
