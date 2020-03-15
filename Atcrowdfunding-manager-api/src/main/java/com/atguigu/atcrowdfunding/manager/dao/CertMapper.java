@@ -13,19 +13,19 @@ import java.util.List;
 @Repository
 public interface CertMapper {
 
-    //根据di删除
+    //根据id删除
     int deleteByPrimaryKey(Integer id);
 
     //添加数据
     int insert(Cert record);
 
-    //根据id修改
+    //根据id查询
     Cert selectByPrimaryKey(Integer id);
 
-    //根据id查询
+    //查询所有
     List<Cert> selectAll();
 
-    //查询所有
+    //根据id修改
     int updateByPrimaryKey(Cert record);
 
     //获取查询出来的分页数据

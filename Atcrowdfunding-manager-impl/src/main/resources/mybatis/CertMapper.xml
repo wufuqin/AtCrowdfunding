@@ -6,40 +6,43 @@
 
     <!--封装结果集-->
     <resultMap id="BaseResultMap" type="com.atguigu.atcrowdfunding.bean.Cert" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
     </resultMap>
 
     <!--根据di删除-->
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from t_cert
-    where id = #{id,jdbcType=INTEGER}
+        delete
+        from t_cert
+        where id = #{id,jdbcType=INTEGER}
     </delete>
 
     <!--添加数据-->
     <insert id="insert" parameterType="com.atguigu.atcrowdfunding.bean.Cert" >
-    insert into t_cert (id, name)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
+        insert
+        into t_cert (id, name)
+        values (#{id,jdbcType=INTEGER},
+                #{name,jdbcType=VARCHAR})
     </insert>
 
     <!--根据id修改-->
     <update id="updateByPrimaryKey" parameterType="com.atguigu.atcrowdfunding.bean.Cert" >
-    update t_cert
-    set name = #{name,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+        update t_cert
+        set name = #{name,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
     </update>
 
     <!--根据id查询-->
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select id, name
-    from t_cert
-    where id = #{id,jdbcType=INTEGER}
+        select id, name
+        from t_cert
+        where id = #{id,jdbcType=INTEGER}
     </select>
 
     <!--查询所有-->
     <select id="selectAll" resultMap="BaseResultMap" >
-    select id, name
-    from t_cert
+        select id, name
+        from t_cert
     </select>
 
     <!-- 查询分页数据 -->

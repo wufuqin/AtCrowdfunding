@@ -53,8 +53,8 @@
                         </div>
                         <button onclick="queryPageCertLike(0)" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
                     </form>
-                    <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
-                    <button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='form.html'"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+                    <button onclick="deleteCertBatchBtn()" type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
+                    <button onclick="window.location.href='${APP_PATH}/cert/add.htm'" type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='form.html'"><i class="glyphicon glyphicon-plus"></i> 新增</button>
                     <br>
                     <hr style="clear:both;">
                     <div class="table-responsive">
@@ -90,6 +90,7 @@
 <%-- 包含src部分 --%>
 <jsp:include page="/WEB-INF/jsp/common/src.jsp"/>
 
+<%--入口函数--%>
 <script type="text/javascript">
     $(function () {
         $(".list-group-item").click(function(){
@@ -143,7 +144,7 @@
                         content+='<td class="text-center" >'+n.name+'</td>';
                         content+='<td class="text-center">';
                         content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/cert/update.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-pencil"></i>修改</button>';
-                        content+='<button type="button" onclick="doDelete('+n.id+',\''+n.name+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
+                        content+='<button type="button" onclick="doDeleteCert('+n.id+',\''+n.name+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
                         content+='</td>';
                         content+='</tr>';
                     });
@@ -208,7 +209,7 @@
                         content+='<td class="text-center" >'+n.name+'</td>';
                         content+='<td class="text-center">';
                         content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/cert/update.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-pencil"></i>修改</button>';
-                        content+='<button type="button" onclick="doDelete('+n.id+',\''+n.name+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
+                        content+='<button type="button" onclick="doDeleteCert('+n.id+',\''+n.name+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
                         content+='</td>';
                         content+='</tr>';
                     });
@@ -235,6 +236,104 @@
                 layer.msg("数据加载失败",{time:2000, icon:5, shift:6});
             }
         });
+    }
+</script>
+
+<%-- 单条数据删除功能 --%>
+<script>
+    function doDeleteCert(id,name) {
+        layer.confirm("确认删除["+name+"]用户？", {icon: 3, title: '提示'}, function (cindex) {
+            $.ajax({
+                type : "POST",
+                data : {
+                    "id" : id
+                },
+                url : "${APP_PATH}/cert/doDelete.do",
+                beforeSend : function () {
+                    layer.close(cindex);
+                    loadingIndex = layer.msg('数据删除中...', {icon: 16});
+                    //对表单数据进行校验
+                    return true;
+                },
+
+                success : function (result) {
+                    layer.close(loadingIndex);
+                    if (result.success) {
+                        loadingIndex = layer.msg('数据删除成功,正在更新数据...', {icon: 16});
+                        //设置定时，让提示框显示一定时间
+                        setTimeout(function () {{window.location.href="${APP_PATH}/cert/index.htm"}},1000);
+                    }else {
+                        layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    }
+                },
+                error : function () {
+                    layer.msg("数据删除失败",{time:2000, icon:5, shift:6});
+                }
+            });
+        }, function (cindex) {
+            layer.close(cindex);
+        })
+    }
+</script>
+
+<%--实现复选框的联动效果--%>
+<script>
+    $("#checkAll").click(function () {
+        var checkedStatus = this.checked;
+        //通过后代元素设置input的chenkbox属性
+        $("tbody tr td input[type='checkbox']").prop("checked",checkedStatus);
+    });
+</script>
+
+<%--批量删除--%>
+<script>
+    function deleteCertBatchBtn() {
+        //获取被选中的复选框数据的id值
+        var selectCheckbox = $("tbody tr td input:checked");
+
+        //判断是否有选中的数据
+        if (selectCheckbox.length==0) {
+            layer.msg("请选择要删除的资质",{time:2000, icon:6, shift:6});
+            return false;
+        }
+
+        //遍历id数组，进行循环拼串
+        var idStr = "";
+        $.each(selectCheckbox,function (i,n) {
+            if (i != 0) {
+                idStr += "&";
+            }
+            idStr += "id="+n.id;
+        });
+        layer.confirm("确认删除这些数据？", {icon: 3, title: '提示'}, function (cindex) {
+            $.ajax({
+                type : "POST",
+                data : idStr,
+                url : "${APP_PATH}/cert/doDeleteBatch.do",
+                beforeSend : function () {
+                    layer.close(cindex);
+                    loadingIndex = layer.msg('数据删除中...', {icon: 16});
+                    //对表单数据进行校验
+                    return true;
+                },
+
+                success : function (result) {
+                    layer.close(loadingIndex);
+                    if (result.success) {
+                        loadingIndex = layer.msg('数据删除成功,正在更新数据...', {icon: 16});
+                        //设置定时，让提示框显示一定时间
+                        setTimeout(function () {{window.location.href="${APP_PATH}/cert/index.htm"}},1000);
+                    }else {
+                        layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    }
+                },
+                error : function () {
+                    layer.msg("数据删除失败",{time:2000, icon:5, shift:6});
+                }
+            });
+        }, function (cindex) {
+            layer.close(cindex);
+        })
     }
 </script>
 
