@@ -83,9 +83,6 @@
                             <tfoot>
                                 <tr >
                                     <td colspan="6" align="center">
-                                        <%--未使用pagination分页插件--%>
-                                        <%--<ul class="pagination"></ul>--%>
-
                                         <%--使用pagination分页插件--%>
                                         <%--显示分页的容器--%>
                                         <div id="Pagination" class="pagination"></div>
@@ -129,11 +126,11 @@
 <script>
     function queryPageUser(pageIndex) {
         $.ajax({
-           type : "POST",
-           data : {
-               "pageno" : pageIndex + 1,
-               "pagesize" : 8
-           },
+            type : "POST",
+            data : {
+                "pageno" : pageIndex + 1,
+                "pagesize" : 8
+            },
             url : "${APP_PATH}/user/doIndex.do",
             beforeSend : function () {
                 loadingIndex = layer.msg('数据加载中...', {icon: 16});

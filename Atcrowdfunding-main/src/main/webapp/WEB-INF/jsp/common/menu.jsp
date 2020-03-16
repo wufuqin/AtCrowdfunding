@@ -71,7 +71,7 @@
             <a href="type.html"><i class="glyphicon glyphicon-equalizer"></i> 分类管理</a>
         </li>
         <li style="height:30px;">
-            <a href="process.html"><i class="glyphicon glyphicon-random"></i> 流程管理</a>
+            <a href="${APP_PATH}/process/index.htm"><i class="glyphicon glyphicon-random"></i> 流程管理</a>
         </li>
         <li style="height:30px;">
             <a href="${APP_PATH}/advertisement/index.htm"><i class="glyphicon glyphicon-hdd"></i> 广告管理</a>

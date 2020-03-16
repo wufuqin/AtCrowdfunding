@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * 许可维护模块的实体类
+ *      存储菜单信息
  */
 public class Permission {
     private Integer id;
