@@ -1,5 +1,5 @@
 <%--
-  添加用户
+  修改广告
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -59,22 +59,21 @@
             <div class="panel panel-default">
                 <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
                 <div class="panel-body">
-                    <form id="addForm">
+                    <form id="updateAdvertisementForm" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
-                            <label for="floginacct">登陆账号</label>
-                            <input type="text" class="form-control" id="floginacct" placeholder="请输入登陆账号">
+                            <label for="name">广告名称</label>
+                            <input type="text" class="form-control" id="name" name="name" value="${advertisement.name}" placeholder="请输入广告名称">
                         </div>
                         <div class="form-group">
-                            <label for="fusername">用户名称</label>
-                            <input type="text" class="form-control" id="fusername" placeholder="请输入用户名称">
+                            <label for="url">广告地址</label>
+                            <input type="text" class="form-control" id="url" name="url" value="${advertisement.url}" placeholder="请输入广告地址">
                         </div>
-                        <div class="form-group">
-                            <label for="femail">邮箱地址</label>
-                            <input type="email" class="form-control" id="femail" placeholder="请输入邮箱地址">
-                            <p class="help-block label label-warning">请输入合法的邮箱地址, 格式为： xxxx@xxxx.com</p>
-                        </div>
-                        <button onclick="addUser()" type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 新增</button>
-                        <button onclick="resetForm()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+                        <%--<div class="form-group">
+                            <label for="advertPicture">广告图片</label>
+                            <input type="file" class="form-control" id="advertPicture" name="advertPicture" value="目前回显文件失败" placeholder="请输入广告图片">
+                        </div>--%>
+                        <button  onclick="updateAdvertisement()" type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 修改</button>
+                        <button  onclick="resetAdvertisementForm()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
                     </form>
                 </div>
             </div>
@@ -105,6 +104,7 @@
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
+<script src="${APP_PATH }/jquery/jquery-form/jquery-form.min.js"></script>
 <script type="text/javascript">
     /*入口函数*/
     $(function () {
@@ -119,27 +119,26 @@
             }
         });
     });
-
 </script>
 
-<%--添加用户--%>
+<%--修改广告--%>
 <script>
-    function addUser() {
+    function updateAdvertisement() {
         //获取添加的用户的信息
-        var floginacct = $("#floginacct");
-        var fusername = $("#fusername");
-        var femail = $("#femail");
+        var name = $("#name");
+        var url = $("#url");
+
 
         $.ajax({
-           type : "POST",
-           data : {
-               "loginacct" : floginacct.val(),
-               "username" : fusername.val(),
-               "email" : femail.val()
-           },
-            url : "${APP_PATH}/user/doAdd.do",
+            type : "POST",
+            data : {
+                "name" : name.val(),
+                "url" : url.val(),
+                "id" : "${advertisement.id}"
+            },
+            url : "${APP_PATH}/advertisement/doUpdate.do",
             beforeSend : function () {
-                loadingIndex = layer.msg('数据保存中...', {icon: 16});
+                loadingIndex = layer.msg('数据修改中...', {icon: 16});
                 //对表单数据进行校验
                 return true;
             },
@@ -147,14 +146,14 @@
             success : function (result) {
                 layer.close(loadingIndex);
                 if (result.success) {
-                    layer.msg("数据保存成功",{time:2000, icon:6, shift:6});
-                    setTimeout(function () {{window.location.href="${APP_PATH}/user/index.htm"}},2000);
+                    layer.msg("数据修改成功...",{time:2000, icon:6, shift:6});
+                    setTimeout(function () {{window.location.href="${APP_PATH}/advertisement/index.htm"}},2000);
                 }else {
-                    layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    layer.msg("数据修改失败...",{time:2000, icon:5, shift:6});
                 }
             },
             error : function () {
-                layer.msg("数据保存失败",{time:2000, icon:5, shift:6});
+                layer.msg("数据修改失败...",{time:2000, icon:5, shift:6});
             }
         });
     }
@@ -162,29 +161,10 @@
 
 <%--重置表单数据--%>
 <script>
-    function resetForm() {
-        //jQuery没有reset函数，使用需要性转换为dom对象使用 [0]
-        $("#addForm")[0].reset();
+    function resetAdvertisementForm() {
+        $("#updateAdvertisementForm")[0].reset();
     }
 </script>
 
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

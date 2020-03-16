@@ -147,7 +147,7 @@
                         content+='<td class="text-center" >'+(i+1)+'</td>';
                         content+='<td class="text-center" ><input type="checkbox" id="'+n.id+'"></td>';
                         content+='<td class="text-center" >'+n.name+'</td>';
-                        content+='<td>';
+                        content+='<td class="text-center">';
                         content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/role/assignPermission.htm?roleid='+n.id+'\'" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i>分配许可</button>';
                         content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/role/update.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i>修改</button>';
                         content+='<button type="button" onclick="doDeleteRole('+n.id+',\''+n.name+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
@@ -157,33 +157,6 @@
                     // 将拼接到的数据放入 tbody标签的指定位置
                     $("tbody").html(content);
 
-                    /* 分页导航条拼串 */
-                   /* var contentBar = '';
-                    /!* 判断是否为第一页 *!/
-                    if(page.pageno==1 ){
-                        contentBar+='<li class="disabled"><a href="#">上一页</a></li>';
-                    }else{
-                        contentBar+='<li><a href="#" onclick="queryPageRole('+(page.pageno-1)+')">上一页</a></li>';
-                    }
-
-                    /!* 将所在也页设置 active属性 *!/
-                    for(var i = 1 ; i<= page.totalno ; i++ ){
-                        contentBar+='<li';
-                        if(page.pageno==i){
-                            contentBar+=' class="active"';
-                        }
-                        contentBar+='><a href="#" onclick="queryPageRole('+i+')">'+i+'</a></li>';
-                    }
-
-                    /!* 判断是否为最后一页 *!/
-                    if(page.pageno==page.totalno ){
-                        contentBar+='<li class="disabled"><a href="#">下一页</a></li>';
-                    }else{
-                        contentBar+='<li><a href="#" onclick="queryPageRole('+(page.pageno+1)+')">下一页</a></li>';
-                    }
-                    $(".pagination").html(contentBar);*/
-
-                    /*使用pagination插件*/
                     // 创建分页
                     $("#Pagination").pagination(page.totalsize, {
                         num_edge_entries: 2, //边缘页数
@@ -243,7 +216,7 @@
                         content+='<td class="text-center" >'+(i+1)+'</td>';
                         content+='<td class="text-center" ><input type="checkbox" id="'+n.id+'"></td>';
                         content+='<td class="text-center" >'+n.name+'</td>';
-                        content+='<td>';
+                        content+='<td class="text-center">';
                         content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/role/assignPermission.htm?roleid='+n.id+'\'" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i>分配权限</button>';
                         content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/role/update.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i>修改</button>';
                         content+='<button type="button" onclick="doDeleteRole('+n.id+',\''+n.name+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
@@ -253,33 +226,6 @@
                     // 将拼接到的数据放入 tbody标签的指定位置
                     $("tbody").html(content);
 
-                    /* 分页导航条拼串 */
-                    /*var contentBar = '';
-                    /!* 判断是否为第一页 *!/
-                    if(page.pageno==1 ){
-                        contentBar+='<li class="disabled"><a href="#">上一页</a></li>';
-                    }else{
-                        contentBar+='<li><a href="#" onclick="queryPageRoleLike('+(page.pageno-1)+')">上一页</a></li>';
-                    }
-
-                    /!* 将所在也页设置 active属性 *!/
-                    for(var i = 1 ; i<= page.totalno ; i++ ){
-                        contentBar+='<li';
-                        if(page.pageno==i){
-                            contentBar+=' class="active"';
-                        }
-                        contentBar+='><a href="#" onclick="queryPageRoleLike('+i+')">'+i+'</a></li>';
-                    }
-
-                    /!* 判断是否为最后一页 *!/
-                    if(page.pageno==page.totalno ){
-                        contentBar+='<li class="disabled"><a href="#">下一页</a></li>';
-                    }else{
-                        contentBar+='<li><a href="#" onclick="queryPageRoleLike('+(page.pageno+1)+')">下一页</a></li>';
-                    }
-                    $(".pagination").html(contentBar);*/
-
-                    /*使用pagination插件*/
                     // 创建分页
                     $("#Pagination").pagination(page.totalsize, {
                         num_edge_entries: 2, //边缘页数

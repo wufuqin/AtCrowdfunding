@@ -1,17 +1,12 @@
 package com.atguigu.atcrowdfunding.bean;
 
 public class Advertisement {
-    private Integer id;
-
-    private String name;
-
-    private String iconpath;
-
-    private String status;
-
-    private String url;
-
-    private Integer userid;
+    private Integer id;         //广告id
+    private String name;        //广告名
+    private String iconpath;    //广告图片名
+    private String status;      //广告状态
+    private String url;         //广告要发布到的地址
+    private Integer userid;     //申请广告的用户id
 
     public Integer getId() {
         return id;

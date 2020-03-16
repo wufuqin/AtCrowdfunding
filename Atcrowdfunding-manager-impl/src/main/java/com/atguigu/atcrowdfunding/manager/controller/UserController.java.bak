@@ -59,7 +59,8 @@ public class UserController {
     //模糊查询
     @ResponseBody
     @RequestMapping("doLike")
-    public Object doLike(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "8") Integer pagesize, String queryText){
+    public Object doLike(@RequestParam(value = "pageno", required = false, defaultValue = "1") 
+		Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "8") Integer pagesize, String queryText){
 
         //创建一个用于存储查询得到的数据集对象
         AjaxResult result = new AjaxResult();
