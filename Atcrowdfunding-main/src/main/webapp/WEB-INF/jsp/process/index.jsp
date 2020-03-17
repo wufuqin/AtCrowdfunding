@@ -118,7 +118,7 @@
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script src="${APP_PATH}/jquery/pagination/jquery.pagination.js"></script>
 <script src="${APP_PATH }/jquery/jquery-form/jquery-form.min.js"></script>
-
+<%--入口函数--%>
 <script type="text/javascript">
     $(function () {
         $(".list-group-item").click(function(){
@@ -171,7 +171,7 @@
                         content+='<td class="text-center" >'+n.version+'</td>';
                         content+='<td class="text-center" >'+n.key+'</td>';
                         content+='<td class="text-center">';
-                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/user/update.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-pencil"></i>查看</button>';
+                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/process/show.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-pencil"></i>查看</button>';
                         content+='<button type="button" onclick="DeleteProcess(\''+n.id+'\',\''+n.name+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
                         content+='</td>';
                         content+='</tr>';
@@ -240,7 +240,7 @@
                         content+='<td class="text-center" >'+n.version+'</td>';
                         content+='<td class="text-center" >'+n.key+'</td>';
                         content+='<td class="text-center">';
-                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/user/update.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-pencil"></i>查看</button>';
+                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/process/show.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-pencil"></i>查看</button>';
                         content+='<button type="button" onclick="DeleteProcess(\''+n.id+'\',\''+n.name+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
                         content+='</td>';
                         content+='</tr>';
@@ -384,8 +384,6 @@
                 success : function (result) {
                     layer.close(loadingIndex);
                     if (result.success) {
-                        loadingIndex = layer.msg('数据删除成功,正在更新数据...', {icon: 16});
-                        //设置定时，让提示框显示一定时间
                         window.location.href="${APP_PATH}/process/index.htm";
                     }else {
                         layer.msg(result.message,{time:2000, icon:5, shift:6});
@@ -403,38 +401,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

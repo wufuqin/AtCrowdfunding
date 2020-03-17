@@ -5,6 +5,7 @@ import com.atguigu.atcrowdfunding.util.Page;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.repository.ProcessDefinitionQuery;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -180,18 +185,24 @@ public class ProcessController {
         return result;
     }
 
+    //去到查看流程图页面
+    @RequestMapping("/show")
+    public String show(){
+        return "process/show";
+    }
 
-
-
-
-
-
-
-
-
-
-
-
+    //加载流程定义图片
+    @ResponseBody
+    @RequestMapping("/showProcessPNG")
+    public void showProcessPNG(String id, HttpServletResponse response) throws IOException {	 //流程定义id
+        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(id).singleResult();
+        //得到流程定义图
+        InputStream resourceAsStream = repositoryService.getResourceAsStream(processDefinition.getDeploymentId(), processDefinition.getDiagramResourceName());
+        //以流的形式返回
+        ServletOutputStream outputStream = response.getOutputStream();
+        //进行复制
+        IOUtils.copy(resourceAsStream, outputStream);
+    }
 
 }
 
