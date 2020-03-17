@@ -48,8 +48,52 @@ public class ProcessController {
             Page page = new Page(pageno,pagesize);
             //调用流程查询方法
             ProcessDefinitionQuery processDefinitionQuery = repositoryService.createProcessDefinitionQuery();
+
             //查询流程定义集合数据,可能出现了自关联,导致Jackson组件无法将集合序列化为JSON串.
             List<ProcessDefinition> listPage = processDefinitionQuery.listPage(page.getStartIndex(), pagesize);
+            //将数据先存储到map集合中，在存储到list集合中
+            List<Map<String,Object>> mylistPage = new ArrayList<Map<String,Object>>();
+            //将查询查询到的数据存储到map中
+            for (ProcessDefinition processDefinition : listPage) {
+                Map<String,Object> pd = new HashMap<String,Object>();
+                pd.put("id", processDefinition.getId());
+                pd.put("name", processDefinition.getName());
+                pd.put("key", processDefinition.getKey());
+                pd.put("version", processDefinition.getVersion());
+                //将数据存储到list中
+                mylistPage.add(pd);
+            }
+            //计算总的记录数
+            Long totalsize = processDefinitionQuery.count();
+            //设置分页数据的当前页数据
+            page.setDatas(mylistPage);
+            //设置分页数据的
+            page.setTotalsize(totalsize.intValue());
+            result.setPage(page);
+            result.setSuccess(true);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("查询流程定义失败!");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    //模糊查询
+    @ResponseBody
+    @RequestMapping("doLike")
+    public Object doLike(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "8") Integer pagesize, String queryText){
+        //创建一个用于存储查询得到的数据集对象
+        AjaxResult result = new AjaxResult();
+        try {
+            //创建一个分页对象
+            Page page = new Page(pageno,pagesize);
+            //调用流程查询方法
+            ProcessDefinitionQuery processDefinitionQuery = repositoryService.createProcessDefinitionQuery();
+
+            //查询流程定义集合数据,可能出现了自关联,导致Jackson组件无法将集合序列化为JSON串.
+            List<ProcessDefinition> listPage = processDefinitionQuery.processDefinitionNameLike("%" + queryText + "%").listPage(page.getStartIndex(), pagesize);
+
             //将数据先存储到map集合中，在存储到list集合中
             List<Map<String,Object>> mylistPage = new ArrayList<Map<String,Object>>();
             //将查询查询到的数据存储到map中

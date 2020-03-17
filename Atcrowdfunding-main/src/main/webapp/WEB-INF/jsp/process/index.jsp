@@ -63,10 +63,10 @@
                         <div class="form-group has-feedback">
                             <div class="input-group">
                                 <div class="input-group-addon">查询条件</div>
-                                <input class="form-control has-success" type="text" placeholder="请输入查询条件">
+                                <input id="queryText" class="form-control has-success" type="text" placeholder="请输入查询条件">
                             </div>
                         </div>
-                        <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
+                        <button onclick="queryPageProcessLike(0)" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
                     </form>
                     <button onclick="deleteProcessBatchBtn()" type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 批量删除</button>
                     <button id="uploadPrcDefBtn" type="button" class="btn btn-primary" style="float:right;" ><i class="glyphicon glyphicon-upload"></i> 上传流程定义文件</button>
@@ -202,6 +202,76 @@
     }
 </script>
 
+<%--模糊查询流程定义--%>
+<script>
+    function queryPageProcessLike(pageIndex) {
+
+        $.ajax({
+            type : "POST",
+            data : {
+                "pageno" : pageIndex + 1,
+                "pagesize" : 8,
+                "queryText" : $("#queryText").val()
+            },
+            url : "${APP_PATH}/process/doLike.do",
+            beforeSend : function () {
+                loadingIndex = layer.msg('数据加载中...', {icon: 16});
+                return true;
+            },
+            success : function (result) {
+                layer.close(loadingIndex);
+                if (result.success){
+                    //查询数据成功
+                    var page = result.page;
+                    var data = page.datas;
+                    /*判断返回的集合中是否有数据*/
+                    if (data.length == 0){
+                        layer.msg("没有您要查询的用户信息",{time:2000, icon:6, shift:6});
+                        return false;
+                    }
+                    var content = '';
+
+                    /* 对后台返回的数据进行拼串展示 */
+                    $.each(data,function(i,n){
+                        content+='<tr>';
+                        content+='<td class="text-center" >'+(i+1)+'</td>';
+                        content+='<td class="text-center" ><input type="checkbox" id="'+n.id+'"/></td>';
+                        content+='<td class="text-center" >'+n.name+'</td>';
+                        content+='<td class="text-center" >'+n.version+'</td>';
+                        content+='<td class="text-center" >'+n.key+'</td>';
+                        content+='<td class="text-center">';
+                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/user/update.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-pencil"></i>查看</button>';
+                        content+='<button type="button" onclick="DeleteProcess(\''+n.id+'\',\''+n.name+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
+                        content+='</td>';
+                        content+='</tr>';
+                    });
+                    // 将拼接到的数据放入 tbody标签的指定位置
+                    $("tbody").html(content);
+
+                    /*使用pagination插件*/
+                    // 创建分页
+                    $("#Pagination").pagination(page.totalsize, {
+                        num_edge_entries: 2, //边缘页数
+                        num_display_entries: 4, //主体页数
+                        callback: queryPageUserLike, //当前函数
+                        items_per_page:8, //每页显示多少条
+                        current_page :(page.pageno-1), //当前页
+                        prev_text : "上一页",
+                        next_text : "下一页"
+                    });
+
+                } else {
+                    //查询数据失败
+                    layer.msg(result.message, {time:2000, icon:5, shift:6});
+                }
+            },
+            error : function () {
+                layer.msg("数据加载失败",{time:2000, icon:5, shift:6});
+            }
+        });
+    }
+</script>
+
 <%--上流程定义文件--%>
 <script>
     $("#uploadPrcDefBtn").click(function(){  //click()函数增加回调函数这个参数,表示绑定事件.
@@ -247,9 +317,11 @@
                 },
                 url : "${APP_PATH}/process/doDelete.do",
                 beforeSend : function() {
+                    loadingIndex = layer.msg('数据删除中...', {icon: 16});
                     return true ;
                 },
                 success : function(result){
+                    layer.close(loadingIndex);
                     if(result.success){
                         window.location.href="${APP_PATH}/process/index.htm";
                     }else{
@@ -296,7 +368,7 @@
             }
             idStr += "id="+n.id;
         });
-        alert(idStr);
+        //alert(idStr);
         layer.confirm("确认删除这些流程？", {icon: 3, title: '提示'}, function (cindex) {
             $.ajax({
                 type : "POST",
@@ -314,7 +386,7 @@
                     if (result.success) {
                         loadingIndex = layer.msg('数据删除成功,正在更新数据...', {icon: 16});
                         //设置定时，让提示框显示一定时间
-                        setTimeout(function () {{window.location.href="${APP_PATH}/process/index.htm"}},1000);
+                        window.location.href="${APP_PATH}/process/index.htm";
                     }else {
                         layer.msg(result.message,{time:2000, icon:5, shift:6});
                     }
