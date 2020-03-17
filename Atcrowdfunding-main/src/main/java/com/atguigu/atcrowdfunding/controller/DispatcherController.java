@@ -1,12 +1,12 @@
 package com.atguigu.atcrowdfunding.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import com.atguigu.atcrowdfunding.bean.Permission;
+import com.atguigu.atcrowdfunding.bean.Member;
+import com.atguigu.atcrowdfunding.potal.service.MemberService;
 import com.atguigu.atcrowdfunding.util.AjaxResult;
 import com.atguigu.atcrowdfunding.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +27,9 @@ public class DispatcherController {
     //用户的业务层对象，按自动类型注入
     @Autowired
     private UserService userService ;
+
+    @Autowired
+    private MemberService memberService;
 
     //去到系统主页面
     @RequestMapping("/index")
@@ -83,16 +86,10 @@ public class DispatcherController {
         return "forget/forget";
     }
 
-    //点击短信注册去到功能为完成提示页面
-    @RequestMapping("/unfinished")
-    public String unfinished(){
-        return "error/unfinished";
-    }
-
-    //去到功能为完成提示页面
+    //去到前台页面
     @RequestMapping("/member")
     public String member(){
-        return "error/unfinished";
+        return "member/index";
     }
 
     //注销功能（退出系统）
@@ -116,10 +113,8 @@ public class DispatcherController {
     @ResponseBody
     @RequestMapping("/doLogin")
     public Object doLogin(String loginacct,String userpswd, String checkCode, String type,HttpSession session){
-
         //请求结果封装对象
         AjaxResult result = new AjaxResult();
-
         try {
             //使用map集合对用户输入的信息进行封装
             Map<String,Object> paramMap = new HashMap<String,Object>();
@@ -138,10 +133,15 @@ public class DispatcherController {
                 result.setSuccess(false);
                 return result;
             }
-
-            //将查询到的用户数据封装到map集合中
-            User user = userService.queryUserLogin(paramMap);
-            session.setAttribute(Const.LOGIN_USER, user);
+            if("member".equals(type)){
+                Member member = memberService.queryMemberLogin(paramMap);
+                session.setAttribute(Const.LOGIN_MEMBER, member);
+            }
+            if ("user".equals(type)){
+                //将查询到的用户数据封装到map集合中
+                User user = userService.queryUserLogin(paramMap);
+                session.setAttribute(Const.LOGIN_USER, user);
+            }
             result.setSuccess(true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -152,24 +152,3 @@ public class DispatcherController {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

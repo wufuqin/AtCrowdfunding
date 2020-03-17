@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.atguigu.atcrowdfunding.bean.Member;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.atguigu.atcrowdfunding.bean.User;
@@ -39,8 +40,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		//2.判断用户是否登录,如果登录就放行
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute(Const.LOGIN_USER);
-		
-		if(user!=null){
+		Member member = (Member)session.getAttribute(Const.LOGIN_MEMBER);
+
+		if(user != null || member != null){
 			return true ;
 		}else{
 		    //重定向到系统首页面

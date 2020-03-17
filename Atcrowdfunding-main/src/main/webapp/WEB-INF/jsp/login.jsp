@@ -28,11 +28,11 @@
     <form id="loginForm" action="${APP_PATH }/doLogin.do" method="POST" class="form-signin" role="form">
         <h2 class="form-signin-heading"><i class="glyphicon glyphicon-log-in"></i> 用户登录</h2>
         <div class="form-group has-success has-feedback">
-            <input type="text" class="form-control" id="floginacct" name="loginacct" value="superadmin" placeholder="请输入登录账号" autofocus>
+            <input type="text" class="form-control" id="floginacct" name="loginacct" placeholder="请输入登录账号" autofocus>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
         <div class="form-group has-success has-feedback">
-            <input type="password" class="form-control" id="fuserpswd" name="userpswd" value="123456" placeholder="请输入登录密码" style="margin-top:10px;">
+            <input type="password" class="form-control" id="fuserpswd" name="userpswd" placeholder="请输入登录密码" style="margin-top:10px;">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
 
@@ -50,7 +50,7 @@
         <div class="form-group has-success has-feedback">
             <select class="form-control" id="ftype" name="type" >
                 <option value="member">会员</option>
-                <option value="user" selected>管理</option>
+                <option value="user">管理</option>
             </select>
         </div>
 
@@ -81,7 +81,9 @@
         var loginacct = $("#floginacct");
         var userpswd = $("#fuserpswd");
         var checkCode = $("#fcheckCode");
-        var type = $("#ftype").val();
+        var type = $("#ftype");
+        //alert(type);
+        //alert(type.val());
 
         //对用户名数据进行校验
         if ($.trim(loginacct.val()) == "") {
@@ -114,7 +116,7 @@
                 "loginacct" : loginacct.val(),
                 "userpswd" : userpswd.val(),
                 "checkCode" : checkCode.val(),
-                "type" : type
+                "type" : type.val()
             },
             url : "${APP_PATH}/doLogin.do",
             beforeSend : function () {
@@ -124,7 +126,13 @@
             success : function (result) {
                 if (result.success){
                     layer.close(loadingIndex);
-                    window.location.href = "${APP_PATH}/main.htm";   //跳转到后台主页面
+                    if (type.val() == "user"){
+                        window.location.href = "${APP_PATH}/main.htm";   //跳转到后台主页面
+                    }else if (type.val() == "member") {
+                        window.location.href = "${APP_PATH}/member.htm";   //跳转到前台主页面
+                    }else {
+                        layer.msg("选择的登录类型不合法", {time:2000, icon:5, shift:5});
+                    }
                 }else {
                     layer.msg(result.message, {time:2000, icon:5, shift:5});
                     refreshCode(); //自动切换验证码
