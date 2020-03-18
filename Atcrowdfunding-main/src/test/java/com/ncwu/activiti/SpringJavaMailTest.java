@@ -1,3 +1,4 @@
+/*
 package com.ncwu.activiti;
 
 import javax.mail.internet.MimeMessage;
@@ -39,3 +40,4 @@ public class SpringJavaMailTest {
 	}
 
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.test;
 
 import java.util.Timer;
@@ -18,3 +19,4 @@ public class TestTimer {
 	}
 
 }
+*/

@@ -2,79 +2,99 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.atguigu.atcrowdfunding.potal.dao.MemberMapper" >
 
-  <!--会员模块的映射配置文件-->
+    <!--会员模块的映射配置文件-->
 
-  <!--封装结果集-->
-  <resultMap id="BaseResultMap" type="com.atguigu.atcrowdfunding.bean.Member" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="loginacct" property="loginacct" jdbcType="VARCHAR" />
-    <result column="userpswd" property="userpswd" jdbcType="CHAR" />
-    <result column="username" property="username" jdbcType="VARCHAR" />
-    <result column="email" property="email" jdbcType="VARCHAR" />
-    <result column="authstatus" property="authstatus" jdbcType="CHAR" />
-    <result column="usertype" property="usertype" jdbcType="CHAR" />
-    <result column="realname" property="realname" jdbcType="VARCHAR" />
-    <result column="cardnum" property="cardnum" jdbcType="VARCHAR" />
-    <result column="accttype" property="accttype" jdbcType="CHAR" />
-    <result column="tel" property="tel" jdbcType="VARCHAR" />
-  </resultMap>
+    <!--封装结果集-->
+    <resultMap id="BaseResultMap" type="com.atguigu.atcrowdfunding.bean.Member" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="loginacct" property="loginacct" jdbcType="VARCHAR" />
+        <result column="userpswd" property="userpswd" jdbcType="CHAR" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="authstatus" property="authstatus" jdbcType="CHAR" />
+        <result column="usertype" property="usertype" jdbcType="CHAR" />
+        <result column="realname" property="realname" jdbcType="VARCHAR" />
+        <result column="cardnum" property="cardnum" jdbcType="VARCHAR" />
+        <result column="accttype" property="accttype" jdbcType="CHAR" />
+        <result column="tel" property="tel" jdbcType="VARCHAR" />
+    </resultMap>
 
-  <!--根据id删除-->
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from t_member
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+    <!--根据id删除-->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from t_member
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
 
-  <!--添加会员-->
-  <insert id="insert" parameterType="com.atguigu.atcrowdfunding.bean.Member" >
-    insert
-    into t_member (id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype)
-    values (#{id,jdbcType=INTEGER},
-            #{loginacct,jdbcType=VARCHAR},
-            #{userpswd,jdbcType=CHAR},
-            #{username,jdbcType=VARCHAR},
-            #{email,jdbcType=VARCHAR},
-            #{authstatus,jdbcType=CHAR},
-            #{usertype,jdbcType=CHAR},
-            #{realname,jdbcType=VARCHAR},
-            #{cardnum,jdbcType=VARCHAR},
-            #{accttype,jdbcType=CHAR})
-  </insert>
+    <!--添加会员-->
+    <insert id="insert" parameterType="com.atguigu.atcrowdfunding.bean.Member" >
+        insert
+        into t_member (id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype)
+        values (#{id,jdbcType=INTEGER},
+                #{loginacct,jdbcType=VARCHAR},
+                #{userpswd,jdbcType=CHAR},
+                #{username,jdbcType=VARCHAR},
+                #{email,jdbcType=VARCHAR},
+                #{authstatus,jdbcType=CHAR},
+                #{usertype,jdbcType=CHAR},
+                #{realname,jdbcType=VARCHAR},
+                #{cardnum,jdbcType=VARCHAR},
+                #{accttype,jdbcType=CHAR})
+    </insert>
 
-  <!--根据id修改-->
-  <update id="updateByPrimaryKey" parameterType="com.atguigu.atcrowdfunding.bean.Member" >
-    update t_member
-    set loginacct = #{loginacct,jdbcType=VARCHAR},
-        userpswd = #{userpswd,jdbcType=CHAR},
-        username = #{username,jdbcType=VARCHAR},
-        email = #{email,jdbcType=VARCHAR},
-        authstatus = #{authstatus,jdbcType=CHAR},
-        usertype = #{usertype,jdbcType=CHAR},
-        realname = #{realname,jdbcType=VARCHAR},
-        cardnum = #{cardnum,jdbcType=VARCHAR},
-        accttype = #{accttype,jdbcType=CHAR}
-    where id = #{id,jdbcType=INTEGER}
+    <!--根据id修改-->
+    <update id="updateByPrimaryKey" parameterType="com.atguigu.atcrowdfunding.bean.Member" >
+        update t_member
+        set loginacct = #{loginacct,jdbcType=VARCHAR},
+            userpswd = #{userpswd,jdbcType=CHAR},
+            username = #{username,jdbcType=VARCHAR},
+            email = #{email,jdbcType=VARCHAR},
+            authstatus = #{authstatus,jdbcType=CHAR},
+            usertype = #{usertype,jdbcType=CHAR},
+            realname = #{realname,jdbcType=VARCHAR},
+            cardnum = #{cardnum,jdbcType=VARCHAR},
+            accttype = #{accttype,jdbcType=CHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!--根据id查询-->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype
+        from t_member
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <!--查询所有-->
+    <select id="selectAll" resultMap="BaseResultMap" >
+        select id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype
+        from t_member
+    </select>
+
+    <!--处理登录请求-->
+    <select id="queryMemberLogin" resultMap="BaseResultMap" >
+        select id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype
+        from t_member
+        where loginacct=#{loginacct} and userpswd=#{userpswd}
+    </select>
+
+    <!--更新账户类型-->
+    <update id="updateAcctType" parameterType="com.atguigu.atcrowdfunding.bean.Member" >
+        update t_member
+        set accttype = #{accttype,jdbcType=CHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!--更新填写的基本信息-->
+    <update id="updateBasicInfo" parameterType="com.atguigu.atcrowdfunding.bean.Member" >
+        update t_member
+        set
+          realname = #{realname,jdbcType=VARCHAR},
+          cardnum = #{cardnum,jdbcType=VARCHAR},
+          tel = #{tel,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <!--根据id查询-->
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype
-    from t_member
-    where id = #{id,jdbcType=INTEGER}
-  </select>
 
-  <!--查询所有-->
-  <select id="selectAll" resultMap="BaseResultMap" >
-    select id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype
-    from t_member
-  </select>
 
-  <!--处理登录请求-->
-  <select id="queryMemberLogin" resultMap="BaseResultMap" >
-  	select id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype
-    from t_member
-    where loginacct=#{loginacct} and userpswd=#{userpswd}
-  </select>
   
 </mapper>
 

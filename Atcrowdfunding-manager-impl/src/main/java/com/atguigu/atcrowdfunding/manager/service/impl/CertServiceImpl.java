@@ -110,6 +110,13 @@ public class CertServiceImpl implements CertService {
     public int updateCert(Cert cert) {
         return certMapper.updateByPrimaryKey(cert);
     }
+
+    //查询出所有的资质
+    @Override
+    public List<Cert> queryCertAll() {
+        return certMapper.queryCertAll();
+    }
+
 }
 
 

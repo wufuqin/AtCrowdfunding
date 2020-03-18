@@ -40,6 +40,9 @@ public interface CertMapper {
 
     //模糊查询总记录数
     Integer queryCountLike(HashMap<String, Object> paramMap);
+
+    //查询出所有的资质
+    List<Cert> queryCertAll();
 }
 
 

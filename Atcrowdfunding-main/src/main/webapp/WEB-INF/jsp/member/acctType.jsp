@@ -52,42 +52,75 @@
             <div class="col-xs-6 col-md-3">
 
                 <h2>商业公司</h2>
-                <a href="#" class="thumbnail">
+                <a href="#" class="thumbnail" acctType="0">
 
                     <img alt="100%x180" src="${APP_PATH}/img/services-box1.jpg" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
                 </a>
             </div>
             <div class="col-xs-6 col-md-3">
                 <h2>个体工商户</h2>
-                <a href="#" class="thumbnail">
+                <a href="#" class="thumbnail" acctType="1">
                     <img alt="100%x180" src="${APP_PATH}/img/services-box2.jpg" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
                 </a>
             </div>
             <div class="col-xs-6 col-md-3">
                 <h2>个人经营</h2>
-                <a href="#" class="thumbnail">
+                <a href="#" class="thumbnail" acctType="2">
                     <img alt="100%x180" src="${APP_PATH}/img/services-box3.jpg" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
                 </a>
             </div>
             <div class="col-xs-6 col-md-3">
                 <h2>政府及非营利组织</h2>
-                <a href="#" class="thumbnail">
+                <a href="#" class="thumbnail" acctType="3">
                     <img alt="100%x180" src="${APP_PATH}/img/services-box4.jpg" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
                 </a>
             </div>
         </div>
-        <button type="button" class="btn btn-danger btn-lg btn-block" onclick="window.location.href='${APP_PATH}/member/apply.html'">认证申请</button>
+        <button id="applyBtn" type="button" class="btn btn-danger btn-lg btn-block" >认证申请</button>
     </div>
 
 </div>
-    <script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>
-    <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
-    <script src="${APP_PATH}/script/docs.min.js"></script>
-    <script>
-        $(".thumbnail").click(function(){
-            $('.seltype').remove();
-            $(this).prepend('<div class="glyphicon glyphicon-ok seltype"></div>');
-        });
-    </script>
+<script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>
+<script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
+<script src="${APP_PATH}/script/docs.min.js"></script>
+<script src="${APP_PATH}/jquery/layer/layer.js"></script>
+
+
+<%--切换选择的账号类型的√--%>
+<script>
+    var acctType = 0;
+    $(".thumbnail").click(function(){
+        $('.seltype').remove();
+        $(this).prepend('<div class="glyphicon glyphicon-ok seltype"></div>');
+        acctType = $(this).attr("acctType");  //获取选择的账号类型
+    });
+
+    /*申请认证*/
+    $("#applyBtn").click(function(){
+        // 判断账户类型是否被选中
+        var len = $('.seltype').length;
+        if ( len == 0 ) {
+            layer.msg("请选择账户类型继续申请", {time:1000, icon:5, shift:6});
+        } else {
+            // 保存选择的账户类型
+            $.ajax({
+                type : "POST",
+                url  : "${APP_PATH}/member/updateAcctType.do",  //更新账户的类型
+                data : {
+                    acctType : acctType
+                },
+                success : function(result) {
+                    if ( result.success ) {
+                        window.location.href = "${APP_PATH}/member/basicInfo.htm";
+                    } else {
+                        layer.msg("账户类型更新失败", {time:1000, icon:5, shift:6});
+                    }
+                }
+            });
+        }
+    });
+
+</script>
+
 </body>
 </html>

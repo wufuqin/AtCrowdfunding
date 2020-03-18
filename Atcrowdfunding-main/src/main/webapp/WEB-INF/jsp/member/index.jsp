@@ -70,7 +70,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="thumbnail" style="    border-radius: 0px;">
-                        <img src="img/services-box1.jpg" class="img-thumbnail" alt="">
+                        <img src="${APP_PATH}/img/services-box1.jpg" class="img-thumbnail" alt="">
                         <div class="caption" style="text-align:center;">
                             <h3>
                                 ${sessionScope.member.username}
@@ -83,7 +83,7 @@
                                     <span class="label label-success" style="cursor:pointer;">已实名认证</span>
                                 </c:when>
                                 <c:otherwise>
-                                    <span class="label label-danger" style="cursor:pointer;" onclick="window.location.href='${APP_PATH}/member/acctType.htm'">未实名认证</span>
+                                    <span class="label label-danger" style="cursor:pointer;" onclick="window.location.href='${APP_PATH}/member/uploadCert.htm'">未实名认证</span>
                                 </c:otherwise>
                             </c:choose>
                         </div>

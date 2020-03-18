@@ -4,6 +4,7 @@ import com.atguigu.atcrowdfunding.bean.Cert;
 import com.atguigu.atcrowdfunding.util.Page;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * 资质维护的业务层接口
@@ -30,6 +31,9 @@ public interface CertService {
 
     //修改资质数据
     int updateCert(Cert cert);
+
+    //查询出所有的资质
+    List<Cert> queryCertAll();
 }
 
 

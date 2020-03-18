@@ -2,51 +2,73 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.atguigu.atcrowdfunding.manager.dao.AccountTypeCertMapper" >
 
-  <!---->
+    <!--分类管理映射配置文件-->
 
-  <!--封装结果集-->
-  <resultMap id="BaseResultMap" type="com.atguigu.atcrowdfunding.bean.AccountTypeCert" >
+    <!--封装结果集-->
+    <resultMap id="BaseResultMap" type="com.atguigu.atcrowdfunding.bean.AccountTypeCert" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="accttype" property="accttype" jdbcType="CHAR" />
     <result column="certid" property="certid" jdbcType="INTEGER" />
-  </resultMap>
+    </resultMap>
 
-  <!--根据id删除-->
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <!--根据id删除-->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_account_type_cert
     where id = #{id,jdbcType=INTEGER}
-  </delete>
+    </delete>
 
-  <!--添加数据-->
-  <insert id="insert" parameterType="com.atguigu.atcrowdfunding.bean.AccountTypeCert" >
+    <!--添加数据-->
+    <insert id="insert" parameterType="com.atguigu.atcrowdfunding.bean.AccountTypeCert" >
     insert
     into t_account_type_cert (id, accttype, certid)
     values (#{id,jdbcType=INTEGER},
             #{accttype,jdbcType=CHAR},
             #{certid,jdbcType=INTEGER}
             )
-  </insert>
+    </insert>
 
-  <!--根据id修改-->
-  <update id="updateByPrimaryKey" parameterType="com.atguigu.atcrowdfunding.bean.AccountTypeCert" >
+    <!--根据id修改-->
+    <update id="updateByPrimaryKey" parameterType="com.atguigu.atcrowdfunding.bean.AccountTypeCert" >
     update t_account_type_cert
     set accttype = #{accttype,jdbcType=CHAR},
         certid = #{certid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
-  </update>
+    </update>
 
-  <!--根据id查询-->
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    <!--根据id查询-->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select id, accttype, certid
     from t_account_type_cert
     where id = #{id,jdbcType=INTEGER}
-  </select>
+    </select>
 
-  <!--查询所有-->
-  <select id="selectAll" resultMap="BaseResultMap" >
+    <!--查询所有-->
+    <select id="selectAll" resultMap="BaseResultMap" >
     select id, accttype, certid
     from t_account_type_cert
-  </select>
+    </select>
+
+    <!--查询资质与账户类型之间的关系（之前给账户类型分配个的资质）-->
+    <select id="queryCertAcctType" resultType="map">
+        select accttype, certid
+        from t_account_type_cert
+    </select>
+
+    <!--增加账户类型和资质的关系-->
+    <insert id="insertAcctTypeCert">
+		insert
+		into t_account_type_cert (accttype, certid)
+		values (#{accttype}, #{certid})
+	</insert>
+
+    <!--删除账户类型和资质的关系-->
+    <delete id="deleteAcctTypeCert">
+		delete
+		from t_account_type_cert
+		where accttype = #{accttype} and certid=#{certid}
+	</delete>
+
+
 
 </mapper>
 

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.atguigu.atcrowdfunding.potal.dao.TicketMapper" >
+
+  <!--实名流程审批映射配置文件-->
+
+  <!--封装结果集-->
+  <resultMap id="BaseResultMap" type="com.atguigu.atcrowdfunding.bean.Ticket" >
+    <id column="id" property="id"/>
+    <result column="memberid" property="memberid"/>
+    <result column="piid" property="piid"/>
+    <result column="status" property="status"/>
+    <result column="authcode" property="authcode"/>
+    <result column="pstep" property="pstep"/>
+  </resultMap>
+
+  <!--根据id删除-->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_ticket
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <!--根据id查询-->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select *
+    from t_ticket
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <!--查询所有-->
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select *
+    from t_ticket
+  </select>
+
+  <!--保存流程-->
+  <insert id="saveTicket" parameterType="com.atguigu.atcrowdfunding.bean.Ticket" >
+    insert into t_ticket (memberid, status, pstep)
+    values (#{memberid},#{status},#{pstep})
+  </insert>
+
+  <!--根据会员id查询流程审批单-->
+  <select id="getTicketByMemberId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select *
+    from t_ticket
+    where memberid = #{memberid,jdbcType=INTEGER} and status='0'
+  </select>
+
+  <!--保存数据到流程审批单-->
+  <update id="updatePstep">
+  	update t_ticket
+  	set pstep=#{pstep}
+  	where memberid=#{memberid} and status='0'
+  </update>
+
+  <!--更新流程审批单-->
+  <update id="updatePiidAndPstep">
+  	update t_ticket
+  	set pstep=#{pstep},authcode=#{authcode},piid=#{piid}
+  	where id=#{id}
+  </update>
+
+  
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

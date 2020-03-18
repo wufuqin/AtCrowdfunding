@@ -1,3 +1,4 @@
+/*
 package com.test;
 
 import com.atguigu.atcrowdfunding.bean.User;
@@ -6,9 +7,11 @@ import com.atguigu.atcrowdfunding.util.MD5Util;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+*/
 /**
  * 往用户表里添加测试数据
- */
+ *//*
+
 public class AddUserTest {
     public static void main(String[] args) throws Exception {
         ApplicationContext ioc = new ClassPathXmlApplicationContext("spring/spring*.xml");
@@ -44,3 +47,4 @@ public class AddUserTest {
 
 
 
+*/

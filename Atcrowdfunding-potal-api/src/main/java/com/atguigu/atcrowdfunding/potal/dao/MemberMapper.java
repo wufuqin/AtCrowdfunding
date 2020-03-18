@@ -29,6 +29,12 @@ public interface MemberMapper {
 
     //处理会员的登录请求
     Member queryMemberLogin(Map<String, Object> paramMap);
+
+    //更新账户类型
+    void updateAcctType(Member loginMember);
+
+    //提交填写的基本信息
+    void updateBasicInfo(Member loginMember);
 }
 
 

@@ -1,3 +1,4 @@
+/*
 package com.ncwu.activiti;
 
 import java.util.HashMap;
@@ -23,9 +24,11 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+*/
 /**
  * 测试Activiti流程框架
- */
+ *//*
+
 public class TestActiviti {
 
     //读取配置文件
@@ -231,8 +234,10 @@ public class TestActiviti {
     }
 
     //5.查询流程实例的任务数据
-    /**
-     */
+    */
+/**
+     *//*
+
     @Test
     public void test05(){
         ProcessDefinition processDefinition = processEngine.getRepositoryService().createProcessDefinitionQuery().latestVersion().singleResult();
@@ -282,13 +287,15 @@ public class TestActiviti {
     }
 
     //4.启动流程实例
-    /**
+    */
+/**
      * act_hi_actinst, 历史的活动的任务表.
      * act_hi_procinst, 历史的流程实例表.
      * act_hi_taskinst, 历史的流程任务表
      * act_ru_execution, 正在运行的任务表.
      * act_ru_task, 运行的任务数据表.
-     */
+     *//*
+
     @Test
     public void test04(){
         ProcessDefinition processDefinition = processEngine.getRepositoryService().createProcessDefinitionQuery().latestVersion().singleResult();
@@ -397,3 +404,4 @@ public class TestActiviti {
 
 
 
+*/

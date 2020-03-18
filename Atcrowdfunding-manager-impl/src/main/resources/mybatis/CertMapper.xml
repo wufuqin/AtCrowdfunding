@@ -79,6 +79,12 @@
         </where>
     </select>
 
+    <!--查询所有的资质-->
+    <select id="queryCertAll" resultMap="BaseResultMap">
+        select *
+        from t_cert
+    </select>
+
 
 
 
