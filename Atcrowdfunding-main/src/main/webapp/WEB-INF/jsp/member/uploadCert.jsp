@@ -2,6 +2,7 @@
   上传资质图片
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -44,16 +45,18 @@
         <li role="presentation"><a href="#"><span class="badge">4</span> 申请确认</a></li>
     </ul>
 
-    <form role="form" style="margin-top:20px;">
-        <div class="form-group">
-            <label for="exampleInputEmail1">手执身份证照片</label>
-            <input type="file" class="form-control" >
-            <br>
-            <h1 style="color:red;">示例图片</h1>
-            <img src="${APP_PATH}/img/pic.jpg">
-        </div>
-        <button type="button" onclick="window.location.href='apply.html'" class="btn btn-default">上一步</button>
-        <button type="button" onclick="window.location.href='apply-2.html'"  class="btn btn-success">下一步</button>
+    <form id="uploadCertForm" style="margin-top:20px;" method="post" enctype="multipart/form-data">
+        <c:forEach items="${queryCertByAcctType }" var="cert" varStatus="status">
+            <div class="form-group">
+                <label for="name">${cert.name }</label>
+                <input type="hidden" name="certimgs[${status.index }].certid" value="${cert.id }">
+                <input type="file" name="certimgs[${status.index }].fileImg" class="form-control" >
+                <br>
+                <img src="${APP_PATH }/img/pic.jpg" style="display:none">
+            </div>
+        </c:forEach>
+        <button type="button" class="btn btn-default">上一步</button>
+        <button type="button" id="nextBtn" class="btn btn-success">下一步</button>
     </form>
     <hr>
 </div> <!-- /container -->
@@ -62,11 +65,63 @@
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
+<script src="${APP_PATH}/jquery/jquery-form/jquery-form.min.js"></script>
+
 <script>
     $('#myTab a').click(function (e) {
-        e.preventDefault()
+        e.preventDefault();
         $(this).tab('show')
     });
 </script>
+
+<%--图片预览--%>
+<script>
+    $(":file").change(function(event){
+        var files = event.target.files;
+        var file;
+
+        if (files && files.length > 0) {
+            file = files[0];
+
+            var URL = window.URL || window.webkitURL;
+            // 本地图片路径
+            var imgURL = URL.createObjectURL(file);
+
+            var imgObj = $(this).next().next(); //获取同辈紧邻的下一个元素
+            //console.log(imgObj);
+            imgObj.attr("src", imgURL);
+            imgObj.show();
+        }
+    });
+</script>
+
+<%--提交资质表单数据--%>
+<script>
+    $("#nextBtn").click(function(){
+        var loadingIndex = -1 ;
+        var options = {
+            url:"${APP_PATH}/member/doUploadCert.do",
+            beforeSubmit : function(){
+                loadingIndex = layer.msg('数据正在保存中', {icon: 6});
+                return true ; //必须返回true,否则,请求终止.
+            },
+            success : function(result){
+                layer.close(loadingIndex);
+                if(result.success){
+                    layer.msg("数据保存成功", {time:1000, icon:6});
+                    window.location.href="${APP_PATH}/member/apply.htm";
+                }else{
+                    layer.msg("数据保存失败", {time:1000, icon:5, shift:6});
+                }
+            }
+        };
+
+        $("#uploadCertForm").ajaxSubmit(options); //异步提交
+        return ;
+    });
+</script>
+
+
+
 </body>
 </html>

@@ -85,6 +85,20 @@
         from t_cert
     </select>
 
+    <!--根据当前用户选择的账户类型查询需要上传的资质图片-->
+    <select id="queryCertByAcctType" resultType="Cert" parameterType="string">
+    	SELECT *
+    	FROM t_cert
+    	WHERE id IN (SELECT certid FROM t_account_type_cert WHERE accttype=#{accttype})
+    </select>
+
+    <!--保存会员与资质关系数据-->
+    <insert id="insertMemberCert">
+		insert
+		into t_member_cert(memberid,certid,iconpath)
+		values(#{memberid},#{certid},#{iconpath});
+	</insert>
+
 
 
 

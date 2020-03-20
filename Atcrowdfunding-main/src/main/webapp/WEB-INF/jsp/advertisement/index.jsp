@@ -37,9 +37,6 @@
                 <%-- 包含页面头部 --%>
                 <jsp:include page="/WEB-INF/jsp/common/top.jsp"/>
             </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
         </div>
     </div>
 </nav>
@@ -109,6 +106,7 @@
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/jquery/pagination/jquery.pagination.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
+<script src="${APP_PATH}/script/menu.js"></script>
 <%--入口函数--%>
 <script type="text/javascript">
     $(function () {
@@ -122,6 +120,7 @@
                 }
             }
         });
+        showMenu();
         queryPageAdvertisement(0);
     });
 </script>

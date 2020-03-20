@@ -1,6 +1,7 @@
 package com.atguigu.atcrowdfunding.manager.dao;
 
 import com.atguigu.atcrowdfunding.bean.Cert;
+import com.atguigu.atcrowdfunding.bean.MemberCert;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -43,6 +44,12 @@ public interface CertMapper {
 
     //查询出所有的资质
     List<Cert> queryCertAll();
+
+    //根据当前用户选择的账户类型查询需要上传的资质图片
+    List<Cert> queryCertByAcctType(String accttype);
+
+    //保存会员与资质关系数据
+    void insertMemberCert(MemberCert memberCert);
 }
 
 

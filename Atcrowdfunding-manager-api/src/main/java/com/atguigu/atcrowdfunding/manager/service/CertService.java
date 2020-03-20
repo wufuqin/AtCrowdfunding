@@ -1,6 +1,7 @@
 package com.atguigu.atcrowdfunding.manager.service;
 
 import com.atguigu.atcrowdfunding.bean.Cert;
+import com.atguigu.atcrowdfunding.bean.MemberCert;
 import com.atguigu.atcrowdfunding.util.Page;
 
 import java.util.HashMap;
@@ -34,6 +35,12 @@ public interface CertService {
 
     //查询出所有的资质
     List<Cert> queryCertAll();
+
+    //根据当前用户选择的账户类型查询需要上传的资质图片
+    List<Cert> queryCertByAcctType(String accttype);
+
+    //保存会员与资质关系数据
+    void saveMemberCert(List<MemberCert> certimgs);
 }
 
 

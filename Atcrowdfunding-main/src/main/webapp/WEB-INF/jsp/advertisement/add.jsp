@@ -105,6 +105,7 @@
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script src="${APP_PATH }/jquery/jquery-form/jquery-form.min.js"></script>
+<script src="${APP_PATH}/script/menu.js"></script>
 <script type="text/javascript">
     /*入口函数*/
     $(function () {
@@ -118,6 +119,7 @@
                 }
             }
         });
+        showMenu();
     });
 </script>
 

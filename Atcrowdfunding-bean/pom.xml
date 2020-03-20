@@ -8,5 +8,33 @@
     <artifactId>Atcrowdfunding-bean</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <parent>
+        <groupId>com.atguigu.maven</groupId>
+        <artifactId>Atcrowdfunding-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../Atcrowdfunding-parent/pom.xml</relativePath>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+    </dependencies>
+
 
 </project>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

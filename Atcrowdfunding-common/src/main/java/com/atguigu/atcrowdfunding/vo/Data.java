@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.atguigu.atcrowdfunding.bean.MemberCert;
 import com.atguigu.atcrowdfunding.bean.User;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 封装数据，方便传递多条数据
@@ -49,7 +50,5 @@ public class Data {
 	public void setCertimgs(List<MemberCert> certimgs) {
 		this.certimgs = certimgs;
 	}
-
-	
 
 }

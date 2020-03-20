@@ -143,7 +143,7 @@ public class AdvertisementController {
             String iconpath = UUID.randomUUID().toString()+extname; //生成随机问卷名 ： 232243343.jpg
 
             ServletContext servletContext = session.getServletContext();
-            String realpath = servletContext.getRealPath("/advertisementPicture");  //得到存储文件的路径
+            String realpath = servletContext.getRealPath("/picture");  //得到存储文件的路径
 
             String path =realpath+ "\\advertisement\\"+iconpath;  //生成文件路径
             mfile.transferTo(new File(path));      //将文件添加到对应路径下

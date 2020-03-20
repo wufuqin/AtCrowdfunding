@@ -89,12 +89,6 @@
                     <p>测试内容2，测试内容2，测试内容2，测试内容2，测试内容2，测试内容2</p>
                 </div>
             </div>
-            <!--
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-            -->
         </div>
     </div>
 </div>
@@ -102,6 +96,7 @@
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
+<script src="${APP_PATH}/script/menu.js"></script>
 <script type="text/javascript">
     $(function () {
         $(".list-group-item").click(function(){
@@ -114,6 +109,7 @@
                 }
             }
         });
+        showMenu();
     });
 </script>
 

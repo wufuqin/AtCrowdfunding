@@ -1,6 +1,7 @@
 package com.atguigu.atcrowdfunding.manager.service.impl;
 
 import com.atguigu.atcrowdfunding.bean.Cert;
+import com.atguigu.atcrowdfunding.bean.MemberCert;
 import com.atguigu.atcrowdfunding.manager.dao.CertMapper;
 import com.atguigu.atcrowdfunding.manager.service.CertService;
 import com.atguigu.atcrowdfunding.util.Page;
@@ -115,6 +116,20 @@ public class CertServiceImpl implements CertService {
     @Override
     public List<Cert> queryCertAll() {
         return certMapper.queryCertAll();
+    }
+
+    //根据当前用户选择的账户类型查询需要上传的资质图片
+    @Override
+    public List<Cert> queryCertByAcctType(String accttype) {
+        return certMapper.queryCertByAcctType(accttype);
+    }
+
+    //保存会员与资质关系数据
+    @Override
+    public void saveMemberCert(List<MemberCert> certimgs) {
+        for (MemberCert memberCert : certimgs) {
+            certMapper.insertMemberCert(memberCert);
+        }
     }
 
 }

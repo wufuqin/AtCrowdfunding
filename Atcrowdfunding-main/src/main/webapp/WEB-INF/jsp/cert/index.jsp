@@ -21,9 +21,6 @@
                 <%-- 包含页面头部 --%>
                 <jsp:include page="/WEB-INF/jsp/common/top.jsp"/>
             </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
         </div>
     </div>
 </nav>
@@ -103,6 +100,7 @@
                 }
             }
         });
+        showMenu();
         //调用查询数据方法
         queryPageCert(0);
 

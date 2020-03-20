@@ -105,6 +105,7 @@
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
+<script src="${APP_PATH}/script/menu.js"></script>
 <%--入口函数--%>
 <script type="text/javascript">
     $(function () {
@@ -118,6 +119,7 @@
                 }
             }
         });
+        showMenu();
     });
 </script>
 
