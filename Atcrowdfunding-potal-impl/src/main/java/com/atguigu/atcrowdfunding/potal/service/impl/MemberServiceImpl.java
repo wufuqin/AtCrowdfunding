@@ -42,6 +42,18 @@ public class MemberServiceImpl implements MemberService {
         memberMapper.updateBasicInfo(loginMember);
     }
 
+    //更新邮箱
+    @Override
+    public void updateEmail(Member loginMember) {
+        memberMapper.updateEmail(loginMember);
+    }
+
+    //更新用户申请状态
+    @Override
+    public void updateAuthStatus(Member loginMember) {
+        memberMapper.updateAuthStatus(loginMember);
+    }
+
 
 }
 

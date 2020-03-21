@@ -6,8 +6,7 @@
     左侧菜单页面
         只加载用户拥有的权限
 --%>
-
-<%--<ul style="padding-left:0px;" class="list-group">
+<ul style="padding-left:0px;" class="list-group">
     <c:forEach items="${sessionScope.permissionRoot.children }" var="permission">
     <c:if test="${empty permission.children}">
     <li class="list-group-item tree-closed" >
@@ -27,16 +26,16 @@
     </li>
     </c:if>
     </c:forEach>
-</ul>--%>
+</ul>
 
-<li class="list-group-item tree-closed" >
+<%--<li class="list-group-item tree-closed" >
     <a href="${APP_PATH}/main.htm"><i class="glyphicon glyphicon-dashboard"></i> 控制面板</a>
 </li>
 <li class="list-group-item tree-closed">
     <span><i class="glyphicon glyphicon glyphicon-tasks"></i> 权限管理 <span class="badge" style="float:right">3</span></span>
     <ul style="margin-top:10px;">
         <li style="height:30px;">
-           <%--异步实现方式--%>
+           &lt;%&ndash;异步实现方式&ndash;%&gt;
             <a href="${APP_PATH}/user/index.htm"><i class="glyphicon glyphicon-user"></i> 用户维护</a>
         </li>
         <li style="height:30px;">
@@ -89,7 +88,7 @@
 </li>
 <li class="list-group-item tree-closed" >
     <a href="param.html"><i class="glyphicon glyphicon-list-alt"></i> 参数管理</a>
-</li>
+</li>--%>
 
 
 

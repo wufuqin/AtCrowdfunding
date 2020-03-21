@@ -91,7 +91,23 @@
           cardnum = #{cardnum,jdbcType=VARCHAR},
           tel = #{tel,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
-  </update>
+    </update>
+
+    <!--更新邮箱-->
+    <update id="updateEmail" parameterType="com.atguigu.atcrowdfunding.bean.Member">
+        update t_member
+        set email = #{email}
+        where id = #{id}
+    </update>
+
+    <!--更新用户申请状态-->
+    <update id="updateAuthStatus">
+        update t_member
+        set authstatus = #{authstatus}
+        where id = #{id}
+    </update>
+
+
 
 
 

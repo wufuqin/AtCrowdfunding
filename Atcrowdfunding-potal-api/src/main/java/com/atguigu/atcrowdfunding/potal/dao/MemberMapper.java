@@ -35,6 +35,12 @@ public interface MemberMapper {
 
     //提交填写的基本信息
     void updateBasicInfo(Member loginMember);
+
+    //更新邮箱
+    void updateEmail(Member loginMember);
+
+    //更新用户申请状态
+    void updateAuthStatus(Member loginMember);
 }
 
 

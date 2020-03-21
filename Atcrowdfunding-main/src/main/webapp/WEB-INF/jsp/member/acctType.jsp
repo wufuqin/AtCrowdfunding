@@ -109,6 +109,10 @@
                 data : {
                     acctType : acctType
                 },
+                beforeSend : function () {
+                    loadingIndex = layer.msg('账户类型更新中...', {icon: 16});
+                    return true;
+                },
                 success : function(result) {
                     if ( result.success ) {
                         window.location.href = "${APP_PATH}/member/basicInfo.htm";

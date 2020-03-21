@@ -1,5 +1,5 @@
 <%--
-  填写实名认证的基本信息
+  填写验证码
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -39,31 +39,22 @@
     </div>
 
     <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#"><span class="badge">1</span> 基本信息</a></li>
-        <li role="presentation"><a href="#"><span class="badge">2</span> 资质文件上传</a></li>
-        <li role="presentation"><a href="#"><span class="badge">3</span> 邮箱确认</a></li>
-        <li role="presentation"><a href="#"><span class="badge">4</span> 申请确认</a></li>
+        <li role="presentation" ><a href="#"><span class="badge">1</span> 基本信息</a></li>
+        <li role="presentation" ><a href="#"><span class="badge">2</span> 资质文件上传</a></li>
+        <li role="presentation" ><a href="#"><span class="badge">3</span> 邮箱确认</a></li>
+        <li role="presentation" class="active"><a href="#"><span class="badge">4</span> 申请确认</a></li>
     </ul>
 
-    <%--表单数据--%>
     <form role="form" style="margin-top:20px;">
         <div class="form-group">
-            <label for="realname">真实名称</label>
-            <input type="text" class="form-control" id="realname" placeholder="请输入真实名称">
+            <label for="authcode">验证码</label>
+            <input type="text" class="form-control" id="authcode" placeholder="请输入你邮箱中接收到的验证码">
         </div>
-        <div class="form-group">
-            <label for="cardnum">身份证号码</label>
-            <input type="text" class="form-control" id="cardnum" placeholder="请输入身份证号码">
-        </div>
-        <div class="form-group">
-            <label for="tel">电话号码</label>
-            <input type="text" class="form-control" id="tel" placeholder="请输入电话号码">
-        </div>
-        <button type="button" onclick="window.location.href='accttype.html'" class="btn btn-default">上一步</button>
-        <button id="nextBtn" type="button"  class="btn btn-success">下一步</button>
+        <button type="button" onclick="javascript:;" class="btn btn-primary">重新发送验证码</button>
+        <button type="button" id="finishBtn"  class="btn btn-success">申请完成</button>
     </form>
     <hr>
-</div>
+</div> <!-- /container -->
 
 <script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
@@ -76,32 +67,33 @@
     });
 </script>
 
-
+<%--申请完成--%>
 <script>
-    $("#nextBtn").click(function(){
+    $("#finishBtn").click(function(){
         $.ajax({
             type : "POST",
-            url  : "${APP_PATH}/member/updateBasicInfo.do",
+            url  : "${APP_PATH}/member/finishApply.do",
             data : {
-                realname : $("#realname").val(),
-                cardnum  : $("#cardnum").val(),
-                tel      : $("#tel").val()
+                authcode : $("#authcode").val()
             },
             beforeSend : function () {
-                loadingIndex = layer.msg('基本信息更新中...', {icon: 16});
+                loadingIndex = layer.msg('实名认证申请中...', {icon: 16});
                 return true;
             },
             success : function(result) {
                 if ( result.success ) {
-                    window.location.href = "${APP_PATH}/member/uploadCert.htm";
+                    window.location.href = "${APP_PATH}/member.htm";
                 } else {
-                    layer.msg("基本信息更新失败", {time:1000, icon:5, shift:6});
+                    var msg = "实名认证申请失败";
+                    if ( result.message ) {
+                        msg = result.message;
+                    }
+                    layer.msg(msg, {time:1000, icon:5, shift:6});
                 }
             }
         });
     });
 </script>
-
 
 
 </body>

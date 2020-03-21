@@ -33,4 +33,10 @@ public class TicketServiceImpl implements TicketService {
 	public void updatePstep(Ticket ticket) {
 		ticketMapper.updatePstep(ticket);
 	}
+
+	//更新流程id和状态
+    @Override
+    public void updatePiidAndPstep(Ticket ticket) {
+        ticketMapper.updatePiidAndPstep(ticket);
+    }
 }

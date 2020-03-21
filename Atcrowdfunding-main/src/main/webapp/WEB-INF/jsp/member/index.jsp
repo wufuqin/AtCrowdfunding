@@ -126,6 +126,7 @@
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/script/back-to-top.js"></script>
 <script src="${APP_PATH}/script/echarts.js"></script>
+<script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script>
     $('#myTab a').click(function (e) {
         e.preventDefault()

@@ -46,18 +46,18 @@
     where memberid = #{memberid,jdbcType=INTEGER} and status='0'
   </select>
 
-  <!--保存数据到流程审批单-->
+  <!--更新流程审批单-->
   <update id="updatePstep">
-  	update t_ticket
-  	set pstep=#{pstep}
-  	where memberid=#{memberid} and status='0'
+    update t_ticket
+    set pstep=#{pstep}
+    where memberid=#{memberid} and status='0'
   </update>
 
-  <!--更新流程审批单-->
+  <!--更新流程id和状态-->
   <update id="updatePiidAndPstep">
-  	update t_ticket
-  	set pstep=#{pstep},authcode=#{authcode},piid=#{piid}
-  	where id=#{id}
+    update t_ticket
+    set pstep=#{pstep},authcode=#{authcode},piid=#{piid}
+    where id=#{id}
   </update>
 
   

@@ -15,6 +15,9 @@ public interface TicketService {
 
 	//更新流程审批单
 	void updatePstep(Ticket ticket);
+
+	//更新流程id和状态
+    void updatePiidAndPstep(Ticket ticket);
 }
 
 
