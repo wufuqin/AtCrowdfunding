@@ -41,6 +41,12 @@ public interface MemberMapper {
 
     //更新用户申请状态
     void updateAuthStatus(Member loginMember);
+
+    //根据会员id查询会员信息
+    Member getMemberById(Integer memberid);
+
+    //查询会员资质信息
+    List<Map<String, Object>> queryCertByMemberId(Integer memberid);
 }
 
 

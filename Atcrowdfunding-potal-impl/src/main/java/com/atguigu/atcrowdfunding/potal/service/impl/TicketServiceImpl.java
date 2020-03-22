@@ -1,5 +1,6 @@
 package com.atguigu.atcrowdfunding.potal.service.impl;
 
+import com.atguigu.atcrowdfunding.bean.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,5 +39,17 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public void updatePiidAndPstep(Ticket ticket) {
         ticketMapper.updatePiidAndPstep(ticket);
+    }
+
+    //根据任务查询流程实例(根据流程实例的id查询流程单,查询用户信息)
+    @Override
+    public Member getMemberByPiId(String processInstanceId) {
+        return ticketMapper.getMemberByPiId(processInstanceId);
+    }
+
+    //更新审核进度
+    @Override
+    public void updateStatus(Member member) {
+		ticketMapper.updateStatus(member);
     }
 }

@@ -152,7 +152,7 @@
                         content+='<td class="text-center" >'+(i+1)+'</td>';
                         content+='<td class="text-center" ><input type="checkbox" id="'+n.id+'"/></td>';
                         content+='<td class="text-center" >'+n.loginacct+'</td>';
-                        content+='<td class="text-center" style="color: #0f0f0f">'+n.username+'</td>';
+                        content+='<td class="text-center" >'+n.username+'</td>';
                         content+='<td class="text-center" >'+n.email+'</td>';
                         content+='<td class="text-center">';
                         content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/user/assignRole.htm?id='+n.id+'\'" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i>分配权限</button>';
@@ -222,7 +222,7 @@
                         content+='<td class="text-center" >'+(i+1)+'</td>';
                         content+='<td class="text-center" ><input type="checkbox" id="'+n.id+'" /></td>';
                         content+='<td class="text-center" >'+n.loginacct+'</td>';
-                        content+='<td class="text-center" style="color: #0f0f0f">'+n.username+'</td>';
+                        content+='<td class="text-center" >'+n.username+'</td>';
                         content+='<td class="text-center" >'+n.email+'</td>';
                         content+='<td class="text-center">';
                         content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/user/assignRole.htm?id='+n.id+'\'" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i>分配权限</button>';

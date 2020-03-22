@@ -28,7 +28,7 @@
     <form id="loginForm" action="${APP_PATH }/doLogin.do" method="POST" class="form-signin" role="form">
         <h2 class="form-signin-heading"><i class="glyphicon glyphicon-log-in"></i> 用户登录</h2>
         <div class="form-group has-success has-feedback">
-            <input type="text" class="form-control" id="floginacct" name="loginacct" value="test01" placeholder="请输入登录账号" autofocus>
+            <input type="text" class="form-control" id="floginacct" name="loginacct" value="superadmin" placeholder="请输入登录账号" autofocus>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
         <div class="form-group has-success has-feedback">
@@ -50,7 +50,7 @@
         <div class="form-group has-success has-feedback">
             <select class="form-control" id="ftype" name="type" >
                 <option value="member">会员</option>
-                <option value="user">管理</option>
+                <option value="user" selected>管理</option>
             </select>
         </div>
 

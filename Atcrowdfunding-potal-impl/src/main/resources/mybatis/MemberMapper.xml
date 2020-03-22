@@ -58,14 +58,14 @@
 
     <!--根据id查询-->
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-        select id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype
+        select id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype, tel
         from t_member
         where id = #{id,jdbcType=INTEGER}
     </select>
 
     <!--查询所有-->
     <select id="selectAll" resultMap="BaseResultMap" >
-        select id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype
+        select id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype, tel
         from t_member
     </select>
 
@@ -106,6 +106,21 @@
         set authstatus = #{authstatus}
         where id = #{id}
     </update>
+
+    <!--根据会员id查询会员信息-->
+    <select id="getMemberById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype , tel
+        from t_member
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <!--查询会员资质信息-->
+    <select id="queryCertByMemberId" resultType="map">
+        SELECT t_cert.id,t_cert.name,t_member_cert.iconpath
+        FROM t_cert JOIN t_member_cert ON t_cert.id = t_member_cert.certid
+        WHERE t_member_cert.memberid = #{memberid}
+    </select>
+
 
 
 

@@ -18,6 +18,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Atcrowdfunding-manager-api" />
     <orderEntry type="module" module-name="Atcrowdfunding-bean" />
+    <orderEntry type="module" module-name="Atcrowdfunding-potal-api" />
     <orderEntry type="module" module-name="Atcrowdfunding-common" />
     <orderEntry type="library" name="Maven: org.springframework:spring-core:4.0.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.1.1" level="project" />

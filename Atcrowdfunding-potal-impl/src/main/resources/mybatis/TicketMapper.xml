@@ -60,7 +60,21 @@
     where id=#{id}
   </update>
 
-  
+  <!--根据任务查询流程实例(根据流程实例的id查询流程单,查询用户信息)-->
+  <select id="getMemberByPiId" resultType="Member">
+    select t_member.*
+    from t_member join t_ticket on t_member.id = t_ticket.memberid
+    where t_ticket.piid=#{piid}
+  </select>
+
+  <!--更新审核进度-->
+  <update id="updateStatus">
+  	update t_ticket
+  	set status='1'
+  	where memberid=#{id} and status='0'
+  </update>
+
+
 </mapper>
 
 
