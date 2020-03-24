@@ -108,7 +108,7 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="${APP_PATH}/index.htm" style="font-size:32px;">众筹网-创意产品众筹平台</a>
                 </div>
-                <div id="navbar" class="navbar-collapse collapse" style="float:right;">
+                <div id="navbar" class="navbar-collapse collapse" style="float:right; padding-right: 20px">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="login.htm">登录</a></li>
                         <li><a href="reg.htm">注册</a></li>

@@ -73,6 +73,13 @@ public class MemberServiceImpl implements MemberService {
         memberMapper.insert(member);
     }
 
+    //修改会员信息
+    @Override
+    public int updateMember(Member member) {
+        memberMapper.updateByPrimaryKey(member);
+        return 0;
+    }
+
 
 }
 

@@ -11,6 +11,7 @@ import com.atguigu.atcrowdfunding.potal.service.MemberService;
 import com.atguigu.atcrowdfunding.potal.service.TicketService;
 import com.atguigu.atcrowdfunding.util.AjaxResult;
 import com.atguigu.atcrowdfunding.util.Const;
+import com.atguigu.atcrowdfunding.util.MD5Util;
 import com.atguigu.atcrowdfunding.vo.Data;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
@@ -297,6 +298,38 @@ public class MemberController {
 
         return result;
 
+    }
+
+    //去到个人设置页面
+    @RequestMapping("/setting")
+    public String setting(){
+        return "member/setting";
+    }
+
+    //对表单数据进行修改
+    @ResponseBody
+    @RequestMapping("/updateSetting")
+    public Object updateSetting(Member member, String userpswd, HttpSession session){
+        AjaxResult result = new AjaxResult();
+        try {
+            member.setUserpswd(MD5Util.digest(userpswd));
+            System.out.println(userpswd);
+            Member loginMember = (Member) session.getAttribute(Const.LOGIN_MEMBER);
+            System.out.println(session.getAttribute(Const.LOGIN_MEMBER));
+            member.setAccttype(loginMember.getAccttype());
+            System.out.println(loginMember.getAccttype());
+            //修改会员信息
+            memberService.updateMember(member);
+            //销毁session中用户的信息重新设置
+            session.removeAttribute(Const.LOGIN_MEMBER);
+            session.setAttribute(Const.LOGIN_MEMBER,member);
+            result.setSuccess(true);
+        }catch (Exception e){
+            result.setSuccess(false);
+            result.setMessage("修改数据失败");
+            e.printStackTrace();
+        }
+        return result;
     }
 
 }

@@ -33,6 +33,9 @@ public interface MemberService {
 
     //保存会员
     void saveMember(Member member);
+
+    //修改会员信息
+    int updateMember(Member member);
 }
 
 

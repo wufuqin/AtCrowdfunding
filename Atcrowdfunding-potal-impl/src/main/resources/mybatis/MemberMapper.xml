@@ -53,7 +53,7 @@
             usertype = #{usertype,jdbcType=CHAR},
             realname = #{realname,jdbcType=VARCHAR},
             cardnum = #{cardnum,jdbcType=VARCHAR},
-            accttype = #{accttype,jdbcType=CHAR}
+            tel = #{tel,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
 
@@ -72,7 +72,7 @@
 
     <!--处理登录请求-->
     <select id="queryMemberLogin" resultMap="BaseResultMap" >
-        select id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype
+        select id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype, tel
         from t_member
         where loginacct=#{loginacct} and userpswd=#{userpswd}
     </select>
