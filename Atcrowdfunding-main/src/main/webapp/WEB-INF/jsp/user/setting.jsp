@@ -1,5 +1,5 @@
 <%--
-  添加用户
+  用户个人设置页面
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -51,27 +51,37 @@
             <ol class="breadcrumb">
                 <li><a href="#">首页</a></li>
                 <li><a href="#">数据列表</a></li>
-                <li class="active">新增</li>
+                <li class="active">个人设置</li>
             </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
                 <div class="panel-body">
-                    <form id="addForm">
+                    <form id="userSettingForm">
                         <div class="form-group">
                             <label for="floginacct">登陆账号</label>
-                            <input type="text" class="form-control" id="floginacct" placeholder="请输入登陆账号">
+                            <input disabled type="text" class="form-control" value="${loginacct}" id="floginacct">
                         </div>
+
                         <div class="form-group">
                             <label for="fusername">用户名称</label>
-                            <input type="text" class="form-control" id="fusername" placeholder="请输入用户名称">
+                            <input type="text" class="form-control" value="${username}" id="fusername" placeholder="请输入用户名称">
                         </div>
+
+                        <div class="form-group">
+                            <label for="fusername">用户密码</label>
+                            <input type="password" class="form-control" value="${userpswd}" id="fuserpswd" placeholder="请输入用户密码">
+                        </div>
+
                         <div class="form-group">
                             <label for="femail">邮箱地址</label>
-                            <input type="email" class="form-control" id="femail" placeholder="请输入邮箱地址">
-                            <p class="help-block label label-warning">请输入合法的邮箱地址, 格式为： xxxx@xxxx.com</p>
+                            <input type="email" class="form-control" value="${email}" id="femail" placeholder="请输入邮箱地址">
                         </div>
-                        <button onclick="addUser()" type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 新增</button>
-                        <button onclick="resetForm()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+                        <div class="form-group">
+                            <label for="femail">注册时间</label>
+                            <input disabled type="text" value="${createtime}" class="form-control" id="fcreatetime">
+                        </div>
+                        <button onclick="updateSetting()" type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 修改</button>
+                        <button onclick="resetUserSettingForm()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
                     </form>
                 </div>
             </div>
@@ -116,29 +126,34 @@
                 }
             }
         });
-        showMenu();
     });
 
 </script>
 
-<%--添加用户--%>
+<%--修改个人信息--%>
 <script>
-    function addUser() {
+    function updateSetting() {
         //获取添加的用户的信息
         var floginacct = $("#floginacct");
         var fusername = $("#fusername");
+        var fuserpswd = $("#fuserpswd");
         var femail = $("#femail");
+        var fcreatetime = $("#fcreatetime");
+
 
         $.ajax({
-           type : "POST",
-           data : {
-               "loginacct" : floginacct.val(),
-               "username" : fusername.val(),
-               "email" : femail.val()
-           },
-            url : "${APP_PATH}/user/doAdd.do",
+            type : "POST",
+            data : {
+                "id" : ${id},
+                "loginacct" : floginacct.val(),
+                "username" : fusername.val(),
+                "userpswd" : fuserpswd.val(),
+                "email" : femail.val(),
+                "createtime" : fcreatetime.val()
+            },
+            url : "${APP_PATH}/user/updateSetting.do",
             beforeSend : function () {
-                loadingIndex = layer.msg('数据保存中...', {icon: 16});
+                loadingIndex = layer.msg('数据修改中...', {icon: 16});
                 //对表单数据进行校验
                 return true;
             },
@@ -146,14 +161,14 @@
             success : function (result) {
                 layer.close(loadingIndex);
                 if (result.success) {
-                    layer.msg("数据保存成功",{time:2000, icon:6, shift:6});
-                    setTimeout(function () {{window.location.href="${APP_PATH}/user/index.htm"}},2000);
+                    layer.msg("数据修改成功",{time:2000, icon:6, shift:6});
+                    setTimeout(function () {{window.location.href="${APP_PATH}/main.htm"}},1000);
                 }else {
-                    layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    layer.msg("数据修改失败",{time:2000, icon:5, shift:6});
                 }
             },
             error : function () {
-                layer.msg("数据保存失败",{time:2000, icon:5, shift:6});
+                layer.msg("数据修改失败",{time:2000, icon:5, shift:6});
             }
         });
     }
@@ -161,29 +176,11 @@
 
 <%--重置表单数据--%>
 <script>
-    function resetForm() {
+    function resetUserSettingForm() {
         //jQuery没有reset函数，使用需要性转换为dom对象使用 [0]
-        $("#addForm")[0].reset();
+        $("#userSettingForm")[0].reset();
     }
 </script>
 
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

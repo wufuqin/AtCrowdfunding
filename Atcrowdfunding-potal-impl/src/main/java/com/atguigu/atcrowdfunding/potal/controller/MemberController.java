@@ -282,7 +282,6 @@ public class MemberController {
                 loginMember.setAuthstatus("1");
                 memberService.updateAuthStatus(loginMember);
 
-
                 //记录流程步骤:
                 ticket.setPstep("finishapply");
                 ticketService.updatePstep(ticket);

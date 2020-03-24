@@ -4,6 +4,7 @@ import com.atguigu.atcrowdfunding.bean.Role;
 import com.atguigu.atcrowdfunding.bean.User;
 import com.atguigu.atcrowdfunding.manager.service.UserService;
 import com.atguigu.atcrowdfunding.util.AjaxResult;
+import com.atguigu.atcrowdfunding.util.Const;
 import com.atguigu.atcrowdfunding.util.Page;
 import com.atguigu.atcrowdfunding.vo.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 /**
@@ -246,6 +248,45 @@ public class UserController {
         } catch (Exception e) {
             result.setSuccess(false);
             result.setMessage("取消权限失败");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    //去到用户的个人设置页面
+    @RequestMapping("/setting")
+    public String setting(HttpSession session, Map<String, Object> map){
+        try {
+            //对用户信息进回显
+            //获取session中登录的用户
+            User loginUser = (User)session.getAttribute(Const.LOGIN_USER);
+            //设置用户信息
+            map.put("id",loginUser.getId());
+            map.put("loginacct",loginUser.getLoginacct());
+            map.put("username",loginUser.getUsername());
+            map.put("userpswd",loginUser.getUserpswd());
+            map.put("email",loginUser.getEmail());
+            map.put("createtime",loginUser.getCreatetime());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "user/setting";
+    }
+
+    //在用户个人设置修改用户个人信息
+    @ResponseBody
+    @RequestMapping("/updateSetting")
+    public Object updateSetting(User user, HttpSession session){
+        AjaxResult result = new AjaxResult();
+        try {
+            int count = userService.updateUser(user);
+            result.setSuccess(count == 1);
+            //销毁session中用户的信息重新设置
+            session.removeAttribute(Const.LOGIN_USER);
+            session.setAttribute(Const.LOGIN_USER,user);
+        }catch (Exception e){
+            result.setSuccess(false);
+            result.setMessage("修改数据失败");
             e.printStackTrace();
         }
         return result;
