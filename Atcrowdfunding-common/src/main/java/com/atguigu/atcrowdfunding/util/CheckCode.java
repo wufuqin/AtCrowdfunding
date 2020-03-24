@@ -32,7 +32,7 @@ public class CheckCode extends HttpServlet {
         request.getSession().setAttribute("CODE",str);
 
         //获取前台传回来手机号码
-        String phone = request.getParameter("phone");
+        String phone = request.getParameter("tel");
         //发送短信
         sendMsg(phone,str);
     }

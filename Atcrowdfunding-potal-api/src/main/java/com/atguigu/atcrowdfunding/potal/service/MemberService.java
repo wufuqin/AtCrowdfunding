@@ -31,6 +31,8 @@ public interface MemberService {
     //查询会员资质信息
     List<Map<String, Object>> queryCertByMemberId(Integer memberid);
 
+    //保存会员
+    void saveMember(Member member);
 }
 
 

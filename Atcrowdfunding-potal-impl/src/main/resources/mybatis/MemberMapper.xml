@@ -28,9 +28,10 @@
     <!--添加会员-->
     <insert id="insert" parameterType="com.atguigu.atcrowdfunding.bean.Member" >
         insert
-        into t_member (id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype)
+        into t_member (id, tel, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype)
         values (#{id,jdbcType=INTEGER},
                 #{loginacct,jdbcType=VARCHAR},
+                #{tel,jdbcType=VARCHAR},
                 #{userpswd,jdbcType=CHAR},
                 #{username,jdbcType=VARCHAR},
                 #{email,jdbcType=VARCHAR},
@@ -120,6 +121,7 @@
         FROM t_cert JOIN t_member_cert ON t_cert.id = t_member_cert.certid
         WHERE t_member_cert.memberid = #{memberid}
     </select>
+
 
 
 

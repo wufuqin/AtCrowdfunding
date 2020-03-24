@@ -13,6 +13,7 @@ import com.atguigu.atcrowdfunding.util.AjaxResult;
 import com.atguigu.atcrowdfunding.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.atguigu.atcrowdfunding.bean.User;
@@ -49,6 +50,48 @@ public class DispatcherController {
     @RequestMapping("/reg")
     public String reg(){
         return "reg";
+    }
+
+    //完成注册
+    @ResponseBody
+    @RequestMapping("/doRge")
+    public Object doRge(String tel, String username, String userpswd, String email, String checkCode, String usertype,HttpSession session){
+        //请求结果封装对象
+        AjaxResult result = new AjaxResult();
+        try {
+            Member member = new Member();
+            //设置会员注册的信息
+            member.setTel(tel);
+            member.setUsername(username);
+            member.setUserpswd(MD5Util.digest(userpswd));
+            member.setEmail(email);
+            member.setUsertype(usertype);
+
+            //设置会员刚刚注册时的默认信息
+            member.setLoginacct(username);
+            member.setAuthstatus(Const.MEMBER_STATUS);
+
+            //从session域中获取程序生成的验证码
+            String checkCode_server = (String) session.getAttribute("CODE");
+            //销毁验证码，确保验证码一次性
+            session.removeAttribute("CODE");
+            //判断用户输入的验证码和实际生成的验证码是否一致，不区分大小写
+            if(!checkCode_server.equalsIgnoreCase(checkCode)){
+                //验证码不正确(抛出异常信息)
+                result.setMessage("验证码错误！");
+                result.setSuccess(false);
+                return result;
+            }
+
+            //保存会员
+            memberService.saveMember(member);
+            result.setSuccess(true);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("注册失败");
+            e.printStackTrace();
+        }
+        return result;
     }
 
     //去到后台主页面

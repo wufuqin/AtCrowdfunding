@@ -54,7 +54,7 @@ public class TestController {
 		return "alert/test";
 	}
 
-	//测试短信注册
+	/*//测试短信注册
 	@ResponseBody
 	@RequestMapping("/doRge")
 	public Object doRge(String loginacct, String userpswd, String code,String email, HttpSession session){
@@ -86,7 +86,7 @@ public class TestController {
 			e.printStackTrace();
 		}
 		return result;
-	}
+	}*/
 
 
 

@@ -232,7 +232,7 @@
 
     <!--maven插件-->
     <build>
-        <finalName>Test</finalName>
+        <finalName>ROOT</finalName>
         <!--maven插件-->
         <plugins>
             <!--jdk编译插件-->

@@ -67,6 +67,11 @@ public class MemberServiceImpl implements MemberService {
         return memberMapper.queryCertByMemberId(memberid);
     }
 
+    //保存会员
+    @Override
+    public void saveMember(Member member) {
+        memberMapper.insert(member);
+    }
 
 
 }

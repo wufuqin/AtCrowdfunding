@@ -1,5 +1,5 @@
 <%--
-    注册页面
+    短信注册测试页面
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -33,11 +33,15 @@
     <form class="form-signin" role="form" id="registerForm" action="member">
         <h2 class="form-signin-heading"><i class="glyphicon glyphicon-log-in"></i> 用户注册</h2>
         <div class="form-group has-success has-feedback">
-            <input type="text" class="form-control" id="fphone" placeholder="请输入手机号：11位" autofocus>
+            <input type="text" class="form-control" id="ftel" placeholder="请输入手机号：11位" autofocus>
+            <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+        </div>
+        <div class="form-group has-success has-feedback">
+            <input type="text" class="form-control" id="fusername" placeholder="请输入用户名" autofocus>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
         <div class="form-group has-success has-feedback">
-            <input type="text" class="form-control" id="fpassword" placeholder="请输入密码：6-18位" style="margin-top:10px;">
+            <input type="password" class="form-control" id="fuserpswd" placeholder="请输入密码：6-18位" style="margin-top:10px;">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
         <div class="form-group has-success has-feedback">
@@ -49,51 +53,150 @@
                 <div class="col-md-6">
                     <input type="text" class="form-control" id="fcode" placeholder="请输入验证码">
                 </div>
-                <%--<a href="javascript:refreshCode();">
-                    <img src="${pageContext.request.contextPath}/CheckCodeServlet" title="看不清" id="vcode"/>
-                </a>--%>
                 <button id="getCode" style="width: 150px" type="button" class="form-control btn btn-lg ">获取验证码</button>
             </div>
 
         </div>
 
         <div class="form-group has-success has-feedback">
-            <select class="form-control" >
-                <option>企业</option>
-                <option>个人</option>
+            <select id="fusertype" class="form-control" >
+                <option value="1">企业</option>
+                <option value="0">个人</option>
             </select>
         </div>
         <div class="checkbox">
             <label>
-                <a href="${APP_PATH}/unfinished.htm">第三方登录</a>
+                <a href="${APP_PATH}/forget.htm">忘记密码</a>
             </label>
             <label style="float:right">
                 <a href="${APP_PATH}/login.htm">我有账号</a>
             </label>
         </div>
-        <a class="btn btn-lg btn-success btn-block" href="${APP_PATH}/member.htm" > 注册</a>
+        <a class="btn btn-lg btn-success btn-block" onclick="doRge()" > 注册</a>
     </form>
 </div>
 <script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
 
-<%-- 切换图片验证码 --%>
+<%--注册--%>
 <script>
-    function refreshCode(){
-        //1.获取验证码图片对象
-        var vcode = document.getElementById("vcode");
-        //2.设置其src属性，加时间戳
-        vcode.src = "${pageContext.request.contextPath}/CheckCodeServlet?time="+new Date().getTime();
+    function doRge() {
+        //获取用户输入的注册信息
+        var tel = $("#ftel");
+        var username = $("#fusername");
+        var userpswd = $("#fuserpswd");
+        var email = $("#femail");
+        var code = $("#fcode");
+        var usertype = $("#fusertype");
+
+        //对手机号数据进行校验
+        if ($.trim(tel.val()) == "") {
+            layer.msg("手机号不能为空", {time:1000, icon:5, shift:6});
+            tel.val("");   //输入框重新设置为空
+            tel.focus();   //重新获取焦点
+            return false;
+        }
+        //对用户名数据进行校验
+        if ($.trim(username.val()) == "") {
+            layer.msg("用户名不能为空", {time:1000, icon:5, shift:6});
+            username.val("");   //输入框重新设置为空
+            username.focus();   //重新获取焦点
+            return false;
+        }
+        //对密码数据进行校验
+        if ($.trim(userpswd.val()) == "") {
+            layer.msg("密码不能为空", {time:1000, icon:5, shift:6});
+            userpswd.val("");   //输入框重新设置为空
+            userpswd.focus();   //重新获取焦点
+            return false;
+        }
+        //对验证码数据进行校验
+        if ($.trim(email.val()) == "") {
+            layer.msg("邮箱不能为空", {time:1000, icon:5, shift:6});
+            email.val("");   //输入框重新设置为空
+            email.focus();   //重新获取焦点
+            return false;
+        }
+        //对验证码数据进行校验
+        if ($.trim(code.val()) == "") {
+            layer.msg("验证码不能为空", {time:1000, icon:5, shift:6});
+            code.val("");   //输入框重新设置为空
+            code.focus();   //重新获取焦点
+            return false;
+        }
+
+        $.ajax({
+            type : "POST",
+            data : {
+                "tel" : tel.val(),
+                "username" : username.val(),
+                "userpswd" : userpswd.val(),
+                "email" : email.val(),
+                "usertype" : usertype.val(),
+                "checkCode" : code.val()
+            },
+            url : "${APP_PATH}/doRge.do",
+            beforeSend : function () {
+                loadingIndex = layer.msg('注册中', {icon: 16});
+                return true;
+            },
+            success : function (result) {
+                if (result.success){
+                    layer.close(loadingIndex);
+                    layer.msg("注册成功", {time:2000, icon:6, shift:6});
+                    setTimeout(function () {{window.location.href = "${APP_PATH}/index.htm"}},2000);
+                }else {
+                    layer.msg(result.message, {time:2000, icon:5, shift:6});
+                }
+            },
+            error : function () {
+                layer.msg("注册失败", {time:2000, icon:5, shift:6});
+            }
+        });
     }
 </script>
 
 <%--获取短信验证码--%>
 <script>
-
     var code = document.getElementById("getCode");
     var flag = 3;
     code.onclick = function () {
+
+        //获取用户输入的注册信息
+        var tel = $("#ftel");
+        var username = $("#fusername");
+        var userpswd = $("#fuserpswd");
+        var email = $("#femail");
+
+        //对手机号数据进行校验
+        if ($.trim(tel.val()) == "") {
+            layer.msg("手机号不能为空", {time:1000, icon:5, shift:6});
+            tel.val("");   //输入框重新设置为空
+            tel.focus();   //重新获取焦点
+            return false;
+        }
+        //对用户名数据进行校验
+        if ($.trim(username.val()) == "") {
+            layer.msg("用户名不能为空", {time:1000, icon:5, shift:6});
+            username.val("");   //输入框重新设置为空
+            username.focus();   //重新获取焦点
+            return false;
+        }
+        //对密码数据进行校验
+        if ($.trim(userpswd.val()) == "") {
+            layer.msg("密码不能为空", {time:1000, icon:5, shift:6});
+            userpswd.val("");   //输入框重新设置为空
+            userpswd.focus();   //重新获取焦点
+            return false;
+        }
+        //对验证码数据进行校验
+        if ($.trim(email.val()) == "") {
+            layer.msg("邮箱不能为空", {time:1000, icon:5, shift:6});
+            email.val("");   //输入框重新设置为空
+            email.focus();   //重新获取焦点
+            return false;
+        }
 
         $("#getCode").prop("class","btn btn-lg btn-success");
         if (flag < 3) {
@@ -101,7 +204,7 @@
         }
 
         var xhr = new XMLHttpRequest();
-        xhr.open("get", "CheckCode?phone=" +document.getElementById("fphone").value, true);
+        xhr.open("get", "${APP_PATH}/CheckCode?tel=" +document.getElementById("ftel").value, true);
         //监听请求状态
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && status == 200) {
@@ -129,6 +232,7 @@
 
 </body>
 </html>
+
 
 
 
