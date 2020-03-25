@@ -1,5 +1,5 @@
 <%--
-    用户维护模块的首页面
+  后台管理会员页面
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -51,41 +51,40 @@
                                 <input id="queryText" class="form-control has-success" type="text" placeholder="请输入查询条件">
                             </div>
                         </div>
-                        <button id="queryBtn" onclick="queryPageUserLike(0)" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
+                        <button id="queryBtn" onclick="queryPageMemberLike(0)" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
                     </form>
-                    <button onclick="deleteBatchBtn()" type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
-                    <button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='${APP_PATH}/user/add.htm'"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+                    <button onclick="deleteMemberBatchBtn()" type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 批量删除</button>
                     <br>
                     <hr style="clear:both;">
                     <div class="table-responsive" >
                         <table class="table  table-bordered">
                             <%-- 表格头部信息 --%>
                             <thead>
-                                <tr >
-                                    <th class="text-center" width="50">序号</th>
-                                    <th class="text-center" width="30"><input id="checkAll" type="checkbox"></th>
-                                    <th class="text-center">账号</th>
-                                    <th class="text-center">名称</th>
-                                    <th class="text-center">邮箱地址</th>
-                                    <th class="text-center" width="200">操作</th>
-                                </tr>
+                            <tr >
+                                <th class="text-center" width="50">序号</th>
+                                <th class="text-center" width="30"><input id="checkAll" type="checkbox"></th>
+                                <th class="text-center">账号</th>
+                                <th class="text-center">名称</th>
+                                <th class="text-center">邮箱地址</th>
+                                <th class="text-center" width="200">操作</th>
+                            </tr>
                             </thead>
 
                             <%-- 查询出的数据 --%>
                             <tbody>
-                                <%-- 查询出来的数据展示区 --%>
+                            <%-- 查询出来的数据展示区 --%>
                             </tbody>
 
                             <%-- 分页导航条 --%>
                             <tfoot>
-                                <tr >
-                                    <td colspan="6" align="center">
-                                        <%--使用pagination分页插件--%>
-                                        <%--显示分页的容器--%>
-                                        <div id="Pagination" class="pagination"></div>
+                            <tr >
+                                <td colspan="6" align="center">
+                                    <%--使用pagination分页插件--%>
+                                    <%--显示分页的容器--%>
+                                    <div id="Pagination" class="pagination"></div>
 
-                                    </td>
-                                </tr>
+                                </td>
+                            </tr>
                             </tfoot>
 
                         </table>
@@ -114,21 +113,20 @@
         });
         showMenu();
         //调用查询用户数据方法
-        queryPageUser(0);
+        queryPageMember(0)
     });
 
 </script>
-
 <%-- 异步查询用户数据 --%>
 <script>
-    function queryPageUser(pageIndex) {
+    function queryPageMember(pageIndex) {
         $.ajax({
             type : "POST",
             data : {
                 "pageno" : pageIndex + 1,
                 "pagesize" : 8
             },
-            url : "${APP_PATH}/user/doIndex.do",
+            url : "${APP_PATH}/member/doMemberIndex.do",
             beforeSend : function () {
                 loadingIndex = layer.msg('数据加载中...', {icon: 16});
                 return true;
@@ -155,9 +153,8 @@
                         content+='<td class="text-center" >'+n.username+'</td>';
                         content+='<td class="text-center" >'+n.email+'</td>';
                         content+='<td class="text-center">';
-                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/user/assignRole.htm?id='+n.id+'\'" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i>分配权限</button>';
-                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/user/update.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-pencil"></i>修改</button>';
-                        content+='<button type="button" onclick="doDelete('+n.id+',\''+n.loginacct+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
+                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/member/update.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-pencil"></i>修改</button>';
+                        content+='<button type="button" onclick="deleteMemberBtn('+n.id+',\''+n.loginacct+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
                         content+='</td>';
                         content+='</tr>';
                     });
@@ -168,7 +165,7 @@
                     $("#Pagination").pagination(page.totalsize, {
                         num_edge_entries: 2, //边缘页数
                         num_display_entries: 4, //主体页数
-                        callback: queryPageUser, //当前函数
+                        callback: queryPageMember, //当前函数
                         items_per_page:8, //每页显示多少条
                         current_page :(page.pageno-1), //当前页
                         prev_text : "上一页",
@@ -189,15 +186,15 @@
 
 <%-- 模糊查询 --%>
 <script>
-    function queryPageUserLike(pageIndex) {
+    function queryPageMemberLike(pageIndex) {
         $.ajax({
-           type : "POST",
-           data : {
-               "pageno" : pageIndex + 1,
-               "pagesize" : 8,
-               "queryText" : $("#queryText").val()
-           },
-            url : "${APP_PATH}/user/doLike.do",
+            type : "POST",
+            data : {
+                "pageno" : pageIndex + 1,
+                "pagesize" : 8,
+                "queryText" : $("#queryText").val()
+            },
+            url : "${APP_PATH}/member/doMemberIndexLike.do",
             beforeSend : function () {
                 loadingIndex = layer.msg('数据加载中...', {icon: 16});
                 return true;
@@ -225,9 +222,8 @@
                         content+='<td class="text-center" >'+n.username+'</td>';
                         content+='<td class="text-center" >'+n.email+'</td>';
                         content+='<td class="text-center">';
-                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/user/assignRole.htm?id='+n.id+'\'" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i>分配权限</button>';
-                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/user/update.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i>修改</button>';
-                        content+='<button type="button" onclick="doDelete('+n.id+',\''+n.loginacct+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
+                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/member/update.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i>修改</button>';
+                        content+='<button type="button" onclick="deleteMemberBtn('+n.id+',\''+n.loginacct+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
                         content+='</td>';
                         content+='</tr>';
                     });
@@ -239,7 +235,7 @@
                     $("#Pagination").pagination(page.totalsize, {
                         num_edge_entries: 2, //边缘页数
                         num_display_entries: 4, //主体页数
-                        callback: queryPageUserLike, //当前函数
+                        callback: queryPageMemberLike, //当前函数
                         items_per_page:8, //每页显示多少条
                         current_page :(page.pageno-1), //当前页
                         prev_text : "上一页",
@@ -260,14 +256,14 @@
 
 <%-- 单条数据删除功能 --%>
 <script>
-    function doDelete(id,loginacct) {
+    function deleteMemberBtn(id,loginacct) {
         layer.confirm("确认删除["+loginacct+"]用户？", {icon: 3, title: '提示'}, function (cindex) {
             $.ajax({
                 type : "POST",
                 data : {
                     "id" : id
                 },
-                url : "${APP_PATH}/user/doDelete.do",
+                url : "${APP_PATH}/member/doDelete.do",
                 beforeSend : function () {
                     layer.close(cindex);
                     loadingIndex = layer.msg('数据删除中...', {icon: 16});
@@ -280,7 +276,7 @@
                     if (result.success) {
                         loadingIndex = layer.msg('数据删除成功,正在更新数据...', {icon: 16});
                         //设置定时，让提示框显示一定时间
-                        setTimeout(function () {{window.location.href="${APP_PATH}/user/index.htm"}},1000);
+                        setTimeout(function () {{window.location.href="${APP_PATH}/member/memberIndex.htm"}},1000);
                     }else {
                         layer.msg(result.message,{time:2000, icon:5, shift:6});
                     }
@@ -306,16 +302,16 @@
 
 <%--批量删除--%>
 <script>
-    function deleteBatchBtn() {
+    function deleteMemberBatchBtn() {
         //获取被选中的复选框数据的id值
         var selectCheckbox = $("tbody tr td input:checked");
-        
+
         //判断是否有选中的数据
         if (selectCheckbox.length==0) {
             layer.msg("请选择要删除的用户",{time:2000, icon:6, shift:6});
             return false;
         }
-        
+
         //遍历id数组，进行循环拼串
         var idStr = "";
         $.each(selectCheckbox,function (i,n) {
@@ -329,7 +325,7 @@
             $.ajax({
                 type : "POST",
                 data : idStr,
-                url : "${APP_PATH}/user/doDeleteBatch.do",
+                url : "${APP_PATH}/member/doDeleteBatch.do",
                 beforeSend : function () {
                     layer.close(cindex);
                     loadingIndex = layer.msg('数据删除中...', {icon: 16});
@@ -342,7 +338,7 @@
                     if (result.success) {
                         loadingIndex = layer.msg('数据删除成功,正在更新数据...', {icon: 16});
                         //设置定时，让提示框显示一定时间
-                        setTimeout(function () {{window.location.href="${APP_PATH}/user/index.htm"}},1000);
+                        setTimeout(function () {{window.location.href="${APP_PATH}/member/memberIndex.htm"}},1000);
                     }else {
                         layer.msg(result.message,{time:2000, icon:5, shift:6});
                     }
@@ -356,24 +352,5 @@
         })
     }
 </script>
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

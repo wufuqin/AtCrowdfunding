@@ -4,9 +4,11 @@ import com.atguigu.atcrowdfunding.bean.Member;
 import com.atguigu.atcrowdfunding.exception.LoginFailException;
 import com.atguigu.atcrowdfunding.potal.dao.MemberMapper;
 import com.atguigu.atcrowdfunding.potal.service.MemberService;
+import com.atguigu.atcrowdfunding.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -78,6 +80,80 @@ public class MemberServiceImpl implements MemberService {
     public int updateMember(Member member) {
         memberMapper.updateByPrimaryKey(member);
         return 0;
+    }
+
+    //调用service层查询方法，返回一个分页数据对象
+    @Override
+    public Page queryMemberPage(Integer pageno, Integer pagesize) {
+        //创建一个分页对象，将查询的对应分页信息传入
+        Page page = new Page(pageno, pagesize);
+
+        //获取索引
+        Integer startIndex = page.getStartIndex();
+
+        //获取查询出来的分页数据
+        List datas = memberMapper.queryMemberList(startIndex,pagesize);
+
+        //设置分页数据到Page分页对象中
+        page.setDatas(datas);
+
+        //查询总的记录条数
+        Integer totalsize = memberMapper.queryMemberCount();
+
+        //设置总记录数到Page分页对象中
+        page.setTotalsize(totalsize);
+        page.setTotalno(totalsize);
+
+        return page;
+    }
+
+    //调用service层查询方法，返回一个分页数据对象
+    @Override
+    public Page queryMemberPage(HashMap<String, Object> paramMap) {
+        //创建一个分页对象，将查询的对应分页信息传入
+        Page page = new Page((Integer) paramMap.get("pageno"), (Integer) paramMap.get("pagesize"));
+
+        //获取索引
+        Integer startIndex = page.getStartIndex();
+        //将索引信息存入map集合
+        paramMap.put("startIndex",startIndex);
+
+        //获取查询出来的分页数据
+        List datas = memberMapper.queryMemberListLike(paramMap);
+
+        //设置分页数据到Page分页对象中
+        page.setDatas(datas);
+
+        //查询总的记录条数
+        Integer totalsize = memberMapper.queryMemberCountLike(paramMap);
+
+        //设置总记录数到Page分页对象中
+        page.setTotalsize(totalsize);
+        page.setTotalno(totalsize);
+
+        return page;
+    }
+
+    //删除会员
+    @Override
+    public int deleteMember(Integer id) {
+        return memberMapper.deleteByPrimaryKey(id);
+    }
+
+    //批量删除会员
+    @Override
+    public int deleteBatchMember(Integer[] ids) {
+        int totalCount = 0;
+        //计算实际删除的记录数
+        for (Integer id : ids) {
+            memberMapper.deleteByPrimaryKey(id);
+            totalCount += 1;
+        }
+        //实际删除记录数与计划删除记录数比较
+        if (totalCount != ids.length){
+            throw new  RuntimeException("批量删除数据失败");
+        }
+        return totalCount;
     }
 
 

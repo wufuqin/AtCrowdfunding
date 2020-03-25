@@ -107,7 +107,7 @@
                 type : "POST",
                 url  : "${APP_PATH}/member/updateAcctType.do",  //更新账户的类型
                 data : {
-                    acctType : acctType
+                    "acctType" : acctType
                 },
                 beforeSend : function () {
                     loadingIndex = layer.msg('账户类型更新中...', {icon: 16});

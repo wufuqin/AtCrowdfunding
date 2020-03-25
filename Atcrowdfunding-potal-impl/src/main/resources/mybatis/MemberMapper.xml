@@ -122,6 +122,38 @@
         WHERE t_member_cert.memberid = #{memberid}
     </select>
 
+    <!-- 查询分页数据 -->
+    <select id="queryMemberList" resultMap="BaseResultMap">
+		select id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype , tel
+		from t_member
+		limit #{startIndex},#{pagesize}
+	</select>
+
+    <!-- 查询总的记录条数 -->
+    <select id="queryMemberCount"  resultType="int">
+		select count(*)
+		from t_member
+	</select>
+
+    <!--查询分页数据,避免sql注入采用 concat进行拼串-->
+    <select id="queryMemberListLike" resultMap="BaseResultMap">
+        select id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype , tel
+        from t_member
+        <where>
+            <if test="queryText != null">loginacct like concat("%",#{queryText},"%")</if>
+        </where>
+        limit #{startIndex},#{pagesize}
+    </select>
+
+    <!-- 查询总的记录条数 -->
+    <select id="queryMemberCountLike"  resultType="int">
+        select count(*)
+        from t_member
+        <where>
+            <if test="queryText != null">loginacct like concat("%",#{queryText},"%")</if>
+        </where>
+    </select>
+
 
 
 

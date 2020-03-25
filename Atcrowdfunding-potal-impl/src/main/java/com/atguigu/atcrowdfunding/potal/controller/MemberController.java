@@ -12,6 +12,7 @@ import com.atguigu.atcrowdfunding.potal.service.TicketService;
 import com.atguigu.atcrowdfunding.util.AjaxResult;
 import com.atguigu.atcrowdfunding.util.Const;
 import com.atguigu.atcrowdfunding.util.MD5Util;
+import com.atguigu.atcrowdfunding.util.Page;
 import com.atguigu.atcrowdfunding.vo.Data;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
@@ -22,6 +23,7 @@ import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -332,7 +334,97 @@ public class MemberController {
         return result;
     }
 
+    //后台管理员去到管理员会员信息页面
+    @RequestMapping("/memberIndex")
+    public String memberIndex(){
+        return "member/memberIndex";
+    }
+
+    //查询数据
+    @ResponseBody
+    @RequestMapping("doMemberIndex")
+    public Object doMemberIndex(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "5") Integer pagesize){
+        //创建一个用于存储查询得到的数据集对象
+        AjaxResult result = new AjaxResult();
+        try {
+            //调用service层查询方法，返回一个分页数据对象
+            Page page = memberService.queryMemberPage(pageno, pagesize);
+            //设置查询状态
+            result.setSuccess(true);
+            //存储查询到的数据
+            result.setPage(page);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("查询数据失败...");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    //模糊查询
+    @ResponseBody
+    @RequestMapping("doMemberIndexLike")
+    public Object doMemberIndexLike(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "8") Integer pagesize, String queryText){
+
+        //创建一个用于存储查询得到的数据集对象
+        AjaxResult result = new AjaxResult();
+        try {
+            //创建一个map集合
+            HashMap<String, Object> paramMap = new HashMap<String, Object>();
+            //将查询条件存入map集合
+            paramMap.put("pageno",pageno);
+            paramMap.put("pagesize",pagesize);
+            paramMap.put("queryText",queryText);
+
+            //调用service层查询方法，返回一个分页数据对象
+            Page page = memberService.queryMemberPage(paramMap);
+            //设置查询状态
+            result.setSuccess(true);
+            //存储查询到的数据
+            result.setPage(page);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("查询数据失败...");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    //删除单条数据
+    @ResponseBody
+    @RequestMapping("/doDelete")
+    public Object doDelete(Integer id){
+        //用来封装ajax请求结果
+        AjaxResult result = new AjaxResult();
+        try {
+            //调用业务层方法,返回一个影响数据库行数的int数值
+            int count = memberService.deleteMember(id);
+            result.setSuccess(true);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("删除用户数据失败");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    //批量删除会员
+    @ResponseBody
+    @RequestMapping("/doDeleteBatch")
+    public Object doDeleteBatch(Integer[] id){
+        AjaxResult result = new AjaxResult();
+        try {
+            int count = memberService.deleteBatchMember(id);
+            result.setSuccess(count == id.length);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("删除数据失败");
+            e.printStackTrace();
+        }
+        return result;
+    }
 }
+
 
 
 

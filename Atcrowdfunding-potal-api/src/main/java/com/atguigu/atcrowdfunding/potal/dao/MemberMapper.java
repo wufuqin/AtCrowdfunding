@@ -1,8 +1,10 @@
 package com.atguigu.atcrowdfunding.potal.dao;
 
 import com.atguigu.atcrowdfunding.bean.Member;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,6 +49,18 @@ public interface MemberMapper {
 
     //查询会员资质信息
     List<Map<String, Object>> queryCertByMemberId(Integer memberid);
+
+    //获取查询出来的分页数据
+    List queryMemberList(@Param("startIndex") Integer startIndex, @Param("pagesize") Integer pagesize);
+
+    //查询总的记录条数
+    Integer queryMemberCount();
+
+    //获取查询出来的分页数据
+    List queryMemberListLike(HashMap<String, Object> paramMap);
+
+    //查询总的记录条数
+    Integer queryMemberCountLike(HashMap<String, Object> paramMap);
 }
 
 

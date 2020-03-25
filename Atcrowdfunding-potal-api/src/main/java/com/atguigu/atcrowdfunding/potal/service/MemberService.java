@@ -1,7 +1,9 @@
 package com.atguigu.atcrowdfunding.potal.service;
 
 import com.atguigu.atcrowdfunding.bean.Member;
+import com.atguigu.atcrowdfunding.util.Page;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +38,18 @@ public interface MemberService {
 
     //修改会员信息
     int updateMember(Member member);
+
+    //调用service层查询方法，返回一个分页数据对象
+    Page queryMemberPage(Integer pageno, Integer pagesize);
+
+    //调用service层查询方法，返回一个分页数据对象
+    Page queryMemberPage(HashMap<String, Object> paramMap);
+
+    //删除会员
+    int deleteMember(Integer id);
+
+    //批量删除会员
+    int deleteBatchMember(Integer[] id);
 }
 
 
