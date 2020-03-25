@@ -234,7 +234,6 @@ public class MemberController {
             variables.put("passListener", new PassListener());
             variables.put("refuseListener", new RefuseListener());
 
-
             //ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("auth");
             ProcessInstance processInstance = runtimeService.startProcessInstanceById(processDefinition.getId(), variables);
 

@@ -17,19 +17,20 @@ public class TestEmail {
     public void test01() throws Exception {
         SimpleEmail email = new SimpleEmail();
         //设置主机名，远程服务器的主机名
-        email.setHostName("smtp.163.com");
+        email.setHostName("smtp.qq.com");
         //设置端口号
         email.setSmtpPort(25);
+        //设置编码格式
         //设置登录服务器的账号和授权码
-        email.setAuthentication("18377548732@163.com","CBTWLFAJGUXADEUA");
+        email.setAuthentication("1820191171@qq.com","htoclnshpfvhcfdc");
         //发送到那个邮箱
-        email.addTo("1820191171@qq.com");
+        email.addTo("18377548732@163.com");
         //设置发送人邮箱
-        email.setFrom("18377548732@163.com");
+        email.setFrom("1820191171@qq.com");
         //设置邮箱的主题
         email.setSubject("试试看");
         //设置邮箱内容
-        email.setMsg("1820191171@qq.com");
+        email.setMsg("试试看");
         //发送邮件
         email.send();
     }

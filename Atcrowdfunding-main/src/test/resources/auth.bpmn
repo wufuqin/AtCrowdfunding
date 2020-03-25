@@ -8,16 +8,16 @@
           <activiti:expression>${toEmail}</activiti:expression>
         </activiti:field>
         <activiti:field name="from">
-          <activiti:string><![CDATA[admin@wufuqin.com]]></activiti:string>
+          <activiti:string><![CDATA[1820191171@qq.com]]></activiti:string>
         </activiti:field>
         <activiti:field name="subject">
-          <activiti:string><![CDATA[实名认证验证码]]></activiti:string>
+          <activiti:string><![CDATA[验证码]]></activiti:string>
         </activiti:field>
         <activiti:field name="charset">
           <activiti:string><![CDATA[UTF-8]]></activiti:string>
         </activiti:field>
         <activiti:field name="html">
-          <activiti:expression>实名认证验证码:${authcode}</activiti:expression>
+          <activiti:expression>验证码:${authcode}</activiti:expression>
         </activiti:field>
       </extensionElements>
     </serviceTask>
