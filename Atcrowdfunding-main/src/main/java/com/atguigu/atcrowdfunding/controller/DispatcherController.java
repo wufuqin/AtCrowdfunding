@@ -11,6 +11,7 @@ import com.atguigu.atcrowdfunding.bean.Permission;
 import com.atguigu.atcrowdfunding.potal.service.MemberService;
 import com.atguigu.atcrowdfunding.util.AjaxResult;
 import com.atguigu.atcrowdfunding.util.MD5Util;
+import com.atguigu.atcrowdfunding.util.SendEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -125,12 +126,6 @@ public class DispatcherController {
         return "main";
     }
 
-    //去到忘记密码页面
-    @RequestMapping("/forget")
-    public String forget(){
-        return "forget/forget";
-    }
-
     //去到前台页面
     @RequestMapping("/member")
     public String member(){
@@ -195,5 +190,49 @@ public class DispatcherController {
         }
         return result;
     }
+
+    //去到忘记密码页面
+    @RequestMapping("/forget")
+    public String forget(){
+        return "forget/forgetPassword";
+    }
+
+    //重置密码
+    @ResponseBody
+    @RequestMapping("/restPassword")
+    public Object restPassword(String email, String checkCode, HttpSession session ){
+        AjaxResult result = new AjaxResult();
+        try {
+            //从session域中获取程序生成的验证码
+            String checkCode_server = (String) session.getAttribute("CHECKCODE_SERVER");
+            //销毁验证码，确保验证码一次性
+            session.removeAttribute("CHECKCODE_SERVER");
+            //判断用户输入的验证码和实际生成的验证码是否一致，不区分大小写
+            if(!checkCode_server.equalsIgnoreCase(checkCode)){
+                //验证码不正确(抛出异常信息)
+                result.setMessage("验证码错误！");
+                result.setSuccess(false);
+                return result;
+            }
+            //发送邮件
+            SendEmail.sendEmial(email,"重置密码","重置链接：<a href=\"https://www.baidu.com\">重置密码</a>");
+            result.setSuccess(true);
+        } catch (Exception e) {
+            result.setMessage("邮件发送失败");
+            e.printStackTrace();
+            result.setSuccess(false);
+
+        }
+        System.out.println(result.getSuccess());
+        System.out.println(result.getMessage());
+        return result;
+    }
+
+    //跳转到自动跳转页面
+    @RequestMapping("/time")
+    public String time(){
+        return "forget/time";
+    }
+
 
 }

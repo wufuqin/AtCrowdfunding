@@ -14,9 +14,6 @@
     <link rel="stylesheet" href="${APP_PATH}/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${APP_PATH}/css/font-awesome.min.css">
     <link rel="stylesheet" href="${APP_PATH}/css/login.css">
-    <style>
-
-    </style>
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -65,14 +62,20 @@
             </select>
         </div>
         <div class="checkbox">
-            <label>
+            <%--<label>
                 <a href="${APP_PATH}/forget.htm">忘记密码</a>
-            </label>
+            </label>--%>
             <label style="float:right">
                 <a href="${APP_PATH}/login.htm">我有账号</a>
             </label>
         </div>
-        <a class="btn btn-lg btn-success btn-block" onclick="doRge()" > 注册</a>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <a type="button" class="btn btn-info form-control" style="width: 136px" onclick="doRge()">注册</a>
+            </div>
+            <a type="button" class="btn btn-info form-control" style="width: 150px" href="${APP_PATH}/index.htm"> 返回</a>
+        </div>
     </form>
 </div>
 <script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>

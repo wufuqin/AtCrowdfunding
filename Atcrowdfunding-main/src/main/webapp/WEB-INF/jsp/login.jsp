@@ -25,7 +25,7 @@
     </div>
 </nav>
 <div class="container">
-    <form id="loginForm" action="${APP_PATH }/doLogin.do" method="POST" class="form-signin" role="form">
+    <form id="loginForm" class="form-signin" role="form">
         <h2 class="form-signin-heading"><i class="glyphicon glyphicon-log-in"></i> 用户登录</h2>
         <div class="form-group has-success has-feedback">
             <input type="text" class="form-control" id="floginacct" name="loginacct" value="superadmin" placeholder="请输入登录账号" autofocus>
@@ -44,7 +44,6 @@
                 <a href="javascript:refreshCode();">
                     <img src="${APP_PATH}/CheckCodeServlet" title="看不清" id="vcode"/>
                 </a>
-                <%--<button type="button" class="btn btn-success btn-lg"><i class="glyphicon glyphicon-envelope"></i> 获取验证码</button>--%>
             </div>
         </div>
         <div class="form-group has-success has-feedback">
@@ -67,7 +66,12 @@
                 <a href="${APP_PATH}/reg.htm">我要注册</a>
             </label>
         </div>
-        <a class="btn btn-lg btn-success btn-block" onclick="doLogin()" > 登录</a>
+        <div class="row">
+            <div class="col-md-6">
+                <a type="button" class="btn btn-info form-control" style="width: 136px" onclick="doLogin()">登录</a>
+            </div>
+            <a type="button" class="btn btn-info form-control" style="width: 150px" href="${APP_PATH}/index.htm"> 返回</a>
+        </div>
     </form>
 </div>
 <script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>
@@ -82,8 +86,6 @@
         var userpswd = $("#fuserpswd");
         var checkCode = $("#fcheckCode");
         var type = $("#ftype");
-        //alert(type);
-        //alert(type.val());
 
         //对用户名数据进行校验
         if ($.trim(loginacct.val()) == "") {
