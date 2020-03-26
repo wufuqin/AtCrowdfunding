@@ -134,7 +134,7 @@
     });
 </script>
 
-<%-- 异步查询用户数据 --%>
+<%-- 异步查询数据 --%>
 <script>
     function queryPageProcess(pageIndex) {
         $.ajax({
@@ -156,7 +156,7 @@
                     var data = page.datas;
                     /*判断返回的集合中是否有数据*/
                     if (data.length == 0){
-                        layer.msg("目前没有查询到流程信息",{time:2000, icon:6, shift:6});
+                        layer.msg("目前没有查询到流程信息",{ icon:6, shift:6});
                         return false;
                     }
                     var content = '';
@@ -252,7 +252,7 @@
                     $("#Pagination").pagination(page.totalsize, {
                         num_edge_entries: 2, //边缘页数
                         num_display_entries: 4, //主体页数
-                        callback: queryPageUserLike, //当前函数
+                        callback: queryPageProcessLike(), //当前函数
                         items_per_page:8, //每页显示多少条
                         current_page :(page.pageno-1), //当前页
                         prev_text : "上一页",
@@ -273,7 +273,7 @@
 
 <%--上流程定义文件--%>
 <script>
-    $("#uploadPrcDefBtn").click(function(){  //click()函数增加回调函数这个参数,表示绑定事件.
+   $("#uploadPrcDefBtn").click(function(){  //click()函数增加回调函数这个参数,表示绑定事件.
 
         $("#processDefFile").click(); //click()函数没有参数,表示触发单击事件.
 
@@ -284,7 +284,7 @@
         var options = {
             url:"${APP_PATH}/process/deploy.do",
             beforeSubmit : function(){
-                loadingIndex = layer.msg('数据正在部署中', {icon: 6});
+                loadingIndex = layer.msg('数据正在部署中', {icon: 16});
                 return true ; //必须返回true,否则,请求终止.
             },
             success : function(result){
@@ -300,8 +300,9 @@
 
         $("#deployForm").ajaxSubmit(options); //异步提交
         return ;
-
     });
+
+
 </script>
 
 <%--删除流程定义--%>

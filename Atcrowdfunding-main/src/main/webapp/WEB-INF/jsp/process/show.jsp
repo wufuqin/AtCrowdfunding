@@ -58,13 +58,11 @@
 					<div class="panel-heading">
 						<img id="show" alt="流程定义图片" src="${APP_PATH }/jquery/layer/skin/default/loading-1.gif">
 				    </div>
-          			
 			  </div>
+            <a href="${APP_PATH}/process/index.htm" type="button" class="btn btn-primary"><i class="glyphicon"></i> 返回</a>
 			</div>
         </div>
       </div>
-
-
 <script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${APP_PATH}/script/docs.min.js"></script>
@@ -72,7 +70,6 @@
 <script src="${APP_PATH}/jquery/pagination/jquery.pagination.js"></script>
 <script src="${APP_PATH}/jquery/jquery-form/jquery-form.min.js"></script>
 <script src="${APP_PATH}/script/menu.js"></script>
-	
 <script type="text/javascript">
     $(function () {
         $(".list-group-item").click(function(){
@@ -86,7 +83,6 @@
             }
         });
         showMenu();
-
         $("#show").attr("src","${APP_PATH}/process/showProcessPNG.do?id=${param.id}");
     });
 </script>

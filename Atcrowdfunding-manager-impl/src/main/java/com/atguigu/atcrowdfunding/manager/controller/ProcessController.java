@@ -195,12 +195,20 @@ public class ProcessController {
     @ResponseBody
     @RequestMapping("/showProcessPNG")
     public void showProcessPNG(String id, HttpServletResponse response) throws IOException {	 //流程定义id
-        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(id).singleResult();
+        /*ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(id).singleResult();
         //得到流程定义图
         InputStream resourceAsStream = repositoryService.getResourceAsStream(processDefinition.getDeploymentId(), processDefinition.getDiagramResourceName());
         //以流的形式返回
         ServletOutputStream outputStream = response.getOutputStream();
         //进行复制
+        IOUtils.copy(resourceAsStream, outputStream);*/
+
+        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(id).singleResult();
+
+        InputStream resourceAsStream = repositoryService.getResourceAsStream(processDefinition.getDeploymentId(), processDefinition.getDiagramResourceName());
+
+        ServletOutputStream outputStream = response.getOutputStream();
+
         IOUtils.copy(resourceAsStream, outputStream);
     }
 

@@ -3,7 +3,7 @@
     后台页面的头部
         抽取出来，在后面需要的页面中直接调用即可
 --%>
-<li style="padding-top:8px; padding-right: 20px">
+<li style="padding-top:8px; padding-right: 40px">
     <div class="btn-group">
         <button type="button" class="btn btn-default btn-success dropdown-toggle" data-toggle="dropdown">
             <i class="glyphicon glyphicon-user"></i> ${sessionScope.user.username} <span class="caret"></span>

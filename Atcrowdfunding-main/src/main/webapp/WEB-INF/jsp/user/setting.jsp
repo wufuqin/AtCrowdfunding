@@ -68,16 +68,18 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="fusername">用户密码</label>
-                            <input type="password" class="form-control" value="${userpswd}" id="fuserpswd" placeholder="请输入用户密码">
+                            <label for="fuserpswd" >用户密码</label>
+                            <input disabled type="password" class="form-control" value="${userpswd}" id="fuserpswd" placeholder="请输入用户密码">
                         </div>
+
+
 
                         <div class="form-group">
                             <label for="femail">邮箱地址</label>
                             <input type="email" class="form-control" value="${email}" id="femail" placeholder="请输入邮箱地址">
                         </div>
                         <div class="form-group">
-                            <label for="femail">注册时间</label>
+                            <label for="fcreatetime">注册时间</label>
                             <input disabled type="text" value="${createtime}" class="form-control" id="fcreatetime">
                         </div>
                         <button onclick="updateSetting()" type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 修改</button>
