@@ -234,5 +234,10 @@ public class DispatcherController {
         return "forget/time";
     }
 
+    //注册成功，自动跳转页面
+    @RequestMapping("/regTime")
+    public String regTime(){
+        return "regTime";
+    }
 
 }

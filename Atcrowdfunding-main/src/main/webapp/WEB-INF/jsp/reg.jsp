@@ -62,9 +62,6 @@
             </select>
         </div>
         <div class="checkbox">
-            <%--<label>
-                <a href="${APP_PATH}/forget.htm">忘记密码</a>
-            </label>--%>
             <label style="float:right">
                 <a href="${APP_PATH}/login.htm">我有账号</a>
             </label>
@@ -147,8 +144,7 @@
             success : function (result) {
                 if (result.success){
                     layer.close(loadingIndex);
-                    layer.msg("注册成功", {time:2000, icon:6, shift:6});
-                    setTimeout(function () {{window.location.href = "${APP_PATH}/index.htm"}},2000);
+                    window.location.href = "${APP_PATH}/regTime.htm";
                 }else {
                     layer.msg(result.message, {time:2000, icon:5, shift:6});
                 }
@@ -163,7 +159,7 @@
 <%--获取短信验证码--%>
 <script>
     var code = document.getElementById("getCode");
-    var flag = 3;
+    var flag = 60;
     code.onclick = function () {
 
         //获取用户输入的注册信息
@@ -202,7 +198,7 @@
         }
 
         $("#getCode").prop("class","btn btn-lg btn-success");
-        if (flag < 3) {
+        if (flag < 60) {
             return;
         }
 
@@ -226,7 +222,7 @@
             code.innerHTML = "重新获取验证码";
             $("#getCode").removeClass();
             $("#getCode").prop("class","btn btn-lg form-control");
-            flag = 3;
+            flag = 60;
         } else {
             setTimeout("timer()", 1000);
         }
