@@ -1,10 +1,12 @@
 package com.atguigu.atcrowdfunding.manager.controller;
 
+import com.atguigu.atcrowdfunding.bean.Member;
 import com.atguigu.atcrowdfunding.bean.Role;
 import com.atguigu.atcrowdfunding.bean.User;
 import com.atguigu.atcrowdfunding.manager.service.UserService;
 import com.atguigu.atcrowdfunding.util.AjaxResult;
 import com.atguigu.atcrowdfunding.util.Const;
+import com.atguigu.atcrowdfunding.util.MD5Util;
 import com.atguigu.atcrowdfunding.util.Page;
 import com.atguigu.atcrowdfunding.vo.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -276,10 +278,19 @@ public class UserController {
     //在用户个人设置修改用户个人信息
     @ResponseBody
     @RequestMapping("/updateSetting")
-    public Object updateSetting(User user, HttpSession session){
+    public Object updateSetting(User user, String userpswd, HttpSession session){
         AjaxResult result = new AjaxResult();
         try {
-            int count = userService.updateUser(user);
+            //根据传进来的用户id查询原来的密码
+            User userPassword = userService.getUserById(user.getId());
+            System.out.println(userPassword.toString());
+            //比较数据库里面的密码与页面传进来的密码是否一致
+            if (!userpswd.equals(userPassword.getUserpswd())){
+                //不一致
+                user.setUserpswd(MD5Util.digest(userpswd));
+            }
+            //根据id修改用户
+            int count = userService.updateUserById(user);
             result.setSuccess(count == 1);
             //销毁session中用户的信息重新设置
             session.removeAttribute(Const.LOGIN_USER);

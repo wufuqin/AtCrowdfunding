@@ -188,6 +188,12 @@ public class UserServiceImpl implements UserService {
         return userMapper.queryPermissionByUserId(id);
     }
 
+    //    //根据id修改用户
+	@Override
+	public int updateUserById(User user) {
+		return userMapper.updateUserById(user);
+	}
+
 }
 
 

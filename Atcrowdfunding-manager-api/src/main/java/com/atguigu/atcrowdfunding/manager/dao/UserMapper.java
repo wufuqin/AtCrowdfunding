@@ -33,6 +33,9 @@ public interface UserMapper {
     //根据id修改
     int updateByPrimaryKey(User record);
 
+    //根据id修改（可修改密码）
+    int updateUserById(User user);
+
     //查询用户信息,校验登录信息
     User queryUserLogin(Map<String, Object> paramMap);
 

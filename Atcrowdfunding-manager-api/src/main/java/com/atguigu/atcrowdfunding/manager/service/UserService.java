@@ -53,4 +53,7 @@ public interface UserService {
 
     //查询用户拥有的权限
     List<Permission> queryPermissionByUserId(Integer id);
+
+    //根据id修改用户
+    int updateUserById(User user);
 }

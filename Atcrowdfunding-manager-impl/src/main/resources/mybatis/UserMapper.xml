@@ -44,6 +44,18 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 
+	<!--根据id修改（可修改密码）-->
+	<update id="updateUserById" parameterType="com.atguigu.atcrowdfunding.bean.User">
+		update t_user
+		set
+		loginacct = #{loginacct,jdbcType=VARCHAR},
+		userpswd = #{userpswd,jdbcType=CHAR},
+		username = #{username,jdbcType=VARCHAR},
+		email = #{email,jdbcType=VARCHAR},
+		createtime = #{createtime,jdbcType=CHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
 	<!-- 根据id查询 -->
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">

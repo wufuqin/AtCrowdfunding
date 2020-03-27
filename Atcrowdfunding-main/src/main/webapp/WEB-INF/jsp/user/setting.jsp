@@ -69,11 +69,8 @@
 
                         <div class="form-group">
                             <label for="fuserpswd" >用户密码</label>
-                            <input disabled type="password" class="form-control" value="${userpswd}" id="fuserpswd" placeholder="请输入用户密码">
+                            <input type="password" class="form-control" value="${userpswd}" id="fuserpswd" placeholder="请输入用户密码">
                         </div>
-
-
-
                         <div class="form-group">
                             <label for="femail">邮箱地址</label>
                             <input type="email" class="form-control" value="${email}" id="femail" placeholder="请输入邮箱地址">
