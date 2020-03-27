@@ -37,7 +37,7 @@ public interface MemberService {
     void saveMember(Member member);
 
     //修改会员信息
-    int updateMember(Member member);
+    void updateMember(Member member);
 
     //调用service层查询方法，返回一个分页数据对象
     Page queryMemberPage(Integer pageno, Integer pagesize);
@@ -56,6 +56,10 @@ public interface MemberService {
 
     //根据id修改会员信息
     void updateMemberById(Member member);
+
+    //根据账号查询会员信息
+    Member queryMemberByAcct(String loginacct);
+
 }
 
 

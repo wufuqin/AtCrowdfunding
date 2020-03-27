@@ -15,7 +15,7 @@ public class SendEmail {
         }
     }
 
-    public static void sendEmial(String addTo, String subject, String msg) throws Exception {
+    public static void sendEmial(String addTo, String subject, String url) throws Exception {
         SimpleEmail email = new SimpleEmail();
         //设置主机名，远程服务器的主机名
         email.setHostName("smtp.qq.com");
@@ -33,7 +33,9 @@ public class SendEmail {
         //设置邮箱的主题
         email.setSubject(subject);
         //设置邮箱内容
-        email.setMsg(msg);
+        //email.setMsg(msg);
+        email.setContent(url,"text/html;charset=utf-8");
+
         //发送邮件
         email.send();
     }

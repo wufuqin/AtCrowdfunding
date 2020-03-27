@@ -154,28 +154,11 @@
         </where>
     </select>
 
+    <!--根据账号查询会员信息-->
+    <select id="queryMemberByAcct" resultMap="BaseResultMap" parameterType="string" >
+        select id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype, tel
+        from t_member
+        where loginacct = #{loginacct}
+    </select>
 
-
-
-
-
-
-  
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

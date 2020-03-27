@@ -6,22 +6,11 @@ import org.apache.commons.mail.SimpleEmail;
 import org.junit.Test;
 
 
-*/
-/**
- * 测试发送邮件
- *//*
-
+//测试发送邮件
 
 public class TestEmail {
 
-
-    */
-/**
-     * 测试commons-email发送和收取邮件
-     *      网易发送到QQ
-     *//*
-
-
+    // 测试commons-email发送和收取邮件  网易发送到QQ
     @Test
     public void test01() throws Exception {
         SimpleEmail email = new SimpleEmail();
@@ -40,19 +29,13 @@ public class TestEmail {
         //设置邮箱的主题
         email.setSubject("试试看");
         //设置邮箱内容
-        email.setMsg("试试看");
+        //email.setMsg("试试看");
+        email.setContent("<a href='https://www.baidu.com'>百度</a>","text/html;charset=utf-8");
         //发送邮件
         email.send();
     }
 
-    */
-/**
-     * 测试commons-email发送和收取邮件
-     *      使用本地james服务器发送到网易邮箱和QQ
-     *      目前失败：没有对james进行配置
-     *//*
-
-
+    //测试commons-email发送和收取邮件,使用本地james服务器发送到网易邮箱和QQ
     @Test
     public void test02() throws Exception {
         SimpleEmail email = new SimpleEmail();

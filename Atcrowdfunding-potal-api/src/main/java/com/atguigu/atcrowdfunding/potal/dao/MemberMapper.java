@@ -61,6 +61,10 @@ public interface MemberMapper {
 
     //查询总的记录条数
     Integer queryMemberCountLike(HashMap<String, Object> paramMap);
+
+    //根据账号查询会员信息
+    Member queryMemberByAcct(String loginacct);
+
 }
 
 

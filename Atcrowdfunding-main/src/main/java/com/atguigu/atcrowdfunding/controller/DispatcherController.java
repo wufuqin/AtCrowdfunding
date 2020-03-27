@@ -197,7 +197,7 @@ public class DispatcherController {
         return "forget/forgetPassword";
     }
 
-    //重置密码
+    //发送重置密码邮件
     @ResponseBody
     @RequestMapping("/restPassword")
     public Object restPassword(String email, String checkCode, HttpSession session ){
@@ -214,8 +214,9 @@ public class DispatcherController {
                 result.setSuccess(false);
                 return result;
             }
+
             //发送邮件
-            SendEmail.sendEmial(email,"重置密码","重置链接：<a href=\"https://www.baidu.com\">重置密码</a>");
+            SendEmail.sendEmial(email,"重置密码","<a href='http://localhost:8080/toRestPassword.htm'>重置密码</a>");
             result.setSuccess(true);
         } catch (Exception e) {
             result.setMessage("邮件发送失败");
@@ -223,8 +224,6 @@ public class DispatcherController {
             result.setSuccess(false);
 
         }
-        System.out.println(result.getSuccess());
-        System.out.println(result.getMessage());
         return result;
     }
 
@@ -234,10 +233,89 @@ public class DispatcherController {
         return "forget/time";
     }
 
+    //点击邮件里重置密码的连接，跳转到重置密码页面
+    @RequestMapping("/toRestPassword")
+    public String toRestPassword(){
+        return "forget/toRestPassword";
+    }
+
+    //完成重置密码功能
+    @ResponseBody
+    @RequestMapping("/doRestPassword")
+    public Object doRestPassword(String loginacct, String userpswd, String fuserpswd, String checkCode, HttpSession session){
+        AjaxResult result = new AjaxResult();
+        try {
+            //根据账号查询会员信息
+            Member member = memberService.queryMemberByAcct(loginacct);
+            //判断用户两次输入的密码是否一致
+            if (!userpswd.equals(fuserpswd)){
+                result.setMessage("两次输入的密码不一致");
+                result.setSuccess(false);
+                return result;
+            }
+            //从session域中获取程序生成的验证码
+            String checkCode_server = (String) session.getAttribute("CHECKCODE_SERVER");
+            //销毁验证码，确保验证码一次性
+            session.removeAttribute("CHECKCODE_SERVER");
+            //判断用户输入的验证码和实际生成的验证码是否一致，不区分大小写
+            if(!checkCode_server.equalsIgnoreCase(checkCode)){
+                //验证码不正确(抛出异常信息)
+                result.setMessage("验证码错误！");
+                result.setSuccess(false);
+                return result;
+            }
+            //设置新密码
+            member.setUserpswd(MD5Util.digest(userpswd));
+            //根据id修改密码
+            memberService.updateMemberById(member);
+            result.setSuccess(true);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("重置密码失败");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    //重置密码成功，自动跳转
+    @RequestMapping("/restTime")
+    public String restTime(){
+        return "forget/restTime";
+    }
+
     //注册成功，自动跳转页面
     @RequestMapping("/regTime")
     public String regTime(){
         return "regTime";
     }
 
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

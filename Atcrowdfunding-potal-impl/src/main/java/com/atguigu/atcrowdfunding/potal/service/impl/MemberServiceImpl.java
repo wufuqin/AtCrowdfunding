@@ -77,9 +77,8 @@ public class MemberServiceImpl implements MemberService {
 
     //修改会员信息
     @Override
-    public int updateMember(Member member) {
+    public void updateMember(Member member) {
         memberMapper.updateByPrimaryKey(member);
-        return 0;
     }
 
     //调用service层查询方法，返回一个分页数据对象
@@ -167,6 +166,13 @@ public class MemberServiceImpl implements MemberService {
     public void updateMemberById(Member member) {
         memberMapper.updateByPrimaryKey(member);
     }
+
+    //根据账号查询会员信息
+    @Override
+    public Member queryMemberByAcct(String loginacct) {
+        return memberMapper.queryMemberByAcct(loginacct);
+    }
+
 
 
 }
