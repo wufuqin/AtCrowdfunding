@@ -153,7 +153,7 @@
                         content+='<td class="text-center" >'+n.username+'</td>';
                         content+='<td class="text-center" >'+n.email+'</td>';
                         content+='<td class="text-center">';
-                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/member/update.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-pencil"></i>修改</button>';
+                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/member/updateMember.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-pencil"></i>修改</button>';
                         content+='<button type="button" onclick="deleteMemberBtn('+n.id+',\''+n.loginacct+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
                         content+='</td>';
                         content+='</tr>';
@@ -222,7 +222,7 @@
                         content+='<td class="text-center" >'+n.username+'</td>';
                         content+='<td class="text-center" >'+n.email+'</td>';
                         content+='<td class="text-center">';
-                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/member/update.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i>修改</button>';
+                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/member/updateMember.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i>修改</button>';
                         content+='<button type="button" onclick="deleteMemberBtn('+n.id+',\''+n.loginacct+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
                         content+='</td>';
                         content+='</tr>';

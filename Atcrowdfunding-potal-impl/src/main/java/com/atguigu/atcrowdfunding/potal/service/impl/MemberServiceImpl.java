@@ -156,6 +156,18 @@ public class MemberServiceImpl implements MemberService {
         return totalCount;
     }
 
+    //根据id查询会员信息
+    @Override
+    public Member queryMemberById(Integer id) {
+        return memberMapper.getMemberById(id);
+    }
+
+    //根据id修改会员信息
+    @Override
+    public void updateMemberById(Member member) {
+        memberMapper.updateByPrimaryKey(member);
+    }
+
 
 }
 

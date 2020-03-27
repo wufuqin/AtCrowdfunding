@@ -1,7 +1,5 @@
 package com.atguigu.atcrowdfunding.util;
 
-
-import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
 /**
@@ -11,7 +9,7 @@ public class SendEmail {
 
     public static void main(String[] args) {
         try {
-            SendEmail.sendEmial("18377548732@163.com","修改密码链接","重置链接：<a href=\"https://www.baidu.com\">重置密码</a>");
+            SendEmail.sendEmial("18377548732@163.com","修改密码链接","<a href='https://www.baidu.com'>重置密码</a>");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -21,8 +19,9 @@ public class SendEmail {
         SimpleEmail email = new SimpleEmail();
         //设置主机名，远程服务器的主机名
         email.setHostName("smtp.qq.com");
+        email.setSSLOnConnect(true);
         //设置端口号
-        email.setSmtpPort(25);
+        email.setSslSmtpPort("465");
         //设置编码格式
         email.setCharset("UTF-8");
         //设置登录服务器的账号和授权码

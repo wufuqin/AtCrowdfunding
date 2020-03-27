@@ -313,12 +313,18 @@ public class MemberController {
     public Object updateSetting(Member member, String userpswd, HttpSession session){
         AjaxResult result = new AjaxResult();
         try {
-            member.setUserpswd(MD5Util.digest(userpswd));
-            System.out.println(userpswd);
+            //根据传进来的会员id查询原来的密码
+            Member userPassword = memberService.getMemberById(member.getId());
+            //比较数据库里面的密码与页面传进来的密码是否一致
+            if (!userpswd.equals(userPassword.getUserpswd())){
+                //不一致
+                member.setUserpswd(MD5Util.digest(userpswd));
+            }
+
             Member loginMember = (Member) session.getAttribute(Const.LOGIN_MEMBER);
-            System.out.println(session.getAttribute(Const.LOGIN_MEMBER));
+
             member.setAccttype(loginMember.getAccttype());
-            System.out.println(loginMember.getAccttype());
+
             //修改会员信息
             memberService.updateMember(member);
             //销毁session中用户的信息重新设置
@@ -422,6 +428,41 @@ public class MemberController {
         }
         return result;
     }
+
+    //去到修改会员信息页面
+    @RequestMapping("/updateMember")
+    public String updateMember(Integer id, Map<String,Object> map){
+        //根据id查询会员信息
+        Member member = memberService.queryMemberById(id);
+        map.put("member",member);
+        return "member/update";
+    }
+
+    //完成后台管理员对会员信息功能
+    @ResponseBody
+    @RequestMapping("/doUpdate")
+    public Object doUpdate(Member member, String userpswd){
+        AjaxResult result = new AjaxResult();
+
+        try {
+            //根据传进来的会员id查询原来的密码
+            Member userPassword = memberService.getMemberById(member.getId());
+            //比较数据库里面的密码与页面传进来的密码是否一致
+            if (!userpswd.equals(userPassword.getUserpswd())){
+                //不一致
+                member.setUserpswd(MD5Util.digest(userpswd));
+            }
+            //一致,根据id修改会员信息
+            memberService.updateMemberById(member);
+            result.setSuccess(true);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("修改数据失败");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }
 
 

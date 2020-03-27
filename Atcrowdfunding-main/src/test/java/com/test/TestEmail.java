@@ -1,22 +1,26 @@
 /*
+
 package com.test;
 
-import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 import org.junit.Test;
+
 
 */
 /**
  * 测试发送邮件
  *//*
 
+
 public class TestEmail {
+
 
     */
 /**
      * 测试commons-email发送和收取邮件
      *      网易发送到QQ
      *//*
+
 
     @Test
     public void test01() throws Exception {
@@ -48,6 +52,7 @@ public class TestEmail {
      *      目前失败：没有对james进行配置
      *//*
 
+
     @Test
     public void test02() throws Exception {
         SimpleEmail email = new SimpleEmail();
@@ -70,31 +75,5 @@ public class TestEmail {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 */

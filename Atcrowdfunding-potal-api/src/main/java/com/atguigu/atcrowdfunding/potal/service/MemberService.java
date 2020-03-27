@@ -50,6 +50,12 @@ public interface MemberService {
 
     //批量删除会员
     int deleteBatchMember(Integer[] id);
+
+    //根据id查询会员信息
+    Member queryMemberById(Integer id);
+
+    //根据id修改会员信息
+    void updateMemberById(Member member);
 }
 
 
