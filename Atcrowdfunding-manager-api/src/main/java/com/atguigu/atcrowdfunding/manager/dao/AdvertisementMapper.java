@@ -39,4 +39,5 @@ public interface AdvertisementMapper {
 
     //查询总的记录条数
     Integer queryCountLike(HashMap<String, Object> paramMap);
+
 }

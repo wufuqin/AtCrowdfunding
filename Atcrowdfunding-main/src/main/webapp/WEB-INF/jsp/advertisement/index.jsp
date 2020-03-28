@@ -2,6 +2,7 @@
     广告管理首页面
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -171,7 +172,6 @@
                             content+="	<td class='text-center'>发布</td>";
                         }
                         content+='<td class="text-center">';
-                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/advertisement/assignRole.htm?id='+n.id+'\'" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i>查看广告</button>';
                         content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/advertisement/update.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-pencil"></i>修改</button>';
                         content+='<button type="button" onclick="doDelete('+n.id+',\''+n.name+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
                         content+='</td>';
@@ -248,7 +248,6 @@
                             content+="	<td class='text-center'>发布</td>";
                         }
                         content+='<td class="text-center">';
-                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/advertisement/assignRole.htm?id='+n.id+'\'" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i>查看广告</button>';
                         content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/advertisement/update.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-pencil"></i>修改</button>';
                         content+='<button type="button" onclick="doDelete('+n.id+',\''+n.name+'\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
                         content+='</td>';
@@ -377,6 +376,34 @@
     }
 </script>
 
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

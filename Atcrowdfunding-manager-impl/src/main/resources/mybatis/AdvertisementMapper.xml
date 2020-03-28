@@ -39,6 +39,11 @@
     set
       name = #{name,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR}
+
+      <where>
+          <!--<if test="queryText != null">loginacct like '%${queryText}%'</if>-->
+          <if test="iconpath != null">iconpath=#{iconpath,jdbcType=VARCHAR}</if>
+      </where>
     where id = #{id,jdbcType=INTEGER}
   </update>
 
@@ -88,7 +93,5 @@
       <if test="queryText != null">name like concat("%",#{queryText},"%")</if>
     </where>
   </select>
-
-
 
 </mapper>

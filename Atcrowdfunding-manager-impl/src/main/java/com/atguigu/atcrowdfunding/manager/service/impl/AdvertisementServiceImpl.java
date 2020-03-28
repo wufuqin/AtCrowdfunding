@@ -110,4 +110,5 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     public int updateAdvertisement(Advertisement advertisement) {
         return advertisementMapper.updateByPrimaryKey(advertisement);
     }
+
 }

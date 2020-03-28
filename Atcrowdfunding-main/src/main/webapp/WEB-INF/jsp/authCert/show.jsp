@@ -60,22 +60,22 @@
                     <div class="panel-body">
                         <form>
                             <div class="form-group">
-                                <label for="frealname">会员真实姓名: </label>
+                                <label >会员真实姓名: </label>
                                 ${member.realname }
                             </div>
                             <div class="form-group">
-                                <label for="fcardnum">会员身份证号: </label>
+                                <label>会员身份证号: </label>
                                 ${member.cardnum }
                             </div>
                             <div class="form-group">
-                                <label for="ftel">会员电话号: </label>
+                                <label>会员电话号: </label>
                                 ${member.tel }
                             </div>
 
                             <hr>
                             <c:forEach items="${certimgs }" var="map">
                                 <div class="form-group">
-                                    <label for="frealname">${map.name }</label><br>
+                                    <label>${map.name }</label><br>
                                     <img src="${APP_PATH }/picture/cert/${map.iconpath}">
                                 </div>
                             </c:forEach>

@@ -68,10 +68,15 @@
                             <label for="url">广告地址</label>
                             <input type="text" class="form-control" id="url" name="url" value="${advertisement.url}" placeholder="请输入广告地址">
                         </div>
-                        <%--<div class="form-group">
+                        <div class="form-group">
                             <label for="advertPicture">广告图片</label>
-                            <input type="file" class="form-control" id="advertPicture" name="advertPicture" value="目前回显文件失败" placeholder="请输入广告图片">
-                        </div>--%>
+                            <input type="file" class="form-control" id="advertPicture" name="advertPicture" value="${advertisement.iconpath}" placeholder="请输入广告图片">
+                        </div>
+                        <div class="form-group">
+                            <label>${advertisement.iconpath }</label><br>
+                            <img src="${APP_PATH }/picture/advertisement/${advertisement.iconpath}">
+                        </div>
+
                         <button  onclick="updateAdvertisement()" type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 修改</button>
                         <button  onclick="resetAdvertisementForm()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
                     </form>
@@ -129,6 +134,7 @@
         //获取添加的用户的信息
         var name = $("#name");
         var url = $("#url");
+        var advertPicture = $("#advertPicture");
 
 
         $.ajax({
@@ -136,6 +142,7 @@
             data : {
                 "name" : name.val(),
                 "url" : url.val(),
+                "advertPicture" : advertPicture.val(),
                 "id" : "${advertisement.id}"
             },
             url : "${APP_PATH}/advertisement/doUpdate.do",

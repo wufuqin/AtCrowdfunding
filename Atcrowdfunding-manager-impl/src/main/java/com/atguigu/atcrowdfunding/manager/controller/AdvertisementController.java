@@ -5,6 +5,7 @@ import com.atguigu.atcrowdfunding.bean.User;
 import com.atguigu.atcrowdfunding.manager.service.AdvertisementService;
 import com.atguigu.atcrowdfunding.util.AjaxResult;
 import com.atguigu.atcrowdfunding.util.Const;
+import com.atguigu.atcrowdfunding.util.CreateFileName;
 import com.atguigu.atcrowdfunding.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -140,7 +141,8 @@ public class AdvertisementController {
             MultipartFile mfile = mreq.getFile("advertPicture");  //创建一个文件对象
             String name = mfile.getOriginalFilename();// 获取上传的原始文件名  java.jpg
             String extname = name.substring(name.lastIndexOf(".")); //  截取文件名后缀 ： .jpg
-            String iconpath = UUID.randomUUID().toString()+extname; //生成随机问卷名 ： 232243343.jpg
+            //String firstPath = CreateFileName.createID();
+            String iconpath = UUID.randomUUID().toString() + extname; //生成随机文件名 ： 232243343.jpg
 
             ServletContext servletContext = session.getServletContext();
             String realpath = servletContext.getRealPath("/picture");  //得到存储文件的路径
@@ -150,7 +152,7 @@ public class AdvertisementController {
             User user = (User)session.getAttribute(Const.LOGIN_USER); //获取当前用户
             advertisement.setUserid(user.getId());  //获取当前用户id
             advertisement.setStatus("1");           //将当前的状态设置为未审核
-            advertisement.setIconpath(iconpath);    //设置广告图片名字
+            advertisement.setIconpath(iconpath);    //设置广告图片的名字
 
             //保存广告
             int count = advertisementService.insertAdvertisement(advertisement);
@@ -171,22 +173,71 @@ public class AdvertisementController {
         return "advertisement/update";
     }
 
-    //修改广告数据
+    //修改广告数据(目前不支持修改广告图片)
     @ResponseBody
     @RequestMapping("/doUpdate")
-    public Object doUpdate(Advertisement advertisement){
+    public Object doUpdate(Advertisement advertisement, String advertPicture, HttpSession session, HttpServletRequest request){
         //用来封装ajax请求结果
         AjaxResult result = new AjaxResult();
         try {
+            //从数据库中查询出原来广告图片名字
+            //判断是否更改了广告图片
+            if (!"".equals(advertPicture)){
+                MultipartHttpServletRequest mreq = (MultipartHttpServletRequest)request;
+
+                MultipartFile mfile = mreq.getFile("advertPicture");  //创建一个文件对象
+                String name = mfile.getOriginalFilename();// 获取上传的原始文件名  java.jpg
+                String extname = name.substring(name.lastIndexOf(".")); //  截取文件名后缀 ： .jpg
+                //String firstPath = CreateFileName.createID();
+                String iconpath = UUID.randomUUID().toString() + extname; //生成随机文件名 ： 232243343.jpg
+
+                ServletContext servletContext = session.getServletContext();
+                String realpath = servletContext.getRealPath("/picture");  //得到存储文件的路径
+
+                String path =realpath+ "\\advertisement\\"+iconpath;  //生成文件路径
+                mfile.transferTo(new File(path));      //将文件添加到对应路径下
+                User user = (User)session.getAttribute(Const.LOGIN_USER); //获取当前用户
+                advertisement.setUserid(user.getId());  //获取当前用户id
+                advertisement.setStatus("1");           //将当前的状态设置为未审核
+                advertisement.setIconpath(iconpath);    //设置广告图片的名字
+            }
             //调用业务层方法,返回一个影响数据库行数的int数值
             int count = advertisementService.updateAdvertisement(advertisement);
             result.setSuccess(count == 1);
         } catch (Exception e) {
             result.setSuccess(false);
-            result.setMessage("修改用户数据失败");
+            result.setMessage("修改广告数据失败");
             e.printStackTrace();
         }
         return result;
     }
 
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
