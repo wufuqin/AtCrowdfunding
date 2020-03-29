@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.atguigu.atcrowdfunding.manager.dao.ProjectMapper" >
+
+  <!--项目的映射配置文件-->
+
+  <!--封装结果集-->
   <resultMap id="BaseResultMap" type="com.atguigu.atcrowdfunding.bean.Project" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
@@ -16,25 +20,39 @@
     <result column="createdate" property="createdate" jdbcType="CHAR" />
     <result column="follower" property="follower" jdbcType="INTEGER" />
   </resultMap>
+
+  <!--根据id删除-->
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_project
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
+  <!--添加数据-->
   <insert id="insert" parameterType="com.atguigu.atcrowdfunding.bean.Project" >
-    insert into t_project (id, name, remark, 
-      money, day, status, deploydate, 
-      supportmoney, supporter, completion, 
-      memberid, createdate, follower
-      )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{money,jdbcType=BIGINT}, #{day,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, #{deploydate,jdbcType=CHAR}, 
-      #{supportmoney,jdbcType=BIGINT}, #{supporter,jdbcType=INTEGER}, #{completion,jdbcType=INTEGER}, 
-      #{memberid,jdbcType=INTEGER}, #{createdate,jdbcType=CHAR}, #{follower,jdbcType=INTEGER}
-      )
+    insert
+    into t_project
+    (id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion, memberid, createdate, follower)
+    values
+     (#{id,jdbcType=INTEGER},
+      #{name,jdbcType=VARCHAR},
+      #{remark,jdbcType=VARCHAR},
+      #{money,jdbcType=BIGINT},
+      #{day,jdbcType=INTEGER},
+      #{status,jdbcType=CHAR},
+      #{deploydate,jdbcType=CHAR},
+      #{supportmoney,jdbcType=BIGINT},
+      #{supporter,jdbcType=INTEGER},
+      #{completion,jdbcType=INTEGER},
+      #{memberid,jdbcType=INTEGER},
+      #{createdate,jdbcType=CHAR},
+      #{follower,jdbcType=INTEGER})
   </insert>
+
+  <!--根据id修改-->
   <update id="updateByPrimaryKey" parameterType="com.atguigu.atcrowdfunding.bean.Project" >
     update t_project
-    set name = #{name,jdbcType=VARCHAR},
+    set
+      name = #{name,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       money = #{money,jdbcType=BIGINT},
       day = #{day,jdbcType=INTEGER},
@@ -48,15 +66,73 @@
       follower = #{follower,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--根据id查询-->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select id, name, remark, money, day, status, deploydate, supportmoney, supporter, 
-    completion, memberid, createdate, follower
+    select id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion, memberid, createdate, follower
     from t_project
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <!--查询所有-->
   <select id="selectAll" resultMap="BaseResultMap" >
-    select id, name, remark, money, day, status, deploydate, supportmoney, supporter, 
-    completion, memberid, createdate, follower
+    select id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion, memberid, createdate, follower
     from t_project
   </select>
+
+  <!-- 查询分页数据 -->
+  <select id="queryList" resultMap="BaseResultMap">
+		select id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion, memberid, createdate, follower
+        from t_project
+		limit #{startIndex},#{pagesize}
+	</select>
+
+  <!-- 查询总的记录条数 -->
+  <select id="queryCount"  resultType="int">
+		select count(*)
+		from t_project
+  </select>
+
+  <!-- 查询分页数据，模糊查询 -->
+  <select id="queryListLike" resultMap="BaseResultMap">
+		select id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion, memberid, createdate, follower
+        from t_project
+        <where>
+          <if test="queryText != null">name like concat("%",#{queryText},"%")</if>
+        </where>
+		limit #{startIndex},#{pagesize}
+	</select>
+
+  <!-- 查询总的记录条数，模糊查询 -->
+  <select id="queryCountLike"  resultType="int">
+		select count(*)
+		from t_project
+        <where>
+          <if test="queryText != null">name like concat("%",#{queryText},"%")</if>
+        </where>
+  </select>
+
+
+
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

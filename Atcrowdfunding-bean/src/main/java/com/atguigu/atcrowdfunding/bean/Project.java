@@ -130,4 +130,5 @@ public class Project {
     public void setFollower(Integer follower) {
         this.follower = follower;
     }
+
 }
