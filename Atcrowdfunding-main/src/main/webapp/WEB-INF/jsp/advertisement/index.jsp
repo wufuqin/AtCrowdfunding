@@ -170,6 +170,8 @@
                             content+="	<td class='text-center'>审核完成</td>";
                         }else if(n.status=='3'){
                             content+="	<td class='text-center'>发布</td>";
+                        }else if(n.status=='4'){
+                            content+="	<td class='text-center'>拒绝申请</td>";
                         }
                         content+='<td class="text-center">';
                         content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/advertisement/update.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-pencil"></i>修改</button>';
@@ -246,6 +248,8 @@
                             content+="	<td class='text-center'>审核完成</td>";
                         }else if(n.status=='3'){
                             content+="	<td class='text-center'>发布</td>";
+                        }else if(n.status=='4'){
+                            content+="	<td class='text-center'>拒绝申请</td>";
                         }
                         content+='<td class="text-center">';
                         content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/advertisement/update.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-pencil"></i>修改</button>';

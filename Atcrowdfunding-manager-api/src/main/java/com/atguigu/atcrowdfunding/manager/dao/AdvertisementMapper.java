@@ -40,4 +40,9 @@ public interface AdvertisementMapper {
     //查询总的记录条数
     Integer queryCountLike(HashMap<String, Object> paramMap);
 
+    //将广告状态设置为 status:2 审核完成
+    void updateAdvertisementStatusByIdPass(Integer id);
+
+    //拒绝申请
+    void updateAdvertisementStatusByIdRefuse(Integer id);
 }

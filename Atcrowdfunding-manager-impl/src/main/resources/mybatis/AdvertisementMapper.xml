@@ -94,4 +94,45 @@
     </where>
   </select>
 
+  <!--将广告状态设置为 status:2 审核完成-->
+  <update id="updateAdvertisementStatusByIdPass" parameterType="int" >
+    update t_advertisement
+    set
+       status = 2
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--拒绝申请-->
+  <update id="updateAdvertisementStatusByIdRefuse" parameterType="int" >
+    update t_advertisement
+    set
+       status = 4
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

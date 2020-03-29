@@ -29,4 +29,10 @@ public interface AdvertisementService {
 
     //修改广告数据
     int updateAdvertisement(Advertisement advertisement);
+
+    //将广告状态设置为 status:2 审核完成
+    void updateAdvertisementStatusByIdPass(Integer id);
+
+    //拒绝申请
+    void updateAdvertisementStatusByIdRefuse(Integer id);
 }

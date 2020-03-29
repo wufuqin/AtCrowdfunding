@@ -4,4 +4,53 @@
 
     <!--广告审核映射配置文件-->
 
+    <!--封装结果集-->
+    <resultMap id="BaseResultMap" type="com.atguigu.atcrowdfunding.bean.Advertisement" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="iconpath" property="iconpath" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="CHAR" />
+        <result column="url" property="url" jdbcType="VARCHAR" />
+        <result column="userid" property="userid" jdbcType="INTEGER" />
+    </resultMap>
+
+    <!-- 查询分页数据 -->
+    <select id="queryList" resultMap="BaseResultMap">
+		select id, name, iconpath, status, url, userid
+		from t_advertisement
+		where status = 1
+		limit #{startIndex},#{pagesize}
+	</select>
+
+    <!-- 查询总的记录条数 -->
+    <select id="queryCount"  resultType="int">
+		select count(*)
+		from t_advertisement
+		where status = 1
+    </select>
+
+    <!--updateAdvertisementStatusById-->
+
+    <!--&lt;!&ndash;模糊查询查询分页数据&ndash;&gt;
+    <select id="queryList" resultMap="BaseResultMap">
+		select id, name, iconpath, status, url, userid
+		from t_advertisement
+		where status = 1
+        <where>
+            <if test="queryText != null">name like concat("%",#{queryText},"%")</if>
+        </where>
+		limit #{startIndex},#{pagesize}
+	</select>-->
+
+    <!--&lt;!&ndash;模糊查询查询总的记录条数&ndash;&gt;
+    <select id="queryCount"  resultType="int">
+		select count(*)
+		from t_advertisement
+		where status = 1
+        <where>
+            <if test="queryText != null">name like concat("%",#{queryText},"%")</if>
+        </where>
+    </select>-->
+
+
 </mapper>

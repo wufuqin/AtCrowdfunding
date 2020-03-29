@@ -111,4 +111,16 @@ public class AdvertisementServiceImpl implements AdvertisementService {
         return advertisementMapper.updateByPrimaryKey(advertisement);
     }
 
+    //将广告状态设置为 status:2 审核完成
+    @Override
+    public void updateAdvertisementStatusByIdPass(Integer id) {
+        advertisementMapper.updateAdvertisementStatusByIdPass(id);
+    }
+
+    //拒绝申请
+    @Override
+    public void updateAdvertisementStatusByIdRefuse(Integer id) {
+        advertisementMapper.updateAdvertisementStatusByIdRefuse(id);
+    }
+
 }
