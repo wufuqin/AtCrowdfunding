@@ -93,6 +93,40 @@ public class ProjectServiceImpl implements ProjectService {
         project.setFollower(0);
         return projectMapper.insert(project);
     }
+
+    //删除项目
+    @Override
+    public int deleteProject(Integer id) {
+        return projectMapper.deleteByPrimaryKey(id);
+    }
+
+    //调用删除方法
+    @Override
+    public int deleteBatchProject(Integer[] ids) {
+        int totalCount = 0;
+        //计算实际删除的记录数
+        for (Integer id : ids) {
+            projectMapper.deleteByPrimaryKey(id);
+            totalCount += 1;
+        }
+        //实际删除记录数与计划删除记录数比较
+        if (totalCount != ids.length){
+            throw new  RuntimeException("批量删除数据失败");
+        }
+        return totalCount;
+    }
+
+    //根据id查询项目信息
+    @Override
+    public Project queryProjectById(Integer id) {
+        return projectMapper.selectByPrimaryKey(id);
+    }
+
+    //修改项目信息
+    @Override
+    public void updateProjectById(Project project) {
+        projectMapper.updateByPrimaryKey(project);
+    }
 }
 
 

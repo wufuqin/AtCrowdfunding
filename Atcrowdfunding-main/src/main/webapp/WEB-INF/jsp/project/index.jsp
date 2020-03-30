@@ -31,7 +31,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <div><a class="navbar-brand" style="font-size:32px;" href="#">众筹平台 - 流程管理</a></div>
+            <div><a class="navbar-brand" style="font-size:32px;" href="#">众筹平台 - 项目管理</a></div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -292,7 +292,102 @@
     }
 </script>
 
-<%--删除单条数据--%>
+<%-- 单条数据删除功能 --%>
+<script>
+    function doDelete(id,name) {
+        layer.confirm("确认删除["+name+"]广告？", {icon: 3, title: '提示'}, function (cindex) {
+            $.ajax({
+                type : "POST",
+                data : {
+                    "id" : id
+                },
+                url : "${APP_PATH}/project/doDelete.do",
+                beforeSend : function () {
+                    layer.close(cindex);
+                    loadingIndex = layer.msg('数据删除中...', {icon: 16});
+                    //对表单数据进行校验
+                    return true;
+                },
+                success : function (result) {
+                    layer.close(loadingIndex);
+                    if (result.success) {
+                        loadingIndex = layer.msg('数据删除成功,正在更新数据...', {icon: 16});
+                        //设置定时，让提示框显示一定时间
+                        window.location.href="${APP_PATH}/project/index.htm";
+                    }else {
+                        layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    }
+                },
+                error : function () {
+                    layer.msg("数据删除失败",{time:2000, icon:5, shift:6});
+                }
+            });
+        }, function (cindex) {
+            layer.close(cindex);
+        })
+    }
+</script>
+
+<%--实现复选框的联动效果--%>
+<script>
+    $("#checkAll").click(function () {
+        var checkedStatus = this.checked;
+        //通过后代元素设置input的chenkbox属性
+        $("tbody tr td input[type='checkbox']").prop("checked",checkedStatus);
+    });
+</script>
+
+<%--批量删除--%>
+<script>
+    function deleteProjectBatchBtn() {
+        //获取被选中的复选框数据的id值
+        var selectCheckbox = $("tbody tr td input:checked");
+
+        //判断是否有选中的数据
+        if (selectCheckbox.length==0) {
+            layer.msg("请选择要删除的广告",{time:2000, icon:6, shift:6});
+            return false;
+        }
+
+        //遍历id数组，进行循环拼串
+        var idStr = "";
+        $.each(selectCheckbox,function (i,n) {
+            if (i != 0) {
+                idStr += "&";
+            }
+            idStr += "id="+n.id;
+        });
+        layer.confirm("确认删除这项目？", {icon: 3, title: '提示'}, function (cindex) {
+            $.ajax({
+                type : "POST",
+                data : idStr,
+                url : "${APP_PATH}/project/doDeleteBatch.do",
+                beforeSend : function () {
+                    layer.close(cindex);
+                    loadingIndex = layer.msg('数据删除中...', {icon: 16});
+                    //对表单数据进行校验
+                    return true;
+                },
+
+                success : function (result) {
+                    layer.close(loadingIndex);
+                    if (result.success) {
+                        loadingIndex = layer.msg('数据删除成功,正在更新数据...', {icon: 16});
+                        //设置定时，让提示框显示一定时间
+                        setTimeout(function () {{window.location.href="${APP_PATH}/project/index.htm"}},1000);
+                    }else {
+                        layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    }
+                },
+                error : function () {
+                    layer.msg("数据删除失败",{time:2000, icon:5, shift:6});
+                }
+            });
+        }, function (cindex) {
+            layer.close(cindex);
+        })
+    }
+</script>
 
 </body>
 </html>

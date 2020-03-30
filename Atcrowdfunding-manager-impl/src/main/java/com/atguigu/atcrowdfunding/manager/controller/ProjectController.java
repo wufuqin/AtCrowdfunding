@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 项目管理的web控制层
@@ -103,6 +104,67 @@ public class ProjectController {
         } catch (Exception e) {
             result.setSuccess(false);
             result.setMessage("查询保存失败...");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    //删除单条数据
+    @ResponseBody
+    @RequestMapping("/doDelete")
+    public Object doDelete(Integer id){
+        //用来封装ajax请求结果
+        AjaxResult result = new AjaxResult();
+        try {
+            //调用业务层方法,返回一个影响数据库行数的int数值
+            int count = projectService.deleteProject(id);
+            result.setSuccess(count == 1);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("删除用户数据失败");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    //批量删除
+    @ResponseBody
+    @RequestMapping("/doDeleteBatch")
+    public Object doDeleteBatch(Integer[] id){
+        AjaxResult result = new AjaxResult();
+        try {
+            //调用删除方法
+            int count = projectService.deleteBatchProject(id);
+            result.setSuccess(count == id.length);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("删除数据失败");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    //去到修改项目信息页面
+    @RequestMapping("/update")
+    public String update(Integer id, Map<String, Object> map){
+        //根据id进行查询项目信息回显
+        Project project = projectService.queryProjectById(id);
+        map.put("project", project);
+        return "project/update";
+    }
+
+    //修改项目数据
+    @ResponseBody
+    @RequestMapping("/doUpdate")
+    public Object doUpdate(Project project){
+        AjaxResult result = new AjaxResult();
+        try {
+            //修改项目信息
+            projectService.updateProjectById(project);
+            result.setSuccess(true);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("删除数据失败");
             e.printStackTrace();
         }
         return result;

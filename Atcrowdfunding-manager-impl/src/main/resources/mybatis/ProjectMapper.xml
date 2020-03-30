@@ -55,15 +55,7 @@
       name = #{name,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       money = #{money,jdbcType=BIGINT},
-      day = #{day,jdbcType=INTEGER},
-      status = #{status,jdbcType=CHAR},
-      deploydate = #{deploydate,jdbcType=CHAR},
-      supportmoney = #{supportmoney,jdbcType=BIGINT},
-      supporter = #{supporter,jdbcType=INTEGER},
-      completion = #{completion,jdbcType=INTEGER},
-      memberid = #{memberid,jdbcType=INTEGER},
-      createdate = #{createdate,jdbcType=CHAR},
-      follower = #{follower,jdbcType=INTEGER}
+      day = #{day,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 

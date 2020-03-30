@@ -19,4 +19,16 @@ public interface ProjectService {
 
     //保存项目
     int saveProject(Project project);
+
+    //删除项目
+    int deleteProject(Integer id);
+
+    //调用删除方法
+    int deleteBatchProject(Integer[] id);
+
+    //根据id查询项目信息
+    Project queryProjectById(Integer id);
+
+    //修改项目信息
+    void updateProjectById(Project project);
 }
