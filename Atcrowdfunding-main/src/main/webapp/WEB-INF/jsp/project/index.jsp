@@ -180,6 +180,8 @@
                             content+="	<td class='text-center'>众筹成功</td>";
                         }else if(n.status=='4'){
                             content+="	<td class='text-center'>众筹失败</td>";
+                        }else if(n.status=='5'){
+                            content+="	<td class='text-center'>拒绝申请</td>";
                         }
                         //content+="<td class='text-center' >"+n.memberid+"</td>";
                         content+='<td class="text-center">';
@@ -260,6 +262,8 @@
                             content+="	<td class='text-center'>众筹成功</td>";
                         }else if(n.status=='4'){
                             content+="	<td class='text-center'>众筹失败</td>";
+                        }else if(n.status=='5'){
+                            content+="	<td class='text-center'>拒绝申请</td>";
                         }
                         //content+="<td class='text-center' >"+n.memberid+"</td>";
                         content+='<td class="text-center">';

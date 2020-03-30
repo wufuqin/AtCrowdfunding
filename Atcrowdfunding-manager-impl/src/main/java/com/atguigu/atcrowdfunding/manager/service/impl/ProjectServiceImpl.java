@@ -127,6 +127,18 @@ public class ProjectServiceImpl implements ProjectService {
     public void updateProjectById(Project project) {
         projectMapper.updateByPrimaryKey(project);
     }
+
+    //将项目状态设置为 status:1 审核完成
+    @Override
+    public void updateProjectStatusByIdPass(Integer id) {
+        projectMapper.updateProjectStatusByIdPass(id);
+    }
+
+    //项目状态设置为 status5 拒绝申请
+    @Override
+    public void updateProjectStatusByIdRefuse(Integer id) {
+        projectMapper.updateProjectStatusByIdRefuse(id);
+    }
 }
 
 

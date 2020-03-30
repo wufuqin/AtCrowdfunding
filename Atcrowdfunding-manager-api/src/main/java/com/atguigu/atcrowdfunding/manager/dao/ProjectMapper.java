@@ -39,4 +39,9 @@ public interface ProjectMapper {
     //查询总的记录条数
     Integer queryCountLike(HashMap<String, Object> paramMap);
 
+    //将项目状态设置为 status:1 审核完成
+    void updateProjectStatusByIdPass(Integer id);
+
+    //项目状态设置为 status5 拒绝申请
+    void updateProjectStatusByIdRefuse(Integer id);
 }

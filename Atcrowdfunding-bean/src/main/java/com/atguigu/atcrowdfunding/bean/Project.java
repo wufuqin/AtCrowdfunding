@@ -27,6 +27,8 @@ public class Project {
 
     private Integer follower;
 
+    private String filename;
+
     public Integer getId() {
         return id;
     }
@@ -131,4 +133,11 @@ public class Project {
         this.follower = follower;
     }
 
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
 }

@@ -4,6 +4,38 @@
 
     <!--项目审核映射配置文件-->
 
+    <!--封装结果集-->
+    <resultMap id="BaseResultMap" type="com.atguigu.atcrowdfunding.bean.Project" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="money" property="money" jdbcType="BIGINT" />
+        <result column="day" property="day" jdbcType="INTEGER" />
+        <result column="status" property="status" jdbcType="CHAR" />
+        <result column="deploydate" property="deploydate" jdbcType="CHAR" />
+        <result column="supportmoney" property="supportmoney" jdbcType="BIGINT" />
+        <result column="supporter" property="supporter" jdbcType="INTEGER" />
+        <result column="completion" property="completion" jdbcType="INTEGER" />
+        <result column="memberid" property="memberid" jdbcType="INTEGER" />
+        <result column="createdate" property="createdate" jdbcType="CHAR" />
+        <result column="follower" property="follower" jdbcType="INTEGER" />
+    </resultMap>
+
+    <!-- 查询分页数据 -->
+    <select id="queryProjectList" resultMap="BaseResultMap">
+		select id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion, memberid, createdate, follower
+        from t_project
+		where status = 0
+		limit #{startIndex},#{pagesize}
+	</select>
+
+    <!-- 查询总的记录条数 -->
+    <select id="queryProjectCount"  resultType="int">
+		select count(*)
+		from t_project
+		where status = 0
+    </select>
+
 </mapper>
 
 
