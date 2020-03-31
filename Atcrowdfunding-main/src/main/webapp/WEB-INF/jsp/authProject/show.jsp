@@ -81,7 +81,30 @@
                             <div class="form-group">
                                 <img src="${APP_PATH }/picture/advertisement/${Project.filename}">
                             </div>
+                            <%--上传图片--%>
+                            <script>
+                                function addAdvertisement() {
+                                    var options = {
+                                        url:"${APP_PATH}/advertisement/doAdd.do",
+                                        beforeSubmit : function(){
+                                            loadingIndex = layer.msg('数据正在保存中', {icon: 6});
+                                            return true ; //必须返回true,否则,请求终止.
+                                        },
+                                        success : function(result){
+                                            layer.close(loadingIndex);
+                                            if(result.success){
+                                                layer.msg("广告数据保存成功", {time:1000, icon:6});
+                                                window.location.href="${APP_PATH}/advertisement/index.htm";
+                                            }else{
+                                                layer.msg("广告数据保存失败", {time:1000, icon:5, shift:6});
+                                            }
+                                        }
+                                    };
 
+                                    $("#addAdvertisementForm").ajaxSubmit(options); //异步提交
+                                    return ;
+                                }
+                            </script>
                             <button onclick="passProject()" type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 通过</button>
                             <button onclick="refuseProject()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 拒绝</button>
                         </form>
@@ -150,11 +173,11 @@
                 if (result.success){
                     window.location.href = "${APP_PATH}/authProject/index.htm";
                 } else {
-                    layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    layer.msg(result.message);
                 }
             },
             error : function () {
-                layer.msg("操作失败",{time:2000, icon:5, shift:6});
+                layer.msg("操作失败");
             }
         });
     }
@@ -178,11 +201,11 @@
                 if (result.success){
                     window.location.href = "${APP_PATH}/authProject/index.htm";
                 } else {
-                    layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    layer.msg(result.message);
                 }
             },
             error : function () {
-                layer.msg("操作失败",{time:2000, icon:5, shift:6});
+                layer.msg("操作失败");
             }
         });
     }

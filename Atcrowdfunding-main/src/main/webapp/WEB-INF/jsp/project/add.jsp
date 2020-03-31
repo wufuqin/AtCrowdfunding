@@ -126,7 +126,6 @@
         });
         showMenu();
     });
-
 </script>
 
 <%--添加项目--%>
@@ -137,7 +136,6 @@
         var remark = $("#remark");
         var money = $("#money");
         var day = $("#day");
-
         $.ajax({
             type : "POST",
             data : {
@@ -156,11 +154,11 @@
                 if (result.success){
                     window.location.href="${APP_PATH}/project/index.htm";
                 } else {
-                    layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    layer.msg(result.message);
                 }
             },
             error : function () {
-                layer.msg("数据保存失败",{time:2000, icon:5, shift:6});
+                layer.msg("数据保存失败");
             }
         });
     }

@@ -145,14 +145,14 @@
             },
             success : function(result){
                 if(result.success){
-                    layer.msg("保存成功...",{time:2000, icon:6, shift:6});
+                    layer.msg("保存成功...");
                     setTimeout(function () {{window.location.href="${APP_PATH}/permission/index.htm"}},2000);
                 }else{
-                    layer.msg("保存失败...", {time:2000, shift:6});
+                    layer.msg("保存失败...");
                 }
             },
             error : function(){
-                layer.msg("保存失败...",{time:2000, icon:5, shift:6});
+                layer.msg("保存失败...");
             }
         });
 

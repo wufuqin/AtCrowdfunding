@@ -92,35 +92,35 @@
 
         //对手机号数据进行校验
         if ($.trim(tel.val()) == "") {
-            layer.msg("手机号不能为空", {time:1000, icon:5, shift:6});
+            layer.msg("手机号不能为空");
             tel.val("");   //输入框重新设置为空
             tel.focus();   //重新获取焦点
             return false;
         }
         //对用户名数据进行校验
         if ($.trim(username.val()) == "") {
-            layer.msg("用户名不能为空", {time:1000, icon:5, shift:6});
+            layer.msg("用户名不能为空");
             username.val("");   //输入框重新设置为空
             username.focus();   //重新获取焦点
             return false;
         }
         //对密码数据进行校验
         if ($.trim(userpswd.val()) == "") {
-            layer.msg("密码不能为空", {time:1000, icon:5, shift:6});
+            layer.msg("密码不能为空");
             userpswd.val("");   //输入框重新设置为空
             userpswd.focus();   //重新获取焦点
             return false;
         }
         //对验证码数据进行校验
         if ($.trim(email.val()) == "") {
-            layer.msg("邮箱不能为空", {time:1000, icon:5, shift:6});
+            layer.msg("邮箱不能为空");
             email.val("");   //输入框重新设置为空
             email.focus();   //重新获取焦点
             return false;
         }
         //对验证码数据进行校验
         if ($.trim(code.val()) == "") {
-            layer.msg("验证码不能为空", {time:1000, icon:5, shift:6});
+            layer.msg("验证码不能为空");
             code.val("");   //输入框重新设置为空
             code.focus();   //重新获取焦点
             return false;
@@ -146,11 +146,11 @@
                     layer.close(loadingIndex);
                     window.location.href = "${APP_PATH}/regTime.htm";
                 }else {
-                    layer.msg(result.message, {time:2000, icon:5, shift:6});
+                    layer.msg(result.message);
                 }
             },
             error : function () {
-                layer.msg("注册失败", {time:2000, icon:5, shift:6});
+                layer.msg("注册失败");
             }
         });
     }
@@ -170,28 +170,28 @@
 
         //对手机号数据进行校验
         if ($.trim(tel.val()) == "") {
-            layer.msg("手机号不能为空", {time:1000, icon:5, shift:6});
+            layer.msg("手机号不能为空");
             tel.val("");   //输入框重新设置为空
             tel.focus();   //重新获取焦点
             return false;
         }
         //对用户名数据进行校验
         if ($.trim(username.val()) == "") {
-            layer.msg("用户名不能为空", {time:1000, icon:5, shift:6});
+            layer.msg("用户名不能为空");
             username.val("");   //输入框重新设置为空
             username.focus();   //重新获取焦点
             return false;
         }
         //对密码数据进行校验
         if ($.trim(userpswd.val()) == "") {
-            layer.msg("密码不能为空", {time:1000, icon:5, shift:6});
+            layer.msg("密码不能为空");
             userpswd.val("");   //输入框重新设置为空
             userpswd.focus();   //重新获取焦点
             return false;
         }
         //对验证码数据进行校验
         if ($.trim(email.val()) == "") {
-            layer.msg("邮箱不能为空", {time:1000, icon:5, shift:6});
+            layer.msg("邮箱不能为空");
             email.val("");   //输入框重新设置为空
             email.focus();   //重新获取焦点
             return false;

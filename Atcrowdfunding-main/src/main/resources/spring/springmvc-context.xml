@@ -16,7 +16,7 @@
     <!-- 启用注解功能 -->
     <context:annotation-config />
     
-    <!-- <mvc:annotation-driven /> -->
+    <!--<mvc:annotation-driven />-->
     <!-- <mvc:default-servlet-handler /> -->
 
     <!--登录拦截器-->

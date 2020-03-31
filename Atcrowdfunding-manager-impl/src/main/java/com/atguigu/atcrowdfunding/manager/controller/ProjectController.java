@@ -53,7 +53,6 @@ public class ProjectController {
         return result;
     }
 
-
     //模块查询
     @ResponseBody
     @RequestMapping("queryPageProjectLike")
@@ -91,21 +90,22 @@ public class ProjectController {
 
     //添加项目
     @ResponseBody
-    @RequestMapping("addProject")
-    public Object addProject(Project project, HttpSession session){
-        //创建一个用于存储查询得到的数据集对象
+    @RequestMapping("/addProject")
+    public Object doAdd(Project project, HttpSession session) {
         AjaxResult result = new AjaxResult();
-        User user = (User) session.getAttribute(Const.LOGIN_USER);
-        project.setMemberid(user.getId());
+
         try {
+            User user = (User)session.getAttribute(Const.LOGIN_USER); //获取当前用户
+            project.setMemberid(user.getId());  //获取当前用户id
+
             //保存项目
             int count = projectService.saveProject(project);
-            result.setSuccess(count == 1);
-        } catch (Exception e) {
-            result.setSuccess(false);
-            result.setMessage("查询保存失败...");
+            result.setSuccess(count==1);
+        } catch ( Exception e ) {
             e.printStackTrace();
+            result.setSuccess(false);
         }
+
         return result;
     }
 

@@ -70,7 +70,7 @@
 
         //对邮箱数据进行校验
         if ($.trim(email.val()) == "") {
-            layer.msg("邮箱不能为空", {time:3000, icon:5, shift:6});
+            layer.msg("邮箱不能为空");
             email.val("");   //输入框重新设置为空
             email.focus();   //重新获取焦点
             return false;
@@ -78,7 +78,7 @@
 
         //对邮箱数据进行校验
         if ($.trim(checkCode.val()) == "") {
-            layer.msg("验证码不能为空", {time:2000, icon:5, shift:6});
+            layer.msg("验证码不能为空");
             checkCode.val("");   //输入框重新设置为空
             checkCode.focus();   //重新获取焦点
             return false;
@@ -100,12 +100,12 @@
                     layer.close(loadingIndex);
                     window.location.href = "${APP_PATH}/time.htm";
                 }else {
-                    layer.msg(result.message, {time:2000, icon:5, shift:6});
+                    layer.msg(result.message);
                     refreshCode(); // 刷新验证码
                 }
             },
             error : function () {
-                layer.msg("邮件发送失败", {time:2000, icon:5, shift:6});
+                layer.msg("邮件发送失败");
                 refreshCode(); // 刷新验证码
             }
         });

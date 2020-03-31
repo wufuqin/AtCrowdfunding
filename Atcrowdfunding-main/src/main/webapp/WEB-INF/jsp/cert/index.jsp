@@ -129,7 +129,7 @@
                     var data = page.datas;
                     /*判断返回的集合中是否有数据*/
                     if (data.length == 0){
-                        layer.msg("目前没有查询到资质信息",{time:2000, icon:6, shift:6});
+                        layer.msg("目前没有查询到资质信息");
                         return false;
                     }
                     var content = '';
@@ -163,11 +163,11 @@
 
 
                 } else {
-                    layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    layer.msg(result.message);
                 }
             },
             error : function () {
-                layer.msg("数据加载失败",{time:2000, icon:5, shift:6});
+                layer.msg("数据加载失败");
             }
         });
     }
@@ -195,7 +195,7 @@
                     var data = page.datas;
                     /*判断返回的集合中是否有数据*/
                     if (data.length == 0){
-                        layer.msg("没有您要查询的资质信息",{time:2000, icon:6, shift:6});
+                        layer.msg("没有您要查询的资质信息");
                         return false;
                     }
                     var content = '';
@@ -227,11 +227,11 @@
 
                 } else {
                     //查询数据失败
-                    layer.msg(result.message, {time:2000, icon:5, shift:6});
+                    layer.msg(result.message);
                 }
             },
             error : function () {
-                layer.msg("数据加载失败",{time:2000, icon:5, shift:6});
+                layer.msg("数据加载失败");
             }
         });
     }
@@ -261,11 +261,11 @@
                         //设置定时，让提示框显示一定时间
                         setTimeout(function () {{window.location.href="${APP_PATH}/cert/index.htm"}},1000);
                     }else {
-                        layer.msg(result.message,{time:2000, icon:5, shift:6});
+                        layer.msg(result.message);
                     }
                 },
                 error : function () {
-                    layer.msg("数据删除失败",{time:2000, icon:5, shift:6});
+                    layer.msg("数据删除失败");
                 }
             });
         }, function (cindex) {
@@ -291,7 +291,7 @@
 
         //判断是否有选中的数据
         if (selectCheckbox.length==0) {
-            layer.msg("请选择要删除的资质",{time:2000, icon:6, shift:6});
+            layer.msg("请选择要删除的资质");
             return false;
         }
 
@@ -322,11 +322,11 @@
                         //设置定时，让提示框显示一定时间
                         setTimeout(function () {{window.location.href="${APP_PATH}/cert/index.htm"}},1000);
                     }else {
-                        layer.msg(result.message,{time:2000, icon:5, shift:6});
+                        layer.msg(result.message);
                     }
                 },
                 error : function () {
-                    layer.msg("数据删除失败",{time:2000, icon:5, shift:6});
+                    layer.msg("数据删除失败");
                 }
             });
         }, function (cindex) {

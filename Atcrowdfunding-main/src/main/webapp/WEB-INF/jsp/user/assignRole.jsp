@@ -162,11 +162,11 @@
                     //将左边选中的数据添加到左边并且删除
                     $("#rightRoleList").append(leftOption);
                 } else {
-                    layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    layer.msg(result.message);
                 }
             },
             error : function () {
-                layer.msg("分配权限失败",{time:2000, icon:5, shift:6});
+                layer.msg("分配权限失败");
             }
         });
         },function (cindex) {
@@ -204,11 +204,11 @@
                     //将右边选中的数据添加到左边并且删除
                     $("#leftRoleList").append(rightOption);
                 } else {
-                    layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    layer.msg(result.message);
                 }
             },
             error : function () {
-                layer.msg("取消权限失败",{time:2000, icon:5, shift:6});
+                layer.msg("取消权限失败");
             }
         });
         },function (cindex) {

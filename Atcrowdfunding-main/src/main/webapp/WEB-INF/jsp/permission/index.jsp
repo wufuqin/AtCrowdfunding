@@ -159,11 +159,11 @@
                     var zNodes = result.data ;
                     $.fn.zTree.init($("#treeDemo"), setting, zNodes);
                 }else{
-                    layer.msg(result.message, {time:2000, icon:5, shift:6});
+                    layer.msg(result.message);
                 }
             },
             error : function () {
-                layer.msg("数据加载失败", {time:2000, icon:5, shift:6});
+                layer.msg("数据加载失败");
             }
         });
     }
@@ -189,11 +189,11 @@
                     if(result.success){
                         loadData();  //删除成功，重新加载许可树
                     }else{
-                        layer.msg(result.message, {time:2000, icon:5, shift:6});
+                        layer.msg(result.message);
                     }
                 },
                 error : function () {
-                    layer.msg("删除失败...", {time:2000, icon:5, shift:6});
+                    layer.msg("删除失败...");
                 }
             });
         }, function(cindex){

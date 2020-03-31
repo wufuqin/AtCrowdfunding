@@ -137,14 +137,14 @@
             success : function (result) {
                 layer.close(loadingIndex);
                 if (result.success) {
-                    layer.msg("数据修改成功...",{time:2000, icon:6, shift:6});
-                    setTimeout(function () {{window.location.href="${APP_PATH}/cert/index.htm"}},2000);
+                    layer.msg("数据修改成功...");
+                    setTimeout(function () {{window.location.href="${APP_PATH}/cert/index.htm"}},1000);
                 }else {
-                    layer.msg("数据修改失败...",{time:2000, icon:5, shift:6});
+                    layer.msg("数据修改失败...");
                 }
             },
             error : function () {
-                layer.msg("数据修改失败...",{time:2000, icon:5, shift:6});
+                layer.msg("数据修改失败...");
             }
         });
     }

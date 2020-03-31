@@ -132,10 +132,9 @@
                     var data = page.datas;
                     /*判断返回的集合中是否有数据*/
                     if (data.length == 0){
-                        layer.msg("目前没有查询到角色信息",{time:2000, icon:6, shift:6});
+                        layer.msg("目前没有查询到角色信息");
                         return false;
                     }
-                    //layer.msg("数据加载成功",{time:2000, icon:6, shift:6});
                     var content = '';
 
                     /* 对后台返回的数据进行拼串展示 */
@@ -169,11 +168,11 @@
 
                 } else {
                     //查询数据失败
-                    layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    layer.msg(result.message);
                 }
             },
             error : function () {
-                layer.msg("数据加载失败",{time:2000, icon:5, shift:6});
+                layer.msg("数据加载失败");
             }
         });
     }
@@ -202,7 +201,7 @@
                     var data = page.datas;
                     /*判断返回的集合中是否有数据*/
                     if (data.length == 0){
-                        layer.msg("没有您要查询的用户信息",{time:2000, icon:6, shift:6});
+                        layer.msg("没有您要查询的用户信息");
                         return false;
                     }
                     var content = '';
@@ -236,11 +235,11 @@
 
                 } else {
                     //查询数据失败
-                    layer.msg(result.message, {time:2000, icon:5, shift:6});
+                    layer.msg(result.message);
                 }
             },
             error : function () {
-                layer.msg("数据加载失败",{time:2000, icon:5, shift:6});
+                layer.msg("数据加载失败");
             }
         });
     }
@@ -270,11 +269,11 @@
                         //设置定时，让提示框显示一定时间
                         setTimeout(function () {{window.location.href="${APP_PATH}/role/index.htm"}},1000);
                     }else {
-                        layer.msg(result.message,{time:2000, icon:5, shift:6});
+                        layer.msg(result.message);
                     }
                 },
                 error : function () {
-                    layer.msg("数据删除失败",{time:2000, icon:5, shift:6});
+                    layer.msg("数据删除失败");
                 }
             });
         }, function (cindex) {
@@ -300,7 +299,7 @@
 
         //判断是否有选中的数据
         if (selectCheckbox.length==0) {
-            layer.msg("请选择要删除的用户",{time:2000, icon:6, shift:6});
+            layer.msg("请选择要删除的用户");
             return false;
         }
 
@@ -332,11 +331,11 @@
                         //设置定时，让提示框显示一定时间
                         setTimeout(function () {{window.location.href="${APP_PATH}/role/index.htm"}},1000);
                     }else {
-                        layer.msg(result.message,{time:2000, icon:5, shift:6});
+                        layer.msg(result.message);
                     }
                 },
                 error : function () {
-                    layer.msg("数据删除失败",{time:2000, icon:5, shift:6});
+                    layer.msg("数据删除失败");
                 }
             });
         }, function (cindex) {

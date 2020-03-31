@@ -135,10 +135,10 @@ function addAdvertisement() {
             success : function(result){
                 layer.close(loadingIndex);
                 if(result.success){
-                    layer.msg("广告数据保存成功", {time:1000, icon:6});
+                    layer.msg("广告数据保存成功");
                     window.location.href="${APP_PATH}/advertisement/index.htm";
                 }else{
-                    layer.msg("广告数据保存失败", {time:1000, icon:5, shift:6});
+                    layer.msg("广告数据保存失败");
                 }
             }
         };

@@ -142,11 +142,11 @@
                 if (result.success){
                     window.location.href = "${APP_PATH}/authAdvertisement/index.htm";
                 } else {
-                    layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    layer.msg(result.message);
                 }
             },
             error : function () {
-                layer.msg("操作失败",{time:2000, icon:5, shift:6});
+                layer.msg("操作失败");
             }
         });
     }
@@ -170,17 +170,15 @@
                 if (result.success){
                     window.location.href = "${APP_PATH}/authAdvertisement/index.htm";
                 } else {
-                    layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    layer.msg(result.message);
                 }
             },
             error : function () {
-                layer.msg("操作失败",{time:2000, icon:5, shift:6});
+                layer.msg("操作失败");
             }
         });
     }
 </script>
-
-
 
 </body>
 </html>

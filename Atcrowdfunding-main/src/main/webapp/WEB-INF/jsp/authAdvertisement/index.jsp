@@ -143,7 +143,7 @@
                     var data = page.datas;
                     /*判断返回的集合中是否有数据*/
                     if (data.length == 0){
-                        layer.msg("目前没有查询到广告信息",{time:2000, icon:6, shift:6});
+                        layer.msg("目前没有查询到广告信息");
                         return false;
                     }
                     var content = '';
@@ -174,11 +174,11 @@
                         next_text : "下一页"
                     });
                 } else {
-                    layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    layer.msg(result.message);
                 }
             },
             error : function () {
-                layer.msg("数据加载失败",{time:2000, icon:5, shift:6});
+                layer.msg("数据加载失败");
             }
         });
     }
@@ -240,11 +240,11 @@
 
                 } else {
                     //查询数据失败
-                    layer.msg(result.message, {time:2000, icon:5, shift:6});
+                    layer.msg(result.message);
                 }
             },
             error : function () {
-                layer.msg("数据加载失败",{time:2000, icon:5, shift:6});
+                layer.msg("数据加载失败");
             }
         });
     }

@@ -36,6 +36,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		uri.add("/toRestPassword.htm"); //重置密码
 		uri.add("/doRestPassword.do"); //重置密码
 		uri.add("/restTime.htm"); //重置密码
+		uri.add("/activateAccount.do"); //激活会员账号邮件链接
 
 		//获取请求路径.
 		String servletPath = request.getServletPath();

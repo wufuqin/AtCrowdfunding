@@ -143,14 +143,14 @@
             success : function(result){
                 layer.close(loadingIndex);
                 if(result.success){
-                    layer.msg("保存成功...", {time:1000, icon:6, shift:6});
-                    setTimeout(function () {{window.location.href="${APP_PATH}/permission/index.htm"}},2000);
+                    layer.msg("保存成功...");
+                    setTimeout(function () {{window.location.href="${APP_PATH}/permission/index.htm"}},1000);
                 }else{
-                    layer.msg("保存数据失败...", {time:1000, icon:5, shift:6});
+                    layer.msg("保存数据失败...");
                 }
             },
             error : function(){
-                layer.msg("保存失败...", {time:1000, icon:5, shift:6});
+                layer.msg("保存失败...");
             }
         });
 

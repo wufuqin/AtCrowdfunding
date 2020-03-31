@@ -100,7 +100,7 @@
         // 判断账户类型是否被选中
         var len = $('.seltype').length;
         if ( len == 0 ) {
-            layer.msg("请选择账户类型继续申请", {time:1000, icon:5, shift:6});
+            layer.msg("请选择账户类型继续申请");
         } else {
             // 保存选择的账户类型
             $.ajax({
@@ -117,7 +117,7 @@
                     if ( result.success ) {
                         window.location.href = "${APP_PATH}/member/basicInfo.htm";
                     } else {
-                        layer.msg("账户类型更新失败", {time:1000, icon:5, shift:6});
+                        layer.msg("账户类型更新失败");
                     }
                 }
             });

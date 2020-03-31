@@ -154,14 +154,14 @@
             success : function (result) {
                 layer.close(loadingIndex);
                 if (result.success) {
-                    layer.msg("数据修改成功",{time:2000, icon:6, shift:6});
+                    layer.msg("数据修改成功");
                     window.location.href="${APP_PATH}/project/index.htm";
                 }else {
-                    layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    layer.msg(result.message);
                 }
             },
             error : function () {
-                layer.msg("数据修改失败",{time:2000, icon:5, shift:6});
+                layer.msg("数据修改失败");
             }
         });
     }

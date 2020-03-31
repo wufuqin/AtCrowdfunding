@@ -89,24 +89,21 @@
 
         //对用户名数据进行校验
         if ($.trim(loginacct.val()) == "") {
-            //alert("用户名不能为空！");
-            layer.msg("用户名不能为空", {time:1000, icon:5, shift:5});
+            layer.msg("用户名不能为空");
             loginacct.val("");   //输入框重新设置为空
             loginacct.focus();   //重新获取焦点
             return false;
         }
         //对密码数据进行校验
         if ($.trim(userpswd.val()) == "") {
-            //alert("密码不能为空！");
-            layer.msg("密码不能为空", {time:1000, icon:5, shift:5});
+            layer.msg("密码不能为空");
             userpswd.val("");   //输入框重新设置为空
             userpswd.focus();   //重新获取焦点
             return false;
         }
         //对验证码数据进行校验
         if ($.trim(checkCode.val()) == "") {
-            //alert("验证码不能为空！");
-            layer.msg("验证码不能为空", {time:1000, icon:5, shift:5});
+            layer.msg("验证码不能为空");
             checkCode.val("");   //输入框重新设置为空
             checkCode.focus();   //重新获取焦点
             return false;
@@ -133,15 +130,15 @@
                     }else if (type.val() == "member") {
                         window.location.href = "${APP_PATH}/member.htm";   //跳转到前台主页面
                     }else {
-                        layer.msg("选择的登录类型不合法", {time:2000, icon:5, shift:5});
+                        layer.msg("选择的登录类型不合法");
                     }
                 }else {
-                    layer.msg(result.message, {time:2000, icon:5, shift:5});
+                    layer.msg(result.message);
                     refreshCode(); //自动切换验证码
                 }
             },
             error : function () {
-                layer.msg("登录失败", {time:2000, icon:5, shift:5});
+                layer.msg("登录失败");
             }
         });
     }

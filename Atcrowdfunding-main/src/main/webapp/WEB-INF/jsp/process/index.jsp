@@ -156,7 +156,7 @@
                     var data = page.datas;
                     /*判断返回的集合中是否有数据*/
                     if (data.length == 0){
-                        layer.msg("目前没有查询到流程信息",{ icon:6, shift:6});
+                        layer.msg("目前没有查询到流程信息");
                         return false;
                     }
                     var content = '';
@@ -191,11 +191,11 @@
 
 
                 } else {
-                    layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    layer.msg(result.message);
                 }
             },
             error : function () {
-                layer.msg("数据加载失败",{time:2000, icon:5, shift:6});
+                layer.msg("数据加载失败");
             }
         });
     }
@@ -225,7 +225,7 @@
                     var data = page.datas;
                     /*判断返回的集合中是否有数据*/
                     if (data.length == 0){
-                        layer.msg("没有您要查询的用户信息",{time:2000, icon:6, shift:6});
+                        layer.msg("没有您要查询的用户信息");
                         return false;
                     }
                     var content = '';
@@ -261,11 +261,11 @@
 
                 } else {
                     //查询数据失败
-                    layer.msg(result.message, {time:2000, icon:5, shift:6});
+                    layer.msg(result.message);
                 }
             },
             error : function () {
-                layer.msg("数据加载失败",{time:2000, icon:5, shift:6});
+                layer.msg("数据加载失败");
             }
         });
     }
@@ -290,10 +290,10 @@
             success : function(result){
                 layer.close(loadingIndex);
                 if(result.success){
-                    layer.msg("部署成功", {time:1000, icon:6});
+                    layer.msg("部署成功");
                     queryPageProcess(0);
                 }else{
-                    layer.msg(result.message, {time:1000, icon:5, shift:6});
+                    layer.msg(result.message);
                 }
             }
         };
@@ -325,11 +325,11 @@
                     if(result.success){
                         window.location.href="${APP_PATH}/process/index.htm";
                     }else{
-                        layer.msg("删除流程定义失败", {time:1000, icon:5, shift:6});
+                        layer.msg("删除流程定义失败");
                     }
                 },
                 error : function(){
-                    layer.msg("删除流程定义失败", {time:1000, icon:5, shift:6});
+                    layer.msg("删除流程定义失败");
                 }
             });
         }, function(cindex){
@@ -356,7 +356,7 @@
 
         //判断是否有选中的数据
         if (selectCheckbox.length==0) {
-            layer.msg("请选择要删除的流程",{time:2000, icon:6, shift:6});
+            layer.msg("请选择要删除的流程");
             return false;
         }
 
@@ -386,11 +386,11 @@
                     if (result.success) {
                         window.location.href="${APP_PATH}/process/index.htm";
                     }else {
-                        layer.msg(result.message,{time:2000, icon:5, shift:6});
+                        layer.msg(result.message);
                     }
                 },
                 error : function () {
-                    layer.msg("数据删除失败",{time:2000, icon:5, shift:6});
+                    layer.msg("数据删除失败");
                 }
             });
         }, function (cindex) {

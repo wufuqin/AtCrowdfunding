@@ -17,6 +17,7 @@
         <result column="cardnum" property="cardnum" jdbcType="VARCHAR" />
         <result column="accttype" property="accttype" jdbcType="CHAR" />
         <result column="tel" property="tel" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
     </resultMap>
 
     <!--根据id删除-->
@@ -28,7 +29,7 @@
     <!--添加会员-->
     <insert id="insert" parameterType="com.atguigu.atcrowdfunding.bean.Member" >
         insert
-        into t_member (id, tel, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype)
+        into t_member (id, tel, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype, status)
         values (#{id,jdbcType=INTEGER},
                 #{loginacct,jdbcType=VARCHAR},
                 #{tel,jdbcType=VARCHAR},
@@ -39,7 +40,8 @@
                 #{usertype,jdbcType=CHAR},
                 #{realname,jdbcType=VARCHAR},
                 #{cardnum,jdbcType=VARCHAR},
-                #{accttype,jdbcType=CHAR})
+                #{accttype,jdbcType=CHAR},
+                #{status,jdbcType=CHAR})
     </insert>
 
     <!--根据id修改-->
@@ -59,7 +61,7 @@
 
     <!--根据id查询-->
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-        select id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype, tel
+        select id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype, tel, status
         from t_member
         where id = #{id,jdbcType=INTEGER}
     </select>
@@ -72,7 +74,7 @@
 
     <!--处理登录请求-->
     <select id="queryMemberLogin" resultMap="BaseResultMap" >
-        select id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype, tel
+        select id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype, tel, status
         from t_member
         where loginacct=#{loginacct} and userpswd=#{userpswd}
     </select>
@@ -160,5 +162,12 @@
         from t_member
         where loginacct = #{loginacct}
     </select>
+
+    <!--修改会员的账号激活状态 status = "Y"-->
+    <update id="updateMemberStatusByLoginacct" parameterType="String" >
+        update t_member
+        set status = "Y"
+        where loginacct = #{loginacct}
+    </update>
 
 </mapper>

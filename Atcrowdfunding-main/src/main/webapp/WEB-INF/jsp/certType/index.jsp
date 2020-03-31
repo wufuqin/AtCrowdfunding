@@ -144,7 +144,7 @@
                     if ( result.success ) {
 
                     } else {
-                        layer.msg("分类关系保存失败", {time:1000, icon:5, shift:6});
+                        layer.msg("分类关系保存失败");
                     }
                 }
             });
@@ -163,7 +163,7 @@
                     if ( result.success ) {
 
                     } else {
-                        layer.msg("分类关系删除失败", {time:1000, icon:5, shift:6});
+                        layer.msg("分类关系删除失败");
                     }
                 }
             });

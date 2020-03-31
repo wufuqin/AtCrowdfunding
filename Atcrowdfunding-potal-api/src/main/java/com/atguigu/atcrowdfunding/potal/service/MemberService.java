@@ -60,6 +60,8 @@ public interface MemberService {
     //根据账号查询会员信息
     Member queryMemberByAcct(String loginacct);
 
+    //修改会员的账号激活状态 status = "Y"
+    int updateMemberStatusByLoginacct(String loginacct);
 }
 
 

@@ -69,7 +69,7 @@ public class DispatcherController {
             member.setUsertype(usertype);
 
             //设置会员刚刚注册时的默认信息
-            member.setLoginacct(username);
+            member.setLoginacct(tel);
             member.setAuthstatus(Const.MEMBER_STATUS);
 
             //从session域中获取程序生成的验证码
@@ -83,9 +83,12 @@ public class DispatcherController {
                 result.setSuccess(false);
                 return result;
             }
-
             //保存会员
             memberService.saveMember(member);
+            String loginacct = member.getLoginacct();
+
+            //给注册用户发送激活邮件链接
+            SendEmail.sendEmial(email,"激活账号","<a href='http://localhost:8080/activateAccount.do?loginacct="+loginacct+"'>点击激活</a>");
             result.setSuccess(true);
         } catch (Exception e) {
             result.setSuccess(false);
@@ -153,6 +156,7 @@ public class DispatcherController {
     @ResponseBody
     @RequestMapping("/doLogin")
     public Object doLogin(String loginacct,String userpswd, String checkCode, String type,HttpSession session){
+
         //请求结果封装对象
         AjaxResult result = new AjaxResult();
         try {
@@ -174,6 +178,13 @@ public class DispatcherController {
                 return result;
             }
             if("member".equals(type)){
+                //查询会员用户是否已经激活
+                Member memberStatus = memberService.queryMemberLogin(paramMap);
+                if (memberStatus.getStatus().equals("N")){
+                    result.setMessage("用户没有激活，请先去激活");
+                    result.setSuccess(false);
+                    return result;
+                }
                 Member member = memberService.queryMemberLogin(paramMap);
                 session.setAttribute(Const.LOGIN_MEMBER, member);
             }
@@ -289,6 +300,14 @@ public class DispatcherController {
         return "regTime";
     }
 
+    //激活注册会员账号
+    @RequestMapping("/activateAccount")
+    public Object activateAccount(String loginacct){
+        //修改会员的账号激活状态 status = "Y"
+        memberService.updateMemberStatusByLoginacct(loginacct);
+        System.out.println(loginacct);
+        return "activateAccount";
+    }
 
 
 }

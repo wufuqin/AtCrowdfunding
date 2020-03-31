@@ -146,14 +146,14 @@
             success : function (result) {
                 layer.close(loadingIndex);
                 if (result.success) {
-                    layer.msg("数据保存成功",{time:2000, icon:6, shift:6});
-                    setTimeout(function () {{window.location.href="${APP_PATH}/user/index.htm"}},2000);
+                    layer.msg("数据保存成功");
+                    setTimeout(function () {{window.location.href="${APP_PATH}/user/index.htm"}},1000);
                 }else {
-                    layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    layer.msg(result.message);
                 }
             },
             error : function () {
-                layer.msg("数据保存失败",{time:2000, icon:5, shift:6});
+                layer.msg("数据保存失败");
             }
         });
     }

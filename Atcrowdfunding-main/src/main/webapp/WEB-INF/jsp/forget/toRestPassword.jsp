@@ -80,28 +80,28 @@
         var fcheckCode = $("#fcheckCode");
 
         if ($.trim(floginacct.val()) == "") {
-            layer.msg("账号不能为空", {time:3000, icon:5, shift:6});
+            layer.msg("账号不能为空");
             floginacct.val("");   //输入框重新设置为空
             floginacct.focus();   //重新获取焦点
             return false;
         }
 
         if ($.trim(fuserpswd.val()) == "") {
-            layer.msg("密码不能为空", {time:3000, icon:5, shift:6});
+            layer.msg("密码不能为空");
             fuserpswd.val("");   //输入框重新设置为空
             fuserpswd.focus();   //重新获取焦点
             return false;
         }
 
         if ($.trim(ffuserpswd.val()) == "") {
-            layer.msg("密码不能为空", {time:3000, icon:5, shift:6});
+            layer.msg("密码不能为空");
             ffuserpswd.val("");   //输入框重新设置为空
             ffuserpswd.focus();   //重新获取焦点
             return false;
         }
 
         if ($.trim(fcheckCode.val()) == "") {
-            layer.msg("验证码不能为空", {time:3000, icon:5, shift:6});
+            layer.msg("验证码不能为空");
             fcheckCode.val("");   //输入框重新设置为空
             fcheckCode.focus();   //重新获取焦点
             return false;
@@ -125,12 +125,12 @@
                     layer.close(loadingIndex);
                     window.location.href = "${APP_PATH}/restTime.htm";
                 }else {
-                    layer.msg(result.message, {time:2000, icon:5, shift:6});
+                    layer.msg(result.message);
                     refreshCode(); // 刷新验证码
                 }
             },
             error : function () {
-                layer.msg("密码重置失败", {time:2000, icon:5, shift:6});
+                layer.msg("密码重置失败");
                 refreshCode(); // 刷新验证码
             }
         });

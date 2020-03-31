@@ -72,6 +72,7 @@ public class MemberServiceImpl implements MemberService {
     //保存会员
     @Override
     public void saveMember(Member member) {
+        member.setStatus("N");
         memberMapper.insert(member);
     }
 
@@ -172,6 +173,13 @@ public class MemberServiceImpl implements MemberService {
     public Member queryMemberByAcct(String loginacct) {
         return memberMapper.queryMemberByAcct(loginacct);
     }
+
+    //修改会员的账号激活状态 status = "Y"
+    @Override
+    public int updateMemberStatusByLoginacct(String loginacct) {
+        return memberMapper.updateMemberStatusByLoginacct(loginacct);
+    }
+
 
 
 

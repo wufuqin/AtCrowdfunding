@@ -158,20 +158,20 @@
                 url : "${APP_PATH}/role/doAssignPermission.do",
                 data : jsonObj,
                 beforeSend : function(){
-                    loadingIndex = layer.msg('正在分配许可...', {icon: 16,shift:5});
+                    loadingIndex = layer.msg('正在分配许可...', {icon: 16});
                     return true ;
                 },
                 success : function(result){
                     layer.close(loadingIndex);
                     if(result.success){
-                        layer.msg("分配成功", {time:2000, icon:6, shift:5});
-                        setTimeout(function () {{window.location.href="${APP_PATH}/role/index.htm"}},1500);
+                        layer.msg("分配成功");
+                        setTimeout(function () {{window.location.href="${APP_PATH}/role/index.htm"}},1000);
                     }else{
-                        layer.msg("分配失败", {time:1000, icon:5, shift:5});
+                        layer.msg("分配失败");
                     }
                 },
                 error : function(){
-                    layer.msg("操作失败!", {time:1000, icon:5, shift:5});
+                    layer.msg("操作失败!");
                 }
             });
     });

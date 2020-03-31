@@ -155,7 +155,7 @@
                     var data = page.datas;
                     /*判断返回的集合中是否有数据*/
                     if (data.length == 0){
-                        layer.msg("目前没有查询到项目信息",{time:2000, icon:6, shift:6});
+                        layer.msg("目前没有查询到项目信息");
                         return false;
                     }
                     var content = '';
@@ -204,11 +204,11 @@
                         next_text : "下一页"
                     });
                 } else {
-                    layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    layer.msg(result.message);
                 }
             },
             error : function () {
-                layer.msg("数据加载失败",{time:2000, icon:5, shift:6});
+                layer.msg("数据加载失败");
             }
         });
     }
@@ -237,7 +237,7 @@
                     var data = page.datas;
                     /*判断返回的集合中是否有数据*/
                     if (data.length == 0){
-                        layer.msg("目前没有查询到项目信息",{time:2000, icon:6, shift:6});
+                        layer.msg("目前没有查询到项目信息");
                         return false;
                     }
                     var content = '';
@@ -286,11 +286,11 @@
                         next_text : "下一页"
                     });
                 } else {
-                    layer.msg(result.message,{time:2000, icon:5, shift:6});
+                    layer.msg(result.message);
                 }
             },
             error : function () {
-                layer.msg("数据加载失败",{time:2000, icon:5, shift:6});
+                layer.msg("数据加载失败");
             }
         });
     }
@@ -319,11 +319,11 @@
                         //设置定时，让提示框显示一定时间
                         window.location.href="${APP_PATH}/project/index.htm";
                     }else {
-                        layer.msg(result.message,{time:2000, icon:5, shift:6});
+                        layer.msg(result.message);
                     }
                 },
                 error : function () {
-                    layer.msg("数据删除失败",{time:2000, icon:5, shift:6});
+                    layer.msg("数据删除失败");
                 }
             });
         }, function (cindex) {
@@ -349,7 +349,7 @@
 
         //判断是否有选中的数据
         if (selectCheckbox.length==0) {
-            layer.msg("请选择要删除的广告",{time:2000, icon:6, shift:6});
+            layer.msg("请选择要删除的广告");
             return false;
         }
 
@@ -380,11 +380,11 @@
                         //设置定时，让提示框显示一定时间
                         setTimeout(function () {{window.location.href="${APP_PATH}/project/index.htm"}},1000);
                     }else {
-                        layer.msg(result.message,{time:2000, icon:5, shift:6});
+                        layer.msg(result.message);
                     }
                 },
                 error : function () {
-                    layer.msg("数据删除失败",{time:2000, icon:5, shift:6});
+                    layer.msg("数据删除失败");
                 }
             });
         }, function (cindex) {
