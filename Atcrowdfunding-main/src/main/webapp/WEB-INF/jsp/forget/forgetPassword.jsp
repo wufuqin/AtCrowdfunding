@@ -25,16 +25,16 @@
     </div>
 </nav>
 <div class="container">
-    <form id="loginForm" class="form-signin" role="form">
+    <form id="restPasswordEmailForm" class="form-signin" role="form">
         <h2 class="form-signin-heading"><i class="glyphicon glyphicon-log-in"></i> 发送重置密码邮件</h2>
         <div class="form-group has-success has-feedback">
-            <input type="text" class="form-control" id="femail" placeholder="请输入邮箱" autofocus>
+            <input type="text" class="form-control" id="email" name="email" placeholder="请输入邮箱" autofocus>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
         <div class="form-group has-success has-feedback">
             <div class="row">
                 <div class="col-md-6">
-                    <input type="text" class="form-control" id="fcheckCode" placeholder="请输入验证码">
+                    <input type="text" class="form-control" id="checkCode" name="checkCode" placeholder="请输入验证码">
                 </div>
                 <a href="javascript:refreshCode();">
                     <img src="${APP_PATH}/CheckCodeServlet" title="看不清" id="vcode"/>
@@ -53,6 +53,9 @@
 <script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
+<script src="${APP_PATH}/jquery/jQuery.validate/jquery.validate.min.js"></script>
+<script src="${APP_PATH}/script/checkRestPasswordEmail.js"></script>
+
 <%--切换验证码--%>
 <script>
     function refreshCode(){
@@ -67,22 +70,6 @@
         //获取用户输入的邮箱和验证码
         var email = $("#femail");
         var checkCode = $("#fcheckCode");
-
-        //对邮箱数据进行校验
-        if ($.trim(email.val()) == "") {
-            layer.msg("邮箱不能为空");
-            email.val("");   //输入框重新设置为空
-            email.focus();   //重新获取焦点
-            return false;
-        }
-
-        //对邮箱数据进行校验
-        if ($.trim(checkCode.val()) == "") {
-            layer.msg("验证码不能为空");
-            checkCode.val("");   //输入框重新设置为空
-            checkCode.focus();   //重新获取焦点
-            return false;
-        }
 
         $.ajax({
             type : "POST",

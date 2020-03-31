@@ -25,26 +25,23 @@
     </div>
 </nav>
 <div class="container">
-    <form id="restForm" class="form-signin" role="form">
+    <form id="restPasswordForm" class="form-signin" role="form">
         <h2 class="form-signin-heading"><i class="glyphicon glyphicon-log-in"></i> 重置密码</h2>
         <div class="form-group has-success has-feedback">
-            <input type="text" class="form-control" id="floginacct" placeholder="请输入账户或者注册时的手机号" autofocus>
-            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            <input type="text" class="form-control" id="loginacct" name="loginacct" placeholder="请输入账户或者注册时的手机号" autofocus>
         </div>
 
         <div class="form-group has-success has-feedback">
-            <input type="password" class="form-control" id="fuserpswd" placeholder="请输入密码" autofocus>
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            <input type="password" class="form-control" id="userpswd" name="userpswd" placeholder="请输入密码" autofocus>
         </div>
         <div class="form-group has-success has-feedback">
-            <input type="password" class="form-control" id="ffuserpswd" placeholder="请再次输入密码" autofocus>
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="请再次输入密码" autofocus>
         </div>
 
         <div class="form-group has-success has-feedback">
             <div class="row">
                 <div class="col-md-6">
-                    <input type="text" class="form-control" id="fcheckCode" placeholder="请输入验证码">
+                    <input type="text" class="form-control" id="checkCode" name="checkCode" placeholder="请输入验证码">
                 </div>
                 <a href="javascript:refreshCode();">
                     <img src="${APP_PATH}/CheckCodeServlet" title="看不清" id="vcode"/>
@@ -53,7 +50,7 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <a type="button" class="btn btn-info form-control" style="width: 136px" onclick="restPassword()">确认</a>
+                <a type="button"  class="btn btn-info form-control" style="width: 136px" onclick="restPassword()">确认</a>
             </div>
             <a type="button" class="btn btn-info form-control" style="width: 150px" href="${APP_PATH}/login.htm"> 返回</a>
         </div>
@@ -63,6 +60,8 @@
 <script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
+<script src="${APP_PATH}/jquery/jQuery.validate/jquery.validate.min.js"></script>
+<script src="${APP_PATH}/script/checkRestPassword.js"></script>
 <%--切换验证码--%>
 <script>
     function refreshCode(){
@@ -78,34 +77,6 @@
         var fuserpswd = $("#fuserpswd");
         var ffuserpswd = $("#ffuserpswd");
         var fcheckCode = $("#fcheckCode");
-
-        if ($.trim(floginacct.val()) == "") {
-            layer.msg("账号不能为空");
-            floginacct.val("");   //输入框重新设置为空
-            floginacct.focus();   //重新获取焦点
-            return false;
-        }
-
-        if ($.trim(fuserpswd.val()) == "") {
-            layer.msg("密码不能为空");
-            fuserpswd.val("");   //输入框重新设置为空
-            fuserpswd.focus();   //重新获取焦点
-            return false;
-        }
-
-        if ($.trim(ffuserpswd.val()) == "") {
-            layer.msg("密码不能为空");
-            ffuserpswd.val("");   //输入框重新设置为空
-            ffuserpswd.focus();   //重新获取焦点
-            return false;
-        }
-
-        if ($.trim(fcheckCode.val()) == "") {
-            layer.msg("验证码不能为空");
-            fcheckCode.val("");   //输入框重新设置为空
-            fcheckCode.focus();   //重新获取焦点
-            return false;
-        }
 
         $.ajax({
             type : "POST",

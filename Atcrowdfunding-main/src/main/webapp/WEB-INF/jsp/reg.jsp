@@ -30,25 +30,21 @@
     <form class="form-signin" role="form" id="registerForm" action="member">
         <h2 class="form-signin-heading"><i class="glyphicon glyphicon-log-in"></i> 用户注册</h2>
         <div class="form-group has-success has-feedback">
-            <input type="text" class="form-control" id="ftel" placeholder="请输入手机号：11位" autofocus>
-            <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+            <input type="text" class="form-control" id="tel" name="tel" placeholder="请输入手机号：11位" autofocus>
         </div>
         <div class="form-group has-success has-feedback">
-            <input type="text" class="form-control" id="fusername" placeholder="请输入用户名" autofocus>
-            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名" autofocus>
         </div>
         <div class="form-group has-success has-feedback">
-            <input type="password" class="form-control" id="fuserpswd" placeholder="请输入密码：6-18位" style="margin-top:10px;">
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            <input type="password" class="form-control" id="userpswd" name="userpswd" placeholder="请输入密码：6-18位" style="margin-top:10px;">
         </div>
         <div class="form-group has-success has-feedback">
-            <input type="text" class="form-control" id="femail" placeholder="请输入邮箱：***@qq.com" style="margin-top:10px;">
-            <span class="glyphicon glyphicon glyphicon-envelope form-control-feedback"></span>
+            <input type="email" class="form-control" id="email" name="email" placeholder="请输入邮箱：***@qq.com" style="margin-top:10px;">
         </div>
         <div class="form-group has-success has-feedback">
             <div class="row">
                 <div class="col-md-6">
-                    <input type="text" class="form-control" id="fcode" placeholder="请输入验证码">
+                    <input type="text" class="form-control" id="code" name="code" placeholder="请输入验证码">
                 </div>
                 <button id="getCode" style="width: 150px" type="button" class="form-control btn btn-lg ">获取验证码</button>
             </div>
@@ -78,53 +74,19 @@
 <script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
+<script src="${APP_PATH}/jquery/jQuery.validate/jquery.validate.min.js"></script>
+<script src="${APP_PATH}/script/checkReg.js"></script>
 
 <%--注册--%>
 <script>
     function doRge() {
         //获取用户输入的注册信息
-        var tel = $("#ftel");
-        var username = $("#fusername");
-        var userpswd = $("#fuserpswd");
-        var email = $("#femail");
-        var code = $("#fcode");
+        var tel = $("#tel");
+        var username = $("#username");
+        var userpswd = $("#userpswd");
+        var email = $("#email");
+        var code = $("#code");
         var usertype = $("#fusertype");
-
-        //对手机号数据进行校验
-        if ($.trim(tel.val()) == "") {
-            layer.msg("手机号不能为空");
-            tel.val("");   //输入框重新设置为空
-            tel.focus();   //重新获取焦点
-            return false;
-        }
-        //对用户名数据进行校验
-        if ($.trim(username.val()) == "") {
-            layer.msg("用户名不能为空");
-            username.val("");   //输入框重新设置为空
-            username.focus();   //重新获取焦点
-            return false;
-        }
-        //对密码数据进行校验
-        if ($.trim(userpswd.val()) == "") {
-            layer.msg("密码不能为空");
-            userpswd.val("");   //输入框重新设置为空
-            userpswd.focus();   //重新获取焦点
-            return false;
-        }
-        //对验证码数据进行校验
-        if ($.trim(email.val()) == "") {
-            layer.msg("邮箱不能为空");
-            email.val("");   //输入框重新设置为空
-            email.focus();   //重新获取焦点
-            return false;
-        }
-        //对验证码数据进行校验
-        if ($.trim(code.val()) == "") {
-            layer.msg("验证码不能为空");
-            code.val("");   //输入框重新设置为空
-            code.focus();   //重新获取焦点
-            return false;
-        }
 
         $.ajax({
             type : "POST",
@@ -162,48 +124,13 @@
     var flag = 60;
     code.onclick = function () {
 
-        //获取用户输入的注册信息
-        var tel = $("#ftel");
-        var username = $("#fusername");
-        var userpswd = $("#fuserpswd");
-        var email = $("#femail");
-
-        //对手机号数据进行校验
-        if ($.trim(tel.val()) == "") {
-            layer.msg("手机号不能为空");
-            tel.val("");   //输入框重新设置为空
-            tel.focus();   //重新获取焦点
-            return false;
-        }
-        //对用户名数据进行校验
-        if ($.trim(username.val()) == "") {
-            layer.msg("用户名不能为空");
-            username.val("");   //输入框重新设置为空
-            username.focus();   //重新获取焦点
-            return false;
-        }
-        //对密码数据进行校验
-        if ($.trim(userpswd.val()) == "") {
-            layer.msg("密码不能为空");
-            userpswd.val("");   //输入框重新设置为空
-            userpswd.focus();   //重新获取焦点
-            return false;
-        }
-        //对验证码数据进行校验
-        if ($.trim(email.val()) == "") {
-            layer.msg("邮箱不能为空");
-            email.val("");   //输入框重新设置为空
-            email.focus();   //重新获取焦点
-            return false;
-        }
-
         $("#getCode").prop("class","btn btn-lg btn-success");
         if (flag < 60) {
             return;
         }
 
         var xhr = new XMLHttpRequest();
-        xhr.open("get", "${APP_PATH}/CheckCode?tel=" +document.getElementById("ftel").value, true);
+        xhr.open("get", "${APP_PATH}/CheckCode?tel=" +document.getElementById("tel").value, true);
         //监听请求状态
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && status == 200) {
