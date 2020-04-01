@@ -1,26 +1,19 @@
 $(document).ready(function() {
-
-    $("#restPasswordEmailForm").validate({
+    $("#addProjectForm").validate({
         errorElement : 'span',
         errorClass : 'help-block',
-
         rules : {
-            email : {
-                required : true,
-                email : true
-            },
-            checkCode : {
-                required : true
-            },
+            name : "required",
+            remark : "required",
+            money : "required",
+            day : "required",
 
         },
         messages : {
-            email : {
-                required : "请输入Email地址",
-                email : "请输入正确的email地址"
-            },
-            checkCode : "请输入验证码"
-
+            name : "请输入项目名称",
+            remark : "请输入项目简介",
+            money : "请输入筹资金额",
+            day : "请输入筹资天数",
         },
 
         errorPlacement : function(error, element) {
@@ -41,7 +34,9 @@ $(document).ready(function() {
             label.remove();
         },
         submitHandler: function() {
-            restPassword();
+            addProject();
         }
     })
 });
+
+

@@ -8,9 +8,12 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse" style="float:right;">
         <ul class="nav navbar-nav">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> ${sessionScope.member.username}<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
+            <li style="padding-top:8px">
+                <button type="button" class="btn btn-default btn-success dropdown-toggle" data-toggle="dropdown">
+                    <i class="glyphicon glyphicon-user"></i> ${sessionScope.member.username} <span class="caret"></span>
+                </button>
+                    <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> ${sessionScope.member.username}<span class="caret"></span></a>--%>
+                    <ul class="dropdown-menu" role="menu">
                     <li><a href="${APP_PATH}/member/setting.htm"><i class="glyphicon glyphicon-scale"></i> 会员中心</a></li>
                     <%--<li><a href="#"><i class="glyphicon glyphicon-comment"></i> 消息</a></li>--%>
                     <li class="divider"></li>

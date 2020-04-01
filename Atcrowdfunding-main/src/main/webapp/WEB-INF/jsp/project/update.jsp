@@ -35,9 +35,6 @@
                 <%-- 包含页面头部 --%>
                 <jsp:include page="/WEB-INF/jsp/common/top.jsp"/>
             </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
         </div>
     </div>
 </nav>
@@ -59,26 +56,26 @@
             <div class="panel panel-default">
                 <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
                 <div class="panel-body">
-                    <form id="updateRoleForm">
+                    <form id="updateProjectForm">
 
-                        <div class="form-group">
+                        <div class="form-group" style="width: 300px">
                             <label for="name">项目名称</label>
-                            <input type="text" class="form-control" id="name" value="${project.name}" placeholder="请输入项目名称">
+                            <input type="text" class="form-control" id="name" name="name" value="${project.name}" placeholder="请输入项目名称">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="width: 300px">
                             <label for="remark">项目简介</label>
-                            <input type="text" class="form-control" id="remark" value="${project.remark}" placeholder="请输入项目简介">
+                            <input type="text" class="form-control" id="remark" name="remark" value="${project.remark}" placeholder="请输入项目简介">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="width: 300px">
                             <label for="money">筹资金额</label>
-                            <input type="text" class="form-control" id="money" value="${project.money}" placeholder="请输入筹资金额">
+                            <input type="text" class="form-control" id="money" name="money" value="${project.money}" placeholder="请输入筹资金额">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="width: 300px">
                             <label for="day">筹资天数</label>
-                            <input type="text" class="form-control" id="day" value="${project.day}" placeholder="请输入筹资天数">
+                            <input type="text" class="form-control" id="day" name="day" value="${project.day}" placeholder="请输入筹资天数">
                         </div>
-                        <button onclick="updateProject()" type="button" class="btn btn-success"><i class="glyphicon glyphicon-edit"></i> 修改</button>
-                        <button onclick="resetProjectForm()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-edit"></i> 修改</button>
+                        <button type="reset" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
                     </form>
                 </div>
             </div>
@@ -110,6 +107,8 @@
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script src="${APP_PATH}/script/menu.js"></script>
+<script src="${APP_PATH}/jquery/jQuery.validate/jquery.validate.min.js"></script>
+<script src="${APP_PATH}/script/checkUpdateProject.js"></script>
 <script type="text/javascript">
     $(function () {
         $(".list-group-item").click(function(){
@@ -164,14 +163,6 @@
                 layer.msg("数据修改失败");
             }
         });
-    }
-</script>
-
-<%--重置表单数据--%>
-<script>
-    function resetProjectForm() {
-        //jQuery没有reset函数，使用需要性转换为dom对象使用 [0]
-        $("#updateRoleForm")[0].reset();
     }
 </script>
 

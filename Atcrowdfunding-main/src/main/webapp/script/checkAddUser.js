@@ -18,7 +18,7 @@ $(document).ready(function() {
         return this.optional(element) || /[^A-Za-z0-9]/.test(str);
     }, "以字母开头，长度在6-12之间，必须包含数字和特殊字符。");
 
-    $("#restPasswordForm").validate({
+    $("#addUserForm").validate({
         errorElement : 'span',
         errorClass : 'help-block',
 
@@ -27,35 +27,22 @@ $(document).ready(function() {
                 required : true,
                 loginacct_tel : true
             },
-            userpswd : {
+            email : {
                 required : true,
-                isPwd : true
+                email : true
             },
-            confirm_password : {
-                required : true,
-                isPwd : true,
-                equalTo : "#userpswd"
-            },
-            checkCode : {
-                required : true
-            },
-
+            username : "required",
         },
+
         messages : {
             loginacct : {
                 required : "请输入手机号"
             },
-            userpswd : {
-                required : "请输入密码",
-                minlength : jQuery.format("密码不能小于{0}个字 符")
+            email : {
+                required : "请输入Email地址",
+                email : "请输入正确的email地址"
             },
-            confirm_password : {
-                required : "请输入确认密码",
-                minlength : "确认密码不能小于6个字符",
-                equalTo : "两次输入密码不一致"
-            },
-            checkCode : "请输入验证码"
-
+            username : "请输入用户名",
         },
 
         errorPlacement : function(error, element) {
@@ -76,7 +63,7 @@ $(document).ready(function() {
             label.remove();
         },
         submitHandler: function() {
-            restPassword();
+            addUser();
         }
     })
 });

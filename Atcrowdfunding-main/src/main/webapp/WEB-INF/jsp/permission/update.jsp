@@ -61,18 +61,17 @@
                 <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
                 <div class="panel-body">
                     <form id="updatePermissionForm">
-                        <div class="form-group">
-                            <label for="fname">许可名称</label>
-                            <input type="text" class="form-control" id="fname" value="${permission.name }" placeholder="请输入许可名称">
+                        <div class="form-group" style="width: 300px">
+                            <label for="name">许可名称</label>
+                            <input type="text" class="form-control" id="name" name="name" value="${permission.name }" placeholder="请输入许可名称">
                         </div>
-                        <div class="form-group">
-                            <label for="furl">许可URL</label>
-                            <input type="email" class="form-control" id="furl" value="${permission.url }" placeholder="请输入许可URL">
-                            <p class="help-block label label-warning">请输入许可URL</p>
+                        <div class="form-group" style="width: 300px">
+                            <label for="url">许可地址</label>
+                            <input type="text" class="form-control" id="url" name="url" value="${permission.url }" placeholder="请输入许可地址">
                         </div>
 
-                        <button id="updatePermissionBtn" type="button" class="btn btn-success"><i class="glyphicon glyphicon-pencil"></i> 修改</button>
-                        <button onclick="resetPermissionBtn()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-pencil"></i> 修改</button>
+                        <button type="reset" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
                     </form>
                 </div>
             </div>
@@ -104,6 +103,8 @@
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script src="${APP_PATH}/script/menu.js"></script>
+<script src="${APP_PATH}/jquery/jQuery.validate/jquery.validate.min.js"></script>
+<script src="${APP_PATH}/script/checkUpdatePermission.js"></script>
 <script type="text/javascript">
     $(function () {
         $(".list-group-item").click(function(){
@@ -122,16 +123,16 @@
 
 <%--修改许可--%>
 <script>
-    $("#updatePermissionBtn").click(function(){
+    function updatePermission() {
 
-        var fname = $("#fname");
-        var furl = $("#furl");
+        var name = $("#name");
+        var url = $("#url");
 
         $.ajax({
             type : "POST",
             data : {
-                "name" : fname.val(),
-                "url" : furl.val(),
+                "name" : name.val(),
+                "url" : url.val(),
                 "icon" : "glyphicon glyphicon-user",
                 "id" :  "${permission.id}"
             },
@@ -153,17 +154,8 @@
                 layer.msg("保存失败...");
             }
         });
+    }
 
-    });
-
-</script>
-
-<%--重置表单数据--%>
-<script>
-function resetPermissionBtn() {
-    //jQuery没有reset函数，使用需要性转换为dom对象使用 [0]
-    $("#updatePermissionForm")[0].reset();
-}
 </script>
 
 </body>

@@ -1,49 +1,45 @@
 $(document).ready(function() {
 
-    // 手机号码验证(登录账号)
-    jQuery.validator.addMethod("reg_loginacct", function(value, element) {
+    // 身份证号码验证
+    jQuery.validator.addMethod("isIdCardNo", function(value, element) {
+        return this.optional(element) || idCardNoUtil.checkIdCardNo(value);//调用验证的方法
+    }, "请正确填写身份证号码");
+
+    // 手机号码验证
+    jQuery.validator.addMethod("tel_tel", function(value, element) {
         var length = value.length;
         return this.optional(element) || (length == 11 && /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(value));
-    }, "请正确填写登录账号");
+    }, "请正确填写您的手机号码");
 
-    // 匹配密码，以字母开头，长度在6-12之间，必须包含数字和特殊字符。
-    jQuery.validator.addMethod("password", function(value, element) {
-        var str = value;
-        if (str.length < 6 || str.length > 18)
-            return false;
-        if (!/^[a-zA-Z]/.test(str))
-            return false;
-        if (!/[0-9]/.test(str))
-            return false;
-        return this.optional(element) || /[^A-Za-z0-9]/.test(str);
-    }, "字母开头,6-12位数之间,包含数字和特殊字符");
 
-    $("#loginForm").validate({
+    $("#updateMemberBasicInfoForm").validate({
         errorElement : 'span',
         errorClass : 'help-block',
+        onkeyup : function(element, event) {
+            //输入无效空格，去除左侧空格
+            var value = this.elementValue(element).replace(/^\s+/g, "");
+            $(element).val(value);
+        },
 
         rules : {
-            loginacct : {
+            realname : "required",
+            cardnum: "isIdCardNo",//添加验证方法
+            tel : {
                 required : true,
-                reg_loginacct : true
-            },
-            userpswd : {
-                required : true,
-                password : true
-            },
-            checkCode : {
-                required : true
-            },
+                tel_tel : true
+            }
 
         },
         messages : {
-            loginacct : {
-                required : "请输入账号"
+            realname : "请输入真实姓名",
+            cardnum: {
+                required: "请填写身份证号码"
             },
-            userpswd : {
-                required : "请输入密码"
-            },
-            checkCode : "请输入验证码"
+
+            tel : {
+                required : "请输入您的手机号"
+            }
+
         },
 
         errorPlacement : function(error, element) {
@@ -64,7 +60,9 @@ $(document).ready(function() {
             label.remove();
         },
         submitHandler: function() {
-            doLogin();
+            updateMemberBasicInfo();
         }
     })
 });
+
+

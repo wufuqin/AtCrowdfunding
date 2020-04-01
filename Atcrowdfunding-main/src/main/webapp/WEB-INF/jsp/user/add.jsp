@@ -56,21 +56,20 @@
             <div class="panel panel-default">
                 <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
                 <div class="panel-body">
-                    <form id="addForm">
-                        <div class="form-group">
-                            <label for="floginacct">登陆账号</label>
-                            <input type="text" class="form-control" id="floginacct" placeholder="请输入登陆账号">
+                    <form id="addUserForm">
+                        <div class="form-group" style="width: 300px">
+                            <label for="loginacct">登陆账号</label>
+                            <input type="text" class="form-control" id="loginacct" name="loginacct" placeholder="请输入手机号">
                         </div>
-                        <div class="form-group">
-                            <label for="fusername">用户名称</label>
-                            <input type="text" class="form-control" id="fusername" placeholder="请输入用户名称">
+                        <div class="form-group" style="width: 300px">
+                            <label for="username">用户名称</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名称">
                         </div>
-                        <div class="form-group">
-                            <label for="femail">邮箱地址</label>
-                            <input type="email" class="form-control" id="femail" placeholder="请输入邮箱地址">
-                            <p class="help-block label label-warning">请输入合法的邮箱地址, 格式为： xxxx@xxxx.com</p>
+                        <div class="form-group" style="width: 300px">
+                            <label for="email">邮箱地址</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="请输入邮箱地址xxxx@xxxx.com">
                         </div>
-                        <button onclick="addUser()" type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 新增</button>
                         <button onclick="resetForm()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
                     </form>
                 </div>
@@ -103,6 +102,8 @@
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script src="${APP_PATH}/script/menu.js"></script>
+<script src="${APP_PATH}/jquery/jQuery.validate/jquery.validate.min.js"></script>
+<script src="${APP_PATH}/script/checkAddUser.js"></script>
 <script type="text/javascript">
     /*入口函数*/
     $(function () {
@@ -125,16 +126,16 @@
 <script>
     function addUser() {
         //获取添加的用户的信息
-        var floginacct = $("#floginacct");
-        var fusername = $("#fusername");
-        var femail = $("#femail");
+        var loginacct = $("#loginacct");
+        var username = $("#username");
+        var email = $("#email");
 
         $.ajax({
            type : "POST",
            data : {
-               "loginacct" : floginacct.val(),
-               "username" : fusername.val(),
-               "email" : femail.val()
+               "loginacct" : loginacct.val(),
+               "username" : username.val(),
+               "email" : email.val()
            },
             url : "${APP_PATH}/user/doAdd.do",
             beforeSend : function () {
@@ -163,7 +164,7 @@
 <script>
     function resetForm() {
         //jQuery没有reset函数，使用需要性转换为dom对象使用 [0]
-        $("#addForm")[0].reset();
+        $("#addUserForm")[0].reset();
     }
 </script>
 

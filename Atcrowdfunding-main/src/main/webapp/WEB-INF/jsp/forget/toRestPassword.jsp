@@ -50,7 +50,7 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <a type="button"  class="btn btn-info form-control" style="width: 136px" onclick="restPassword()">确认</a>
+                <button type="submit" class="btn btn-info form-control" style="width: 136px">确认</button>
             </div>
             <a type="button" class="btn btn-info form-control" style="width: 150px" href="${APP_PATH}/login.htm"> 返回</a>
         </div>

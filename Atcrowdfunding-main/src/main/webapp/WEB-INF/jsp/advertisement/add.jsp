@@ -60,20 +60,20 @@
                 <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
                 <div class="panel-body">
                     <form id="addAdvertisementForm" method="POST" enctype="multipart/form-data">
-                        <div class="form-group">
+                        <div class="form-group" style="width: 300px">
                             <label for="name">广告名称</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="请输入广告名称">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="width: 300px">
                             <label for="url">广告地址</label>
-                            <input type="text" class="form-control" id="url" name="url" placeholder="请输入广告地址">
+                            <input type="url" class="form-control" id="url" name="url" placeholder="请输入广告地址">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="width: 300px">
                             <label for="advertPicture">广告图片</label>
                             <input type="file" class="form-control" id="advertPicture" name="advertPicture" placeholder="请输入广告图片">
                         </div>
-                        <button onclick="addAdvertisement()" type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 新增</button>
-                        <button onclick="resetAdvertisementForm()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+                        <button type="reset" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
                     </form>
                 </div>
             </div>
@@ -106,6 +106,8 @@
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script src="${APP_PATH }/jquery/jquery-form/jquery-form.min.js"></script>
 <script src="${APP_PATH}/script/menu.js"></script>
+<script src="${APP_PATH}/jquery/jQuery.validate/jquery.validate.min.js"></script>
+<script src="${APP_PATH}/script/checkAddAdvertisement.js"></script>
 <script type="text/javascript">
     /*入口函数*/
     $(function () {
@@ -129,7 +131,7 @@ function addAdvertisement() {
         var options = {
             url:"${APP_PATH}/advertisement/doAdd.do",
             beforeSubmit : function(){
-                loadingIndex = layer.msg('数据正在保存中', {icon: 6});
+                loadingIndex = layer.msg('数据正在保存中', {icon: 16});
                 return true ; //必须返回true,否则,请求终止.
             },
             success : function(result){
@@ -147,14 +149,5 @@ function addAdvertisement() {
         return ;
     }
 </script>
-
-<%--重置广告信息--%>
-<script>
-    function resetAdvertisementForm() {
-        //jQuery没有reset函数，使用需要性转换为dom对象使用 [0]
-        $("#addAdvertisementForm")[0].reset();
-    }
-</script>
-
 </body>
 </html>

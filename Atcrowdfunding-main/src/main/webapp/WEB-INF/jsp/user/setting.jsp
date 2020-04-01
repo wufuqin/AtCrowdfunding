@@ -57,30 +57,30 @@
                 <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
                 <div class="panel-body">
                     <form id="userSettingForm">
-                        <div class="form-group">
-                            <label for="floginacct">登陆账号</label>
-                            <input disabled type="text" class="form-control" value="${loginacct}" id="floginacct">
+                        <div class="form-group" style="width: 300px">
+                            <label for="loginacct">登陆账号</label>
+                            <input disabled type="text" class="form-control" value="${loginacct}" id="loginacct" name="loginacct">
                         </div>
 
-                        <div class="form-group">
-                            <label for="fusername">用户名称</label>
-                            <input type="text" class="form-control" value="${username}" id="fusername" placeholder="请输入用户名称">
+                        <div class="form-group" style="width: 300px">
+                            <label for="username">用户名称</label>
+                            <input type="text" class="form-control" value="${username}" id="username" name="username" placeholder="请输入用户名称">
                         </div>
 
-                        <div class="form-group">
-                            <label for="fuserpswd" >用户密码</label>
-                            <input type="password" class="form-control" value="${userpswd}" id="fuserpswd" placeholder="请输入用户密码">
+                        <div class="form-group" style="width: 300px">
+                            <label for="userpswd" >用户密码</label>
+                            <input type="password" class="form-control" value="${userpswd}" id="userpswd" name="userpswd" placeholder="请输入用户密码">
                         </div>
-                        <div class="form-group">
-                            <label for="femail">邮箱地址</label>
-                            <input type="email" class="form-control" value="${email}" id="femail" placeholder="请输入邮箱地址">
+                        <div class="form-group" style="width: 300px">
+                            <label for="email">邮箱地址</label>
+                            <input type="email" class="form-control" value="${email}" id="email" name="email" placeholder="请输入邮箱地址">
                         </div>
-                        <div class="form-group">
-                            <label for="fcreatetime">注册时间</label>
-                            <input disabled type="text" value="${createtime}" class="form-control" id="fcreatetime">
+                        <div class="form-group" style="width: 300px">
+                            <label for="createtime">注册时间</label>
+                            <input disabled type="text" value="${createtime}" class="form-control" id="createtime" name="createtime">
                         </div>
-                        <button onclick="updateSetting()" type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 修改</button>
-                        <button onclick="resetUserSettingForm()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 修改</button>
+                        <button type="reset" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
                     </form>
                 </div>
             </div>
@@ -112,6 +112,8 @@
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script src="${APP_PATH}/script/menu.js"></script>
+<script src="${APP_PATH}/jquery/jQuery.validate/jquery.validate.min.js"></script>
+<script src="${APP_PATH}/script/checkUserSetting.js"></script>
 <script type="text/javascript">
     /*入口函数*/
     $(function () {
@@ -133,22 +135,21 @@
 <script>
     function updateSetting() {
         //获取添加的用户的信息
-        var floginacct = $("#floginacct");
-        var fusername = $("#fusername");
-        var fuserpswd = $("#fuserpswd");
-        var femail = $("#femail");
-        var fcreatetime = $("#fcreatetime");
-
+        var loginacct = $("#loginacct");
+        var username = $("#username");
+        var userpswd = $("#userpswd");
+        var email = $("#email");
+        var createtime = $("#createtime");
 
         $.ajax({
             type : "POST",
             data : {
                 "id" : ${id},
-                "loginacct" : floginacct.val(),
-                "username" : fusername.val(),
-                "userpswd" : fuserpswd.val(),
-                "email" : femail.val(),
-                "createtime" : fcreatetime.val()
+                "loginacct" : loginacct.val(),
+                "username" : username.val(),
+                "userpswd" : userpswd.val(),
+                "email" : email.val(),
+                "createtime" : createtime.val()
             },
             url : "${APP_PATH}/user/updateSetting.do",
             beforeSend : function () {
@@ -160,7 +161,7 @@
             success : function (result) {
                 layer.close(loadingIndex);
                 if (result.success) {
-                    layer.msg("数据修改成功",{time:2000, icon:6, shift:6});
+                    layer.msg("数据修改成功");
                     setTimeout(function () {{window.location.href="${APP_PATH}/main.htm"}},1000);
                 }else {
                     layer.msg("数据修改失败");
@@ -170,14 +171,6 @@
                 layer.msg("数据修改失败");
             }
         });
-    }
-</script>
-
-<%--重置表单数据--%>
-<script>
-    function resetUserSettingForm() {
-        //jQuery没有reset函数，使用需要性转换为dom对象使用 [0]
-        $("#userSettingForm")[0].reset();
     }
 </script>
 

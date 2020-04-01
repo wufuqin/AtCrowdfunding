@@ -1,26 +1,26 @@
 $(document).ready(function() {
 
-    $("#restPasswordEmailForm").validate({
+    // 手机号码验证(登录账号)
+    jQuery.validator.addMethod("reg_tel", function(value, element) {
+        var length = value.length;
+        return this.optional(element) || (length == 11 && /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(value));
+    }, "请填写正确手机号");
+
+    $("#registerForm").validate({
         errorElement : 'span',
         errorClass : 'help-block',
 
         rules : {
-            email : {
+            tel : {
                 required : true,
-                email : true
-            },
-            checkCode : {
-                required : true
-            },
+                reg_tel : true
+            }
 
         },
         messages : {
-            email : {
-                required : "请输入Email地址",
-                email : "请输入正确的email地址"
-            },
-            checkCode : "请输入验证码"
-
+            tel : {
+                required : "请输入手机号"
+            }
         },
 
         errorPlacement : function(error, element) {
@@ -41,7 +41,7 @@ $(document).ready(function() {
             label.remove();
         },
         submitHandler: function() {
-            restPassword();
+            getCode();
         }
     })
 });

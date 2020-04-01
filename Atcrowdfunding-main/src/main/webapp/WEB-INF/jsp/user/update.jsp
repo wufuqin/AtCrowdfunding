@@ -35,9 +35,6 @@
                 <%-- 包含页面头部 --%>
                 <jsp:include page="/WEB-INF/jsp/common/top.jsp"/>
             </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
         </div>
     </div>
 </nav>
@@ -59,22 +56,21 @@
             <div class="panel panel-default">
                 <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
                 <div class="panel-body">
-                    <form id="updateForm">
-                        <div class="form-group">
-                            <label for="floginacct">登陆账号</label>
-                            <input type="text" class="form-control" id="floginacct" value="${user.loginacct}">
+                    <form id="updateUserForm">
+                        <div class="form-group" style="width: 300px">
+                            <label for="loginacct">登陆账号</label>
+                            <input type="text" class="form-control" id="loginacct" name="loginacct" value="${user.loginacct}" placeholder="请输入账号">
                         </div>
-                        <div class="form-group">
-                            <label for="fusername">用户名称</label>
-                            <input type="text" class="form-control" id="fusername" value="${user.username}">
+                        <div class="form-group" style="width: 300px">
+                            <label for="username">用户名称</label>
+                            <input type="text" class="form-control" id="username" name="username" value="${user.username}" placeholder="请输入用户名称">
                         </div>
-                        <div class="form-group">
-                            <label for="femail">邮箱地址</label>
-                            <input type="email" class="form-control" id="femail" value="${user.email}">
-                            <p class="help-block label label-warning">请输入合法的邮箱地址, 格式为： xxxx@xxxx.com</p>
+                        <div class="form-group" style="width: 300px">
+                            <label for="email">邮箱地址</label>
+                            <input type="email" class="form-control" id="email" name="email" value="${user.email}" placeholder="请输入邮箱">
                         </div>
-                        <button onclick="updateUser()" type="button" class="btn btn-success"><i class="glyphicon glyphicon-edit"></i> 修改</button>
-                        <button onclick="resetForm()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-edit"></i> 修改</button>
+                        <button type="reset" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
                     </form>
                 </div>
             </div>
@@ -83,7 +79,7 @@
 </div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content" id="submitUpdate">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title" id="myModalLabel">帮助</h4>
@@ -106,6 +102,8 @@
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script src="${APP_PATH}/script/menu.js"></script>
+<script src="${APP_PATH}/jquery/jQuery.validate/jquery.validate.min.js"></script>
+<script src="${APP_PATH}/script/checkUpdateUser.js"></script>
 <%--入口函数--%>
 <script type="text/javascript">
     $(function () {
@@ -127,16 +125,16 @@
 <script>
     function updateUser() {
         //获取添加的用户的信息
-        var floginacct = $("#floginacct");
-        var fusername = $("#fusername");
-        var femail = $("#femail");
+        var loginacct = $("#loginacct");
+        var username = $("#username");
+        var email = $("#email");
 
         $.ajax({
             type : "POST",
             data : {
-                "loginacct" : floginacct.val(),
-                "username" : fusername.val(),
-                "email" : femail.val(),
+                "loginacct" : loginacct.val(),
+                "username" : username.val(),
+                "email" : email.val(),
                 "id" : "${user.id}"
             },
             url : "${APP_PATH}/user/doUpdate.do",
@@ -159,14 +157,6 @@
                 layer.msg("数据修改失败...");
             }
         });
-    }
-</script>
-
-<%--重置表单数据--%>
-<script>
-    function resetForm() {
-        //jQuery没有reset函数，使用需要性转换为dom对象使用 [0]
-        $("#updateForm")[0].reset();
     }
 </script>
 

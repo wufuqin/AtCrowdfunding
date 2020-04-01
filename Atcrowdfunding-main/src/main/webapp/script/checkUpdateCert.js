@@ -1,26 +1,14 @@
 $(document).ready(function() {
-
-    $("#restPasswordEmailForm").validate({
+    $("#certUpdateForm").validate({
         errorElement : 'span',
         errorClass : 'help-block',
 
         rules : {
-            email : {
-                required : true,
-                email : true
-            },
-            checkCode : {
-                required : true
-            },
-
+            name : "required",
         },
-        messages : {
-            email : {
-                required : "请输入Email地址",
-                email : "请输入正确的email地址"
-            },
-            checkCode : "请输入验证码"
 
+        messages : {
+            name : "请输入资质名"
         },
 
         errorPlacement : function(error, element) {
@@ -41,7 +29,10 @@ $(document).ready(function() {
             label.remove();
         },
         submitHandler: function() {
-            restPassword();
+            updateCert();
         }
+
     })
 });
+
+

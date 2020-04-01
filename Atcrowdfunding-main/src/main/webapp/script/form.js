@@ -18,7 +18,7 @@
 		if (!/^[a-zA-Z]/.test(str))
 			return false;
 		if (!/[0-9]/.test(str))
-			return fasle;
+			return false;
 		return this.optional(element) || /[^A-Za-z0-9]/.test(str);
 	}, "以字母开头，长度在6-12之间，必须包含数字和特殊字符。");
 
@@ -93,7 +93,7 @@
 			label.closest('.form-group').removeClass('has-error').addClass("has-feedback has-success");
 			label.remove();
 		},
-		submitHandler: function(form) { 
+		submitHandler: function(form) {
 			alert("submitted!");
 		}
 

@@ -14,10 +14,9 @@ $(document).ready(function() {
         if (!/^[a-zA-Z]/.test(str))
             return false;
         if (!/[0-9]/.test(str))
-            return fasle;
+            return false;
         return this.optional(element) || /[^A-Za-z0-9]/.test(str);
     }, "字母开头,6-12位数之间,包含数字和特殊字符");
-
 
     $("#registerForm").validate({
         errorElement : 'span',
@@ -37,9 +36,6 @@ $(document).ready(function() {
                 required : true,
                 email : true
             },
-            code : {
-                required : true
-            },
 
         },
         messages : {
@@ -54,8 +50,6 @@ $(document).ready(function() {
                 required : "请输入Email地址",
                 email : "请输入正确的email地址"
             },
-            code : "请输入验证码"
-
         },
 
         errorPlacement : function(error, element) {
@@ -75,5 +69,8 @@ $(document).ready(function() {
             label.closest('.form-group').removeClass('has-error').addClass("has-feedback has-success");
             label.remove();
         },
+        submitHandler: function() {
+            doRge();
+        }
     })
 });

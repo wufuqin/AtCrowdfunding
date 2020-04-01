@@ -104,46 +104,66 @@
                 <div class="panel-heading">个人信息<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"></div></div>
                 <div class="panel-body">
                     <form id="settingMemberForm">
-                        <div class="form-group">
-                            <label for="floginacct">登陆账号</label>
-                            <input disabled type="text" class="form-control" id="floginacct" value="${sessionScope.member.loginacct}" placeholder="请输入登陆账号">
+                        <div class="form-group" style="width: 300px">
+                            <label for="loginacct">登陆账号</label>
+                            <input disabled type="text" class="form-control" id="loginacct" name="loginacct" value="${sessionScope.member.loginacct}" placeholder="请输入登陆账号">
                         </div>
-                        <div class="form-group">
-                            <label for="floginacct">登陆密码</label>
-                            <input type="password" class="form-control" id="fuserpswd" value="${sessionScope.member.userpswd}" placeholder="请输入登陆账号">
+                        <div class="form-group" style="width: 300px">
+                            <label for="userpswd">登陆密码</label>
+                            <input type="password" class="form-control" id="userpswd" name="userpswd" value="${sessionScope.member.userpswd}" placeholder="请输入登陆账号">
                         </div>
 
-                        <div class="form-group">
-                            <label for="fusername">用户名称</label>
-                            <input type="text" class="form-control" id="fusername" value="${sessionScope.member.username}" placeholder="请输入用户名称">
+                        <div class="form-group" style="width: 300px">
+                            <label for="username">用户名称</label>
+                            <input type="text" class="form-control" id="username" name="username" value="${sessionScope.member.username}" placeholder="请输入用户名称">
                         </div>
-                        <div class="form-group">
-                            <label for="femail">邮箱地址</label>
-                            <input type="email" class="form-control" id="femail" value="${sessionScope.member.email}" placeholder="请输入邮箱地址">
+                        <div class="form-group" style="width: 300px">
+                            <label for="email">邮箱地址</label>
+                            <input type="email" class="form-control" id="email" name="email" value="${sessionScope.member.email}" placeholder="请输入邮箱地址">
                         </div>
-                        <div class="form-group">
-                            <label for="femail">实名认证状态</label>
-                            <input disabled type="email" class="form-control" id="fauthstatus" value="${sessionScope.member.authstatus}">
+                        <div class="form-group" style="width: 300px">
+                            <label for="authstatus">实名认证状态</label>
+                            <c:choose>
+                                <c:when test="${sessionScope.member.authstatus eq '0'}">
+                                    <input disabled type="text" class="form-control" id="authstatus" name="authstatus" value="未实名认证">
+                                </c:when>
+                                <c:when test="${sessionScope.member.authstatus eq '1'}">
+                                    <input disabled type="text" class="form-control" id="authstatus" name="authstatus" value="实名认证申请中">
+                                </c:when>
+                                <c:when test="${sessionScope.member.authstatus eq '2'}">
+                                    <input disabled type="text" class="form-control" id="authstatus" name="authstatus" value="已实名认证">
+                                </c:when>
+                            </c:choose>
+
                         </div>
-                        <div class="form-group">
-                            <label for="femail">用户类型</label>
-                            <input disabled type="email" class="form-control" id="fusertype" value="${sessionScope.member.usertype}">
+                        <div class="form-group" style="width: 300px">
+                            <label for="usertype">用户类型</label>
+                            <c:choose>
+                                <c:when test="${sessionScope.member.usertype eq '0'}">
+                                    <input disabled type="text" class="form-control" id="usertype" name="usertype" value="个人">
+                                </c:when>
+                                <c:when test="${sessionScope.member.usertype eq '1'}">
+                                    <input disabled type="text" class="form-control" id="usertype" name="usertype" value="企业">
+                                </c:when>
+                            </c:choose>
+
                         </div>
-                        <div class="form-group">
-                            <label for="femail">真实姓名</label>
-                            <input disabled type="email" class="form-control" id="frealname" value="${sessionScope.member.realname}">
+
+                        <div class="form-group" style="width: 300px">
+                            <label for="realname">真实姓名</label>
+                            <input disabled type="text" class="form-control" id="realname" name="realname" value="${sessionScope.member.realname}">
                         </div>
-                        <div class="form-group">
-                            <label for="femail">身份证号</label>
-                            <input disabled type="email" class="form-control" id="fcardnum" value="${sessionScope.member.cardnum}">
+                        <div class="form-group" style="width: 300px">
+                            <label for="cardnum">身份证号</label>
+                            <input disabled type="text" class="form-control" id="cardnum" name="cardnum" value="${sessionScope.member.cardnum}">
                         </div>
-                        <div class="form-group">
-                            <label for="femail">手机号</label>
-                            <input disabled type="email" class="form-control" id="ftel" value="${sessionScope.member.tel}">
+                        <div class="form-group" style="width: 300px">
+                            <label for="tel">手机号</label>
+                            <input disabled type="text" class="form-control" id="tel" name="tel" value="${sessionScope.member.tel}">
                         </div>
-                        <button onclick="updateSetting()" type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 修改</button>
-                        <button onclick="resetMemberForm()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
-                        <a href="${APP_PATH}/member.htm" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 返回</a>
+                        <button type="submit" class="btn btn-info"> 修改</button>
+                        <button type="reset" class="btn btn-info">重置</button>
+                        <a href="${APP_PATH}/member.htm" type="button" class="btn btn-info"> 返回</a>
                     </form>
                 </div>
             </div>
@@ -156,34 +176,47 @@
 <script src="${APP_PATH}/script/back-to-top.js"></script>
 <script src="${APP_PATH}/script/echarts.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
+<script src="${APP_PATH}/jquery/jQuery.validate/jquery.validate.min.js"></script>
+<script src="${APP_PATH}/script/checkMemberSetting.js"></script>
 
 <%--修改个人信息--%>
 <script>
     function updateSetting() {
         //获取添加的用户的信息
-        var floginacct = $("#floginacct");
-        var fuserpswd = $("#fuserpswd");
-        var fusername = $("#fusername");
-        var femail = $("#femail");
-        var fauthstatus = $("#fauthstatus");
-        var fusertype = $("#fusertype");
-        var frealname = $("#frealname");
-        var fcardnum = $("#fcardnum");
-        var ftel = $("#ftel");
+        var loginacct = $("#loginacct").val();
+        var userpswd = $("#userpswd").val();
+        var username = $("#username").val();
+        var email = $("#email").val();
+        if ($("#authstatus").val() == "未实名认证") {
+            var authstatus = 0;
+        }else if($("#authstatus").val() == "实名认证申请中") {
+            var authstatus = 1;
+        }else if($("#authstatus").val() == "已实名认证") {
+            var authstatus = 2;
+        }
+
+        if ($("#usertype").val() == "个人") {
+            var usertype = 0;
+        }else if($("#usertype").val() == "企业") {
+            var usertype = 1;
+        }
+        var realname = $("#realname").val();
+        var cardnum = $("#cardnum").val();
+        var tel = $("#tel").val();
 
         $.ajax({
             type : "POST",
             data : {
                 "id" : ${sessionScope.member.id},
-                "loginacct" : floginacct.val(),
-                "userpswd" : fuserpswd.val(),
-                "username" : fusername.val(),
-                "email" : femail.val(),
-                "authstatus" : fauthstatus.val(),
-                "usertype" : fusertype.val(),
-                "realname" : frealname.val(),
-                "cardnum" : fcardnum.val(),
-                "tel" : ftel.val()
+                "loginacct" : loginacct,
+                "userpswd" : userpswd,
+                "username" : username,
+                "email" : email,
+                "authstatus" : authstatus,
+                "usertype" : usertype,
+                "realname" : realname,
+                "cardnum" : cardnum,
+                "tel" : tel
             },
             url : "${APP_PATH}/member/updateSetting.do",
             beforeSend : function () {
@@ -208,12 +241,5 @@
     }
 </script>
 
-<%--重置表单数据--%>
-<script>
-    function resetMemberForm() {
-        //jQuery没有reset函数，使用需要性转换为dom对象使用 [0]
-        $("#settingMemberForm")[0].reset();
-    }
-</script>
 </body>
 </html>

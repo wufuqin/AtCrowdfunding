@@ -1,26 +1,18 @@
 $(document).ready(function() {
 
-    $("#restPasswordEmailForm").validate({
+    $("#updateRoleForm").validate({
         errorElement : 'span',
         errorClass : 'help-block',
 
         rules : {
-            email : {
-                required : true,
-                email : true
-            },
-            checkCode : {
+            name : {
                 required : true
-            },
+            }
 
         },
-        messages : {
-            email : {
-                required : "请输入Email地址",
-                email : "请输入正确的email地址"
-            },
-            checkCode : "请输入验证码"
 
+        messages : {
+            name : "请输入角色名"
         },
 
         errorPlacement : function(error, element) {
@@ -41,7 +33,10 @@ $(document).ready(function() {
             label.remove();
         },
         submitHandler: function() {
-            restPassword();
+            updateRole();
         }
+
     })
 });
+
+

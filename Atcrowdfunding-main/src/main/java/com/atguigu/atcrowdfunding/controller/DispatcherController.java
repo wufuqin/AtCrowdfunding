@@ -156,7 +156,6 @@ public class DispatcherController {
     @ResponseBody
     @RequestMapping("/doLogin")
     public Object doLogin(String loginacct,String userpswd, String checkCode, String type,HttpSession session){
-
         //请求结果封装对象
         AjaxResult result = new AjaxResult();
         try {

@@ -62,13 +62,13 @@
                 <div class="panel-body">
                     <form id="updateRoleForm">
 
-                        <div class="form-group">
-                            <label for="fname">角色名称</label>
+                        <div class="form-group" style="width: 300px">
+                            <label for="name">角色名称</label>
                             <%--目前参数name的数据回显失败--%>
-                            <input type="email" class="form-control" id="fname" value="${role.name}">
+                            <input type="text" class="form-control" id="name" name="name" value="${role.name}">
                         </div>
-                        <button onclick="updateRole()" type="button" class="btn btn-success"><i class="glyphicon glyphicon-edit"></i> 修改</button>
-                        <button onclick="resetRoleForm()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-edit"></i> 修改</button>
+                        <button type="reset" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
                     </form>
                 </div>
             </div>
@@ -100,6 +100,8 @@
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script src="${APP_PATH}/script/menu.js"></script>
+<script src="${APP_PATH}/jquery/jQuery.validate/jquery.validate.min.js"></script>
+<script src="${APP_PATH}/script/checkUpdateRole.js"></script>
 <script type="text/javascript">
     $(function () {
         $(".list-group-item").click(function(){
@@ -118,13 +120,13 @@
 
 <%--修改用户数据--%>
 <script>
-    function updateRole(id,name) {
+    function updateRole() {
         //获取添加的用户的信息
-        var fname = $("#fname");
+        var name = $("#name");
         $.ajax({
             type : "POST",
             data : {
-                "name" : fname.val(),
+                "name" : name.val(),
                 "id" : "${role.id}"
             },
             url : "${APP_PATH}/role/doUpdate.do",

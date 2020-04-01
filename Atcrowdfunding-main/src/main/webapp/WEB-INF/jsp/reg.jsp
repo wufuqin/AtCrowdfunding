@@ -46,7 +46,7 @@
                 <div class="col-md-6">
                     <input type="text" class="form-control" id="code" name="code" placeholder="请输入验证码">
                 </div>
-                <button id="getCode" style="width: 150px" type="button" class="form-control btn btn-lg ">获取验证码</button>
+                <button style="width: 150px" type="submit" class="form-control btn btn-lg ">获取验证码</button>
             </div>
 
         </div>
@@ -65,7 +65,7 @@
         <br>
         <div class="row">
             <div class="col-md-6">
-                <a type="button" class="btn btn-info form-control" style="width: 136px" onclick="doRge()">注册</a>
+                <button type="submit" class="btn btn-info form-control" style="width: 136px">注册</button>
             </div>
             <a type="button" class="btn btn-info form-control" style="width: 150px" href="${APP_PATH}/index.htm"> 返回</a>
         </div>
@@ -76,6 +76,7 @@
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script src="${APP_PATH}/jquery/jQuery.validate/jquery.validate.min.js"></script>
 <script src="${APP_PATH}/script/checkReg.js"></script>
+<script src="${APP_PATH}/script/checkRegCode.js"></script>
 
 <%--注册--%>
 <script>
@@ -87,6 +88,14 @@
         var email = $("#email");
         var code = $("#code");
         var usertype = $("#fusertype");
+
+        if($.trim(tel.val()) == ""){
+            layer.msg("用户账号不能为空,请重新输入!",function(){
+                tel.val("");
+                tel.focus();
+            });
+            return false ;
+        }
 
         $.ajax({
             type : "POST",
@@ -120,27 +129,28 @@
 
 <%--获取短信验证码--%>
 <script>
-    var code = document.getElementById("getCode");
-    var flag = 60;
-    code.onclick = function () {
+    function getCode() {
+        var code = document.getElementById("getCode");
+        var flag = 60;
+        code.onclick = function () {
 
-        $("#getCode").prop("class","btn btn-lg btn-success");
-        if (flag < 60) {
-            return;
-        }
-
-        var xhr = new XMLHttpRequest();
-        xhr.open("get", "${APP_PATH}/CheckCode?tel=" +document.getElementById("tel").value, true);
-        //监听请求状态
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && status == 200) {
-                alert(xhr.responseText);
+            $("#getCode").prop("class","btn btn-lg btn-success");
+            if (flag < 60) {
+                return;
             }
-        };
-        xhr.send(null);
-        timer();
 
-    };
+            var xhr = new XMLHttpRequest();
+            xhr.open("get", "${APP_PATH}/CheckCode?tel=" +document.getElementById("tel").value, true);
+            //监听请求状态
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && status == 200) {
+                    alert(xhr.responseText);
+                }
+            };
+            xhr.send(null);
+            timer();
+        };
+    }
 
     function timer() {
         flag--;

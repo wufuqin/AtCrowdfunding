@@ -55,31 +55,32 @@
             </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
-                <div class="panel-body">
-                    <form id="addForm">
-                        <div class="form-group">
+                <div class="panel-body" >
+                    <form id="addProjectForm">
+                        <div class="form-group" style="width: 300px">
                             <label for="name">项目名称</label>
-                            <input type="text" class="form-control" id="name" placeholder="请输入项目名称">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="请输入项目名称">
                         </div>
-                        <div class="form-group">
-                            <label for="remark">项目简介</label>
-                            <input type="text" class="form-control" id="remark" placeholder="请输入项目简介">
+                        <div class="form-group" style="width: 300px">
+                            <label for="remark">项目简介</label><br>
+                            <input type="text" class="form-control" id="remark" name="remark" placeholder="请输入项目简介">
+
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="width: 300px">
                             <label for="money">筹资金额</label>
-                            <input type="text" class="form-control" id="money" placeholder="请输入筹资金额">
+                            <input type="number" class="form-control" id="money" name="money" placeholder="请输入筹资金额">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="width: 300px">
                             <label for="day">筹资天数</label>
-                            <input type="text" class="form-control" id="day" placeholder="请输入筹资天数">
+                            <input type="number" class="form-control" id="day" name="day" placeholder="请输入筹资天数">
                         </div>
                         <%--<div class="form-group">
                             <label for="membername">发起人姓名</label>
                             <input type="text" class="form-control" id="membername" placeholder="请输入发起人ID">
                         </div>--%>
 
-                        <button onclick="addProject()" type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 新增</button>
-                        <button onclick="resetForm()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+                        <button type="reset" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
                     </form>
                 </div>
             </div>
@@ -111,6 +112,8 @@
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script src="${APP_PATH}/script/menu.js"></script>
+<script src="${APP_PATH}/jquery/jQuery.validate/jquery.validate.min.js"></script>
+<script src="${APP_PATH}/script/checkAddProject.js"></script>
 <script type="text/javascript">
     /*入口函数*/
     $(function () {
@@ -161,14 +164,6 @@
                 layer.msg("数据保存失败");
             }
         });
-    }
-</script>
-
-<%--重置表单数据--%>
-<script>
-    function resetForm() {
-        //jQuery没有reset函数，使用需要性转换为dom对象使用 [0]
-        $("#addForm")[0].reset();
     }
 </script>
 

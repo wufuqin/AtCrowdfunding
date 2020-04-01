@@ -35,9 +35,6 @@
                 <%-- 包含页面头部 --%>
                 <jsp:include page="/WEB-INF/jsp/common/top.jsp"/>
             </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
         </div>
     </div>
 </nav>
@@ -51,7 +48,6 @@
             </div>
         </div>
 
-
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <ol class="breadcrumb">
                 <li><a href="#">首页</a></li>
@@ -61,23 +57,22 @@
             <div class="panel panel-default">
                 <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
                 <div class="panel-body">
-                    <form id="addForm">
-                        <div class="form-group">
-                            <label for="fname">许可名称</label>
-                            <input type="text" class="form-control" id="fname"  placeholder="请输入许可名称">
+                    <form id="addPermissionForm">
+                        <div class="form-group" style="width: 300px">
+                            <label for="name">许可名称</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="请输入许可名称">
                         </div>
-                        <div class="form-group">
-                            <label for="furl">许可URL</label>
-                            <input type="email" class="form-control" id="furl" placeholder="请输入许可URL">
-                            <p class="help-block label label-warning">请输入许可URL</p>
+                        <div class="form-group" style="width: 300px">
+                            <label for="url">许可地址</label>
+                            <input type="text" class="form-control" id="url" name="url" placeholder="请输入许可地址">
+
                         </div>
-                        <button id="addBtn" type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 新增</button>
-                        <button id="resetBtn" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+                        <button type="reset" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
                     </form>
                 </div>
             </div>
         </div>
-
 
     </div>
 </div>
@@ -106,6 +101,8 @@
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script src="${APP_PATH}/script/menu.js"></script>
+<script src="${APP_PATH}/jquery/jQuery.validate/jquery.validate.min.js"></script>
+<script src="${APP_PATH}/script/checkAddPermission.js"></script>
 <script type="text/javascript">
     $(function () {
         $(".list-group-item").click(function(){
@@ -124,17 +121,17 @@
 
 <%--添加许可--%>
 <script>
-    $("#addBtn").click(function(){
+    function addPermission() {
 
-        var fname = $("#fname");
-        var furl = $("#furl");
+        var name = $("#name");
+        var url = $("#url");
 
         var loadingIndex = -1 ;
         $.ajax({
             type : "POST",
             data : {
-                "name" : fname.val(),
-                "url" : furl.val(),
+                "name" : name.val(),
+                "url" : url.val(),
                 "icon" : "glyphicon glyphicon-user",
                 "pid" : "${param.id}"
             },
@@ -146,7 +143,7 @@
             success : function(result){
                 if(result.success){
                     layer.msg("保存成功...");
-                    setTimeout(function () {{window.location.href="${APP_PATH}/permission/index.htm"}},2000);
+                    setTimeout(function () {{window.location.href="${APP_PATH}/permission/index.htm"}},1000);
                 }else{
                     layer.msg("保存失败...");
                 }
@@ -155,38 +152,8 @@
                 layer.msg("保存失败...");
             }
         });
-
-    });
-    $("#resetBtn").click(function(){
-        $("#addForm")[0].reset();
-    });
-</script>
-
-<%--重置表单数据--%>
-<script>
-function resetRoleForm() {
-    //jQuery没有reset函数，使用需要性转换为dom对象使用 [0]
-    $("#addRoleForm")[0].reset();
-}
+    }
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

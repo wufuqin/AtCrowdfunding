@@ -59,14 +59,14 @@
             <div class="panel panel-default">
                 <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
                 <div class="panel-body">
-                    <form id="certForm">
-                        <div class="form-group">
-                            <label for="fname">资质名称</label>
-                            <input type="text" class="form-control" id="fname" placeholder="请输入资质名称">
+                    <form id="certAddForm">
+                        <div class="form-group" style="width: 300px">
+                            <label for="name">资质名称</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="请输入资质名称">
                         </div>
 
-                        <button onclick="addCert()" type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 新增</button>
-                        <button onclick="resetCertForm()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+                        <button type="reset" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
                     </form>
                 </div>
             </div>
@@ -98,6 +98,8 @@
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script src="${APP_PATH}/script/menu.js"></script>
+<script src="${APP_PATH}/jquery/jQuery.validate/jquery.validate.min.js"></script>
+<script src="${APP_PATH}/script/checkAddCert.js"></script>
 
 <script type="text/javascript">
     $(function () {
@@ -119,12 +121,12 @@
 <script>
     function addCert() {
         //获取添加的用户的信息
-        var fname = $("#fname");
+        var name = $("#name");
 
         $.ajax({
             type : "POST",
             data : {
-                "name" : fname.val()
+                "name" : name.val()
             },
             url : "${APP_PATH}/cert/doAdd.do",
             beforeSend : function () {
@@ -146,14 +148,6 @@
                 layer.msg("数据保存失败");
             }
         });
-    }
-</script>
-
-<%--重置表单数据--%>
-<script>
-    function resetCertForm() {
-        //jQuery没有reset函数，使用需要性转换为dom对象使用 [0]
-        $("#certForm")[0].reset();
     }
 </script>
 

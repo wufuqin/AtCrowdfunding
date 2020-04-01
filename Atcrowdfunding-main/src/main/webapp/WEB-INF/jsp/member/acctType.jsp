@@ -76,7 +76,8 @@
                 </a>
             </div>
         </div>
-        <button id="applyBtn" type="button" class="btn btn-danger btn-lg btn-block" >认证申请</button>
+        <button type="button" onclick="window.location.href='${APP_PATH}/member.htm'" class="btn btn-info" style="width: 70px">返回</button>
+        <button id="applyBtn" type="button" class="btn btn-info" style="width: 70px">下一步</button>
     </div>
 
 </div>

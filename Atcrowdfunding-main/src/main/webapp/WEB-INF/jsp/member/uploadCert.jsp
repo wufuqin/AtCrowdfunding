@@ -47,19 +47,19 @@
 
     <form id="uploadCertForm" style="margin-top:20px;" method="post" enctype="multipart/form-data">
         <c:forEach items="${queryCertByAcctType }" var="cert" varStatus="status">
-            <div class="form-group">
-                <label for="name">${cert.name }</label>
+            <div class="form-group" style="width: 480px">
+                <label>${cert.name }</label>
                 <input type="hidden" name="certimgs[${status.index }].certid" value="${cert.id }">
                 <input type="file" name="certimgs[${status.index }].fileImg" class="form-control" >
                 <br>
                 <img src="${APP_PATH }/img/pic.jpg" style="display:none">
             </div>
         </c:forEach>
-        <button type="button" class="btn btn-default">上一步</button>
-        <button type="button" id="nextBtn" class="btn btn-success">下一步</button>
+        <button type="button" class="btn btn-info">上一步</button>
+        <button type="button" id="nextBtn" class="btn btn-info">下一步</button>
     </form>
     <hr>
-</div> <!-- /container -->
+</div>
 
 <script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>

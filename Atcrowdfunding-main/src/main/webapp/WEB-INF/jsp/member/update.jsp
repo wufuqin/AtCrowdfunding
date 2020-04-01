@@ -2,7 +2,7 @@
   后台更新会员页面
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -36,9 +36,6 @@
                 <%-- 包含页面头部 --%>
                 <jsp:include page="/WEB-INF/jsp/common/top.jsp"/>
             </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
         </div>
     </div>
 </nav>
@@ -61,45 +58,65 @@
                 <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
                 <div class="panel-body">
                     <form id="updateMemberForm">
-                        <div class="form-group">
-                            <label for="floginacct">登陆账号</label>
-                            <input  type="text" class="form-control" id="floginacct" value="${member.loginacct}" placeholder="请输入登陆账号">
+                        <div class="form-group" style="width: 300px">
+                            <label for="loginacct">登陆账号</label>
+                            <input  type="text" class="form-control" id="loginacct" name="loginacct" value="${member.loginacct}" placeholder="请输入登陆账号">
                         </div>
-                        <div class="form-group">
-                            <label for="floginacct">登陆密码</label>
-                            <input type="password" class="form-control" id="fuserpswd" value="${member.userpswd}" placeholder="请输入登陆账号">
+                        <div class="form-group" style="width: 300px">
+                            <label for="userpswd">登陆密码</label>
+                            <input type="password" class="form-control" id="userpswd" name="userpswd" value="${member.userpswd}" placeholder="请输入登陆账号">
                         </div>
 
-                        <div class="form-group">
-                            <label for="fusername">用户名称</label>
-                            <input type="text" class="form-control" id="fusername" value="${member.username}" placeholder="请输入用户名称">
+                        <div class="form-group" style="width: 300px">
+                            <label for="username">用户名称</label>
+                            <input type="text" class="form-control" id="username" name="username" value="${member.username}" placeholder="请输入用户名称">
                         </div>
-                        <div class="form-group">
-                            <label for="femail">邮箱地址</label>
-                            <input type="email" class="form-control" id="femail" value="${member.email}" placeholder="请输入邮箱地址">
+                        <div class="form-group" style="width: 300px">
+                            <label for="email">邮箱地址</label>
+                            <input type="email" class="form-control" id="email" name="email" value="${member.email}" placeholder="请输入邮箱地址">
                         </div>
-                        <div class="form-group">
-                            <label for="femail">实名认证状态</label>
-                            <input  type="email" class="form-control" id="fauthstatus" value="${member.authstatus}">
+                        <div class="form-group" style="width: 300px">
+                            <label for="authstatus">实名认证状态</label>
+                            <c:choose>
+                                <c:when test="${member.authstatus eq '0'}">
+                                    <input disabled type="text" class="form-control" id="authstatus" name="authstatus" value="未实名认证">
+                                </c:when>
+                                <c:when test="${member.authstatus eq '1'}">
+                                    <input disabled type="text" class="form-control" id="authstatus" name="authstatus" value="实名认证申请中">
+                                </c:when>
+                                <c:when test="${member.authstatus eq '2'}">
+                                    <input disabled type="text" class="form-control" id="authstatus" name="authstatus" value="已实名认证">
+                                </c:when>
+                            </c:choose>
+
                         </div>
-                        <div class="form-group">
-                            <label for="femail">用户类型</label>
-                            <input  type="email" class="form-control" id="fusertype" value="${member.usertype}">
+                        <div class="form-group" style="width: 300px">
+                            <label for="usertype">用户类型</label>
+                            <c:choose>
+                                <c:when test="${member.usertype eq '0'}">
+                                    <input disabled type="text" class="form-control" id="usertype" name="usertype" value="个人">
+                                </c:when>
+                                <c:when test="${member.usertype eq '1'}">
+                                    <input disabled type="text" class="form-control" id="usertype" name="usertype" value="企业">
+                                </c:when>
+                            </c:choose>
+
                         </div>
-                        <div class="form-group">
-                            <label for="femail">真实姓名</label>
-                            <input  type="email" class="form-control" id="frealname" value="${member.realname}">
+
+                        <div class="form-group" style="width: 300px">
+                            <label for="realname">真实姓名</label>
+                            <input  type="text" class="form-control" id="realname" name="realname" value="${member.realname}">
                         </div>
-                        <div class="form-group">
-                            <label for="femail">身份证号</label>
-                            <input  type="email" class="form-control" id="fcardnum" value="${member.cardnum}">
+                        <div class="form-group" style="width: 300px">
+                            <label for="cardnum">身份证号</label>
+                            <input  type="text" class="form-control" id="cardnum" name="cardnum" value="${member.cardnum}">
                         </div>
-                        <div class="form-group">
-                            <label for="femail">手机号</label>
-                            <input  type="email" class="form-control" id="ftel" value="${member.tel}">
+                        <div class="form-group" style="width: 300px">
+                            <label for="tel">手机号</label>
+                            <input  type="text" class="form-control" id="tel" name="tel" value="${member.tel}">
                         </div>
-                        <button onclick="updateMember()" type="button" class="btn btn-success"> 修改</button>
-                        <button onclick="resetMemberForm()" type="button" class="btn btn-danger"> 重置</button>
+                        <button type="submit" class="btn btn-success"> 修改</button>
+                        <button type="reset" class="btn btn-danger"> 重置</button>
                         <a href="${APP_PATH}/member/memberIndex.htm" type="button" class="btn btn-info"> 返回</a>
                     </form>
                 </div>
@@ -132,6 +149,9 @@
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script src="${APP_PATH}/script/menu.js"></script>
+<script src="${APP_PATH}/jquery/jQuery.validate/jquery.validate.min.js"></script>
+<script src="${APP_PATH}/script/checkUpdateMember.js"></script>
+<script src="${APP_PATH}/script/card.js"></script>
 <%--入口函数--%>
 <script type="text/javascript">
     $(function () {
@@ -153,29 +173,41 @@
 <script>
     function updateMember() {
         //获取添加的用户的信息
-        var floginacct = $("#floginacct");
-        var fuserpswd = $("#fuserpswd");
-        var fusername = $("#fusername");
-        var femail = $("#femail");
-        var fauthstatus = $("#fauthstatus");
-        var fusertype = $("#fusertype");
-        var frealname = $("#frealname");
-        var fcardnum = $("#fcardnum");
-        var ftel = $("#ftel");
+        var loginacct = $("#loginacct").val();
+        var userpswd = $("#userpswd").val();
+        var username = $("#username").val();
+        var email = $("#email").val();
+
+        if ($("#authstatus").val() == "未实名认证") {
+            var authstatus = 0;
+        }else if($("#authstatus").val() == "实名认证申请中") {
+            var authstatus = 1;
+        }else if($("#authstatus").val() == "已实名认证") {
+            var authstatus = 2;
+        }
+
+        if ($("#usertype").val() == "个人") {
+            var usertype = 0;
+        }else if($("#usertype").val() == "企业") {
+            var usertype = 1;
+        }
+        var realname = $("#realname").val();
+        var cardnum = $("#cardnum").val();
+        var tel = $("#tel").val();
 
         $.ajax({
             type : "POST",
             data : {
                 "id" : ${member.id},
-                "loginacct" : floginacct.val(),
-                "userpswd" : fuserpswd.val(),
-                "username" : fusername.val(),
-                "email" : femail.val(),
-                "authstatus" : fauthstatus.val(),
-                "usertype" : fusertype.val(),
-                "realname" : frealname.val(),
-                "cardnum" : fcardnum.val(),
-                "tel" : ftel.val()
+                "loginacct" : loginacct,
+                "userpswd" : userpswd,
+                "username" : username,
+                "email" : email,
+                "authstatus" : authstatus,
+                "usertype" : usertype,
+                "realname" : realname,
+                "cardnum" : cardnum,
+                "tel" : tel
             },
             url : "${APP_PATH}/member/doUpdate.do",
             beforeSend : function () {
@@ -197,14 +229,6 @@
                 layer.msg("数据修改失败error");
             }
         });
-    }
-</script>
-
-<%--重置表单数据--%>
-<script>
-    function resetMemberForm() {
-        //jQuery没有reset函数，使用需要性转换为dom对象使用 [0]
-        $("#updateMemberForm")[0].reset();
     }
 </script>
 

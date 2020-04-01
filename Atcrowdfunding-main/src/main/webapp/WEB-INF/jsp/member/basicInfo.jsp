@@ -46,21 +46,21 @@
     </ul>
 
     <%--表单数据--%>
-    <form role="form" style="margin-top:20px;">
-        <div class="form-group">
+    <form role="form" id="updateMemberBasicInfoForm" style="margin-top:20px;">
+        <div class="form-group" style="width: 480px">
             <label for="realname">真实名称</label>
-            <input type="text" class="form-control" id="realname" placeholder="请输入真实名称">
+            <input type="text" class="form-control" id="realname" name="realname" placeholder="请输入真实名称">
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width: 480px">
             <label for="cardnum">身份证号码</label>
-            <input type="text" class="form-control" id="cardnum" placeholder="请输入身份证号码">
+            <input type="text" class="form-control" id="cardnum" name="cardnum" placeholder="请输入身份证号码">
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width: 480px">
             <label for="tel">电话号码</label>
-            <input type="text" class="form-control" id="tel" placeholder="请输入电话号码">
+            <input type="text" class="form-control" id="tel" name="tel" placeholder="请输入电话号码">
         </div>
-        <button type="button" onclick="window.location.href='accttype.html'" class="btn btn-default">上一步</button>
-        <button id="nextBtn" type="button"  class="btn btn-success">下一步</button>
+        <button type="button" onclick="window.location.href='${APP_PATH}/member/acctType.htm'" class="btn btn-info">上一步</button>
+        <button type="submit"  class="btn btn-info">下一步</button>
     </form>
     <hr>
 </div>
@@ -69,6 +69,9 @@
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
+<script src="${APP_PATH}/jquery/jQuery.validate/jquery.validate.min.js"></script>
+<script src="${APP_PATH}/script/checkUpdateMemberBasicInfo.js"></script>
+<script src="${APP_PATH}/script/card.js"></script>
 <script>
     $('#myTab a').click(function (e) {
         e.preventDefault();
@@ -76,9 +79,8 @@
     });
 </script>
 
-
 <script>
-    $("#nextBtn").click(function(){
+    function updateMemberBasicInfo(){
         $.ajax({
             type : "POST",
             url  : "${APP_PATH}/member/updateBasicInfo.do",
@@ -99,7 +101,7 @@
                 }
             }
         });
-    });
+    }
 </script>
 </body>
 </html>
