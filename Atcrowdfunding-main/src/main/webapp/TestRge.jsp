@@ -168,7 +168,6 @@
         var loginacct = $("#floginacct");
         var userpswd = $("#fuserpswd");
         var email = $("#femail");
-        var code = $("#fcode");
 
         //对手机号数据进行校验
         if ($.trim(phone.val()) == "") {

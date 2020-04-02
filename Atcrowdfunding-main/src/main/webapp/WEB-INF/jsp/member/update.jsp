@@ -50,8 +50,8 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <ol class="breadcrumb">
-                <li><a href="#">首页</a></li>
-                <li><a href="#">数据列表</a></li>
+                <li><a href="${APP_PATH}/main.htm">首页</a></li>
+                <li><a href="${APP_PATH}/member/memberIndex.htm">数据列表</a></li>
                 <li class="active">修改</li>
             </ol>
             <div class="panel panel-default">
@@ -116,7 +116,7 @@
                             <input  type="text" class="form-control" id="tel" name="tel" value="${member.tel}">
                         </div>
                         <button type="submit" class="btn btn-success"> 修改</button>
-                        <button type="reset" class="btn btn-danger"> 重置</button>
+                        <button type="reset" class="btn btn-info"> 重置</button>
                         <a href="${APP_PATH}/member/memberIndex.htm" type="button" class="btn btn-info"> 返回</a>
                     </form>
                 </div>

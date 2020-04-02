@@ -49,8 +49,8 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <ol class="breadcrumb">
-                <li><a href="#">首页</a></li>
-                <li><a href="#">数据列表</a></li>
+                <li><a href="${APP_PATH}/main.htm">首页</a></li>
+                <li><a href="${APP_PATH}/project/index.htm">数据列表</a></li>
                 <li class="active">修改项目信息</li>
             </ol>
             <div class="panel panel-default">
@@ -74,8 +74,10 @@
                             <label for="day">筹资天数</label>
                             <input type="text" class="form-control" id="day" name="day" value="${project.day}" placeholder="请输入筹资天数">
                         </div>
-                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-edit"></i> 修改</button>
-                        <button type="reset" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+                        <button type="submit" class="btn btn-success">修改</button>
+                        <button type="reset" class="btn btn-info">重置</button>
+                        <button type="button" onclick="window.location.href='${APP_PATH}/project/index.htm'" class="btn btn-info">返回</button>
+
                     </form>
                 </div>
             </div>

@@ -45,21 +45,23 @@
         <li role="presentation" class="active"><a href="#"><span class="badge">4</span> 申请确认</a></li>
     </ul>
 
-    <form role="form" style="margin-top:20px;">
-        <div class="form-group">
+    <form role="form" id="checkAuthCoedForm" style="margin-top:20px;">
+        <div class="form-group" style="width: 490px">
             <label for="authcode">验证码</label>
-            <input type="text" class="form-control" id="authcode" placeholder="请输入你邮箱中接收到的验证码">
+            <input type="text" class="form-control" id="authcode" name="authcode" placeholder="请输入你邮箱中接收到的验证码">
         </div>
-        <button type="button" onclick="javascript:;" class="btn btn-primary">重新发送验证码</button>
-        <button type="button" id="finishBtn"  class="btn btn-success">申请完成</button>
+        <button type="button" onclick="window.location.href='${APP_PATH}/member/checkEmail.htm'" class="btn btn-info">上一步</button>
+        <button type="submit" class="btn btn-success">申请完成</button>
     </form>
     <hr>
-</div> <!-- /container -->
+</div>
 
 <script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
+<script src="${APP_PATH}/jquery/jQuery.validate/jquery.validate.min.js"></script>
+<script src="${APP_PATH}/script/checkAuthCoed.js"></script>
 <script>
     $('#myTab a').click(function (e) {
         e.preventDefault();
@@ -69,7 +71,7 @@
 
 <%--申请完成--%>
 <script>
-    $("#finishBtn").click(function(){
+   function checkAuthCoed(){
         $.ajax({
             type : "POST",
             url  : "${APP_PATH}/member/finishApply.do",
@@ -88,7 +90,7 @@
                 }
             }
         });
-    });
+   }
 </script>
 </body>
 </html>

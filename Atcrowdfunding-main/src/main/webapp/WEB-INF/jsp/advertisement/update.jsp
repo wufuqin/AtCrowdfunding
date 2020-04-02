@@ -35,9 +35,6 @@
                 <%-- 包含页面头部 --%>
                 <jsp:include page="/WEB-INF/jsp/common/top.jsp"/>
             </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
         </div>
     </div>
 </nav>
@@ -52,8 +49,8 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <ol class="breadcrumb">
-                <li><a href="#">首页</a></li>
-                <li><a href="#">数据列表</a></li>
+                <li><a href="${APP_PATH}/main.htm">首页</a></li>
+                <li><a href="${APP_PATH}/advertisement/index.htm">数据列表</a></li>
                 <li class="active">新增</li>
             </ol>
             <div class="panel panel-default">
@@ -77,8 +74,10 @@
                             <img src="${APP_PATH }/picture/advertisement/${advertisement.iconpath}">
                         </div>
 
-                        <button  onclick="updateAdvertisement()" type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 修改</button>
-                        <button  onclick="resetAdvertisementForm()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+                        <button  onclick="updateAdvertisement()" type="button" class="btn btn-success">修改</button>
+                        <button  onclick="resetAdvertisementForm()" type="button" class="btn btn-info">重置</button>
+                        <button type="button" onclick="window.location.href='${APP_PATH}/advertisement/index.htm'" class="btn btn-info">返回</button>
+
                     </form>
                 </div>
             </div>

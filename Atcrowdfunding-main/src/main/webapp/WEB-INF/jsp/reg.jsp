@@ -46,7 +46,7 @@
                 <div class="col-md-6">
                     <input type="text" class="form-control" id="code" name="code" placeholder="请输入验证码">
                 </div>
-                <button style="width: 150px" type="submit" class="form-control btn btn-lg ">获取验证码</button>
+                <button id="getCode" style="width: 150px" type="button" class="form-control btn btn-lg ">获取验证码</button>
             </div>
 
         </div>
@@ -89,14 +89,6 @@
         var code = $("#code");
         var usertype = $("#fusertype");
 
-        if($.trim(tel.val()) == ""){
-            layer.msg("用户账号不能为空,请重新输入!",function(){
-                tel.val("");
-                tel.focus();
-            });
-            return false ;
-        }
-
         $.ajax({
             type : "POST",
             data : {
@@ -129,28 +121,63 @@
 
 <%--获取短信验证码--%>
 <script>
-    function getCode() {
-        var code = document.getElementById("getCode");
-        var flag = 60;
-        code.onclick = function () {
+    var code = document.getElementById("getCode");
+    var flag = 60;
+    code.onclick = function () {
 
-            $("#getCode").prop("class","btn btn-lg btn-success");
-            if (flag < 60) {
-                return;
+        //获取用户输入的注册信息
+        var tel = $("#tel");
+        var username = $("#username");
+        var userpswd = $("#userpswd");
+        var email = $("#email");
+        var code = $("#code");
+
+        //对手机号数据进行校验
+        if ($.trim(tel.val()) == "") {
+            layer.msg("手机号不能为空");
+            tel.val("");   //输入框重新设置为空
+            tel.focus();   //重新获取焦点
+            return false;
+        }
+        //对用户名数据进行校验
+        if ($.trim(username.val()) == "") {
+            layer.msg("用户名不能为空");
+            username.val("");   //输入框重新设置为空
+            username.focus();   //重新获取焦点
+            return false;
+        }
+        //对密码数据进行校验
+        if ($.trim(userpswd.val()) == "") {
+            layer.msg("密码不能为空");
+            userpswd.val("");   //输入框重新设置为空
+            userpswd.focus();   //重新获取焦点
+            return false;
+        }
+        //对验证码数据进行校验
+        if ($.trim(email.val()) == "") {
+            layer.msg("邮箱不能为空");
+            email.val("");   //输入框重新设置为空
+            email.focus();   //重新获取焦点
+            return false;
+        }
+
+        $("#getCode").prop("class","btn btn-lg btn-success");
+        if (flag < 60) {
+            return;
+        }
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("get", "${APP_PATH}/CheckCode?tel=" +document.getElementById("tel").value, true);
+        //监听请求状态
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && status == 200) {
+                alert(xhr.responseText);
             }
-
-            var xhr = new XMLHttpRequest();
-            xhr.open("get", "${APP_PATH}/CheckCode?tel=" +document.getElementById("tel").value, true);
-            //监听请求状态
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && status == 200) {
-                    alert(xhr.responseText);
-                }
-            };
-            xhr.send(null);
-            timer();
         };
-    }
+        xhr.send(null);
+        timer();
+
+    };
 
     function timer() {
         flag--;

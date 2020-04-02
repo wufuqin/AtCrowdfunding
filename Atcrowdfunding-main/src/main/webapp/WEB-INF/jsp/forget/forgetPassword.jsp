@@ -68,8 +68,8 @@
 <script>
     function restPassword() {
         //获取用户输入的邮箱和验证码
-        var email = $("#femail");
-        var checkCode = $("#fcheckCode");
+        var email = $("#email");
+        var checkCode = $("#checkCode");
 
         $.ajax({
             type : "POST",

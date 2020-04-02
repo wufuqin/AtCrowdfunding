@@ -83,7 +83,11 @@ public class MemberController {
 
     //去到填写基本信息页面
     @RequestMapping("/basicInfo")
-    public String basicInfo(){
+    public String basicInfo(HttpSession session, Map<String, Object> map){
+        //查询用户已经有的信息
+        Member member = (Member) session.getAttribute(Const.LOGIN_MEMBER);
+        Member memberInfo = memberService.queryMemberById(member.getId());
+        session.setAttribute("memberInfo",memberInfo);
         return "member/basicInfo";
     }
 
@@ -233,8 +237,6 @@ public class MemberController {
             variables.put("loginacct", member.getLoginacct());
             variables.put("passListener", new PassListener());
             variables.put("refuseListener", new RefuseListener());
-
-            //ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("auth");
             ProcessInstance processInstance = runtimeService.startProcessInstanceById(processDefinition.getId(), variables);
 
             //记录流程步骤:
@@ -250,9 +252,7 @@ public class MemberController {
             e.printStackTrace();
             result.setSuccess(false);
         }
-
         return result;
-
     }
 
     //去到验证验证码页面
@@ -271,7 +271,6 @@ public class MemberController {
 
             // 获取登录会员信息
             Member loginMember = (Member)session.getAttribute(Const.LOGIN_MEMBER);
-
 
             //让当前系统用户完成:验证码审核任务.
             Ticket ticket = ticketService.getTicketByMemberId(loginMember.getId()) ;

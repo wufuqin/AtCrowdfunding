@@ -161,7 +161,7 @@
                             <label for="tel">手机号</label>
                             <input disabled type="text" class="form-control" id="tel" name="tel" value="${sessionScope.member.tel}">
                         </div>
-                        <button type="submit" class="btn btn-info"> 修改</button>
+                        <button type="submit" class="btn btn-success"> 修改</button>
                         <button type="reset" class="btn btn-info">重置</button>
                         <a href="${APP_PATH}/member.htm" type="button" class="btn btn-info"> 返回</a>
                     </form>

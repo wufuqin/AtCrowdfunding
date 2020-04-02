@@ -73,18 +73,18 @@
 <%--完成重置密码--%>
 <script>
     function restPassword() {
-        var floginacct = $("#floginacct");
-        var fuserpswd = $("#fuserpswd");
-        var ffuserpswd = $("#ffuserpswd");
-        var fcheckCode = $("#fcheckCode");
+        var loginacct = $("#loginacct");
+        var userpswd = $("#userpswd");
+        var confirm_password = $("#confirm_password");
+        var checkCode = $("#checkCode");
 
         $.ajax({
             type : "POST",
             data : {
-                "loginacct" : floginacct.val(),
-                "userpswd" : fuserpswd.val(),
-                "fuserpswd" : ffuserpswd.val(),
-                "checkCode" : fcheckCode.val()
+                "loginacct" : loginacct.val(),
+                "userpswd" : userpswd.val(),
+                "confirm_password" : confirm_password.val(),
+                "checkCode" : checkCode.val()
             },
             url : "${APP_PATH}/doRestPassword.do",
             beforeSend : function () {

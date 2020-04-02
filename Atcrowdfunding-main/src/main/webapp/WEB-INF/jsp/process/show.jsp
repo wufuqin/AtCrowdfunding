@@ -59,7 +59,7 @@
 						<img id="show" alt="流程定义图片" src="${APP_PATH }/jquery/layer/skin/default/loading-1.gif">
 				    </div>
 			  </div>
-            <a href="${APP_PATH}/process/index.htm" type="button" class="btn btn-primary"><i class="glyphicon"></i> 返回</a>
+            <a href="${APP_PATH}/process/index.htm" type="button" class="btn btn-info" style="width: 100px"><i class="glyphicon"></i> 返回</a>
 			</div>
         </div>
       </div>

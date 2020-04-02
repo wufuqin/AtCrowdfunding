@@ -1,7 +1,6 @@
 <%--
 		登录成功之后跳转的页面，后台主页面
 --%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -56,25 +55,12 @@
 			</div>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">控制面板</h1>
+          <h1 class="page-header">创意众筹平台后台管理系统</h1>
 
           <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder ">
-              <img  data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>权限管理</h4>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>业务审核</h4>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>业务管理</h4>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>参数管理</h4>
-            </div>
+              <div class="item active">
+                  <img src="${APP_PATH}/img/my_carousel-1.jpg" style="width: 100%" height="520">
+              </div>
           </div>
         </div>
       </div>

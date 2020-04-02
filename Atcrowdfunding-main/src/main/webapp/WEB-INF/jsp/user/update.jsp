@@ -49,8 +49,8 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <ol class="breadcrumb">
-                <li><a href="#">首页</a></li>
-                <li><a href="#">数据列表</a></li>
+                <li><a href="${APP_PATH}/main.htm">首页</a></li>
+                <li><a href="${APP_PATH}/user/index.htm">数据列表</a></li>
                 <li class="active">修改</li>
             </ol>
             <div class="panel panel-default">
@@ -69,8 +69,9 @@
                             <label for="email">邮箱地址</label>
                             <input type="email" class="form-control" id="email" name="email" value="${user.email}" placeholder="请输入邮箱">
                         </div>
-                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-edit"></i> 修改</button>
-                        <button type="reset" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+                        <button type="submit" class="btn btn-success"> 修改</button>
+                        <button type="reset" class="btn btn-info"> 重置</button>
+                        <button type="button" onclick="window.location.href='${APP_PATH}/user/index.htm'" class="btn btn-info"> 返回</button>
                     </form>
                 </div>
             </div>
@@ -148,7 +149,7 @@
                 layer.close(loadingIndex);
                 if (result.success) {
                     layer.msg("数据修改成功...");
-                    setTimeout(function () {{window.location.href="${APP_PATH}/user/index.htm"}},2000);
+                    setTimeout(function () {{window.location.href="${APP_PATH}/user/index.htm"}},1000);
                 }else {
                     layer.msg("数据修改失败...");
                 }

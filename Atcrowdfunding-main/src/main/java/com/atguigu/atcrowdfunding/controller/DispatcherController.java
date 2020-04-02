@@ -252,13 +252,13 @@ public class DispatcherController {
     //完成重置密码功能
     @ResponseBody
     @RequestMapping("/doRestPassword")
-    public Object doRestPassword(String loginacct, String userpswd, String fuserpswd, String checkCode, HttpSession session){
+    public Object doRestPassword(String loginacct, String userpswd, String confirm_password, String checkCode, HttpSession session){
         AjaxResult result = new AjaxResult();
         try {
             //根据账号查询会员信息
             Member member = memberService.queryMemberByAcct(loginacct);
             //判断用户两次输入的密码是否一致
-            if (!userpswd.equals(fuserpswd)){
+            if (!userpswd.equals(confirm_password)){
                 result.setMessage("两次输入的密码不一致");
                 result.setSuccess(false);
                 return result;

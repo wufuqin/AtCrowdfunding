@@ -37,9 +37,6 @@
                 <%-- 包含页面头部 --%>
                 <jsp:include page="/WEB-INF/jsp/common/top.jsp"/>
             </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
         </div>
     </div>
 </nav>
@@ -55,10 +52,13 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
             <div class="panel panel-default">
-                <div class="panel-heading"><i class="glyphicon glyphicon-th-list"></i> 权限分配列表<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
+                <div class="panel-heading"><i class="glyphicon glyphicon-th-list"></i> 权限分配列表:给角色 <span style="color: red"> ${role.name}</span> 分配权限<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
+
                 <div class="panel-body">
                     <button id="assignPermissionBtn" class="btn btn-success">分配许可</button>
-                    <br><br>
+                    <button style="width: 90px" type="button" onclick="window.location.href='${APP_PATH}/role/index.htm'" class="btn btn-info">返回</button>
+                    <br>
+                    <br>
                     <ul id="treeDemo" class="ztree" onclick="return false"></ul>
                 </div>
             </div>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -184,14 +185,14 @@ public class RoleController {
 
     //去到分配许可页面
     @RequestMapping("/assignPermission")
-    public String assignPermission(){
+    public String assignPermission(Integer roleid, Map<String, Object> map){
+        //根据id查询角色名
+        Role role = roleService.getRoleById(roleid);
+        map.put("role", role);
         return "role/assignPermission";
     }
 
-    /**
-     * 显示权限树
-     * @return
-     */
+    //显示权限树
     @ResponseBody
     @RequestMapping("/loadDataAsync")
     public Object loadDataAsync(Integer roleid){

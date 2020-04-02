@@ -64,8 +64,11 @@
                             <label for="name">角色名称</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="请输入角色名称">
                         </div>
-                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 新增</button>
-                        <button type="reset" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+                        <button type="submit" class="btn btn-success"> 新增</button>
+                        <button type="reset" class="btn btn-info"> 重置</button>
+                        <button type="button" onclick="window.location.href='${APP_PATH}/role/index.htm'" class="btn btn-info">返回</button>
+
+
                     </form>
                 </div>
             </div>

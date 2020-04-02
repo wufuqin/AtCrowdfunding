@@ -55,7 +55,7 @@
                 <img src="${APP_PATH }/img/pic.jpg" style="display:none">
             </div>
         </c:forEach>
-        <button type="button" class="btn btn-info">上一步</button>
+        <button type="button" onclick="window.location.href='${APP_PATH}/member/basicInfo.htm'" class="btn btn-info">上一步</button>
         <button type="button" id="nextBtn" class="btn btn-info">下一步</button>
     </form>
     <hr>
@@ -102,13 +102,13 @@
         var options = {
             url:"${APP_PATH}/member/doUploadCert.do",
             beforeSubmit : function(){
-                loadingIndex = layer.msg('数据正在保存中', {icon: 6});
+                loadingIndex = layer.msg('数据正在保存中', {icon: 16});
                 return true ; //必须返回true,否则,请求终止.
             },
             success : function(result){
                 layer.close(loadingIndex);
                 if(result.success){
-                    layer.msg("数据保存成功", {time:1000, icon:6});
+                    layer.msg("数据保存成功");
                     window.location.href="${APP_PATH}/member/apply.htm";
                 }else{
                     layer.msg("数据保存失败");

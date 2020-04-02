@@ -1,14 +1,26 @@
 $(document).ready(function() {
-    $("#certUpdateForm").validate({
+    $("#uploadCertForm").validate({
         errorElement : 'span',
         errorClass : 'help-block',
 
         rules : {
-            name : "required",
+            "certimgs[0].fileImg" : "required",
+            "certimgs[1].fileImg" : "required",
+            "certimgs[2].fileImg" : "required",
+            "certimgs[3].fileImg" : "required",
+            "certimgs[4].fileImg" : "required",
+            "certimgs[5].fileImg" : "required",
+            "certimgs[6].fileImg" : "required"
         },
 
         messages : {
-            name : "请输入资质名",
+            "certimgs[0].fileImg" : "请选择资质文件",
+            "certimgs[1].fileImg" : "请选择资质文件",
+            "certimgs[2].fileImg" : "请选择资质文件",
+            "certimgs[3].fileImg" : "请选择资质文件",
+            "certimgs[4].fileImg" : "请选择资质文件",
+            "certimgs[5].fileImg" : "请选择资质文件",
+            "certimgs[6].fileImg" : "请选择资质文件"
         },
 
         errorPlacement : function(error, element) {
@@ -29,7 +41,7 @@ $(document).ready(function() {
             label.remove();
         },
         submitHandler: function() {
-            updateCert();
+            uploadCert();
         }
 
     })

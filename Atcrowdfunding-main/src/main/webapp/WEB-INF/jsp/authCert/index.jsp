@@ -55,7 +55,7 @@
                     <h3 class="panel-title"><i class="glyphicon glyphicon-th"></i> 数据列表</h3>
                 </div>
                 <div class="panel-body">
-                    <form class="form-inline" role="form" style="float:left;">
+                    <%--<form class="form-inline" role="form" style="float:left;">
                         <div class="form-group has-feedback">
                             <div class="input-group">
                                 <div class="input-group-addon">查询条件</div>
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <button onclick="AuthCertLike(0)" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
-                    </form>
+                    </form>--%>
                     <br>
                     <hr style="clear:both;">
                     <div class="table-responsive">

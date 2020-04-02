@@ -49,8 +49,8 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <ol class="breadcrumb">
-                <li><a href="#">首页</a></li>
-                <li><a href="#">数据列表</a></li>
+                <li><a href="${APP_PATH}/main.htm">首页</a></li>
+                <li><a href="${APP_PATH}/project/index.htm">数据列表</a></li>
                 <li class="active">新增</li>
             </ol>
             <div class="panel panel-default">
@@ -79,8 +79,10 @@
                             <input type="text" class="form-control" id="membername" placeholder="请输入发起人ID">
                         </div>--%>
 
-                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 新增</button>
-                        <button type="reset" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+                        <button type="submit" class="btn btn-success">新增</button>
+                        <button type="reset" class="btn btn-info">重置</button>
+                        <button type="button" onclick="window.location.href='${APP_PATH}/project/index.htm'" class="btn btn-info">返回</button>
+
                     </form>
                 </div>
             </div>

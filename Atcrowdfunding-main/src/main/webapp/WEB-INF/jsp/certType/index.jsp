@@ -60,6 +60,9 @@
                     <h3 class="panel-title"><i class="glyphicon glyphicon-th"></i> 资质分类表</h3>
                 </div>
                 <div class="panel-body">
+                    <button onclick="window.location.href='${APP_PATH}/main.htm'" type="button" class="btn btn-info" style="float:right; width: 100px">返回</button>
+                    <br>
+                    <hr style="clear:both;">
                     <div class="table-responsive">
                         <table class="table  table-bordered">
                             <thead>

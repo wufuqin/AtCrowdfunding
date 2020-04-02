@@ -50,7 +50,7 @@
                         </div>
                         <button onclick="queryPageCertLike(0)" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
                     </form>
-                    <button onclick="deleteCertBatchBtn()" type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
+                    <button onclick="deleteCertBatchBtn()" type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 批量删除</button>
                     <button onclick="window.location.href='${APP_PATH}/cert/add.htm'" type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='form.html'"><i class="glyphicon glyphicon-plus"></i> 新增</button>
                     <br>
                     <hr style="clear:both;">
@@ -61,7 +61,7 @@
                                 <th class="text-center" width="50">序号</th>
                                 <th class="text-center" width="30"><input id="checkAll" type="checkbox"></th>
                                 <th class="text-center">名称</th>
-                                <th class="text-center" width="150">操作</th>
+                                <th class="text-center" width="180">操作</th>
                             </tr>
                             </thead>
                             <%-- 查询出的数据 --%>

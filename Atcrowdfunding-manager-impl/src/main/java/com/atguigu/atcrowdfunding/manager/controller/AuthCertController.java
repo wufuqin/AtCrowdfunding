@@ -50,18 +50,13 @@ public class AuthCertController {
     @RequestMapping("/doIndex")
     public Object doIndex(@RequestParam(value="pageno",required=false,defaultValue="1") Integer pageno, @RequestParam(value="pagesize",required=false,defaultValue="8") Integer pagesize){
         AjaxResult result = new AjaxResult();
-
         try {
-
             Page page = new Page(pageno,pagesize);
-
             //1.查询后台backuser委托组的任务
             TaskQuery taskQuery = taskService.createTaskQuery().processDefinitionKey("auth")
                     .taskCandidateGroup("backuser");
             List<Task> listPage = taskQuery
                     .listPage(page.getStartIndex(), pagesize);
-
-
             List<Map<String,Object>> data = new ArrayList<Map<String,Object>>();
 
             for (Task task : listPage) {
@@ -75,18 +70,13 @@ public class AuthCertController {
                         .processDefinitionId(task.getProcessDefinitionId())
                         .singleResult();
 
-
                 map.put("procDefName", processDefinition.getName());
                 map.put("procDefVersion", processDefinition.getVersion());
 
-
                 //3.根据任务查询流程实例(根据流程实例的id查询流程单,查询用户信息)
                 Member member = ticketService.getMemberByPiId(task.getProcessInstanceId());
-
                 map.put("member",member);
-
                 data.add(map);
-
             }
 
             page.setDatas(data);

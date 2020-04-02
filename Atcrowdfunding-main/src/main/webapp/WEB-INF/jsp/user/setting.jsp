@@ -49,8 +49,7 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <ol class="breadcrumb">
-                <li><a href="#">首页</a></li>
-                <li><a href="#">数据列表</a></li>
+                <li><a href="${APP_PATH}/main.htm">首页</a></li>
                 <li class="active">个人设置</li>
             </ol>
             <div class="panel panel-default">
@@ -79,8 +78,10 @@
                             <label for="createtime">注册时间</label>
                             <input disabled type="text" value="${createtime}" class="form-control" id="createtime" name="createtime">
                         </div>
-                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 修改</button>
-                        <button type="reset" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+                        <button type="submit" class="btn btn-success">修改</button>
+                        <button type="reset" class="btn btn-info">重置</button>
+                        <button type="button" onclick="window.location.href='${APP_PATH}/main.htm'" class="btn btn-info">返回</button>
+
                     </form>
                 </div>
             </div>
