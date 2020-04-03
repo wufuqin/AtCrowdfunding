@@ -186,6 +186,7 @@ public class DispatcherController {
                 result.setSuccess(false);
                 return result;
             }
+
             if("member".equals(type)){
                 //查询会员用户是否已经激活
                 Member memberStatus = memberService.queryMemberLogin(paramMap);
@@ -194,6 +195,7 @@ public class DispatcherController {
                     result.setSuccess(false);
                     return result;
                 }
+
                 Member member = memberService.queryMemberLogin(paramMap);
                 session.setAttribute(Const.LOGIN_MEMBER, member);
             }

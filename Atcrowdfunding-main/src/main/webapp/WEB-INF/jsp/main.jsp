@@ -81,7 +81,7 @@
                     }
                 }
             });
-            layer.msg('登录成功');
+            //layer.msg('登录成功');
         });
 </script>
   </body>
