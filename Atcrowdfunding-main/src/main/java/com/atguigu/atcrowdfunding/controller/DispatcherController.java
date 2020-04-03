@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.atguigu.atcrowdfunding.bean.Member;
@@ -13,6 +14,7 @@ import com.atguigu.atcrowdfunding.util.AjaxResult;
 import com.atguigu.atcrowdfunding.util.MD5Util;
 import com.atguigu.atcrowdfunding.util.SendEmail;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +36,12 @@ public class DispatcherController {
 
     @Autowired
     private MemberService memberService;
+
+    //会员等成功之后的主页面
+    @RequestMapping("/afterSuccessfulLoginIndex")
+    public String afterSuccessfulLoginIndex(){
+        return "afterSuccessfulLoginIndex";
+    }
 
     //去到系统主页面
     @RequestMapping("/index")
@@ -78,6 +86,7 @@ public class DispatcherController {
             session.removeAttribute("CODE");
             //判断用户输入的验证码和实际生成的验证码是否一致，不区分大小写
             if(!checkCode_server.equalsIgnoreCase(checkCode)){
+            //if(!"abcd".equalsIgnoreCase("abcd")){
                 //验证码不正确(抛出异常信息)
                 result.setMessage("验证码错误！");
                 result.setSuccess(false);
@@ -88,7 +97,7 @@ public class DispatcherController {
             String loginacct = member.getLoginacct();
 
             //给注册用户发送激活邮件链接
-            SendEmail.sendEmial(email,"激活账号","<a href='http://localhost:8080/activateAccount.do?loginacct="+loginacct+"'>点击激活</a>");
+            SendEmail.sendEmial(email,"激活账号","<a href='http://"+Const.path+"/activateAccount.do?loginacct="+loginacct+"'>点击激活</a>");
             result.setSuccess(true);
         } catch (Exception e) {
             result.setSuccess(false);
@@ -156,6 +165,7 @@ public class DispatcherController {
     @ResponseBody
     @RequestMapping("/doLogin")
     public Object doLogin(String loginacct,String userpswd, String checkCode, String type,HttpSession session){
+
         //请求结果封装对象
         AjaxResult result = new AjaxResult();
         try {
@@ -210,7 +220,7 @@ public class DispatcherController {
     //发送重置密码邮件
     @ResponseBody
     @RequestMapping("/restPassword")
-    public Object restPassword(String email, String checkCode, HttpSession session ){
+    public Object restPassword(String email, String checkCode, HttpSession session){
         AjaxResult result = new AjaxResult();
         try {
             //从session域中获取程序生成的验证码
@@ -224,15 +234,13 @@ public class DispatcherController {
                 result.setSuccess(false);
                 return result;
             }
-
             //发送邮件
-            SendEmail.sendEmial(email,"重置密码","<a href='http://localhost:8080/toRestPassword.htm'>重置密码</a>");
+            SendEmail.sendEmial(email,"重置密码","<a href='http://"+Const.path+"/toRestPassword.htm'>重置密码</a>");
             result.setSuccess(true);
         } catch (Exception e) {
             result.setMessage("邮件发送失败");
             e.printStackTrace();
             result.setSuccess(false);
-
         }
         return result;
     }
@@ -304,10 +312,8 @@ public class DispatcherController {
     public Object activateAccount(String loginacct){
         //修改会员的账号激活状态 status = "Y"
         memberService.updateMemberStatusByLoginacct(loginacct);
-        System.out.println(loginacct);
         return "activateAccount";
     }
-
 
 }
 

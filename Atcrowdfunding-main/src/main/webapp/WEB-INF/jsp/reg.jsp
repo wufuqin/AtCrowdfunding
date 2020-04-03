@@ -76,7 +76,6 @@
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script src="${APP_PATH}/jquery/jQuery.validate/jquery.validate.min.js"></script>
 <script src="${APP_PATH}/script/checkReg.js"></script>
-<script src="${APP_PATH}/script/checkRegCode.js"></script>
 
 <%--注册--%>
 <script>

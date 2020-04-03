@@ -28,11 +28,11 @@
     <form id="loginForm" class="form-signin" role="form">
         <h2 class="form-signin-heading"><i class="glyphicon glyphicon-log-in"></i> 用户登录</h2>
         <div class="form-group has-success has-feedback">
-            <input type="text" class="form-control" id="loginacct" name="loginacct" value="18377548732" placeholder="请输入登录账号" autofocus>
+            <input type="text" class="form-control" id="loginacct" name="loginacct" placeholder="请输入登录账号" autofocus>
 
         </div>
         <div class="form-group has-success has-feedback">
-            <input type="password" class="form-control" id="userpswd" name="userpswd" value="abc123`" placeholder="请输入登录密码" style="margin-top:10px;">
+            <input type="password" class="form-control" id="userpswd" name="userpswd" placeholder="请输入登录密码" style="margin-top:10px;">
         </div>
 
         <div class="form-group has-success has-feedback">
