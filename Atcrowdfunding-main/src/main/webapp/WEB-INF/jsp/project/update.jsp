@@ -56,7 +56,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
                 <div class="panel-body">
-                    <form id="updateProjectForm">
+                    <form id="updateProjectForm" method="POST" enctype="multipart/form-data">
 
                         <div class="form-group" style="width: 300px">
                             <label for="name">项目名称</label>
@@ -73,6 +73,9 @@
                         <div class="form-group" style="width: 300px">
                             <label for="day">筹资天数</label>
                             <input type="text" class="form-control" id="day" name="day" value="${project.day}" placeholder="请输入筹资天数">
+                        </div>
+                        <div class="form-group">
+                            <img src="${APP_PATH }/picture/project/${project.filename}">
                         </div>
                         <button type="submit" class="btn btn-success">修改</button>
                         <button type="reset" class="btn btn-info">重置</button>

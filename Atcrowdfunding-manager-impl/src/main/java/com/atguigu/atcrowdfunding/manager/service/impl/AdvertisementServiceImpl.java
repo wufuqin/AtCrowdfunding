@@ -123,4 +123,112 @@ public class AdvertisementServiceImpl implements AdvertisementService {
         advertisementMapper.updateAdvertisementStatusByIdRefuse(id);
     }
 
+    //查询需要发布的广告
+    @Override
+    public Page queryPagePublishAdvertisement(Integer pageno, Integer pagesize) {
+        //创建一个分页对象，将查询的对应分页信息传入
+        Page page = new Page(pageno, pagesize);
+
+        //获取索引
+        Integer startIndex = page.getStartIndex();
+
+        //获取查询需要发布广告的分页数据
+        List datas = advertisementMapper.queryPublishList(startIndex,pagesize);
+
+        //设置分页数据到Page分页对象中
+        page.setDatas(datas);
+
+        //查询需要发布广告总的记录条数
+        Integer totalsize = advertisementMapper.queryPublishCount();
+
+        //设置总记录数到Page分页对象中
+        page.setTotalsize(totalsize);
+        page.setTotalno(totalsize);
+
+        return page;
+    }
+
+    //模糊查询需要发布的广告
+    @Override
+    public Page queryPagePublishLikeAdvertisement(HashMap<String, Object> paramMap) {
+        //创建一个分页对象，将查询的对应分页信息传入
+        Page page = new Page((Integer) paramMap.get("pageno"), (Integer) paramMap.get("pagesize"));
+
+        //获取索引
+        Integer startIndex = page.getStartIndex();
+        //将索引信息存入map集合
+        paramMap.put("startIndex",startIndex);
+
+        //获取查询出来查询需要发布的广告的分页数据
+        List datas = advertisementMapper.queryPublishListLike(paramMap);
+
+        //设置分页数据到Page分页对象中
+        page.setDatas(datas);
+
+        //查询总的查询需要发布的广告记录条数
+        Integer totalsize = advertisementMapper.queryPublishCountLike(paramMap);
+
+        //设置总记录数到Page分页对象中
+        page.setTotalsize(totalsize);
+        page.setTotalno(totalsize);
+
+        return page;
+    }
+
+    //发布广告将广告的status改为 3
+    @Override
+    public void updateAdvertisementStatusByIdPublish(Integer id) {
+        advertisementMapper.updateAdvertisementStatusByIdPublish(id);
+    }
+
+    //查询已经状态为status为3的广告
+    @Override
+    public Page queryPublishAdvertisement(Integer pageno, Integer pagesize) {
+        //创建一个分页对象，将查询的对应分页信息传入
+        Page page = new Page(pageno, pagesize);
+
+        //获取索引
+        Integer startIndex = page.getStartIndex();
+
+        //获取查询已经发布的广告数据
+        List datas = advertisementMapper.queryPublishAdvertisementList(startIndex,pagesize);
+
+        //设置分页数据到Page分页对象中
+        page.setDatas(datas);
+
+        //查询已经发布的广告数据总的记录条数
+        Integer totalsize = advertisementMapper.queryPublishAdvertisementCount();
+
+        //设置总记录数到Page分页对象中
+        page.setTotalsize(totalsize);
+        page.setTotalno(totalsize);
+
+        return page;
+    }
+
+    //查询轮播图数据
+    @Override
+    public Page queryPublishCarouseAdvertisement(Integer pageno, Integer pagesize) {
+        //创建一个分页对象，将查询的对应分页信息传入
+        Page page = new Page(pageno, pagesize);
+
+        //获取索引
+        Integer startIndex = page.getStartIndex();
+
+        //获取查询已经发布的轮播图数据
+        List datas = advertisementMapper.queryPublishCarouseAdvertisementList(startIndex,pagesize);
+
+        //设置分页数据到Page分页对象中
+        page.setDatas(datas);
+
+        //查询已经发布的轮播图数据总的记录条数
+        Integer totalsize = advertisementMapper.queryPublishCarouseAdvertisementCount();
+
+        //设置总记录数到Page分页对象中
+        page.setTotalsize(totalsize);
+        page.setTotalno(totalsize);
+
+        return page;
+    }
+
 }

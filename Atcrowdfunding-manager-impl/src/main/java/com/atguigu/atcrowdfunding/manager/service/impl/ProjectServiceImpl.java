@@ -139,6 +139,37 @@ public class ProjectServiceImpl implements ProjectService {
     public void updateProjectStatusByIdRefuse(Integer id) {
         projectMapper.updateProjectStatusByIdRefuse(id);
     }
+
+    //查询需要发布的项目信息
+    @Override
+    public Page queryPagePublishProject(Integer pageno, Integer pagesize) {
+        //创建一个分页对象，将查询的对应分页信息传入
+        Page page = new Page(pageno, pagesize);
+
+        //获取索引
+        Integer startIndex = page.getStartIndex();
+
+        //获取查询需要发布广告的分页数据
+        List datas = projectMapper.queryPublishList(startIndex,pagesize);
+
+        //设置分页数据到Page分页对象中
+        page.setDatas(datas);
+
+        //查询需要发布广告总的记录条数
+        Integer totalsize = projectMapper.queryPublishCount();
+
+        //设置总记录数到Page分页对象中
+        page.setTotalsize(totalsize);
+        page.setTotalno(totalsize);
+
+        return page;
+    }
+
+    //发布项目，将项目的status该为 2
+    @Override
+    public void updateProjectStatusByIdPublish(Integer id) {
+        projectMapper.updateProjectStatusByIdPublish(id);
+    }
 }
 
 

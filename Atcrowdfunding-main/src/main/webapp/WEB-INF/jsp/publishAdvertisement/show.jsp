@@ -28,7 +28,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <div><a class="navbar-brand" style="font-size:32px;" href="user.html">众筹平台 - 实名认证审核</a></div>
+            <div><a class="navbar-brand" style="font-size:32px;" href="user.html">众筹平台 - 实名发布</a></div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -66,7 +66,7 @@
                             </div>
                             <div class="form-group">
                                 <label>广告状态: </label>
-                                未审核
+                                审核完成
                             </div>
 
                             <hr>
@@ -74,9 +74,8 @@
                                 <img src="${APP_PATH }/picture/advertisement/${advertisement.iconpath}" style="width: 300px; height: 200px">
                             </div>
 
-                            <button onclick="passAdvertisement()" type="button" class="btn btn-success"> 通过</button>
-                            <button onclick="refuseAdvertisement()" type="button" class="btn btn-danger"> 拒绝</button>
-                            <button type="button" onclick="window.location.href='${APP_PATH}/authAdvertisement/index.htm'" class="btn btn-info">返回</button>
+                            <button onclick="publishAdvertisement()" type="button" class="btn btn-success"> 发布广告</button>
+                            <button type="button" onclick="window.location.href='${APP_PATH}/advertisement/publishIndex.htm'" class="btn btn-info">返回</button>
 
                         </form>
                     </div>
@@ -126,51 +125,24 @@
 
 </script>
 
-<%--通过申请--%>
+<%--发布广告--%>
 <script>
-    function passAdvertisement() {
+    function publishAdvertisement() {
         $.ajax({
             type : "POST",
             data : {
                 "id" : ${advertisement.id }
             },
-            url : "${APP_PATH}/authAdvertisement/passAdvertisement.do",
+            url : "${APP_PATH}/advertisement/publishAdvertisement.do",
             beforeSend : function () {
                 loadingIndex = layer.msg('数据加载中...', {icon: 16});
                 return true;
             },
             success : function (result) {
                 layer.close(loadingIndex);
+                layer.msg("广告发布成功");
                 if (result.success){
-                    window.location.href = "${APP_PATH}/authAdvertisement/index.htm";
-                } else {
-                    layer.msg(result.message);
-                }
-            },
-            error : function () {
-                layer.msg("操作失败");
-            }
-        });
-    }
-</script>
-
-<%--拒绝申请--%>
-<script>
-    function refuseAdvertisement() {
-        $.ajax({
-            type : "POST",
-            data : {
-                "id" : ${advertisement.id }
-            },
-            url : "${APP_PATH}/authAdvertisement/refuseAdvertisement.do",
-            beforeSend : function () {
-                loadingIndex = layer.msg('数据加载中...', {icon: 16});
-                return true;
-            },
-            success : function (result) {
-                layer.close(loadingIndex);
-                if (result.success){
-                    window.location.href = "${APP_PATH}/authAdvertisement/index.htm";
+                    window.location.href = "${APP_PATH}/advertisement/publishIndex.htm";
                 } else {
                     layer.msg(result.message);
                 }

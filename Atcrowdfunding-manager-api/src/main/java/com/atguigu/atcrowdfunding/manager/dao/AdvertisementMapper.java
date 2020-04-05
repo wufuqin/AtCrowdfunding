@@ -28,7 +28,6 @@ public interface AdvertisementMapper {
     int updateByPrimaryKey(Advertisement record);
 
     //获取查询出来的分页数据
-    //当想mybatis传递多个参数是，需要使用注解指定参数名，否则mybatis不能自动识别
     List queryList(@Param("startIndex") Integer startIndex, @Param("pagesize") Integer pagesize);
 
     //查询总的记录条数
@@ -45,4 +44,31 @@ public interface AdvertisementMapper {
 
     //拒绝申请
     void updateAdvertisementStatusByIdRefuse(Integer id);
+
+    //获取查询需要发布广告的分页数据
+    List queryPublishList(@Param("startIndex") Integer startIndex, @Param("pagesize") Integer pagesize);
+
+    //查询需要发布广告总的记录条数
+    Integer queryPublishCount();
+
+    //获取查询出来查询需要发布的广告的分页数据
+    List queryPublishListLike(HashMap<String, Object> paramMap);
+
+    //查询总的查询需要发布的广告记录条数
+    Integer queryPublishCountLike(HashMap<String, Object> paramMap);
+
+    //发布广告将广告的status改为 3
+    void updateAdvertisementStatusByIdPublish(Integer id);
+
+    //获取查询已经发布的广告数据
+    List queryPublishAdvertisementList(@Param("startIndex") Integer startIndex, @Param("pagesize") Integer pagesize);
+
+    //查询已经发布的广告数据总的记录条数
+    Integer queryPublishAdvertisementCount();
+
+    //获取查询已经发布的轮播图数据
+    List queryPublishCarouseAdvertisementList(@Param("startIndex") Integer startIndex, @Param("pagesize") Integer pagesize);
+
+    //查询已经发布的轮播图数据总的记录条数
+    Integer queryPublishCarouseAdvertisementCount();
 }

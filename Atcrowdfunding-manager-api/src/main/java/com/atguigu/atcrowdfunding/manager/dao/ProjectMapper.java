@@ -44,4 +44,13 @@ public interface ProjectMapper {
 
     //项目状态设置为 status5 拒绝申请
     void updateProjectStatusByIdRefuse(Integer id);
+
+    //获取查询需要发布广告的分页数据
+    List queryPublishList(@Param("startIndex") Integer startIndex, @Param("pagesize") Integer pagesize);
+
+    //查询需要发布广告总的记录条数
+    Integer queryPublishCount();
+
+    //发布项目，将项目的status该为 2
+    void updateProjectStatusByIdPublish(Integer id);
 }

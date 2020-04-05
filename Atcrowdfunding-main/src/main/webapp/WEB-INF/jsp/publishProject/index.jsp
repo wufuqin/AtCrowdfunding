@@ -119,20 +119,20 @@
             }
         });
         showMenu();
-        queryPageAuthProject(0);
+        queryPagePublishProject(0);
     });
 </script>
 
-<%--查询需要审核的项目--%>
+<%--查询需要发布的项目--%>
 <script>
-    function queryPageAuthProject(pageIndex) {
+    function queryPagePublishProject(pageIndex) {
         $.ajax({
             type : "POST",
             data : {
                 "pageno" : pageIndex + 1,
                 "pagesize" : 8
             },
-            url : "${APP_PATH}/authProject/doIndex.do",
+            url : "${APP_PATH}/project/doPublishIndex.do",
             beforeSend : function () {
                 loadingIndex = layer.msg('数据加载中...', {icon: 16});
                 return true;
@@ -158,9 +158,9 @@
                         content+="<td class='text-center' >"+n.money+"</td>";
                         content+="<td class='text-center' >"+n.day+"</td>";
                         content+="<td class='text-center' >"+n.createdate+"</td>";
-                        content+="<td class='text-center'>未审核</td>";
+                        content+="<td class='text-center'>即将开始</td>";
                         content+='<td class="text-center">';
-                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/authProject/show.htm?id='+n.id+'\'" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-eye-open"></i>审核</button>';
+                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/project/show.htm?id='+n.id+'\'" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-eye-open"></i>审核</button>';
                         content+='</td>';
                         content+='</tr>';
                     });
@@ -171,7 +171,7 @@
                     $("#Pagination").pagination(page.totalsize, {
                         num_edge_entries: 2, //边缘页数
                         num_display_entries: 4, //主体页数
-                        callback: queryPageAuthProject, //当前函数
+                        callback: queryPagePublishProject, //当前函数
                         items_per_page:8, //每页显示多少条
                         current_page :(page.pageno-1), //当前页
                         prev_text : "上一页",

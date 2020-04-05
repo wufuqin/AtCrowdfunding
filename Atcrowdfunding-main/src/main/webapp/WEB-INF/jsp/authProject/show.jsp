@@ -47,8 +47,8 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <ol class="breadcrumb">
-                <li><a href="#">首页</a></li>
-                <li><a href="#">数据列表</a></li>
+                <li><a href="${APP_PATH}/main.htm">首页</a></li>
+                <li><a href="${APP_PATH}/authProject/index.htm">数据列表</a></li>
                 <li class="active">项目信息</li>
             </ol>
             <div class="panel panel-default">
@@ -79,34 +79,13 @@
 
                             <hr>
                             <div class="form-group">
-                                <img src="${APP_PATH }/picture/advertisement/${Project.filename}">
+                                <img src="${APP_PATH }/picture/project/${project.filename}">
                             </div>
-                            <%--上传图片--%>
-                            <script>
-                                function addAdvertisement() {
-                                    var options = {
-                                        url:"${APP_PATH}/advertisement/doAdd.do",
-                                        beforeSubmit : function(){
-                                            loadingIndex = layer.msg('数据正在保存中', {icon: 6});
-                                            return true ; //必须返回true,否则,请求终止.
-                                        },
-                                        success : function(result){
-                                            layer.close(loadingIndex);
-                                            if(result.success){
-                                                layer.msg("广告数据保存成功", {time:1000, icon:6});
-                                                window.location.href="${APP_PATH}/advertisement/index.htm";
-                                            }else{
-                                                layer.msg("广告数据保存失败", {time:1000, icon:5, shift:6});
-                                            }
-                                        }
-                                    };
 
-                                    $("#addAdvertisementForm").ajaxSubmit(options); //异步提交
-                                    return ;
-                                }
-                            </script>
-                            <button onclick="passProject()" type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 通过</button>
-                            <button onclick="refuseProject()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 拒绝</button>
+                            <button onclick="passProject()" type="button" class="btn btn-success"> 通过</button>
+                            <button onclick="refuseProject()" type="button" class="btn btn-danger"> 拒绝</button>
+                            <button type="button" onclick="window.location.href='${APP_PATH}/authProject/index.htm'" class="btn btn-info">返回</button>
+
                         </form>
                     </div>
                 </div>

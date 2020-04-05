@@ -134,7 +134,6 @@ public class AdvertisementController {
     @RequestMapping("/doAdd")
     public Object doAdd(HttpServletRequest request, Advertisement advertisement, HttpSession session) {
         AjaxResult result = new AjaxResult();
-
         try {
             MultipartHttpServletRequest mreq = (MultipartHttpServletRequest)request;
 
@@ -176,31 +175,15 @@ public class AdvertisementController {
     //修改广告数据(目前不支持修改广告图片)
     @ResponseBody
     @RequestMapping("/doUpdate")
-    public Object doUpdate(Advertisement advertisement, String advertPicture, HttpSession session, HttpServletRequest request){
+    public Object doUpdate(Advertisement advertisement, HttpSession session, HttpServletRequest request){
         //用来封装ajax请求结果
         AjaxResult result = new AjaxResult();
         try {
-            //从数据库中查询出原来广告图片名字
-            //判断是否更改了广告图片
-            if (!"".equals(advertPicture)){
-                MultipartHttpServletRequest mreq = (MultipartHttpServletRequest)request;
 
-                MultipartFile mfile = mreq.getFile("advertPicture");  //创建一个文件对象
-                String name = mfile.getOriginalFilename();// 获取上传的原始文件名  java.jpg
-                String extname = name.substring(name.lastIndexOf(".")); //  截取文件名后缀 ： .jpg
-                //String firstPath = CreateFileName.createID();
-                String iconpath = UUID.randomUUID().toString() + extname; //生成随机文件名 ： 232243343.jpg
+            User user = (User)session.getAttribute(Const.LOGIN_USER); //获取当前用户
+            advertisement.setUserid(user.getId());  //获取当前用户id
+            advertisement.setStatus("1");           //将当前的状态设置为未审核
 
-                ServletContext servletContext = session.getServletContext();
-                String realpath = servletContext.getRealPath("/picture");  //得到存储文件的路径
-
-                String path =realpath+ "\\advertisement\\"+iconpath;  //生成文件路径
-                mfile.transferTo(new File(path));      //将文件添加到对应路径下
-                User user = (User)session.getAttribute(Const.LOGIN_USER); //获取当前用户
-                advertisement.setUserid(user.getId());  //获取当前用户id
-                advertisement.setStatus("1");           //将当前的状态设置为未审核
-                advertisement.setIconpath(iconpath);    //设置广告图片的名字
-            }
             //调用业务层方法,返回一个影响数据库行数的int数值
             int count = advertisementService.updateAdvertisement(advertisement);
             result.setSuccess(count == 1);
@@ -211,6 +194,132 @@ public class AdvertisementController {
         }
         return result;
     }
+
+    //去到发布广告页面
+    @RequestMapping("/publishIndex")
+    public String publishIndex(){
+        return "publishAdvertisement/index";
+    }
+
+    //查询需要发布的广告
+    @ResponseBody
+    @RequestMapping("doPublishIndex")
+    public Object doPublishIndex(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "8") Integer pagesize){
+        //创建一个用于存储查询得到的数据集对象
+        AjaxResult result = new AjaxResult();
+        try {
+            //调用service层查询方法，返回一个分页数据对象
+            Page page = advertisementService.queryPagePublishAdvertisement(pageno, pagesize);
+            //设置查询状态
+            result.setSuccess(true);
+            //存储查询到的数据
+            result.setPage(page);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("查询数据失败...");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    //模糊查询需要发布的广告
+    @ResponseBody
+    @RequestMapping("doPublishLike")
+    public Object doPublishLike(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "8") Integer pagesize, String queryText){
+
+        //创建一个用于存储查询得到的数据集对象
+        AjaxResult result = new AjaxResult();
+        try {
+            //创建一个map集合
+            HashMap<String, Object> paramMap = new HashMap<String, Object>();
+            //将查询条件存入map集合
+            paramMap.put("pageno",pageno);
+            paramMap.put("pagesize",pagesize);
+            paramMap.put("queryText",queryText);
+
+            //调用service层查询方法，返回一个分页数据对象
+            Page page = advertisementService.queryPagePublishLikeAdvertisement(paramMap);
+            //设置查询状态
+            result.setSuccess(true);
+            //存储查询到的数据
+            result.setPage(page);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("查询数据失败...");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    //去到查看广告发布页面
+    @RequestMapping("/show")
+    public String show(Integer id, Map map){
+        Advertisement advertisement = advertisementService.getAdvertisementById(id);
+        map.put("advertisement",advertisement);
+        return "publishAdvertisement/show";
+    }
+
+    //发布广告将广告的status改为 3
+    @ResponseBody
+    @RequestMapping("publishAdvertisement")
+    public Object publishAdvertisement(Integer id){
+        //创建一个用于存储查询得到的数据集对象
+        AjaxResult result = new AjaxResult();
+        try {
+            //调用service层的方法发布广告将广告的status改为 3
+            advertisementService.updateAdvertisementStatusByIdPublish(id);
+            result.setSuccess(true);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("操作失败...");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    //查询轮播图数据
+    @ResponseBody
+    @RequestMapping("selectPublishCarouse")
+    public Object selectPublishCarouse(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "8") Integer pagesize){
+        //创建一个用于存储查询得到的数据集对象
+        AjaxResult result = new AjaxResult();
+        try {
+            //调用service层查询方法，返回一个分页数据对象
+            Page page = advertisementService.queryPublishCarouseAdvertisement(pageno, pagesize);
+            //设置查询状态
+            result.setSuccess(true);
+            //存储查询到的数据
+            result.setPage(page);
+        } catch (Exception e) {
+            result.setMessage("查询数据失败...");
+            result.setSuccess(false);
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+    //查询一般广告
+    @ResponseBody
+    @RequestMapping("selectPublish")
+    public Object selectPublish(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "8") Integer pagesize){
+        //创建一个用于存储查询得到的数据集对象
+        AjaxResult result = new AjaxResult();
+        try {
+            //调用service层查询方法，返回一个分页数据对象
+            Page page = advertisementService.queryPublishAdvertisement(pageno, pagesize);
+            //设置查询状态
+            result.setSuccess(true);
+            //存储查询到的数据
+            result.setPage(page);
+        } catch (Exception e) {
+            result.setMessage("查询数据失败...");
+            result.setSuccess(false);
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 
 
 }

@@ -2,6 +2,7 @@
     后台显示的首页面
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -13,6 +14,7 @@
     <link rel="stylesheet" href="${APP_PATH}/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${APP_PATH}/css/font-awesome.min.css">
     <link rel="stylesheet" href="${APP_PATH}/css/carousel.css">
+    <link rel="stylesheet" href="${APP_PATH}/jquery/pagination/pagination.css">
     <style>
         h3 {
             font-weight:bold;
@@ -120,17 +122,14 @@
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
     </ol>
-    <div class="carousel-inner" role="listbox">
+
+    <%--<div class="carousel-inner" role="listbox">
         <div class="item active" onclick="window.location.href='project.html'" style="cursor:pointer;">
             <img src="img/my_carousel-1.jpg" alt="First slide">
         </div>
-        <div class="item" onclick="window.location.href='project.html'" style="cursor:pointer;">
-            <img src="img/my_carousel-2.jpg" alt="Second slide">
-        </div>
-        <div class="item" onclick="window.location.href='project.html'" style="cursor:pointer;">
-            <img src="img/my_carousel-3.jpg" alt="Third slide">
-        </div>
-    </div>
+    </div>--%>
+
+
     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left"></span>
         <span class="sr-only">Previous</span>
@@ -146,205 +145,16 @@
 ================================================== -->
 <!-- Wrap the rest of the page in another container to center all the content. -->
 
+<%--轮播图下面的广告--%>
 <div class="container marketing">
 
     <!-- Three columns of text below the carousel -->
-    <div class="row">
-        <div class="col-lg-4">
-            <img class="img-circle" src="img/p1.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-            <h2>智能高清监控机器人</h2>
-            <p>可爱的造型，摄像安防远程互联的全能设计，让你随时随地守护您的家人，陪伴你的生活。</p>
-            <p><a class="btn btn-default" href="project.html" role="button">项目详情 &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-            <img class="img-circle" src="img/p2.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-            <h2>NEOKA智能手环</h2>
-            <p>要运动更要安全，这款、名为“蝶舞”的NEOKA-V9100智能运动手环为“安全运动而生”。</p>
-            <p><a class="btn btn-default" href="project.html" role="button">项目详情 &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-            <img class="img-circle" src="img/p3.png" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-            <h2>驱蚊扣</h2>
-            <p>随处使用的驱蚊纽扣，<br>解决夏季蚊虫问题。</p>
-            <p><a class="btn btn-default" href="project.html" role="button">项目详情 &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
+    <div class="row" id="publishAdvertisementBox">
+
     </div><!-- /.row -->
 
-    <%--科技--%>
-    <div class="container">
-        <div class="row clearfix">
-            <div class="col-md-12 column">
-                <div class="box ui-draggable" id="mainBox">
-                    <div class="mHd" style="">
-                        <div class="path">
-                            <a href="projects.html">更多...</a>
-                        </div>
-                        <h3>
-                            科技 <small style="color:#FFF;">开启智慧未来</small>
-                        </h3>
-                    </div>
-                    <div class="mBd" style="padding-top:10px;">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="thumbnail">
-                                    <img alt="300x200" src="img/product-1.jpg" />
-                                    <div class="caption">
-                                        <h3 class="break">
-                                            <a href="project.html">活性富氢净水直饮机</a>
-                                        </h3>
-                                        <p>
-                                        <div style="float:left;"><i class="glyphicon glyphicon-screenshot" title="目标金额" ></i> $20,000 </div>
-                                        <div style="float:right;"><i title="截至日期" class="glyphicon glyphicon-calendar"></i> 2017-20-20 </div>
-                                        </p>
-                                        <br>
-                                        <div class="progress" style="margin-bottom: 4px;">
-                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                                <span >40% </span>
-                                            </div>
-                                        </div>
-                                        <div><span style="float:right;"><i class="glyphicon glyphicon-star-empty" ></i></span>  <span ><i class="glyphicon glyphicon-user" title="支持人数"></i> 12345</span> </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div id="Pagination" class="pagination" style="padding-left: 500px"></div>
 
-            </div>
-        </div>
-    </div>
-
-    <%--设计--%>
-    <div class="container">
-        <div class="row clearfix">
-            <div class="col-md-12 column">
-                <div class="box ui-draggable" id="mainBox">
-                    <div class="mHd" style="">
-                        <div class="path">
-                            <a href="projects.html">更多...</a>
-                        </div>
-                        <h3>
-                            设计 <small style="color:#FFF;">创意改变生活</small>
-                        </h3>
-                    </div>
-                    <div class="mBd" style="padding-top:10px;">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="thumbnail">
-                                    <img alt="300x200" src="img/product-5.jpg" />
-                                    <div class="caption">
-                                        <h3 class="break">
-                                            <a href="project.html">活性富氢净水直饮机</a>
-                                        </h3>
-                                        <p>
-                                        <div style="float:left;"><i class="glyphicon glyphicon-screenshot" title="目标金额" ></i> $20,000 </div>
-                                        <div style="float:right;"><i title="截至日期" class="glyphicon glyphicon-calendar"></i> 2017-20-20 </div>
-                                        </p>
-                                        <br>
-                                        <div class="progress" style="margin-bottom: 4px;">
-                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                                <span >40% </span>
-                                            </div>
-                                        </div>
-                                        <div><span style="float:right;"><i class="glyphicon glyphicon-star-empty" ></i></span>  <span ><i class="glyphicon glyphicon-user" title="支持人数"></i> 12345</span> </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <%--农业--%>
-    <div class="container">
-        <div class="row clearfix">
-            <div class="col-md-12 column">
-                <div class="box ui-draggable" id="mainBox">
-                    <div class="mHd" style="">
-                        <div class="path">
-                            <a href="projects.html">更多...</a>
-                        </div>
-                        <h3>
-                            农业 <small style="color:#FFF;">网络天下肥美</small>
-                        </h3>
-                    </div>
-                    <div class="mBd" style="padding-top:10px;">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="thumbnail">
-                                    <img alt="300x200" src="img/product-9.jpg" />
-                                    <div class="caption">
-                                        <h3 class="break">
-                                            <a href="project.html">活性富氢净水直饮机</a>
-                                        </h3>
-                                        <p>
-                                        <div style="float:left;"><i class="glyphicon glyphicon-screenshot" title="目标金额" ></i> $20,000 </div>
-                                        <div style="float:right;"><i title="截至日期" class="glyphicon glyphicon-calendar"></i> 2017-20-20 </div>
-                                        </p>
-                                        <br>
-                                        <div class="progress" style="margin-bottom: 4px;">
-                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                                <span >40% </span>
-                                            </div>
-                                        </div>
-                                        <div><span style="float:right;"><i class="glyphicon glyphicon-star-empty" ></i></span>  <span ><i class="glyphicon glyphicon-user" title="支持人数"></i> 12345</span> </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <%--其他--%>
-    <div class="container">
-        <div class="row clearfix">
-            <div class="col-md-12 column">
-                <div class="box ui-draggable" id="mainBox">
-                    <div class="mHd" style="">
-                        <div class="path">
-                            <a href="projects.html">更多...</a>
-                        </div>
-                        <h3>
-                            其他 <small style="color:#FFF;">发现更多惊喜</small>
-                        </h3>
-                    </div>
-                    <div class="mBd" style="padding-top:10px;">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="thumbnail">
-                                    <img alt="300x200" src="img/product-1.jpg" />
-                                    <div class="caption">
-                                        <h3 class="break">
-                                            <a href="project.html">活性富氢净水直饮机</a>
-                                        </h3>
-                                        <p>
-                                        <div style="float:left;"><i class="glyphicon glyphicon-screenshot" title="目标金额" ></i> $20,000 </div>
-                                        <div style="float:right;"><i title="截至日期" class="glyphicon glyphicon-calendar"></i> 2017-20-20 </div>
-                                        </p>
-                                        <br>
-                                        <div class="progress" style="margin-bottom: 4px;">
-                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                                <span >40% </span>
-                                            </div>
-                                        </div>
-                                        <div><span style="float:right;"><i class="glyphicon glyphicon-star-empty" ></i></span>  <span ><i class="glyphicon glyphicon-user" title="支持人数"></i> 12345</span> </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
 </div><!-- /.container -->
 
 
@@ -352,11 +162,119 @@
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/script/back-to-top.js"></script>
+<script src="${APP_PATH}/jquery/layer/layer.js"></script>
+<script src="${APP_PATH}/jquery/pagination/jquery.pagination.js"></script>
 <script>
     $(".thumbnail img").css("cursor", "pointer");
     $(".thumbnail img").click(function(){
         window.location.href = "project.html";
     });
+    $(function () {
+        //加载轮播图广告
+        publishCarouseAdvertisement(0);
+
+        //加载一般广告
+        publishAdvertisement(0);
+
+    })
+
 </script>
+
+<%--加载轮播图广告图片--%>
+<script>
+    function publishCarouseAdvertisement(pageIndex) {
+        $.ajax({
+            type : "POST",
+            data : {
+                "pageno" : pageIndex + 1,
+                "pagesize" : 8
+            },
+            url : "${APP_PATH}/advertisement/selectPublishCarouse.do",
+            beforeSend : function () {
+                return true;
+            },
+            success : function (result) {
+                if (result.success){
+                    //查询数据成功
+                    var page = result.page;
+                    var data = page.datas;
+
+                    var content = '';
+                    /* 对后台返回的数据进行拼串展示 */
+                    $.each(data,function(i,n){
+                        content+="<div class='item active' onclick='window.location.href=\"#\"' style='cursor:pointer;'>";
+                        /*if(n =='0'){
+                            content+="<img src=\'${APP_PATH }/picture/advertisement/"+n.iconpath+"\' style=\'width: 100%; height: 500px\' alt=\'First slide\'>" ;
+                        }else if(n =='1'){
+                            content+="<img src=\'${APP_PATH }/picture/advertisement/"+n.iconpath+"\' style=\'width: 100%; height: 500px\' alt=\'Second slide\'>" ;
+                        }else if(n =='2'){
+                            content+="<img src=\'${APP_PATH }/picture/advertisement/"+n.iconpath+"\' style=\'width: 100%; height: 500px\' alt=\'Third slide\'>" ;
+                        }*/
+                        content+="<img src=\'${APP_PATH }/picture/advertisement/"+n.iconpath+"\' style=\'width: 100%; height: 500px\' alt=\'First slide\'>" ;
+
+                        content+="</div>";
+                    });
+
+                    // 将拼接到的数据放入标签的指定位置
+                    $("#myCarousel").html(content);
+
+                } else {
+                    //查询数据失败
+                    layer.msg("轮播图加载失败");
+                }
+            },
+            error : function () {
+                layer.msg("轮播图加载失败");
+            }
+        });
+    }
+
+</script>
+
+<%--加载发布一般的广告--%>
+<script>
+    function publishAdvertisement(pageIndex) {
+        $.ajax({
+            type : "POST",
+            data : {
+                "pageno" : pageIndex + 1,
+                "pagesize" : 8
+            },
+            url : "${APP_PATH}/advertisement/selectPublish.do",
+            beforeSend : function () {
+                return true;
+            },
+            success : function (result) {
+                if (result.success){
+                    //查询数据成功
+                    var page = result.page;
+                    var data = page.datas;
+
+                    var content = '';
+                    /* 对后台返回的数据进行拼串展示 */
+                    $.each(data,function(i,n){
+                        content+="<div class='col-lg-4'>";
+                        content+="<img src=\'${APP_PATH }/picture/advertisement/"+n.iconpath+"\' style=\'width: 100px; height: 100px;\'>";
+                        content+="<h2>"+n.name+"</h2>";
+                        content+="<p>good</p>";
+                        content+="<p><a class='btn btn-default' href='#' role='button'>项目详情 &raquo;</a></p>";
+                        content+="</div>";
+                    });
+
+                    // 将拼接到的数据放入标签的指定位置
+                    $("#publishAdvertisementBox").html(content);
+
+                } else {
+                    //查询数据失败
+                    layer.msg("数据加载失败");
+                }
+            },
+            error : function () {
+                layer.msg("数据加载失败");
+            }
+        });
+    }
+</script>
+
 </body>
 </html>

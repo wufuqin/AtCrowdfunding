@@ -61,10 +61,20 @@
                             <label for="name">广告名称</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="请输入广告名称">
                         </div>
-                        <div class="form-group" style="width: 300px">
-                            <label for="url">广告地址</label>
+                       <%-- <div class="form-group" style="width: 300px">
+                            <label for="url">请选择广告区域</label>
                             <input type="text" class="form-control" id="url" name="url" placeholder="请输入广告地址">
+                        </div>--%>
+
+                        <div class="form-group" style="width: 300px">
+                            <label for="url">请选择广告区域</label>
+                            <select class="form-control" id="url" name="url" >
+                                <option selected >-- 请选择广告区域 --</option>
+                                <option value="top">轮播图广告</option>
+                                <option value="body">一般广告</option>
+                            </select>
                         </div>
+
                         <div class="form-group" style="width: 300px">
                             <label for="advertPicture">广告图片</label>
                             <input type="file" class="form-control" id="advertPicture" name="advertPicture" placeholder="请输入广告图片">

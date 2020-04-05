@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $("#addAdvertisementForm").validate({
+    $("#updateAdvertisementForm").validate({
         errorElement : 'span',
         errorClass : 'help-block',
 
@@ -8,14 +8,13 @@ $(document).ready(function() {
             name : "required",
             url : {
                 required : true
-            },
-            advertPicture : "required"
+            }
         },
 
         messages : {
             name : "输入广告名称",
-            url : "请输入广告地址",
-            advertPicture : "请选择广告图片"
+            url : "请输入广告地址"
+
         },
 
         errorPlacement : function(error, element) {
@@ -36,7 +35,7 @@ $(document).ready(function() {
             label.remove();
         },
         submitHandler: function() {
-            addAdvertisement();
+            updateAdvertisement();
         }
 
     })

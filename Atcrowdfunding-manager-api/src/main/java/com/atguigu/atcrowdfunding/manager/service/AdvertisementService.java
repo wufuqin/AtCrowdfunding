@@ -35,4 +35,19 @@ public interface AdvertisementService {
 
     //拒绝申请
     void updateAdvertisementStatusByIdRefuse(Integer id);
+
+    //查询需要发布的广告
+    Page queryPagePublishAdvertisement(Integer pageno, Integer pagesize);
+
+    //模糊查询需要发布的广告
+    Page queryPagePublishLikeAdvertisement(HashMap<String, Object> paramMap);
+
+    //发布广告将广告的status改为 3
+    void updateAdvertisementStatusByIdPublish(Integer id);
+
+    //查询已经状态为status为3的广告
+    Page queryPublishAdvertisement(Integer pageno, Integer pagesize);
+
+    //查询轮播图数据
+    Page queryPublishCarouseAdvertisement(Integer pageno, Integer pagesize);
 }

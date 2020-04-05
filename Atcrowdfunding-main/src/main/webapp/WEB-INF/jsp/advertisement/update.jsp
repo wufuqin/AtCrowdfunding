@@ -57,25 +57,24 @@
                 <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
                 <div class="panel-body">
                     <form id="updateAdvertisementForm" method="POST" enctype="multipart/form-data">
-                        <div class="form-group">
+                        <div class="form-group" style="width: 350px">
                             <label for="name">广告名称</label>
                             <input type="text" class="form-control" id="name" name="name" value="${advertisement.name}" placeholder="请输入广告名称">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="width: 350px">
                             <label for="url">广告地址</label>
                             <input type="text" class="form-control" id="url" name="url" value="${advertisement.url}" placeholder="请输入广告地址">
                         </div>
-                        <div class="form-group">
+                       <%-- <div class="form-group" style="width: 350px">
                             <label for="advertPicture">广告图片</label>
-                            <input type="file" class="form-control" id="advertPicture" name="advertPicture" value="${advertisement.iconpath}" placeholder="请输入广告图片">
-                        </div>
-                        <div class="form-group">
-                            <label>${advertisement.iconpath }</label><br>
+                            <input type="file" class="form-control" id="advertPicture" value="${advertisement.iconpath}" placeholder="请输入广告图片">
+                        </div>--%>
+                        <div class="form-group" style="width: 350px">
                             <img src="${APP_PATH }/picture/advertisement/${advertisement.iconpath}">
                         </div>
 
-                        <button  onclick="updateAdvertisement()" type="button" class="btn btn-success">修改</button>
-                        <button  onclick="resetAdvertisementForm()" type="button" class="btn btn-info">重置</button>
+                        <button type="submit" class="btn btn-success">修改</button>
+                        <button type="reset" class="btn btn-info">重置</button>
                         <button type="button" onclick="window.location.href='${APP_PATH}/advertisement/index.htm'" class="btn btn-info">返回</button>
 
                     </form>
@@ -110,6 +109,8 @@
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script src="${APP_PATH }/jquery/jquery-form/jquery-form.min.js"></script>
 <script src="${APP_PATH}/script/menu.js"></script>
+<script src="${APP_PATH}/jquery/jQuery.validate/jquery.validate.min.js"></script>
+<script src="${APP_PATH}/script/checkUpdateAdvertisement.js"></script>
 <script type="text/javascript">
     /*入口函数*/
     $(function () {
@@ -135,7 +136,6 @@
         var url = $("#url");
         var advertPicture = $("#advertPicture");
 
-
         $.ajax({
             type : "POST",
             data : {
@@ -155,7 +155,7 @@
                 layer.close(loadingIndex);
                 if (result.success) {
                     layer.msg("数据修改成功...");
-                    setTimeout(function () {{window.location.href="${APP_PATH}/advertisement/index.htm"}},2000);
+                    setTimeout(function () {{window.location.href="${APP_PATH}/advertisement/index.htm"}},1000);
                 }else {
                     layer.msg("数据修改失败...");
                 }
@@ -167,12 +167,30 @@
     }
 </script>
 
-<%--重置表单数据--%>
-<script>
-    function resetAdvertisementForm() {
-        $("#updateAdvertisementForm")[0].reset();
+<%--上传图片--%>
+<%--<script>
+    function updateAdvertisement() {
+        var options = {
+            url:"${APP_PATH}/advertisement/doUpdate.do",
+            beforeSubmit : function(){
+                loadingIndex = layer.msg('数据正在保存中', {icon: 16});
+                return true ; //必须返回true,否则,请求终止.
+            },
+            success : function(result){
+                layer.close(loadingIndex);
+                if(result.success){
+                    layer.msg("广告数据保存成功");
+                    window.location.href="${APP_PATH}/advertisement/index.htm";
+                }else{
+                    layer.msg("广告数据保存失败");
+                }
+            }
+        };
+
+        $("#updateAdvertisementForm").ajaxSubmit(options); //异步提交
+        return ;
     }
-</script>
+</script>--%>
 
 </body>
 </html>

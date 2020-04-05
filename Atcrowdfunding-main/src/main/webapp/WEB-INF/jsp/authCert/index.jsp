@@ -157,7 +157,7 @@
                         content += '<td class="text-center">'+task.taskName+'</td>';
                         content += '<td class="text-center">'+task.member.username+'</td>';
                         content += '<td class="text-center">';
-                        content += '<button type="button" onclick="window.location.href=\'${APP_PATH}/authCert/show.htm?taskid='+task.taskid+'&memberid='+task.member.id+'\'" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>';
+                        content += '<button type="button" onclick="window.location.href=\'${APP_PATH}/authCert/show.htm?taskid='+task.taskid+'&memberid='+task.member.id+'\'" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-eye-open"></i>审核</button>';
                         content += '</td>';
                         content += '</tr>';
                     });

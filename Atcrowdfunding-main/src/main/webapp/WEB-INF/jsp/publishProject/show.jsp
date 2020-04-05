@@ -1,5 +1,5 @@
 <%--
- 审核广告页面
+  查看并且审核项目
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -48,8 +48,8 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <ol class="breadcrumb">
                 <li><a href="${APP_PATH}/main.htm">首页</a></li>
-                <li><a href="${APP_PATH}/authAdvertisement/index.htm">数据列表</a></li>
-                <li class="active">广告信息</li>
+                <li><a href="${APP_PATH}/authProject/index.htm">数据列表</a></li>
+                <li class="active">项目信息</li>
             </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
@@ -57,26 +57,33 @@
                     <div class="panel-body">
                         <form>
                             <div class="form-group">
-                                <label >广告名称: </label>
-                                ${advertisement.name }
+                                <label >项目名称: </label>
+                                ${project.name }
                             </div>
                             <div class="form-group">
-                                <label>广告地址: </label>
-                                ${advertisement.url }
+                                <label>目标金额: </label>
+                                ${project.money }
                             </div>
                             <div class="form-group">
-                                <label>广告状态: </label>
-                                未审核
+                                <label>总筹天数: </label>
+                                ${project.day }
+                            </div>
+                            <div class="form-group">
+                                <label>创建时间: </label>
+                                ${project.createdate }
+                            </div>
+                            <div class="form-group">
+                                <label>状态: </label>
+                                即将开始
                             </div>
 
                             <hr>
                             <div class="form-group">
-                                <img src="${APP_PATH }/picture/advertisement/${advertisement.iconpath}" style="width: 300px; height: 200px">
+                                <img src="${APP_PATH }/picture/project/${project.filename}">
                             </div>
 
-                            <button onclick="passAdvertisement()" type="button" class="btn btn-success"> 通过</button>
-                            <button onclick="refuseAdvertisement()" type="button" class="btn btn-danger"> 拒绝</button>
-                            <button type="button" onclick="window.location.href='${APP_PATH}/authAdvertisement/index.htm'" class="btn btn-info">返回</button>
+                            <button onclick="publishProject()" type="button" class="btn btn-success"> 发布项目</button>
+                            <button type="button" onclick="window.location.href='${APP_PATH}/project/publishIndex.htm'" class="btn btn-info">返回</button>
 
                         </form>
                     </div>
@@ -126,15 +133,15 @@
 
 </script>
 
-<%--通过申请--%>
+<%--发布项目--%>
 <script>
-    function passAdvertisement() {
+    function publishProject() {
         $.ajax({
             type : "POST",
             data : {
-                "id" : ${advertisement.id }
+                "id" : ${project.id }
             },
-            url : "${APP_PATH}/authAdvertisement/passAdvertisement.do",
+            url : "${APP_PATH}/project/publishProject.do",
             beforeSend : function () {
                 loadingIndex = layer.msg('数据加载中...', {icon: 16});
                 return true;
@@ -142,7 +149,7 @@
             success : function (result) {
                 layer.close(loadingIndex);
                 if (result.success){
-                    window.location.href = "${APP_PATH}/authAdvertisement/index.htm";
+                    window.location.href = "${APP_PATH}/project/publishIndex.htm";
                 } else {
                     layer.msg(result.message);
                 }
@@ -153,59 +160,5 @@
         });
     }
 </script>
-
-<%--拒绝申请--%>
-<script>
-    function refuseAdvertisement() {
-        $.ajax({
-            type : "POST",
-            data : {
-                "id" : ${advertisement.id }
-            },
-            url : "${APP_PATH}/authAdvertisement/refuseAdvertisement.do",
-            beforeSend : function () {
-                loadingIndex = layer.msg('数据加载中...', {icon: 16});
-                return true;
-            },
-            success : function (result) {
-                layer.close(loadingIndex);
-                if (result.success){
-                    window.location.href = "${APP_PATH}/authAdvertisement/index.htm";
-                } else {
-                    layer.msg(result.message);
-                }
-            },
-            error : function () {
-                layer.msg("操作失败");
-            }
-        });
-    }
-</script>
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

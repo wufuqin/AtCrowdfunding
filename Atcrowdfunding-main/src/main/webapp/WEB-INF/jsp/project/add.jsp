@@ -56,7 +56,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
                 <div class="panel-body" >
-                    <form id="addProjectForm">
+                    <form id="addProjectForm" method="post" enctype="multipart/form-data">
                         <div class="form-group" style="width: 300px">
                             <label for="name">项目名称</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="请输入项目名称">
@@ -74,6 +74,12 @@
                             <label for="day">筹资天数</label>
                             <input type="number" class="form-control" id="day" name="day" placeholder="请输入筹资天数">
                         </div>
+
+                        <div class="form-group" style="width: 300px">
+                            <label for="projectPicture">项目图片图片</label>
+                            <input type="file" class="form-control" id="projectPicture" name="projectPicture" placeholder="请输入项目图片">
+                        </div>
+
                         <%--<div class="form-group">
                             <label for="membername">发起人姓名</label>
                             <input type="text" class="form-control" id="membername" placeholder="请输入发起人ID">
@@ -114,6 +120,7 @@
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script src="${APP_PATH}/script/menu.js"></script>
+<script src="${APP_PATH}/jquery/jquery-form/jquery-form.min.js"></script>
 <script src="${APP_PATH}/jquery/jQuery.validate/jquery.validate.min.js"></script>
 <script src="${APP_PATH}/script/checkAddProject.js"></script>
 <script type="text/javascript">
@@ -134,7 +141,7 @@
 </script>
 
 <%--添加项目--%>
-<script>
+<%--<script>
     function addProject() {
         //获取用户输入的数据
         var name = $("#name");
@@ -166,6 +173,32 @@
                 layer.msg("数据保存失败");
             }
         });
+    }
+</script>--%>
+
+
+<%--上传图片--%>
+<script>
+    function addProject() {
+        var options = {
+            url:"${APP_PATH}/project/doAdd.do",
+            beforeSubmit : function(){
+                loadingIndex = layer.msg('数据正在保存中', {icon: 16});
+                return true ; //必须返回true,否则,请求终止.
+            },
+            success : function(result){
+                layer.close(loadingIndex);
+                if(result.success){
+                    layer.msg("项目数据保存成功");
+                    window.location.href="${APP_PATH}/project/index.htm";
+                }else{
+                    layer.msg("项目数据保存失败");
+                }
+            }
+        };
+
+        $("#addProjectForm").ajaxSubmit(options); //异步提交
+        return ;
     }
 </script>
 

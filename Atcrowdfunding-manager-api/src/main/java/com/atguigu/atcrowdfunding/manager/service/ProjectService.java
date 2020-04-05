@@ -37,4 +37,10 @@ public interface ProjectService {
 
     //项目状态设置为 status5 拒绝申请
     void updateProjectStatusByIdRefuse(Integer id);
+
+    //查询需要发布的项目信息
+    Page queryPagePublishProject(Integer pageno, Integer pagesize);
+
+    //发布项目，将项目的status该为 2
+    void updateProjectStatusByIdPublish(Integer id);
 }

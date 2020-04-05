@@ -2,15 +2,14 @@ $(document).ready(function() {
 
     // 身份证号码验证
     jQuery.validator.addMethod("isIdCardNo", function(value, element) {
-        return this.optional(element) || (length == 11 && /^[1](([3][0-9])|([4][5-9])|([5][0-3,5-9])|([6][5,6])|([7][0-8])|([8][0-9])|([9][1,8,9]))[0-9]{8}$/.test(value));
-    }, "请填写正确手机号");
+        return this.optional(element) || idCardNoUtil.checkIdCardNo(value);//调用验证的方法
+    }, "请正确填写身份证号码");
 
     // 手机号码验证
     jQuery.validator.addMethod("tel_tel", function(value, element) {
         var length = value.length;
-        return this.optional(element) || (length == 11 && /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(value));
-    }, "请正确填写您的手机号码");
-
+        return this.optional(element) || (length == 11 && /^[1](([3][0-9])|([4][5-9])|([5][0-3,5-9])|([6][5,6])|([7][0-8])|([8][0-9])|([9][1,8,9]))[0-9]{8}$/.test(value));
+    }, "请填写正确手机号");
 
     $("#updateMemberBasicInfoForm").validate({
         errorElement : 'span',

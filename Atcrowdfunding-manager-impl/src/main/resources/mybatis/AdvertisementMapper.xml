@@ -109,6 +109,63 @@
        status = 4
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!-- 获取查询需要发布广告的分页数据 -->
+  <select id="queryPublishList" resultMap="BaseResultMap">
+		select id, name, iconpath, status, url, userid
+		from t_advertisement
+		where status = 2
+		limit #{startIndex},#{pagesize}
+	</select>
+
+  <!-- 查询需要发布广告总的记录条数 -->
+  <select id="queryPublishCount"  resultType="int">
+		select count(*)
+		from t_advertisement
+		where status = 2
+  </select>
+
+  <!--将广告状态设置为 status:3 发布-->
+  <update id="updateAdvertisementStatusByIdPublish" parameterType="int" >
+    update t_advertisement
+    set
+       status = 3
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <!--获取查询已经发布的广告数据-->
+    <select id="queryPublishAdvertisementList" resultMap="BaseResultMap">
+		select id, name, iconpath, status, url, userid
+		from t_advertisement
+		where status = 3 and url = "body"
+		limit #{startIndex},#{pagesize}
+	</select>
+
+    <!--查询已经发布的广告数据总的记录条数-->
+    <select id="queryPublishAdvertisementCount"  resultType="int">
+		select count(*)
+		from t_advertisement
+		where status = 3 and url = "body"
+    </select>
+
+    <!--获取查询已经发布的轮播图数据-->
+    <select id="queryPublishCarouseAdvertisementList" resultMap="BaseResultMap">
+		select id, name, iconpath, status, url, userid
+		from t_advertisement
+		where status = 3 and url = "top"
+		limit #{startIndex},#{pagesize}
+	</select>
+
+    <!--查询已经发布的轮播图数据总的记录条数-->
+    <select id="queryPublishCarouseAdvertisementCount"  resultType="int">
+		select count(*)
+		from t_advertisement
+		where status = 3 and url = "top"
+    </select>
+
+
+
+
 </mapper>
 
 

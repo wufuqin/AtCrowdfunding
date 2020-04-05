@@ -122,6 +122,29 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
+    <!-- 获取查询需要发布项目的分页数据 -->
+    <select id="queryPublishList" resultMap="BaseResultMap">
+		select id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion, memberid, createdate, follower
+        from t_project
+		where status = 1
+		limit #{startIndex},#{pagesize}
+	</select>
+
+    <!-- 查询需要发布项目总的记录条数 -->
+    <select id="queryPublishCount"  resultType="int">
+		select count(*)
+		from t_project
+		where status = 1
+  </select>
+
+    <!--发布项目，将项目的status该为 2-->
+    <update id="updateProjectStatusByIdPublish" parameterType="com.atguigu.atcrowdfunding.bean.Project" >
+        update t_project
+        set
+          status = 2
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
 
 
 </mapper>

@@ -33,7 +33,7 @@ public class AuthAdvertisementController {
         return "authAdvertisement/index";
     }
 
-    //查询数据需要审核的广告数据
+    //查询需要审核的广告数据
     @ResponseBody
     @RequestMapping("doIndex")
     public Object doIndex(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "8") Integer pagesize){

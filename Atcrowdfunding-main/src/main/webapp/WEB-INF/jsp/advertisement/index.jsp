@@ -76,7 +76,7 @@
                                 <th class="text-center" width="50">序号</th>
                                 <th class="text-center" width="30"><input id="checkAll" type="checkbox"></th>
                                 <th class="text-center">广告名称</th>
-                                <th class="text-center">地址</th>
+                                <th class="text-center">发布区域</th>
                                 <th class="text-center">状态</th>
                                 <th class="text-center" width="200">操作</th>
                             </tr>
@@ -159,8 +159,12 @@
                         content+="	<td class='text-center'>"+(i+1)+"</td>";
                         content+="	<td class='text-center' ><input type='checkbox' id='"+n.id+"'></td>";
                         content+="	<td class='text-center' >"+n.name+"</td>";
-                        content+="	<td class='text-center' >"+n.url+"</td>";
-
+                        //判断广告地址
+                        if(n.url=='top'){
+                            content+="	<td class='text-center' >轮播图广告</td>";
+                        }else if(n.url=='body'){
+                            content+="	<td class='text-center' >一般广告</td>";
+                        }
                         //判断广告的状态
                         if(n.status=='0'){
                             content+="	<td class='text-center'>草稿</td>";
@@ -237,8 +241,12 @@
                         content+="	<td class='text-center'>"+(i+1)+"</td>";
                         content+="	<td class='text-center' ><input type='checkbox' id='"+n.id+"'></td>";
                         content+="	<td class='text-center' >"+n.name+"</td>";
-                        content+="	<td class='text-center' >"+n.url+"</td>";
-
+                        //判断广告地址
+                        if(n.url=='top'){
+                            content+="	<td class='text-center' >轮播图广告</td>";
+                        }else if(n.url=='body'){
+                            content+="	<td class='text-center' >一般广告</td>";
+                        }
                         //判断广告的状态
                         if(n.status=='0'){
                             content+="	<td class='text-center'>草稿</td>";

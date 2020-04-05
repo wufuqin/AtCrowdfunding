@@ -103,6 +103,7 @@
 <script src="${APP_PATH}/script/docs.min.js"></script>
 <script src="${APP_PATH}/script/menu.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
+<script src="${APP_PATH}/jquery/pagination/jquery.pagination.js"></script>
 
 <script type="text/javascript">
     $(function () {
@@ -156,7 +157,7 @@
                         content+="<td class='text-center' >"+n.url+"</td>";
                         content+="<td class='text-center'>未审核</td>";
                         content+='<td class="text-center">';
-                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/authAdvertisement/show.htm?id='+n.id+'\'" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-eye-open"></i>审核</button>';
+                        content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/authAdvertisement/show.htm?id='+n.id+'\'" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-eye-open"></i>审核</button>';
                         content+='</td>';
                         content+='</tr>';
                     });

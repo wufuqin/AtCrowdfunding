@@ -34,9 +34,6 @@
             <ul class="nav navbar-nav navbar-right">
                     <%@include file="/WEB-INF/jsp/common/top.jsp"%>
             </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
         </div>
     </div>
 </nav>
@@ -50,8 +47,8 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <ol class="breadcrumb">
-                <li><a href="#">首页</a></li>
-                <li><a href="#">数据列表</a></li>
+                <li><a href="${APP_PATH}/main.htm">首页</a></li>
+                <li><a href="${APP_PATH}/authCert/index.htm">数据列表</a></li>
                 <li class="active">显示会员资质信息</li>
             </ol>
             <div class="panel panel-default">
@@ -80,8 +77,11 @@
                                 </div>
                             </c:forEach>
 
-                            <button id="passBtn" type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 通过</button>
-                            <button id="refuseBtn" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 拒绝</button>
+                            <button id="passBtn" type="button" class="btn btn-success">通过</button>
+                            <button id="refuseBtn" type="button" class="btn btn-danger">拒绝</button>
+                            <button type="button" onclick="window.location.href='${APP_PATH}/authCert/index.htm'" class="btn btn-info">返回</button>
+
+
                         </form>
                     </div>
                 </div>
