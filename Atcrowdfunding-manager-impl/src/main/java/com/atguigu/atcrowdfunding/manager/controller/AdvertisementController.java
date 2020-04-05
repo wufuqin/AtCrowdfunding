@@ -286,6 +286,7 @@ public class AdvertisementController {
         try {
             //调用service层查询方法，返回一个分页数据对象
             Page page = advertisementService.queryPublishCarouseAdvertisement(pageno, pagesize);
+            //System.out.println("轮播图"+page.toString());
             //设置查询状态
             result.setSuccess(true);
             //存储查询到的数据
@@ -308,6 +309,7 @@ public class AdvertisementController {
         try {
             //调用service层查询方法，返回一个分页数据对象
             Page page = advertisementService.queryPublishAdvertisement(pageno, pagesize);
+           // System.out.println("一般广告"+page.toString());
             //设置查询状态
             result.setSuccess(true);
             //存储查询到的数据

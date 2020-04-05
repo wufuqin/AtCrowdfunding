@@ -13,7 +13,6 @@ public class Page<T> {
     private Integer totalsize; //总数据条数
     private Integer totalno;   //总页数
 
-
     //只提供有参构造器，要求在查询数据的时候必须传递参数
     public Page(Integer pageno, Integer pagesize) {
         if (pageno <= 0) {
@@ -73,6 +72,18 @@ public class Page<T> {
     //获取开始索引
     public Integer getStartIndex() {
         return (this.pageno - 1) * pagesize;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Page{" +
+                "pageno=" + pageno +
+                ", pagesize=" + pagesize +
+                ", datas=" + datas +
+                ", totalsize=" + totalsize +
+                ", totalno=" + totalno +
+                '}';
     }
 }
 

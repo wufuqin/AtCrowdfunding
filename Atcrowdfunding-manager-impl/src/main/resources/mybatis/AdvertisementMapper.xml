@@ -163,9 +163,6 @@
 		where status = 3 and url = "top"
     </select>
 
-
-
-
 </mapper>
 
 

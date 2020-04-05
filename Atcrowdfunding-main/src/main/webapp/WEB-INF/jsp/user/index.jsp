@@ -175,7 +175,6 @@
                         next_text : "下一页"
                     });
 
-
                 } else {
                     layer.msg(result.message);
                 }

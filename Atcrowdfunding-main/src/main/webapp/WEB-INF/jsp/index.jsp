@@ -79,7 +79,7 @@
 
         /* 文章列表 */
         .newsList{padding:10px;text-align:left;}
-        .newsList li{background:url("../images/share/point.png") no-repeat 2px 14px; padding-left:10px;height:30px; line-height:30px;}
+        .newsList li{background:url("../images/share/point.jpg") no-repeat 2px 14px; padding-left:10px;height:30px; line-height:30px;}
         .newsList li a{display:inline-block;*display:inline;zoom:1;font-size:14px;}
         .newsList li .date{float:right; color:#999;}
         .newsList li.split{margin-bottom:10px;padding-bottom:10px;border-bottom:1px dotted #ddd;height:0px;line-height:0px;overflow:hidden;}
@@ -116,34 +116,8 @@
 <!-- Carousel 轮播图
 ================================================== -->
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
 
-    <%--<div class="carousel-inner" role="listbox">
-        <div class="item active" onclick="window.location.href='project.html'" style="cursor:pointer;">
-            <img src="img/my_carousel-1.jpg" alt="First slide">
-        </div>
-    </div>--%>
-
-
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-        <span class="sr-only">Next</span>
-    </a>
 </div><!-- /.carousel -->
-
-
-<!-- Marketing messaging and featurettes
-================================================== -->
-<!-- Wrap the rest of the page in another container to center all the content. -->
 
 <%--轮播图下面的广告--%>
 <div class="container marketing">
@@ -172,10 +146,8 @@
     $(function () {
         //加载轮播图广告
         publishCarouseAdvertisement(0);
-
         //加载一般广告
         publishAdvertisement(0);
-
     })
 
 </script>
@@ -199,23 +171,40 @@
                     var page = result.page;
                     var data = page.datas;
 
-                    var content = '';
-                    /* 对后台返回的数据进行拼串展示 */
-                    $.each(data,function(i,n){
-                        content+="<div class='item active' onclick='window.location.href=\"#\"' style='cursor:pointer;'>";
-                        /*if(n =='0'){
-                            content+="<img src=\'${APP_PATH }/picture/advertisement/"+n.iconpath+"\' style=\'width: 100%; height: 500px\' alt=\'First slide\'>" ;
-                        }else if(n =='1'){
-                            content+="<img src=\'${APP_PATH }/picture/advertisement/"+n.iconpath+"\' style=\'width: 100%; height: 500px\' alt=\'Second slide\'>" ;
-                        }else if(n =='2'){
-                            content+="<img src=\'${APP_PATH }/picture/advertisement/"+n.iconpath+"\' style=\'width: 100%; height: 500px\' alt=\'Third slide\'>" ;
-                        }*/
-                        content+="<img src=\'${APP_PATH }/picture/advertisement/"+n.iconpath+"\' style=\'width: 100%; height: 500px\' alt=\'First slide\'>" ;
+                    var content = "";
+                    content += '<ol class="carousel-indicators">\n' +
+                               '<li data-target="#myCarousel" data-slide-to="0" class="active"></li>\n' +
+                               '<li data-target="#myCarousel" data-slide-to="1"></li>\n' +
+                               '<li data-target="#myCarousel" data-slide-to="2"></li>\n' +
+                               '</ol>\n' +
+                               '<div class="carousel-inner" role="listbox">';
 
-                        content+="</div>";
+                    $.each(data,function (i,n) {
+                        if (i == "0"){
+                            content += '<div class="item active" onclick="window.location.href=\'#\'" style="cursor:pointer;">\n' +
+                                '<img src="${APP_PATH}/picture/advertisement/'+n.iconpath+'" alt="First slide">\n' +
+                                '</div>'
+                        }else if (i == "1") {
+                            content += '<div class="item" onclick="window.location.href=\'#\'" style="cursor:pointer;">\n' +
+                                '<img src="${APP_PATH}/picture/advertisement/'+n.iconpath+'" alt="Second slide">\n' +
+                                '</div>'
+                        }else if (i == "2") {
+                            content += '<div class="item" onclick="window.location.href=\'#\'" style="cursor:pointer;">\n' +
+                                '<img src="${APP_PATH}/picture/advertisement/'+n.iconpath+'" alt="Third slide">\n' +
+                                '</div>'
+                        }
                     });
 
-                    // 将拼接到的数据放入标签的指定位置
+                    content += '</div>\n' +
+                               '<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">\n' +
+                               '<span class="glyphicon glyphicon-chevron-left"></span>\n' +
+                               '<span class="sr-only">Previous</span>\n' +
+                               '</a>\n' +
+                               '<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">\n' +
+                               '<span class="glyphicon glyphicon-chevron-right"></span>\n' +
+                               '<span class="sr-only">Next</span>\n' +
+                               '</a>';
+
                     $("#myCarousel").html(content);
 
                 } else {
