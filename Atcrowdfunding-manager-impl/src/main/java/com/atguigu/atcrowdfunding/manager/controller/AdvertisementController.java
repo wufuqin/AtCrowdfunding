@@ -140,13 +140,12 @@ public class AdvertisementController {
             MultipartFile mfile = mreq.getFile("advertPicture");  //创建一个文件对象
             String name = mfile.getOriginalFilename();// 获取上传的原始文件名  java.jpg
             String extname = name.substring(name.lastIndexOf(".")); //  截取文件名后缀 ： .jpg
-            //String firstPath = CreateFileName.createID();
             String iconpath = UUID.randomUUID().toString() + extname; //生成随机文件名 ： 232243343.jpg
 
             ServletContext servletContext = session.getServletContext();
             String realpath = servletContext.getRealPath("/picture");  //得到存储文件的路径
 
-            String path =realpath+ "\\advertisement\\"+iconpath;  //生成文件路径
+            String path =realpath+ "/advertisement/"+iconpath;  //生成文件路径
             mfile.transferTo(new File(path));      //将文件添加到对应路径下
             User user = (User)session.getAttribute(Const.LOGIN_USER); //获取当前用户
             advertisement.setUserid(user.getId());  //获取当前用户id

@@ -111,7 +111,7 @@ public class ProjectController {
             ServletContext servletContext = session.getServletContext();
             String realpath = servletContext.getRealPath("/picture");  //得到存储文件的路径
 
-            String path = realpath + "\\project\\" + iconpath;  //生成文件路径
+            String path = realpath + "/project/" + iconpath;  //生成文件路径
             mfile.transferTo(new File(path));      //将文件添加到对应路径下
             User user = (User) session.getAttribute(Const.LOGIN_USER); //获取当前用户
             project.setMemberid(user.getId());  //获取当前用户id
