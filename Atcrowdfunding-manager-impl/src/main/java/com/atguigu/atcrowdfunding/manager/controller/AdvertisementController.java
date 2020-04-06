@@ -299,7 +299,6 @@ public class AdvertisementController {
         return result;
     }
 
-
     //查询一般广告
     @ResponseBody
     @RequestMapping("selectPublish")

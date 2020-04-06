@@ -170,6 +170,107 @@ public class ProjectServiceImpl implements ProjectService {
     public void updateProjectStatusByIdPublish(Integer id) {
         projectMapper.updateProjectStatusByIdPublish(id);
     }
+
+    //查询科技类项目数据
+    @Override
+    public Page queryPublishTechnologyProject(Integer pageno, Integer pagesize) {
+        //创建一个分页对象，将查询的对应分页信息传入
+        Page page = new Page(pageno, pagesize);
+
+        //获取索引
+        Integer startIndex = page.getStartIndex();
+
+        //获取查询已经发布的科技类项目数据
+        List datas = projectMapper.queryPublishTechnologyProject(startIndex,pagesize);
+
+        //设置分页数据到Page分页对象中
+        page.setDatas(datas);
+
+        //查询查询已经发布的科技类项目数据总的记录条数
+        Integer totalsize = projectMapper.queryPublishTechnologyProjectCount();
+
+        //设置总记录数到Page分页对象中
+        page.setTotalsize(totalsize);
+        page.setTotalno(totalsize);
+
+        return page;
+    }
+
+    //查询设计类项目
+    @Override
+    public Page queryPublishDesignProject(Integer pageno, Integer pagesize) {
+        //创建一个分页对象，将查询的对应分页信息传入
+        Page page = new Page(pageno, pagesize);
+
+        //获取索引
+        Integer startIndex = page.getStartIndex();
+
+        //获取查询已经发布的设计类项目数据
+        List datas = projectMapper.queryPublishDesignProjectList(startIndex,pagesize);
+
+        //设置分页数据到Page分页对象中
+        page.setDatas(datas);
+
+        //查询查询已经发布的设计类项目数据总的记录条数
+        Integer totalsize = projectMapper.queryPublishDesignProjectCount();
+
+        //设置总记录数到Page分页对象中
+        page.setTotalsize(totalsize);
+        page.setTotalno(totalsize);
+
+        return page;
+    }
+
+    //查询农业类项目
+    @Override
+    public Page queryPublishAgricultureProject(Integer pageno, Integer pagesize) {
+        //创建一个分页对象，将查询的对应分页信息传入
+        Page page = new Page(pageno, pagesize);
+
+        //获取索引
+        Integer startIndex = page.getStartIndex();
+
+        //获取查询已经发布的农业类项目数据
+        List datas = projectMapper.queryPublishAgricultureProjectList(startIndex,pagesize);
+
+        //设置分页数据到Page分页对象中
+        page.setDatas(datas);
+
+        //查询查询已经发布的农业类项目数据总的记录条数
+        Integer totalsize = projectMapper.queryPublishAgricultureProjectCount();
+
+        //设置总记录数到Page分页对象中
+        page.setTotalsize(totalsize);
+        page.setTotalno(totalsize);
+
+        return page;
+    }
+
+    //查询其他类项目
+    @Override
+    public Page queryPublishOthersProject(Integer pageno, Integer pagesize) {
+        //创建一个分页对象，将查询的对应分页信息传入
+        Page page = new Page(pageno, pagesize);
+
+        //获取索引
+        Integer startIndex = page.getStartIndex();
+
+        //获取查询已经发布的其他类项目数据
+        List datas = projectMapper.queryPublishOthersProjectList(startIndex,pagesize);
+
+        //设置分页数据到Page分页对象中
+        page.setDatas(datas);
+
+        //查询查询已经发布的其他类项目数据总的记录条数
+        Integer totalsize = projectMapper.queryPublishOthersProjectCount();
+
+        //设置总记录数到Page分页对象中
+        page.setTotalsize(totalsize);
+        page.setTotalno(totalsize);
+
+        return page;
+    }
+
 }
 
 

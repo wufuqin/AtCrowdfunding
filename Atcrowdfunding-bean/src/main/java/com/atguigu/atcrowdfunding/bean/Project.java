@@ -1,5 +1,8 @@
 package com.atguigu.atcrowdfunding.bean;
 
+/**
+ * 项目实体类
+ */
 public class Project {
     private Integer id;
 
@@ -28,6 +31,8 @@ public class Project {
     private Integer follower;
 
     private String filename;
+
+    private String projectType;
 
     public Integer getId() {
         return id;
@@ -139,5 +144,13 @@ public class Project {
 
     public void setFilename(String filename) {
         this.filename = filename;
+    }
+
+    public String getProjectType() {
+        return projectType;
+    }
+
+    public void setProjectType(String projectType) {
+        this.projectType = projectType;
     }
 }

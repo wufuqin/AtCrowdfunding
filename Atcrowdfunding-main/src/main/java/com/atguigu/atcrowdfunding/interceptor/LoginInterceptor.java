@@ -39,6 +39,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		uri.add("/activateAccount.do"); //激活会员账号邮件链接
 		uri.add("/advertisement/selectPublish.do"); //加载首页一般广告
 		uri.add("/advertisement/selectPublishCarouse.do"); //加载首页轮播图广告
+		uri.add("/project/publishTechnologyProject.do"); //科技项目
+		uri.add("/project/publishDesignProject.do"); //设计项目
+		uri.add("/project/publishAgricultureProject.do"); //农业项目
+		uri.add("/project/publishOthersProject.do"); //其他项目
 
 		//获取请求路径.
 		String servletPath = request.getServletPath();

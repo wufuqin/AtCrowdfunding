@@ -61,8 +61,13 @@
                                 ${advertisement.name }
                             </div>
                             <div class="form-group">
-                                <label>广告地址: </label>
-                                ${advertisement.url }
+                                <label>发布区域: </label>
+                                <c:if test="${advertisement.url eq 'top'}">
+                                    轮播图广告
+                                </c:if>
+                                <c:if test="${advertisement.url eq 'body'}">
+                                    一般广告
+                                </c:if>
                             </div>
                             <div class="form-group">
                                 <label>广告状态: </label>

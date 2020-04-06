@@ -51,14 +51,15 @@
     <div style="float:right; padding-right: 30px; padding-top: 4px; font-size:32px">
         <a href="${APP_PATH}/index.htm">其他</a>
     </div>
+
     <div style="float:right; padding-right: 30px; padding-top: 4px; font-size:32px">
-        <a href="${APP_PATH}/index.htm">科技</a>
+        <a href="${APP_PATH}/index.htm">农业</a>
     </div>
     <div style="float:right; padding-right: 30px; padding-top: 4px; font-size:32px">
         <a href="${APP_PATH}/index.htm">设计</a>
     </div>
     <div style="float:right; padding-right: 30px; padding-top: 4px; font-size:32px">
-        <a href="${APP_PATH}/index.htm">农业</a>
+        <a href="${APP_PATH}/index.htm">科技</a>
     </div>
     <div style="float:right; padding-right: 30px; padding-top: 4px; font-size:32px">
         <a href="${APP_PATH}/index.htm">首页</a>

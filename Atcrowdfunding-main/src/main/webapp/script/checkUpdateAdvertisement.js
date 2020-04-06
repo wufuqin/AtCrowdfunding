@@ -5,15 +5,12 @@ $(document).ready(function() {
         errorClass : 'help-block',
 
         rules : {
-            name : "required",
-            url : {
-                required : true
-            }
+            name : "required"
+
         },
 
         messages : {
-            name : "输入广告名称",
-            url : "请输入广告地址"
+            name : "输入广告名称"
 
         },
 

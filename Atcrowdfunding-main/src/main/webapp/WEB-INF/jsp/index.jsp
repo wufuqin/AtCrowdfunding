@@ -113,23 +113,101 @@
     </div>
 </div>
 
-<!-- Carousel 轮播图
-================================================== -->
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-
-</div><!-- /.carousel -->
+<!--  轮播图 -->
+<div id="myCarousel" class="carousel slide" data-ride="carousel"></div>
 
 <%--轮播图下面的广告--%>
 <div class="container marketing">
-
-    <!-- Three columns of text below the carousel -->
-    <div class="row" id="publishAdvertisementBox">
-
-    </div><!-- /.row -->
-
+    <div class="row" id="publishAdvertisementBox"></div>
     <div id="Pagination" class="pagination" style="padding-left: 500px"></div>
+</div>
 
-</div><!-- /.container -->
+<%--科技--%>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="box ui-draggable" id="mainBox">
+                <div class="mHd" style="">
+                    <div class="path">
+                        <a href="#">更多...</a>
+                    </div>
+                    <h3>
+                        科技 <small style="color:#FFF;">开启智慧未来</small>
+                    </h3>
+                </div>
+                <div class="mBd" id="publishTechnologyProject" style="padding-top:10px;">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<%--设计--%>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="box ui-draggable" id="mainBox">
+                <div class="mHd" style="">
+                    <div class="path">
+                        <a href="#">更多...</a>
+                    </div>
+                    <h3>
+                        设计 <small style="color:#FFF;">创意改变生活</small>
+                    </h3>
+                </div>
+                <div class="mBd" id="publishDesignProject" style="padding-top:10px;">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<%--农业--%>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="box ui-draggable" id="mainBox">
+                <div class="mHd" style="">
+                    <div class="path">
+                        <a href="#">更多...</a>
+                    </div>
+                    <h3>
+                        农业 <small style="color:#FFF;">网络天下肥美</small>
+                    </h3>
+                </div>
+                <div class="mBd" id="publishAgricultureProject" style="padding-top:10px;">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<%--其他--%>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="box ui-draggable" id="mainBox">
+                <div class="mHd" style="">
+                    <div class="path">
+                        <a href="#">更多...</a>
+                    </div>
+                    <h3>
+                        其他 <small style="color:#FFF;">发现更多惊喜</small>
+                    </h3>
+                </div>
+                <div class="mBd" id="publishOthersProject" style="padding-top:10px;">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 
 
 <script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>
@@ -148,8 +226,15 @@
         publishCarouseAdvertisement(0);
         //加载一般广告
         publishAdvertisement(0);
+        //加载科技类项目
+        publishTechnologyProject(0);
+        //加载设计类项目
+        publishDesignProject(0);
+        //加载农业类项目
+        publishAgricultureProject(0);
+        //加载其他类项目
+        publishOthersProject(0);
     })
-
 </script>
 
 <%--加载轮播图广告图片--%>
@@ -245,7 +330,6 @@
                         content+="<div class='col-lg-4'>";
                         content+="<img src=\'${APP_PATH }/picture/advertisement/"+n.iconpath+"\' style=\'width: 100px; height: 100px;\'>";
                         content+="<h2>"+n.name+"</h2>";
-                        content+="<p>good</p>";
                         content+="<p><a class='btn btn-default' href='#' role='button'>项目详情 &raquo;</a></p>";
                         content+="</div>";
                     });
@@ -260,6 +344,253 @@
             },
             error : function () {
                 layer.msg("数据加载失败");
+            }
+        });
+    }
+</script>
+
+<%--加载科技类项目--%>
+<script>
+    function publishTechnologyProject(pageIndex) {
+        $.ajax({
+            type : "POST",
+            data : {
+                "pageno" : pageIndex + 1,
+                "pagesize" : 8
+            },
+            url : "${APP_PATH}/project/publishTechnologyProject.do",
+            beforeSend : function () {
+                return true;
+            },
+            success : function (result) {
+                if (result.success){
+                    //查询数据成功
+                    var page = result.page;
+                    var data = page.datas;
+
+                    var content = "";
+                    content += '<div class="row">';
+
+                    $.each(data,function (i,n) {
+                        content+="<div class='col-md-3'>";
+                        content+="<div class='thumbnail'>";
+                        content+="<img src='${APP_PATH }/picture/project/"+n.filename+"' style='width: 300px; height: 150px;'>";
+                        content+="<div class='caption'>";
+                        content+="<h3 class='break'>";
+                        content+="<a href='#'>"+n.name+"</a>";
+                        content+="</h3>";
+                        content+="<p>";
+                        content+="<div style='float:left;'><i class='glyphicon glyphicon-screenshot' title='目标金额' ></i> $"+n.money+" </div>";
+                        content+="<div style='float:right;'><i title='截至日期' class='glyphicon glyphicon-calendar'></i>"+n.createdate+" </div>";
+                        content+="</p>";
+                        content+="<br>";
+                        content+="<div class='progress' style='margin-bottom: 4px;'>";
+                        content+="<div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width: 90%'>";
+                        content+="<span >90% </span>";
+                        content+="</div>";
+                        content+="</div>";
+                        content+="<div><span style='float:right;'><i class='glyphicon glyphicon-star-empty' ></i></span>  <span ><i class='glyphicon glyphicon-user' title='支持人数'></i> </span>支持人数:"+n.supporter+"</div>";
+                        content+="</div>";
+                        content+="</div>";
+                        content+="</div>";
+                    });
+
+                    content += '</div>';
+
+                    $("#publishTechnologyProject").html(content);
+
+                } else {
+                    //查询数据失败
+                    layer.msg("科技项目加载失败");
+                }
+            },
+            error : function () {
+                layer.msg("科技项目加载失败");
+            }
+        });
+    }
+
+</script>
+
+<%--加载设计类项目--%>
+<script>
+    function publishDesignProject(pageIndex) {
+        $.ajax({
+            type : "POST",
+            data : {
+                "pageno" : pageIndex + 1,
+                "pagesize" : 8
+            },
+            url : "${APP_PATH}/project/publishDesignProject.do",
+            beforeSend : function () {
+                return true;
+            },
+            success : function (result) {
+                if (result.success){
+                    //查询数据成功
+                    var page = result.page;
+                    var data = page.datas;
+
+                    //alert(data);
+
+                    var content = "";
+                    content += '<div class="row">';
+
+                    $.each(data,function (i,n) {
+                        content+="<div class='col-md-3'>";
+                        content+="<div class='thumbnail'>";
+                        content+="<img src='${APP_PATH }/picture/project/"+n.filename+"' style='width: 300px; height: 150px;'>";
+                        content+="<div class='caption'>";
+                        content+="<h3 class='break'>";
+                        content+="<a href='#'>"+n.name+"</a>";
+                        content+="</h3>";
+                        content+="<p>";
+                        content+="<div style='float:left;'><i class='glyphicon glyphicon-screenshot' title='目标金额' ></i> $"+n.money+" </div>";
+                        content+="<div style='float:right;'><i title='截至日期' class='glyphicon glyphicon-calendar'></i>"+n.createdate+" </div>";
+                        content+="</p>";
+                        content+="<br>";
+                        content+="<div class='progress' style='margin-bottom: 4px;'>";
+                        content+="<div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width: 90%'>";
+                        content+="<span >90% </span>";
+                        content+="</div>";
+                        content+="</div>";
+                        content+="<div><span style='float:right;'><i class='glyphicon glyphicon-star-empty' ></i></span>  <span ><i class='glyphicon glyphicon-user' title='支持人数'></i> </span>支持人数:"+n.supporter+"</div>";
+                        content+="</div>";
+                        content+="</div>";
+                        content+="</div>";
+                    });
+
+                    content += '</div>';
+
+                    $("#publishDesignProject").html(content);
+
+                } else {
+                    //查询数据失败
+                    layer.msg("设计类项目加载失败");
+                }
+            },
+            error : function () {
+                layer.msg("设计类项目加载失败");
+            }
+        });
+    }
+
+</script>
+
+<%--加载农业类项目--%>
+<script>
+    function publishAgricultureProject(pageIndex) {
+        $.ajax({
+            type : "POST",
+            data : {
+                "pageno" : pageIndex + 1,
+                "pagesize" : 8
+            },
+            url : "${APP_PATH}/project/publishAgricultureProject.do",
+            beforeSend : function () {
+                return true;
+            },
+            success : function (result) {
+                if (result.success){
+                    //查询数据成功
+                    var page = result.page;
+                    var data = page.datas;
+                    var content = "";
+                    content += '<div class="row">';
+
+                    $.each(data,function (i,n) {
+                        content+="<div class='col-md-3'>";
+                        content+="<div class='thumbnail'>";
+                        content+="<img src='${APP_PATH }/picture/project/"+n.filename+"' style='width: 300px; height: 150px;'>";
+                        content+="<div class='caption'>";
+                        content+="<h3 class='break'>";
+                        content+="<a href='#'>"+n.name+"</a>";
+                        content+="</h3>";
+                        content+="<p>";
+                        content+="<div style='float:left;'><i class='glyphicon glyphicon-screenshot' title='目标金额' ></i> $"+n.money+" </div>";
+                        content+="<div style='float:right;'><i title='截至日期' class='glyphicon glyphicon-calendar'></i>"+n.createdate+" </div>";
+                        content+="</p>";
+                        content+="<br>";
+                        content+="<div class='progress' style='margin-bottom: 4px;'>";
+                        content+="<div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width: 90%'>";
+                        content+="<span >90% </span>";
+                        content+="</div>";
+                        content+="</div>";
+                        content+="<div><span style='float:right;'><i class='glyphicon glyphicon-star-empty' ></i></span>  <span ><i class='glyphicon glyphicon-user' title='支持人数'></i> </span>支持人数:"+n.supporter+"</div>";
+                        content+="</div>";
+                        content+="</div>";
+                        content+="</div>";
+                    });
+
+                    content += '</div>';
+
+                    $("#publishAgricultureProject").html(content);
+
+                } else {
+                    //查询数据失败
+                    layer.msg("设计类项目加载失败");
+                }
+            },
+            error : function () {
+                layer.msg("设计类项目加载失败");
+            }
+        });
+    }
+</script>
+
+<%--加载其他类项目--%>
+<script>
+    function publishOthersProject(pageIndex) {
+        $.ajax({
+            type : "POST",
+            data : {
+                "pageno" : pageIndex + 1,
+                "pagesize" : 8
+            },
+            url : "${APP_PATH}/project/publishOthersProject.do",
+            beforeSend : function () {
+                return true;
+            },
+            success : function (result) {
+                if (result.success){
+                    //查询数据成功
+                    var page = result.page;
+                    var data = page.datas;
+                    var content = "";
+                    content += '<div class="row">';
+                    $.each(data,function (i,n) {
+                        content+="<div class='col-md-3'>";
+                        content+="<div class='thumbnail'>";
+                        content+="<img src='${APP_PATH }/picture/project/"+n.filename+"' style='width: 300px; height: 150px;'>";
+                        content+="<div class='caption'>";
+                        content+="<h3 class='break'>";
+                        content+="<a href='#'>"+n.name+"</a>";
+                        content+="</h3>";
+                        content+="<p>";
+                        content+="<div style='float:left;'><i class='glyphicon glyphicon-screenshot' title='目标金额' ></i> $"+n.money+" </div>";
+                        content+="<div style='float:right;'><i title='截至日期' class='glyphicon glyphicon-calendar'></i>"+n.createdate+" </div>";
+                        content+="</p>";
+                        content+="<br>";
+                        content+="<div class='progress' style='margin-bottom: 4px;'>";
+                        content+="<div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width: 90%'>";
+                        content+="<span >90% </span>";
+                        content+="</div>";
+                        content+="</div>";
+                        content+="<div><span style='float:right;'><i class='glyphicon glyphicon-star-empty' ></i></span>  <span ><i class='glyphicon glyphicon-user' title='支持人数'></i> </span>支持人数:"+n.supporter+"</div>";
+                        content+="</div>";
+                        content+="</div>";
+                        content+="</div>";
+                    });
+                    content += '</div>';
+                    $("#publishOthersProject").html(content);
+
+                } else {
+                    //查询数据失败
+                    layer.msg("设计类项目加载失败");
+                }
+            },
+            error : function () {
+                layer.msg("设计类项目加载失败");
             }
         });
     }

@@ -2,6 +2,7 @@
   修改项目信息页面
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -63,6 +64,47 @@
                             <input type="text" class="form-control" id="name" name="name" value="${project.name}" placeholder="请输入项目名称">
                         </div>
                         <div class="form-group" style="width: 300px">
+                            <label for="projectType">项目类别</label>
+                            <select class="form-control" id="projectType" name="projectType">
+
+                                <c:if test="${project.projectType eq null}">
+                                    <option selected>-- 请选择项目类别 --</option>
+                                    <option value="technology">科技类</option>
+                                    <option value="design">设计类</option>
+                                    <option value="agriculture ">农业类</option>
+                                    <option value="others">其他</option>
+                                </c:if>
+                                <c:if test="${project.projectType eq 'technology'}">
+                                    <option >-- 请选择项目类别 --</option>
+                                    <option selected value="technology">科技类</option>
+                                    <option value="design">设计类</option>
+                                    <option value="agriculture">农业类</option>
+                                    <option value="others">其他</option>
+                                </c:if>
+                                <c:if test="${project.projectType eq 'design'}">
+                                    <option >-- 请选择项目类别 --</option>
+                                    <option value="technology">科技类</option>
+                                    <option selected value="design">设计类</option>
+                                    <option value="agriculture">农业类</option>
+                                    <option value="others">其他</option>
+                                </c:if>
+                                <c:if test="${project.projectType eq 'agriculture'}">
+                                    <option >-- 请选择项目类别 --</option>
+                                    <option value="technology">科技类</option>
+                                    <option value="design">设计类</option>
+                                    <option selected value="agriculture">农业类</option>
+                                    <option value="others">其他</option>
+                                </c:if>
+                                <c:if test="${project.projectType eq 'others'}">
+                                    <option>-- 请选择项目类别 --</option>
+                                    <option value="technology">科技类</option>
+                                    <option value="design">设计类</option>
+                                    <option value="agriculture">农业类</option>
+                                    <option selected value="others">其他</option>
+                                </c:if>
+                            </select>
+                        </div>
+                        <div class="form-group" style="width: 300px">
                             <label for="remark">项目简介</label>
                             <input type="text" class="form-control" id="remark" name="remark" value="${project.remark}" placeholder="请输入项目简介">
                         </div>
@@ -75,7 +117,7 @@
                             <input type="text" class="form-control" id="day" name="day" value="${project.day}" placeholder="请输入筹资天数">
                         </div>
                         <div class="form-group">
-                            <img src="${APP_PATH }/picture/project/${project.filename}">
+                            <img src="${APP_PATH }/picture/project/${project.filename}" style="width: 300px; height: 200px;">
                         </div>
                         <button type="submit" class="btn btn-success">修改</button>
                         <button type="reset" class="btn btn-info">重置</button>
@@ -138,6 +180,7 @@
         var remark = $("#remark");
         var money = $("#money");
         var day = $("#day");
+        var projectType = $("#projectType");
 
         $.ajax({
             type : "POST",
@@ -146,6 +189,7 @@
                 "remark" : remark.val(),
                 "money" : money.val(),
                 "day" : day.val(),
+                "projectType": projectType.val(),
                 "id" : "${project.id}"
             },
             url : "${APP_PATH}/project/doUpdate.do",

@@ -6,14 +6,14 @@ $(document).ready(function() {
             name : "required",
             remark : "required",
             money : "required",
-            day : "required",
+            day : "required"
 
         },
         messages : {
             name : "请输入项目名称",
             remark : "请输入项目简介",
             money : "请输入筹资金额",
-            day : "请输入筹资天数",
+            day : "请输入筹资天数"
         },
 
         errorPlacement : function(error, element) {

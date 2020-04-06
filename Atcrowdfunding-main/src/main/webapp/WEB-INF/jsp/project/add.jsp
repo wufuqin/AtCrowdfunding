@@ -28,7 +28,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <div><a class="navbar-brand" style="font-size:32px;" href="user.html">众筹平台 - 用户维护</a></div>
+            <div><a class="navbar-brand" style="font-size:32px;" href="#">众筹平台 - 用户维护</a></div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -61,6 +61,18 @@
                             <label for="name">项目名称</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="请输入项目名称">
                         </div>
+
+                        <div class="form-group" style="width: 300px">
+                            <label for="projectType">项目类别</label>
+                            <select class="form-control" id="projectType" name="projectType" >
+                                <option selected >-- 请选择项目类别 --</option>
+                                <option value="technology">科技类</option>
+                                <option value="design">设计类</option>
+                                <option value="agriculture">农业类</option>
+                                <option value="others">其他</option>
+                            </select>
+                        </div>
+
                         <div class="form-group" style="width: 300px">
                             <label for="remark">项目简介</label><br>
                             <input type="text" class="form-control" id="remark" name="remark" placeholder="请输入项目简介">
@@ -139,43 +151,6 @@
         showMenu();
     });
 </script>
-
-<%--添加项目--%>
-<%--<script>
-    function addProject() {
-        //获取用户输入的数据
-        var name = $("#name");
-        var remark = $("#remark");
-        var money = $("#money");
-        var day = $("#day");
-        $.ajax({
-            type : "POST",
-            data : {
-                "name" : name.val(),
-                "remark" : remark.val(),
-                "money" : money.val(),
-                "day" : day.val()
-            },
-            url : "${APP_PATH}/project/addProject.do",
-            beforeSend : function () {
-                loadingIndex = layer.msg('数据保存中...', {icon: 16});
-                return true;
-            },
-            success : function (result) {
-                layer.close(loadingIndex);
-                if (result.success){
-                    window.location.href="${APP_PATH}/project/index.htm";
-                } else {
-                    layer.msg(result.message);
-                }
-            },
-            error : function () {
-                layer.msg("数据保存失败");
-            }
-        });
-    }
-</script>--%>
-
 
 <%--上传图片--%>
 <script>

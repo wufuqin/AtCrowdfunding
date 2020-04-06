@@ -34,14 +34,14 @@ public class ProjectController {
 
     //去到项目管理首页面
     @RequestMapping("/index")
-    public String index(){
+    public String index() {
         return "project/index";
     }
 
     //查询项目数据
     @ResponseBody
     @RequestMapping("/queryPageProject")
-    public Object queryPageProject(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "8") Integer pagesize){
+    public Object queryPageProject(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "8") Integer pagesize) {
         //创建一个用于存储查询得到的数据集对象
         AjaxResult result = new AjaxResult();
         try {
@@ -62,7 +62,7 @@ public class ProjectController {
     //模块查询
     @ResponseBody
     @RequestMapping("queryPageProjectLike")
-    public Object queryPageProjectLike(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "8") Integer pagesize, String queryText){
+    public Object queryPageProjectLike(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "8") Integer pagesize, String queryText) {
 
         //创建一个用于存储查询得到的数据集对象
         AjaxResult result = new AjaxResult();
@@ -70,9 +70,9 @@ public class ProjectController {
             //创建一个map集合
             HashMap<String, Object> paramMap = new HashMap<String, Object>();
             //将查询条件存入map集合
-            paramMap.put("pageno",pageno);
-            paramMap.put("pagesize",pagesize);
-            paramMap.put("queryText",queryText);
+            paramMap.put("pageno", pageno);
+            paramMap.put("pagesize", pagesize);
+            paramMap.put("queryText", queryText);
 
             //调用service层查询方法，返回一个分页数据对象
             Page page = projectService.queryPageProjectLike(paramMap);
@@ -90,7 +90,7 @@ public class ProjectController {
 
     //去到添加项目页面
     @RequestMapping("/add")
-    public String add(){
+    public String add() {
         return "project/add";
     }
 
@@ -113,7 +113,7 @@ public class ProjectController {
 
             String path = realpath + "\\project\\" + iconpath;  //生成文件路径
             mfile.transferTo(new File(path));      //将文件添加到对应路径下
-            User user = (User)session.getAttribute(Const.LOGIN_USER); //获取当前用户
+            User user = (User) session.getAttribute(Const.LOGIN_USER); //获取当前用户
             project.setMemberid(user.getId());  //获取当前用户id
             project.setFilename(iconpath);    //设置项目图片的名字
 
@@ -130,7 +130,7 @@ public class ProjectController {
     //删除单条数据
     @ResponseBody
     @RequestMapping("/doDelete")
-    public Object doDelete(Integer id){
+    public Object doDelete(Integer id) {
         //用来封装ajax请求结果
         AjaxResult result = new AjaxResult();
         try {
@@ -148,7 +148,7 @@ public class ProjectController {
     //批量删除
     @ResponseBody
     @RequestMapping("/doDeleteBatch")
-    public Object doDeleteBatch(Integer[] id){
+    public Object doDeleteBatch(Integer[] id) {
         AjaxResult result = new AjaxResult();
         try {
             //调用删除方法
@@ -164,7 +164,7 @@ public class ProjectController {
 
     //去到修改项目信息页面
     @RequestMapping("/update")
-    public String update(Integer id, Map<String, Object> map){
+    public String update(Integer id, Map<String, Object> map) {
         //根据id进行查询项目信息回显
         Project project = projectService.queryProjectById(id);
         map.put("project", project);
@@ -174,7 +174,7 @@ public class ProjectController {
     //修改项目数据
     @ResponseBody
     @RequestMapping("/doUpdate")
-    public Object doUpdate(Project project){
+    public Object doUpdate(Project project) {
         AjaxResult result = new AjaxResult();
         try {
             //修改项目信息
@@ -190,14 +190,14 @@ public class ProjectController {
 
     //去到发布首页面
     @RequestMapping("/publishIndex")
-    public String publishIndex(){
+    public String publishIndex() {
         return "publishProject/index";
     }
 
     //查询需要发布的项目信息
     @ResponseBody
     @RequestMapping("doPublishIndex")
-    public Object doPublishIndex(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "8") Integer pagesize){
+    public Object doPublishIndex(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "8") Integer pagesize) {
         //创建一个用于存储查询得到的数据集对象
         AjaxResult result = new AjaxResult();
         try {
@@ -217,17 +217,17 @@ public class ProjectController {
 
     //去到查看发布项目页面
     @RequestMapping("/show")
-    public String show(Integer id, Map<String,Object> map){
+    public String show(Integer id, Map<String, Object> map) {
         //查询项目数据进行回显
         Project project = projectService.queryProjectById(id);
-        map.put("project",project);
+        map.put("project", project);
         return "publishProject/show";
     }
 
     //发布项目，将项目的status该为 2
     @ResponseBody
     @RequestMapping("publishProject")
-    public Object publishProject(Integer id){
+    public Object publishProject(Integer id) {
         //创建一个用于存储查询得到的数据集对象
         AjaxResult result = new AjaxResult();
         try {
@@ -241,6 +241,91 @@ public class ProjectController {
         }
         return result;
     }
+
+    //查询科技类项目数据
+    @ResponseBody
+    @RequestMapping("publishTechnologyProject")
+    public Object publishTechnologyProject(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "8") Integer pagesize) {
+        //创建一个用于存储查询得到的数据集对象
+        AjaxResult result = new AjaxResult();
+        try {
+            //调用service层查询方法，返回一个分页数据对象
+            Page page = projectService.queryPublishTechnologyProject(pageno, pagesize);
+            //设置查询状态
+            result.setSuccess(true);
+            //存储查询到的数据
+            result.setPage(page);
+        } catch (Exception e) {
+            result.setMessage("查询数据失败...");
+            result.setSuccess(false);
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    //查询设计类项目
+    @ResponseBody
+    @RequestMapping("publishDesignProject")
+    public Object publishDesignProject(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "8") Integer pagesize) {
+        //创建一个用于存储查询得到的数据集对象
+        AjaxResult result = new AjaxResult();
+        try {
+            //调用service层查询方法，返回一个分页数据对象
+            Page page = projectService.queryPublishDesignProject(pageno, pagesize);
+            //设置查询状态
+            result.setSuccess(true);
+            //存储查询到的数据
+            result.setPage(page);
+        } catch (Exception e) {
+            result.setMessage("查询数据失败...");
+            result.setSuccess(false);
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    //查询农业类项目
+    @ResponseBody
+    @RequestMapping("publishAgricultureProject")
+    public Object publishAgricultureProject(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "8") Integer pagesize) {
+        //创建一个用于存储查询得到的数据集对象
+        AjaxResult result = new AjaxResult();
+        try {
+            //调用service层查询方法，返回一个分页数据对象
+            Page page = projectService.queryPublishAgricultureProject(pageno, pagesize);
+            //设置查询状态
+            result.setSuccess(true);
+            //存储查询到的数据
+            result.setPage(page);
+        } catch (Exception e) {
+            result.setMessage("查询数据失败...");
+            result.setSuccess(false);
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    //查询其他类项目
+    @ResponseBody
+    @RequestMapping("publishOthersProject")
+    public Object publishOthersProject(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "8") Integer pagesize) {
+        //创建一个用于存储查询得到的数据集对象
+        AjaxResult result = new AjaxResult();
+        try {
+            //调用service层查询方法，返回一个分页数据对象
+            Page page = projectService.queryPublishOthersProject(pageno, pagesize);
+            //设置查询状态
+            result.setSuccess(true);
+            //存储查询到的数据
+            result.setPage(page);
+        } catch (Exception e) {
+            result.setMessage("查询数据失败...");
+            result.setSuccess(false);
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 
 
 }

@@ -2,6 +2,7 @@
   修改广告
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -61,16 +62,39 @@
                             <label for="name">广告名称</label>
                             <input type="text" class="form-control" id="name" name="name" value="${advertisement.name}" placeholder="请输入广告名称">
                         </div>
-                        <div class="form-group" style="width: 350px">
-                            <label for="url">广告地址</label>
-                            <input type="text" class="form-control" id="url" name="url" value="${advertisement.url}" placeholder="请输入广告地址">
+
+                        <div class="form-group" style="width: 300px">
+                            <label for="url">选择广告区域</label>
+                            <select class="form-control" id="url" name="url" >
+
+
+                                <c:if test="${advertisement.url eq null}">
+                                    <option selected >-- 请选择广告区域 --</option>
+                                    <option value="top">轮播图广告</option>
+                                    <option value="body">一般广告</option>
+                                </c:if>
+
+                                <c:if test="${advertisement.url eq 'top'}">
+                                    <option >-- 请选择广告区域 --</option>
+                                    <option selected value="top">轮播图广告</option>
+                                    <option value="body">一般广告</option>
+                                </c:if>
+
+                                <c:if test="${advertisement.url eq 'body'}">
+                                    <option >-- 请选择广告区域 --</option>
+                                    <option value="top">轮播图广告</option>
+                                    <option selected value="body">一般广告</option>
+                                </c:if>
+
+                            </select>
+
                         </div>
                        <%-- <div class="form-group" style="width: 350px">
                             <label for="advertPicture">广告图片</label>
                             <input type="file" class="form-control" id="advertPicture" value="${advertisement.iconpath}" placeholder="请输入广告图片">
                         </div>--%>
                         <div class="form-group" style="width: 350px">
-                            <img src="${APP_PATH }/picture/advertisement/${advertisement.iconpath}">
+                            <img src="${APP_PATH }/picture/advertisement/${advertisement.iconpath}" style="width: 300px; height: 200px">
                         </div>
 
                         <button type="submit" class="btn btn-success">修改</button>

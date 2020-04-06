@@ -60,6 +60,25 @@
                                 <label >项目名称: </label>
                                 ${project.name }
                             </div>
+
+                            <div class="form-group">
+                                <label >项目类别: </label>
+
+                                <c:if test="${project.projectType eq 'technology'}">
+                                    科技类
+                                </c:if>
+                                <c:if test="${project.projectType eq 'design'}">
+                                    设计类
+                                </c:if>
+                                <c:if test="${project.projectType eq 'agriculture'}">
+                                    农业类
+                                </c:if>
+                                <c:if test="${project.projectType eq 'others'}">
+                                    其他
+                                </c:if>
+                            </div>
+
+
                             <div class="form-group">
                                 <label>目标金额: </label>
                                 ${project.money }
@@ -70,7 +89,7 @@
                             </div>
                             <div class="form-group">
                                 <label>创建时间: </label>
-                                ${project.createdate }
+                                ${project.createdate}
                             </div>
                             <div class="form-group">
                                 <label>状态: </label>
@@ -79,7 +98,7 @@
 
                             <hr>
                             <div class="form-group">
-                                <img src="${APP_PATH }/picture/project/${project.filename}">
+                                <img src="${APP_PATH }/picture/project/${project.filename}" style="width: 300px; height: 200px;">
                             </div>
 
                             <button onclick="passProject()" type="button" class="btn btn-success"> 通过</button>

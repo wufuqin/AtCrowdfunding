@@ -53,4 +53,49 @@ public interface ProjectMapper {
 
     //发布项目，将项目的status该为 2
     void updateProjectStatusByIdPublish(Integer id);
+
+    //获取查询已经发布的科技类项目数据
+    List queryPublishTechnologyProject(@Param("startIndex") Integer startIndex, @Param("pagesize") Integer pagesize);
+
+    //查询查询已经发布的科技类项目数据总的记录条数
+    Integer queryPublishTechnologyProjectCount();
+
+    //获取查询已经发布的设计类项目数据
+    List queryPublishDesignProjectList(@Param("startIndex") Integer startIndex, @Param("pagesize") Integer pagesize);
+
+    //查询查询已经发布的设计类项目数据总的记录条数
+    Integer queryPublishDesignProjectCount();
+
+    //获取查询已经发布的农业类项目数据
+    List queryPublishAgricultureProjectList(@Param("startIndex") Integer startIndex, @Param("pagesize") Integer pagesize);
+
+    //查询查询已经发布的农业类项目数据总的记录条数
+    Integer queryPublishAgricultureProjectCount();
+
+    //获取查询已经发布的其他类项目数据
+    List queryPublishOthersProjectList(@Param("startIndex") Integer startIndex, @Param("pagesize") Integer pagesize);
+
+    //查询查询已经发布的其他类项目数据总的记录条数
+    Integer queryPublishOthersProjectCount();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

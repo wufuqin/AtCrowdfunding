@@ -43,4 +43,16 @@ public interface ProjectService {
 
     //发布项目，将项目的status该为 2
     void updateProjectStatusByIdPublish(Integer id);
+
+    //查询科技类项目数据
+    Page queryPublishTechnologyProject(Integer pageno, Integer pagesize);
+
+    //查询设计类项目
+    Page queryPublishDesignProject(Integer pageno, Integer pagesize);
+
+    //查询农业类项目
+    Page queryPublishAgricultureProject(Integer pageno, Integer pagesize);
+
+    //查询其他类项目
+    Page queryPublishOthersProject(Integer pageno, Integer pagesize);
 }

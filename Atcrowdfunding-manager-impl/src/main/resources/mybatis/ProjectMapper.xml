@@ -20,6 +20,7 @@
     <result column="createdate" property="createdate" jdbcType="CHAR" />
     <result column="follower" property="follower" jdbcType="INTEGER" />
     <result column="filename" property="filename" jdbcType="VARCHAR" />
+    <result column="projectType" property="projectType" jdbcType="VARCHAR" />
     </resultMap>
 
     <!--根据id删除-->
@@ -32,7 +33,7 @@
     <insert id="insert" parameterType="com.atguigu.atcrowdfunding.bean.Project" >
     insert
     into t_project
-    (id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion, memberid, createdate, follower, filename)
+    (id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion, memberid, createdate, follower, filename, projectType)
     values
      (#{id,jdbcType=INTEGER},
       #{name,jdbcType=VARCHAR},
@@ -47,7 +48,8 @@
       #{memberid,jdbcType=INTEGER},
       #{createdate,jdbcType=CHAR},
       #{follower,jdbcType=INTEGER},
-      #{filename,jdbcType=VARCHAR})
+      #{filename,jdbcType=VARCHAR},
+      #{projectType,jdbcType=VARCHAR})
     </insert>
 
     <!--根据id修改-->
@@ -57,26 +59,27 @@
           name = #{name,jdbcType=VARCHAR},
           remark = #{remark,jdbcType=VARCHAR},
           money = #{money,jdbcType=BIGINT},
-          day = #{day,jdbcType=INTEGER}
+          day = #{day,jdbcType=INTEGER},
+          projectType = #{projectType,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
 
     <!--根据id查询-->
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-        select id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion, memberid, createdate, follower, filename
+        select id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion, memberid, createdate, follower, filename, projectType
         from t_project
         where id = #{id,jdbcType=INTEGER}
     </select>
 
     <!--查询所有-->
     <select id="selectAll" resultMap="BaseResultMap" >
-    select id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion, memberid, createdate, follower
+    select id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion, memberid, createdate, follower, projectType
     from t_project
     </select>
 
     <!-- 查询分页数据 -->
     <select id="queryList" resultMap="BaseResultMap">
-        select id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion, memberid, createdate, follower
+        select id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion, memberid, createdate, follower, projectType
         from t_project
         limit #{startIndex},#{pagesize}
     </select>
@@ -145,9 +148,85 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
+    <!--获取查询已经发布的科技项目数据-->
+    <select id="queryPublishTechnologyProject" resultMap="BaseResultMap">
+		select id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion, memberid, createdate, follower, filename, projectType
+        from t_project
+		where status = 2 and projectType = "technology"
+		limit #{startIndex},#{pagesize}
+	</select>
+
+    <!--查询已经发布的科技项目数据总的记录条数-->
+    <select id="queryPublishTechnologyProjectCount"  resultType="int">
+		select count(*)
+		from t_project
+		where status = 2 and projectType = "technology"
+    </select>
+
+    <!--获取查询已经发布的设计类项目数据-->
+    <select id="queryPublishDesignProjectList" resultMap="BaseResultMap">
+		select id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion, memberid, createdate, follower, filename, projectType
+        from t_project
+		where status = 2 and projectType = "design"
+		limit #{startIndex},#{pagesize}
+	</select>
+
+    <!--查询已经发布的设计类项目总的记录条数-->
+    <select id="queryPublishDesignProjectCount"  resultType="int">
+		select count(*)
+		from t_project
+		where status = 2 and projectType = "design"
+    </select>
+
+    <!--获取查询已经发布的设计类项目数据-->
+    <select id="queryPublishAgricultureProjectList" resultMap="BaseResultMap">
+		select id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion, memberid, createdate, follower, filename, projectType
+        from t_project
+		where status = 2 and projectType = "agriculture"
+		limit #{startIndex},#{pagesize}
+	</select>
+
+    <!--查询已经发布的设计类项目总的记录条数-->
+    <select id="queryPublishAgricultureProjectCount"  resultType="int">
+		select count(*)
+		from t_project
+		where status = 2 and projectType = "agriculture"
+    </select>
+
+    <!--获取查询已经发布的设计类项目数据-->
+    <select id="queryPublishOthersProjectList" resultMap="BaseResultMap">
+		select id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion, memberid, createdate, follower, filename, projectType
+        from t_project
+		where status = 2 and projectType = "others"
+		limit #{startIndex},#{pagesize}
+	</select>
+
+    <!--查询已经发布的设计类项目总的记录条数-->
+    <select id="queryPublishOthersProjectCount"  resultType="int">
+		select count(*)
+		from t_project
+		where status = 2 and projectType = "others"
+    </select>
 
 
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
