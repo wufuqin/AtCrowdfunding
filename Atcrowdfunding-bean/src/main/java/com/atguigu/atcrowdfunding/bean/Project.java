@@ -34,6 +34,12 @@ public class Project {
 
     private String projectType;
 
+    private Integer raiseMoney;
+
+    private Integer supportNeedMoney;
+
+    private String express;
+
     public Integer getId() {
         return id;
     }
@@ -152,5 +158,29 @@ public class Project {
 
     public void setProjectType(String projectType) {
         this.projectType = projectType;
+    }
+
+    public Integer getRaiseMoney() {
+        return raiseMoney;
+    }
+
+    public void setRaiseMoney(Integer raiseMoney) {
+        this.raiseMoney = raiseMoney;
+    }
+
+    public Integer getSupportNeedMoney() {
+        return supportNeedMoney;
+    }
+
+    public void setSupportNeedMoney(Integer supportNeedMoney) {
+        this.supportNeedMoney = supportNeedMoney;
+    }
+
+    public String getExpress() {
+        return express;
+    }
+
+    public void setExpress(String express) {
+        this.express = express;
     }
 }

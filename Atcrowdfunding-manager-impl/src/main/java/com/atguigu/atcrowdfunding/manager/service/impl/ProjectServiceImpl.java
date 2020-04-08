@@ -91,6 +91,7 @@ public class ProjectServiceImpl implements ProjectService {
         project.setCompletion(0);
         project.setCreatedate(createTime);
         project.setFollower(0);
+        project.setRaiseMoney(0);
         return projectMapper.insert(project);
     }
 

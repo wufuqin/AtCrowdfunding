@@ -123,7 +123,7 @@
 </div>
 
 <%--科技--%>
-<div class="container">
+<div id="Technology" class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
             <div class="box ui-draggable" id="mainBox">
@@ -145,7 +145,7 @@
 </div>
 
 <%--设计--%>
-<div class="container">
+<div id="Design" class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
             <div class="box ui-draggable" id="mainBox">
@@ -167,7 +167,7 @@
 </div>
 
 <%--农业--%>
-<div class="container">
+<div id="Agriculture" class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
             <div class="box ui-draggable" id="mainBox">
@@ -188,7 +188,7 @@
 </div>
 
 <%--其他--%>
-<div class="container">
+<div id="Others" class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
             <div class="box ui-draggable" id="mainBox">
@@ -207,8 +207,6 @@
         </div>
     </div>
 </div>
-
-
 
 <script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
@@ -374,10 +372,10 @@
                     $.each(data,function (i,n) {
                         content+="<div class='col-md-3'>";
                         content+="<div class='thumbnail'>";
-                        content+="<img src='${APP_PATH }/picture/project/"+n.filename+"' style='width: 300px; height: 150px;'>";
+                        content+="<img id='potalProject' src='${APP_PATH }/picture/project/"+n.filename+"' style='width: 300px; height: 150px;'>";
                         content+="<div class='caption'>";
                         content+="<h3 class='break'>";
-                        content+="<a href='#'>"+n.name+"</a>";
+                        content+="<a id='potalProject' href='${APP_PATH}/potalProject/index.htm?id="+n.id+"&memberid="+n.memberid+"'>"+n.name+"</a>";
                         content+="</h3>";
                         content+="<p>";
                         content+="<div style='float:left;'><i class='glyphicon glyphicon-screenshot' title='目标金额' ></i> $"+n.money+" </div>";
@@ -442,7 +440,7 @@
                         content+="<img src='${APP_PATH }/picture/project/"+n.filename+"' style='width: 300px; height: 150px;'>";
                         content+="<div class='caption'>";
                         content+="<h3 class='break'>";
-                        content+="<a href='#'>"+n.name+"</a>";
+                        content+="<a href='${APP_PATH}/potalProject/index.htm?id="+n.id+"'>"+n.name+"</a>";
                         content+="</h3>";
                         content+="<p>";
                         content+="<div style='float:left;'><i class='glyphicon glyphicon-screenshot' title='目标金额' ></i> $"+n.money+" </div>";
@@ -504,7 +502,7 @@
                         content+="<img src='${APP_PATH }/picture/project/"+n.filename+"' style='width: 300px; height: 150px;'>";
                         content+="<div class='caption'>";
                         content+="<h3 class='break'>";
-                        content+="<a href='#'>"+n.name+"</a>";
+                        content+="<a href='${APP_PATH}/potalProject/index.htm?id="+n.id+"'>"+n.name+"</a>";
                         content+="</h3>";
                         content+="<p>";
                         content+="<div style='float:left;'><i class='glyphicon glyphicon-screenshot' title='目标金额' ></i> $"+n.money+" </div>";
@@ -564,7 +562,7 @@
                         content+="<img src='${APP_PATH }/picture/project/"+n.filename+"' style='width: 300px; height: 150px;'>";
                         content+="<div class='caption'>";
                         content+="<h3 class='break'>";
-                        content+="<a href='#'>"+n.name+"</a>";
+                        content+="<a href='${APP_PATH}/potalProject/index.htm?id="+n.id+"'>"+n.name+"</a>";
                         content+="</h3>";
                         content+="<p>";
                         content+="<div style='float:left;'><i class='glyphicon glyphicon-screenshot' title='目标金额' ></i> $"+n.money+" </div>";

@@ -43,6 +43,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		uri.add("/project/publishDesignProject.do"); //设计项目
 		uri.add("/project/publishAgricultureProject.do"); //农业项目
 		uri.add("/project/publishOthersProject.do"); //其他项目
+		uri.add("/potalProject/index.htm"); //其他项目
 
 		//获取请求路径.
 		String servletPath = request.getServletPath();

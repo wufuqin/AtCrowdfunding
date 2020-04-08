@@ -25,8 +25,8 @@
                     <li style="padding-top:9px; padding-right: 25px">
                         <ul class="nav navbar-nav navbar-right">
                             <div class="row">
-                                <a href="login.htm" type="button" class="btn btn-info form-control" style="width: 100px">登录</a>
-                                <a href="reg.htm" type="button" class="btn btn-info form-control" style="width: 100px"> 注册</a>
+                                <a href="${APP_PATH}/login.htm" type="button" class="btn btn-info form-control" style="width: 100px">登录</a>
+                                <a href="${APP_PATH}/reg.htm" type="button" class="btn btn-info form-control" style="width: 100px"> 注册</a>
                             </div>
                         </ul>
                     </li>
@@ -48,20 +48,19 @@
     </form>
 
 
-    <div style="float:right; padding-right: 30px; padding-top: 4px; font-size:32px">
-        <a href="${APP_PATH}/index.htm">其他</a>
+    <div style="float:right; padding-right: 30px; padding-top: 8px; font-size:25px">
+        <a href="#Others">其他</a>
     </div>
-
-    <div style="float:right; padding-right: 30px; padding-top: 4px; font-size:32px">
-        <a href="${APP_PATH}/index.htm">农业</a>
+    <div style="float:right; padding-right: 30px; padding-top: 8px; font-size:25px">
+        <a href="#Agriculture">农业</a>
     </div>
-    <div style="float:right; padding-right: 30px; padding-top: 4px; font-size:32px">
-        <a href="${APP_PATH}/index.htm">设计</a>
+    <div style="float:right; padding-right: 30px; padding-top: 8px; font-size:25px">
+        <a href="#Design">设计</a>
     </div>
-    <div style="float:right; padding-right: 30px; padding-top: 4px; font-size:32px">
-        <a href="${APP_PATH}/index.htm">科技</a>
+    <div style="float:right; padding-right: 30px; padding-top: 8px; font-size:25px">
+        <a href="#Technology">科技</a>
     </div>
-    <div style="float:right; padding-right: 30px; padding-top: 4px; font-size:32px">
+    <div style="float:right; padding-right: 30px; padding-top: 8px; font-size:25px">
         <a href="${APP_PATH}/index.htm">首页</a>
     </div>
 </div>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.atguigu.atcrowdfunding.potal.dao.PotalProjectMapper" >
+
+    <!--前台项目的映射配置文件-->
+
+    <!--封装结果集-->
+    <resultMap id="BaseResultMap" type="com.atguigu.atcrowdfunding.bean.Project" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="money" property="money" jdbcType="BIGINT" />
+        <result column="day" property="day" jdbcType="INTEGER" />
+        <result column="status" property="status" jdbcType="CHAR" />
+        <result column="deploydate" property="deploydate" jdbcType="CHAR" />
+        <result column="supportmoney" property="supportmoney" jdbcType="BIGINT" />
+        <result column="supporter" property="supporter" jdbcType="INTEGER" />
+        <result column="completion" property="completion" jdbcType="INTEGER" />
+        <result column="memberid" property="memberid" jdbcType="INTEGER" />
+        <result column="createdate" property="createdate" jdbcType="CHAR" />
+        <result column="follower" property="follower" jdbcType="INTEGER" />
+        <result column="filename" property="filename" jdbcType="VARCHAR" />
+        <result column="projectType" property="projectType" jdbcType="VARCHAR" />
+        <result column="raiseMoney" property="raiseMoney" jdbcType="INTEGER" />
+        <result column="supportNeedMoney" property="supportNeedMoney" jdbcType="INTEGER" />
+        <result column="express" property="express" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!--根据id查询项目信息-->
+    <select id="queryPotalProjectInfoById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion, memberid, createdate, follower, filename, projectType, raiseMoney, supportNeedMoney, express
+        from t_project
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

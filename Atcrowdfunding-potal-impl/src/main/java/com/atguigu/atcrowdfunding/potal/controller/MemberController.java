@@ -138,6 +138,7 @@ public class MemberController {
             loginMember.setRealname(member.getRealname());
             loginMember.setCardnum(member.getCardnum());
             loginMember.setTel(member.getTel());
+            loginMember.setIntroduction(member.getIntroduction());
             // 更新账户类型
             memberService.updateBasicInfo(loginMember);
 

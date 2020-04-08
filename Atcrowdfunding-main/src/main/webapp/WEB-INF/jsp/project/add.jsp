@@ -63,6 +63,11 @@
                         </div>
 
                         <div class="form-group" style="width: 300px">
+                            <label for="memberid">发起项目的会员编号</label>
+                            <input type="text" class="form-control" id="memberid" name="memberid" placeholder="请输入发起项目的会员编号">
+                        </div>
+
+                        <div class="form-group" style="width: 300px">
                             <label for="projectType">项目类别</label>
                             <select class="form-control" id="projectType" name="projectType" >
                                 <option selected >-- 请选择项目类别 --</option>
@@ -82,6 +87,17 @@
                             <label for="money">筹资金额</label>
                             <input type="number" class="form-control" id="money" name="money" placeholder="请输入筹资金额">
                         </div>
+
+                        <div class="form-group" style="width: 300px">
+                            <label for="supportNeedMoney">每次支持所需要金额</label>
+                            <input type="number" class="form-control" id="supportNeedMoney" name="supportNeedMoney" placeholder="请输入每次支持所需要金额">
+                        </div>
+
+                        <div class="form-group" style="width: 300px">
+                            <label for="express">是否包邮</label>
+                            <input type="text" class="form-control" id="express" name="express" placeholder="请输入是否包邮">
+                        </div>
+
                         <div class="form-group" style="width: 300px">
                             <label for="day">筹资天数</label>
                             <input type="number" class="form-control" id="day" name="day" placeholder="请输入筹资天数">

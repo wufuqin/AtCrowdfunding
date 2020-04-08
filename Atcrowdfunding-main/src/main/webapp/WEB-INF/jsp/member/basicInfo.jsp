@@ -59,6 +59,10 @@
             <label for="tel">电话号码</label>
             <input type="text" class="form-control" id="tel" name="tel" value="${memberInfo.tel}" placeholder="请输入电话号码">
         </div>
+        <div class="form-group" style="width: 480px">
+            <label for="introduction">简介</label>
+            <input type="text" class="form-control" id="introduction" name="introduction" value="${memberInfo.introduction}" placeholder="(可不填)请输入账户简介">
+        </div>
         <button type="button" onclick="window.location.href='${APP_PATH}/member/acctType.htm'" class="btn btn-info">上一步</button>
         <button type="submit"  class="btn btn-info">下一步</button>
     </form>
@@ -87,7 +91,8 @@
             data : {
                 realname : $("#realname").val(),
                 cardnum  : $("#cardnum").val(),
-                tel      : $("#tel").val()
+                tel      : $("#tel").val(),
+                introduction : $("#introduction").val()
             },
             beforeSend : function () {
                 loadingIndex = layer.msg('基本信息更新中...', {icon: 16});

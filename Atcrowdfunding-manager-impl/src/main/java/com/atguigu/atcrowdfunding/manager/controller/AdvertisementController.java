@@ -320,8 +320,6 @@ public class AdvertisementController {
         return result;
     }
 
-
-
 }
 
 

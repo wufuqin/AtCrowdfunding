@@ -28,6 +28,8 @@ public class Member {
 
     private String status;
 
+    private String introduction;
+
     public Integer getId() {
         return id;
     }
@@ -123,4 +125,13 @@ public class Member {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
+
 }
