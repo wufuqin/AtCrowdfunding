@@ -3,6 +3,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -32,8 +33,9 @@
         <%--菜单区--%>
         <div class="col-sm-3 col-md-2 sidebar" >
             <div class="tree">
-                <%--包含左侧菜单页面--%>
+                <%--包含左侧菜单页面&ndash;--%>;
                 <jsp:include page="/WEB-INF/jsp/common/menu.jsp"/>
+
             </div>
         </div>
 

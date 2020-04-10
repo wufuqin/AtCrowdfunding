@@ -48,10 +48,8 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
 			<div class="tree">
-                <ul style="padding-left:0px;" class="list-group" >
-					<%--包含左侧菜单页面--%>
-					<jsp:include page="/WEB-INF/jsp/common/menu.jsp"/>
-                </ul>
+                <%--包含左侧菜单页面--%>
+                <jsp:include page="/WEB-INF/jsp/common/menu.jsp"/>
 			</div>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

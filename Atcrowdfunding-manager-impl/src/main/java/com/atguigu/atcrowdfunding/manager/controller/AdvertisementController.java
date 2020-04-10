@@ -3,10 +3,8 @@ package com.atguigu.atcrowdfunding.manager.controller;
 import com.atguigu.atcrowdfunding.bean.Advertisement;
 import com.atguigu.atcrowdfunding.bean.User;
 import com.atguigu.atcrowdfunding.manager.service.AdvertisementService;
-import com.atguigu.atcrowdfunding.util.AjaxResult;
-import com.atguigu.atcrowdfunding.util.Const;
-import com.atguigu.atcrowdfunding.util.CreateFileName;
-import com.atguigu.atcrowdfunding.util.Page;
+import com.atguigu.atcrowdfunding.util.*;
+import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -138,15 +139,25 @@ public class AdvertisementController {
             MultipartHttpServletRequest mreq = (MultipartHttpServletRequest)request;
 
             MultipartFile mfile = mreq.getFile("advertPicture");  //创建一个文件对象
+            CommonsMultipartFile cFile = (CommonsMultipartFile)mfile;
+            DiskFileItem fileItem = (DiskFileItem) cFile.getFileItem();
+            InputStream inputStream = fileItem.getInputStream();
+
             String name = mfile.getOriginalFilename();// 获取上传的原始文件名  java.jpg
             String extname = name.substring(name.lastIndexOf(".")); //  截取文件名后缀 ： .jpg
             String iconpath = UUID.randomUUID().toString() + extname; //生成随机文件名 ： 232243343.jpg
 
             ServletContext servletContext = session.getServletContext();
-            String realpath = servletContext.getRealPath("/picture");  //得到存储文件的路径
+            //String realpath = servletContext.getRealPath("/picture");  //得到存储文件的路径
+            //String path =realpath+ "/advertisement/"+iconpath;  //生成文件路径
+            //mfile.transferTo(new File(path));      //将文件添加到对应路径下
 
-            String path =realpath+ "/advertisement/"+iconpath;  //生成文件路径
-            mfile.transferTo(new File(path));      //将文件添加到对应路径下
+            //读取本地文件
+            FtpUtil.uploadFile("47.95.223.197",21,"userftp","userftp",
+             "/home/userftp/test","pic",iconpath,inputStream);
+
+
+
             User user = (User)session.getAttribute(Const.LOGIN_USER); //获取当前用户
             advertisement.setUserid(user.getId());  //获取当前用户id
             advertisement.setStatus("1");           //将当前的状态设置为未审核

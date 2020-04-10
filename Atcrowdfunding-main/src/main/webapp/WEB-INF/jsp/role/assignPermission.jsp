@@ -55,11 +55,14 @@
                 <div class="panel-heading"><i class="glyphicon glyphicon-th-list"></i> 权限分配列表:给角色 <span style="color: red"> ${role.name}</span> 分配权限<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
 
                 <div class="panel-body">
-                    <button id="assignPermissionBtn" class="btn btn-success">分配许可</button>
+                   <%-- <button id="assignPermissionBtn" class="btn btn-success">分配许可</button>
                     <button style="width: 90px" type="button" onclick="window.location.href='${APP_PATH}/role/index.htm'" class="btn btn-info">返回</button>
                     <br>
-                    <br>
+                    <br>--%>
                     <ul id="treeDemo" class="ztree" onclick="return false"></ul>
+                    <button id="assignPermissionBtn" class="btn btn-success">分配许可</button>
+                    <button style="width: 90px" type="button" onclick="window.location.href='${APP_PATH}/role/index.htm'" class="btn btn-info">返回</button>
+
                 </div>
             </div>
         </div>

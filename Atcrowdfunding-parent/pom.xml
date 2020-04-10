@@ -21,7 +21,6 @@
 
     <dependencyManagement>
         <dependencies>
-
             <!--junit-->
             <dependency>
                 <groupId>junit</groupId>
@@ -226,13 +225,21 @@
                 <version>4.4.6</version>
             </dependency>
 
+            <!--&lt;!&ndash;apache工具组件&ndash;&gt;
+            <dependency>
+                <groupId>commons-net</groupId>
+                <artifactId>commons-net</artifactId>
+                <version>3.6</version>
+            </dependency>-->
+
+
         </dependencies>
 
     </dependencyManagement>
 
     <!--maven插件-->
     <build>
-        <finalName>Test</finalName>
+        <finalName>ROOT</finalName>
         <!--maven插件-->
         <plugins>
             <!--jdk编译插件-->

@@ -37,7 +37,7 @@ public class DispatcherController {
     @Autowired
     private MemberService memberService;
 
-    //会员等成功之后的主页面
+    //会员登录成功之后的主页面
     @RequestMapping("/afterSuccessfulLoginIndex")
     public String afterSuccessfulLoginIndex(){
         return "afterSuccessfulLoginIndex";
@@ -204,6 +204,7 @@ public class DispatcherController {
                 User user = userService.queryUserLogin(paramMap);
                 session.setAttribute(Const.LOGIN_USER, user);
             }
+
             result.setSuccess(true);
         } catch (Exception e) {
             e.printStackTrace();
