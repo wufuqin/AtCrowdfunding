@@ -5,7 +5,9 @@ import com.atguigu.atcrowdfunding.bean.User;
 import com.atguigu.atcrowdfunding.manager.service.ProjectService;
 import com.atguigu.atcrowdfunding.util.AjaxResult;
 import com.atguigu.atcrowdfunding.util.Const;
+import com.atguigu.atcrowdfunding.util.FtpUtil;
 import com.atguigu.atcrowdfunding.util.Page;
+import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -103,16 +107,24 @@ public class ProjectController {
             MultipartHttpServletRequest mreq = (MultipartHttpServletRequest) request;
 
             MultipartFile mfile = mreq.getFile("projectPicture");  //创建一个文件对象
+            CommonsMultipartFile cFile = (CommonsMultipartFile)mfile;
+            DiskFileItem fileItem = (DiskFileItem) cFile.getFileItem();
+            InputStream inputStream = fileItem.getInputStream();
             String name = mfile.getOriginalFilename();// 获取上传的原始文件名  java.jpg
             String extname = name.substring(name.lastIndexOf(".")); //  截取文件名后缀 ： .jpg
             //String firstPath = CreateFileName.createID();
             String iconpath = UUID.randomUUID().toString() + extname; //生成随机文件名 ： 232243343.jpg
 
-            ServletContext servletContext = session.getServletContext();
-            String realpath = servletContext.getRealPath("/picture");  //得到存储文件的路径
+            //ServletContext servletContext = session.getServletContext();
+            //String realpath = servletContext.getRealPath("/picture");  //得到存储文件的路径
+            //String path = realpath + "/project/" + iconpath;  //生成文件路径
+            //mfile.transferTo(new File(path));      //将文件添加到对应路径下
 
-            String path = realpath + "/project/" + iconpath;  //生成文件路径
-            mfile.transferTo(new File(path));      //将文件添加到对应路径下
+            //将图片保存至云服务器（解决分布式系统部署环境下的文件共享问题）
+            //读取本地文件
+            FtpUtil.uploadFile("47.95.223.197",21,"userftp","userftp",
+                    "/home/userftp/test","pic",iconpath,inputStream);
+
             //User user = (User) session.getAttribute(Const.LOGIN_USER); //获取当前用户
             //project.setMemberid(user.getId());  //获取当前用户id
             project.setFilename(iconpath);    //设置项目图片的名字
@@ -325,8 +337,6 @@ public class ProjectController {
         }
         return result;
     }
-
-
 
 }
 

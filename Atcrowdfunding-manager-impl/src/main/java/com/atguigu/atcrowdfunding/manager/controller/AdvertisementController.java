@@ -147,16 +147,19 @@ public class AdvertisementController {
             String extname = name.substring(name.lastIndexOf(".")); //  截取文件名后缀 ： .jpg
             String iconpath = UUID.randomUUID().toString() + extname; //生成随机文件名 ： 232243343.jpg
 
-            ServletContext servletContext = session.getServletContext();
+            //将图片保存至本地tomcat服务器
+            //ServletContext servletContext = session.getServletContext();
             //String realpath = servletContext.getRealPath("/picture");  //得到存储文件的路径
             //String path =realpath+ "/advertisement/"+iconpath;  //生成文件路径
             //mfile.transferTo(new File(path));      //将文件添加到对应路径下
 
-            //读取本地文件
-            FtpUtil.uploadFile("47.95.223.197",21,"userftp","userftp",
-             "/home/userftp/test","pic",iconpath,inputStream);
 
-
+            //将图片保存至云服务器（解决分布式系统部署环境下的文件共享问题）
+            boolean status = FtpUtil.uploadFile("47.95.223.197", 21, "userftp", "userftp", "/home/userftp/test", "pic", iconpath, inputStream);
+            if ("false".equals(status)){
+                result.setSuccess(false);
+                return result;
+            }
 
             User user = (User)session.getAttribute(Const.LOGIN_USER); //获取当前用户
             advertisement.setUserid(user.getId());  //获取当前用户id
@@ -170,7 +173,6 @@ public class AdvertisementController {
             e.printStackTrace();
             result.setSuccess(false);
         }
-
         return result;
     }
 

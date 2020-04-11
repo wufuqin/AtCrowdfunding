@@ -57,6 +57,8 @@ public class PotalProjectController {
     @RequestMapping("/checkMemberLoginStatus")
     public Object checkMemberLoginStatus(HttpSession session){
         AjaxResult result = new AjaxResult();
+        Member member = (Member) session.getAttribute(Const.LOGIN_MEMBER);
+        System.out.println(member.toString());
         try {
             //判断当前用户是否已经登录
             if ("".equals(session.getAttribute(Const.LOGIN_MEMBER))){

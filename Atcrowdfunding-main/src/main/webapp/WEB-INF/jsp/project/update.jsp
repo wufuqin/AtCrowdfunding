@@ -117,7 +117,7 @@
                             <input type="text" class="form-control" id="day" name="day" value="${project.day}" placeholder="请输入筹资天数">
                         </div>
                         <div class="form-group">
-                            <img src="${APP_PATH }/picture/project/${project.filename}" style="width: 300px; height: 200px;">
+                            <img src="http://47.95.223.197/test/pic/${project.filename}" style="width: 300px; height: 200px;">
                         </div>
                         <button type="submit" class="btn btn-success">修改</button>
                         <button type="reset" class="btn btn-info">重置</button>

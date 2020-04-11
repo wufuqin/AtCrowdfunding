@@ -30,11 +30,12 @@ public class FtpUtil {
 	 * @param input 输入流 
 	 * @return 成功返回true，否则返回false 
 	 */  
-	public static boolean uploadFile(String host, int port, String username, String password, String basePath,
-			String filePath, String filename, InputStream input) {
+	public static boolean uploadFile(String host, int port, String username, String password, String basePath, String filePath, String filename, InputStream input) {
 		boolean result = false;
+
 		FTPClient ftp = new FTPClient();
 		try {
+
 			int reply;
 			ftp.connect(host, port);// 连接FTP服务器
 			// 如果采用默认端口，可以使用ftp.connect(host)的方式直接连接FTP服务器
@@ -61,6 +62,8 @@ public class FtpUtil {
 					}
 				}
 			}
+			//设置被动模式
+			ftp.enterLocalPassiveMode();
 			//设置上传文件的类型为二进制类型
 			ftp.setFileType(FTP.BINARY_FILE_TYPE);
 			//上传文件

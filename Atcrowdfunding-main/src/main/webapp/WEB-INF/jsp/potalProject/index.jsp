@@ -128,7 +128,7 @@
                     <%--项目图片--%>
                     <div class="col-md-8 column">
                         <%--<img alt="140x140" width="740" src="${APP_PATH}/img/product_detail_head.jpg" />--%>
-                        <img alt="140x140" width="740" src="${APP_PATH }/picture/project/${potalProject.filename}" />
+                        <img alt="140x140" width="740" src="http://47.95.223.197/test/pic/${potalProject.filename}" />
                     </div>
 
                     <%--右侧信息栏--%>

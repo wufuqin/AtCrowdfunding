@@ -194,7 +194,7 @@ public class ProcessController {
     //加载流程定义图片
     @ResponseBody
     @RequestMapping("/showProcessPNG")
-    public void showProcessPNG(String id, HttpServletResponse response) throws IOException {	 //流程定义id
+    public void showProcessPNG(String id, HttpServletResponse response) throws IOException {
         //得到流程定义图
         ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(id).singleResult();
         //得到流程定义图

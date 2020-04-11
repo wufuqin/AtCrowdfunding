@@ -97,7 +97,7 @@
 
                             <hr>
                             <div class="form-group">
-                                <img src="${APP_PATH }/picture/project/${project.filename}" style="width: 300px; height: 200px;">
+                                <img src="http://47.95.223.197/test/pic/${project.filename}" style="width: 300px; height: 200px;">
                             </div>
 
                             <button onclick="publishProject()" type="button" class="btn btn-success"> 发布项目</button>
