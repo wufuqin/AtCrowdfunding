@@ -378,7 +378,7 @@
                         content+="<a id='potalProject' href='${APP_PATH}/potalProject/index.htm?id="+n.id+"&memberid="+n.memberid+"'>"+n.name+"</a>";
                         content+="</h3>";
                         content+="<p>";
-                        content+="<div style='float:left;'><i class='glyphicon glyphicon-screenshot' title='目标金额' ></i> $"+n.money+" </div>";
+                        content+="<div style='float:left;'><i class='glyphicon glyphicon-screenshot' title='目标金额' ></i> ￥"+n.money+" </div>";
                         content+="<div style='float:right;'><i title='截至日期' class='glyphicon glyphicon-calendar'></i>"+n.createdate+" </div>";
                         content+="</p>";
                         content+="<br>";
@@ -440,7 +440,7 @@
                         content+="<img src='http://47.95.223.197/test/pic/"+n.filename+"' style='width: 300px; height: 150px;'>";
                         content+="<div class='caption'>";
                         content+="<h3 class='break'>";
-                        content+="<a href='${APP_PATH}/potalProject/index.htm?id="+n.id+"'>"+n.name+"</a>";
+                        content+="<a href='${APP_PATH}/potalProject/index.htm?id="+n.id+"&memberid="+n.memberid+"'>"+n.name+"</a>";
                         content+="</h3>";
                         content+="<p>";
                         content+="<div style='float:left;'><i class='glyphicon glyphicon-screenshot' title='目标金额' ></i> $"+n.money+" </div>";

@@ -30,6 +30,8 @@ public class Member {
 
     private String introduction;
 
+    private String address;
+
     public Integer getId() {
         return id;
     }
@@ -134,4 +136,11 @@ public class Member {
         this.introduction = introduction;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }

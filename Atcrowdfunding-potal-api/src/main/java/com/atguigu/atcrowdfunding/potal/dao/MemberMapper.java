@@ -67,6 +67,9 @@ public interface MemberMapper {
 
     //修改会员的账号激活状态 status = "Y"
     int updateMemberStatusByLoginacct(String loginacct);
+
+    //更新会员收货地址信息
+    void updateMemberAddressInfoById(Member member);
 }
 
 

@@ -96,7 +96,7 @@
                     <div class="panel-heading" style="text-align:center;">
                         <div class="container-fluid">
                             <div class="row clearfix">
-                                <div class="col-md-3 column">
+                                <div class="col-md-2 column">
                                     <div class="progress" style="height:50px;border-radius:0;    position: absolute;width: 75%;right:49px;">
                                         <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;height:50px;">
                                             <div style="font-size:16px;margin-top:15px;">1. 确认回报内容</div>
@@ -110,10 +110,11 @@
                                         ">
                                     </div>
                                 </div>
-                                <div class="col-md-3 column">
-                                    <div class="progress" style="height:50px;border-radius:0;position: absolute;width: 75%;right:49px;">
+
+                                <div class="col-md-2 column">
+                                    <div class="progress" style="height:50px;border-radius:0;    position: absolute;width: 75%;right:49px;">
                                         <div class="progress-bar progress-bar-default" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;height:50px;">
-                                            <div style="font-size:16px;margin-top:15px;">2. 确认订单</div>
+                                            <div style="font-size:16px;margin-top:15px;">2. 确认收货地址</div>
                                         </div>
                                     </div>
                                     <div style="right: 0;border:10px solid #ddd;border-left-color: #88b7d5;border-width: 25px;position: absolute;
@@ -124,10 +125,11 @@
                                         ">
                                     </div>
                                 </div>
-                                <div class="col-md-3 column">
+
+                                <div class="col-md-2 column">
                                     <div class="progress" style="height:50px;border-radius:0;position: absolute;width: 75%;right:49px;">
                                         <div class="progress-bar progress-bar-default" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;height:50px;">
-                                            <div style="font-size:16px;margin-top:15px;">3. 付款</div>
+                                            <div style="font-size:16px;margin-top:15px;">3. 确认订单</div>
                                         </div>
                                     </div>
                                     <div style="right: 0;border:10px solid #ddd;border-left-color: #88b7d5;border-width: 25px;position: absolute;
@@ -138,10 +140,24 @@
                                         ">
                                     </div>
                                 </div>
-                                <div class="col-md-3 column">
+                                <div class="col-md-2 column">
+                                    <div class="progress" style="height:50px;border-radius:0;position: absolute;width: 75%;right:49px;">
+                                        <div class="progress-bar progress-bar-default" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;height:50px;">
+                                            <div style="font-size:16px;margin-top:15px;">4. 付款</div>
+                                        </div>
+                                    </div>
+                                    <div style="right: 0;border:10px solid #ddd;border-left-color: #88b7d5;border-width: 25px;position: absolute;
+                                             border-left-color: rgba(221, 221, 221, 1);
+                                             border-top-color: rgba(221, 221, 221, 0);
+                                             border-bottom-color: rgba(221, 221, 221, 0);
+                                             border-right-color: rgba(221, 221, 221, 0);
+                                        ">
+                                    </div>
+                                </div>
+                                <div class="col-md-2 column">
                                     <div class="progress" style="height:50px;border-radius:0;">
                                         <div class="progress-bar progress-bar-default" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;height:50px;">
-                                            <div style="font-size:16px;margin-top:15px;">4. 完成</div>
+                                            <div style="font-size:16px;margin-top:15px;">5. 完成</div>
                                         </div>
                                     </div>
                                 </div>
@@ -173,9 +189,8 @@
                                         <tbody>
                                         <tr>
                                             <td>${potalProject.name}</td>
-                                            <td>${member.realname}</td>
-                                            <%--<td>每满1750人抽取一台活性富氢净水直饮机，至少抽取一台。抽取名额（小数点后一位四舍五入）=参与人数÷1750人，由苏宁官方抽取。</td>--%>
-                                            <td><input type="text" class="text-center form-control" style="width:60px;" value="1"></td>
+                                            <td>${companyMember.realname}</td>
+                                            <td>1</td>
                                             <td style="color:#F60">￥ ${potalProject.supportNeedMoney}</td>
                                             <td>${potalProject.express}</td>
                                         </tr>
@@ -183,7 +198,7 @@
                                     </table>
                                     <div style="float:right;">
                                         <p>总价(含运费)：<span style="font-size:16px;color:#F60;">￥${potalProject.supportNeedMoney}</span></p>
-                                        <button type="button" class="btn btn-info btn-lg" style="float:right;" onclick="window.location.href='${APP_PATH}/potalProject/toOrder.htm'"><i class="glyphicon glyphicon-credit-card"></i> 去结算</button>
+                                        <button type="button" class="btn btn-info btn-lg" style="float:right;" onclick="window.location.href='${APP_PATH}/potalProject/toMemberAddress.htm?id=${potalProject.id}'"><i class="glyphicon glyphicon-credit-card"></i> 确定</button>
                                     </div>
                                 </div>
 
@@ -221,7 +236,7 @@
 <script src="${APP_PATH}/script/back-to-top.js"></script>
 <script>
     $('#myTab a').click(function (e) {
-        e.preventDefault()
+        e.preventDefault();
         $(this).tab('show')
     })
 </script>

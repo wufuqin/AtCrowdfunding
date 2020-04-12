@@ -1,8 +1,10 @@
 <%--
-  确认订单页面
+  会员收货地址
+--%>
+<%--
+  点击确认支持之后，跳转的确认回报页面
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -89,10 +91,12 @@
 
 <div class="container theme-showcase" role="main">
 
+
     <div class="container">
         <div class="row clearfix">
             <div class="col-md-12 column">
                 <div class="panel panel-default" >
+
 
                     <div class="panel-heading" style="text-align:center;">
                         <div class="container-fluid">
@@ -113,9 +117,24 @@
                                 </div>
 
                                 <div class="col-md-2 column">
+                                    <div class="progress" style="height:50px;border-radius:0;position: absolute;width: 75%;right:49px;">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;height:50px;">
+                                            <div style="font-size:16px;margin-top:15px;">2. 确认收货地址</div>
+                                        </div>
+                                    </div>
+                                    <div style="right: 0;border:10px solid #ddd;border-left-color: #88b7d5;border-width: 25px;position: absolute;
+                                             border-left-color: rgba(92, 184, 92, 1);
+                                             border-top-color: rgba(92, 184, 92, 0);
+                                             border-bottom-color: rgba(92, 184, 92, 0);
+                                             border-right-color: rgba(92, 184, 92, 0);
+                                        ">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2 column">
                                     <div class="progress" style="height:50px;border-radius:0;    position: absolute;width: 75%;right:49px;">
                                         <div class="progress-bar progress-bar-default" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;height:50px;">
-                                            <div style="font-size:16px;margin-top:15px;">2. 确认收货地址</div>
+                                            <div style="font-size:16px;margin-top:15px;">3. 确认订单</div>
                                         </div>
                                     </div>
                                     <div style="right: 0;border:10px solid #ddd;border-left-color: #88b7d5;border-width: 25px;position: absolute;
@@ -127,20 +146,6 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-2 column">
-                                    <div class="progress" style="height:50px;border-radius:0;position: absolute;width: 75%;right:49px;">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;height:50px;">
-                                            <div style="font-size:16px;margin-top:15px;">3. 确认订单</div>
-                                        </div>
-                                    </div>
-                                    <div style="right: 0;border:10px solid #ddd;border-left-color: #88b7d5;border-width: 25px;position: absolute;
-                                             border-left-color: rgba(92, 184, 92, 1);
-                                             border-top-color: rgba(92, 184, 92, 0);
-                                             border-bottom-color: rgba(92, 184, 92, 0);
-                                             border-right-color: rgba(92, 184, 92, 0);
-                                        ">
-                                    </div>
-                                </div>
                                 <div class="col-md-2 column">
                                     <div class="progress" style="height:50px;border-radius:0;position: absolute;width: 75%;right:49px;">
                                         <div class="progress-bar progress-bar-default" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;height:50px;">
@@ -166,88 +171,30 @@
                         </div>
                     </div>
 
-                    <div class="panel-body">
-                        <div class="container-fluid">
-                            <div class="row clearfix">
-                                <div class="col-md-12 column">
-                                    <blockquote style="border-left: 5px solid #f60;color:#f60;padding: 0 0 0 20px;">
-                                        <b>
-                                            项目信息 <%--<a style="font-size:12px;" href="pay-step-1.html">修改数量</a>--%>
-                                        </b>
-                                    </blockquote>
-                                </div>
-                                <div class="col-md-12 column">
-                                    <table class="table table-bordered" style="text-align:center;">
-                                        <thead>
-                                        <tr style="background-color:#ddd;">
-                                            <td>项目名称</td>
-                                            <td>发起人</td>
-                                            <%--<td width="300">回报内容</td>--%>
-                                            <td width="80">回报数量</td>
-                                            <td>支持单价</td>
-                                            <td>配送费用</td>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>${potalProject.name}</td>
-                                            <td>${companyMember.realname}</td>
-                                            <td>1</td>
-                                            <td style="color:#F60">￥ ${potalProject.supportNeedMoney}</td>
-                                            <td>${potalProject.express}</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                                <div class="col-md-12 column">
-                                    <blockquote style="border-left: 5px solid #f60;color:#f60;padding: 0 0 0 20px;">
-                                        <b>
-                                            账单
-                                        </b>
-                                    </blockquote>
-                                </div>
-
-                                <div class="col-md-12 column">
-                                    <div class="alert alert-warning alert-dismissable" style="text-align:right; border:2px solid #ffc287;">
-                                        <ul style="list-style:none;" >
-                                            <li style="margin-top:10px;">支持金额：<span style="color:red;">￥${potalProject.supportNeedMoney}</span></li>
-                                            <li style="margin-top:10px;">配送费用：<span style="color:red;">${potalProject.express}</span></li>
-                                            <li style="margin-top:10px;margin-bottom:10px;"><h2>支付总金额：<span style="color:red;">￥${potalProject.supportNeedMoney}</span></h2></li>
-
-                                            <li style="margin-top:10px;">
-                                                <button id="payBtn" type="button" class="btn btn-success btn-lg" onclick="window.location.href='#'"><i class="glyphicon glyphicon-credit-card"></i> 立即付款</button>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="container">
-                                    <div class="row clearfix">
-                                        <div class="col-md-12 column">
-                                            <blockquote>
-                                                <p >
-                                                    <i class="glyphicon glyphicon-info-sign" style="color:#2a6496;"></i> 提示
-                                                </p><br>
-                                                <span style="font-size:12px;">1.众筹并非商品交易，存在一定风险。支持者根据自己的判断选择、支持众筹项目，与发起人共同实现梦想并获得发起人承诺的回报。<br>
-                                                2.众筹平台仅提供平台网络空间及技术支持等中介服务，众筹仅存在于发起人和支持者之间，使用众筹平台产生的法律后果由发起人与支持者自行承担。<br>
-                                                3.本项目必须在2017-06-04之前达到 ￥1000000.00 的目标才算成功，否则已经支持的订单将取消。订单取消或募集失败的，您支持的金额将原支付路径退回。<br>
-                                                4.请在支持项目后15分钟内付款，否则您的支持请求会被自动关闭。<br>
-                                                5.众筹成功后由发起人统一进行发货，售后服务由发起人统一提供；如果发生发起人无法发放回报、延迟发放回报、不提供回报后续服务等情况，您需要直接和发起人协商解决。<br>
-                                                6.如您不同意上述风险提示内容，您有权选择不支持；一旦选择支持，视为您已确认并同意以上提示内容。</span>
-                                            </blockquote>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <%--表单数据--%>
+    <form role="form" id="updateMemberBasicInfoForm" style="margin-top:20px;padding-left: 20px">
+        <div class="form-group" style="width: 480px">
+            <label for="realname">收货人</label>
+            <input type="text" class="form-control" id="realname" name="realname" value="${memberInfo.realname}" placeholder="请输入姓名">
+        </div>
+
+        <div class="form-group" style="width: 480px">
+            <label for="tel">手机</label>
+            <input type="text" class="form-control" id="tel" name="tel" value="${memberInfo.tel}" placeholder="请输入手机号">
+        </div>
+
+        <div class="form-group" style="width: 480px">
+            <label for="address">地址</label>
+            <input type="text" class="form-control" id="address" name="address" value="${memberInfo.address}" placeholder="请输入地址">
+        </div>
+
+        <button type="submit" onclick="memberAddressInfo()" class="btn btn-info">确认</button>
+    </form>
 
 </div> <!-- /container -->
 <script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>
@@ -256,22 +203,51 @@
 <script src="${APP_PATH}/script/back-to-top.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
 <script>
-
     $('#myTab a').click(function (e) {
         e.preventDefault();
         $(this).tab('show')
-    });
+    })
+</script>
 
+<%--提交收货地址信息--%>
+<script>
+    function memberAddressInfo() {
+
+        //获取会员输入的收货地址信息
+        var realname = $("#realname").val();
+        var tel = $("#tel").val();
+        var address = $("#address").val();
+
+        $.ajax({
+            type : "POST",
+            data : {
+                "realname" : realname,
+                "tel" : tel,
+                "address" : address,
+                "id" : ${memberInfo.id}
+            },
+            url : "${APP_PATH}/potalProject/doMemberAddress.do",
+            beforeSend : function () {
+                layer.msg('订单生成中...', {icon: 16});
+                return true;
+            },
+            success : function (result) {
+                if (result.success){
+                    window.location.href="${APP_PATH}/potalProject/toOrder.htm";
+                }else {
+                    layer.msg("订单生成失败");
+                }
+            },
+            error : function () {
+                layer.msg("订单生成失败");
+            }
+        });
+
+    }
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
 
 
 

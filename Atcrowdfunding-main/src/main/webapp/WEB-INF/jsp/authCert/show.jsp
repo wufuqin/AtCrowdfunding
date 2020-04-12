@@ -136,6 +136,10 @@
                 taskid : "${param.taskid}",
                 memberid : "${param.memberid}"
             },
+            beforeSend : function () {
+                loadingIndex = layer.msg('数据保村中...', {icon: 16});
+                return true;
+            },
             success : function(result) {
                 window.location.href = "${APP_PATH}/authCert/index.htm";
             }
@@ -149,6 +153,10 @@
             data : {
                 taskid : "${param.taskid}",
                 memberid : "${param.memberid}"
+            },
+            beforeSend : function () {
+                loadingIndex = layer.msg('数据保村中...', {icon: 16});
+                return true;
             },
             success : function(result) {
                 window.location.href = "${APP_PATH}/authCert/index.htm";

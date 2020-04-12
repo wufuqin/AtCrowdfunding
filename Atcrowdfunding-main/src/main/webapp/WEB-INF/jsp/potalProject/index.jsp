@@ -171,19 +171,19 @@
                                             <div class="">
 
                                                 <c:choose>
-                                                    <c:when test="${member.authstatus eq '0'}">
+                                                    <c:when test="${companyMember.authstatus eq '0'}">
                                                         <h4>
-                                                            <b>发起者：${member.realname}</b> <span style="float:right;font-size:12px;" class="label label-success">未认证</span>
+                                                            <b>发起者：${companyMember.realname}</b> <span style="float:right;font-size:12px;" class="label label-success">未认证</span>
                                                         </h4>
                                                     </c:when>
-                                                    <c:when test="${member.authstatus eq '1'}">
+                                                    <c:when test="${companyMember.authstatus eq '1'}">
                                                         <h4>
-                                                            <b>发起者：${member.realname}</b> <span style="float:right;font-size:12px;" class="label label-success">认证中</span>
+                                                            <b>发起者：${companyMember.realname}</b> <span style="float:right;font-size:12px;" class="label label-success">认证中</span>
                                                         </h4>
                                                     </c:when>
-                                                    <c:when test="${member.authstatus eq '2'}">
+                                                    <c:when test="${companyMember.authstatus eq '2'}">
                                                         <h4>
-                                                            <b>发起者：${member.realname}</b> <span style="float:right;font-size:12px;" class="label label-success">已认证</span>
+                                                            <b>发起者：${companyMember.realname}</b> <span style="float:right;font-size:12px;" class="label label-success">已认证</span>
                                                         </h4>
 
                                                     </c:when>
@@ -191,11 +191,11 @@
 
 
                                                 <p style="font-size:12px">
-                                                    简介：${member.introduction}
+                                                    简介：${companyMember.introduction}
 
                                                 </p>
                                                 <p style="font-size:12px">
-                                                    联系电话：${member.tel}
+                                                    联系电话：${companyMember.tel}
                                                 </p>
                                             </div>
                                         </div>
@@ -221,22 +221,6 @@
                             </div>
                         </div>
 
-                        <%--&lt;%&ndash;支持详情2&ndash;%&gt;
-                        <div class="panel panel-default" style="border-radius: 0px;">
-                            <div class="panel-heading">
-                                <h3 >
-                                    ￥149.00 <span style="float:right;font-size:12px;">限额2000位，剩余1966位</span>
-                                </h3>
-                            </div>
-                            <div class="panel-body">
-                                <p>配送费用：包邮</p>
-                                <p>预计发放时间：项目筹款成功后的50天内</p>
-                                <button type="button" class="btn  btn-warning btn-lg" onclick="window.location.href='pay-step-1.html'">支持</button>
-                                <br><br>
-                                <p>感谢您的支持，在众筹开始后，您将以79元的优惠价格获得“遇见彩虹?”智能插座一件（参考价208元）。</p>
-                            </div>
-                        </div>--%>
-
                         <%--风险提示--%>
                         <div class=" panel panel-default" style="border-radius: 0px;">
                             <div class="panel-heading">
@@ -254,19 +238,6 @@
                             </div>
                         </div>
 
-                        <%--为你推荐--%>
-                        <%--<div><h2>为你推荐</h2><hr></div>
-                        <div class="prjtip panel panel-default" style="border-radius: 0px;">
-                            <div class="panel-body">
-                                <img src="${APP_PATH}/img/product-3.png" width="100%" height="100%">
-                            </div>
-                        </div>
-                        <div class="prjtip panel panel-default" style="border-radius: 0px;">
-                            <div class="panel-body">
-                                <img src="${APP_PATH}/img/product-4.jpg" width="100%" height="100%">
-                            </div>
-                        </div>--%>
-
                     </div>
 
                 </div>
@@ -275,71 +246,6 @@
     </div>
 
 </div>
-
-<%--点击立即支持之后弹出的生态框--%>
-<%--
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
-    <div class="modal-dialog "  style="width:960px;height:400px;" role="document">
-        <div class="modal-content" data-spy="scroll" data-target="#myScrollspy">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">选择支持项</h4>
-            </div>
-            <div class="modal-body">
-                <div class="container-fluid">
-                    <div class="row clearfix">
-                        <div class="col-sm-3 col-md-3 column" id="myScrollspy">
-                            <ul class="nav nav-tabs nav-stacked">
-                                <li class="active"><a href="#section-1">￥1.00</a></li>
-                                <li class="active"><a href="#section-2">￥149.00</a></li>
-                                <li class="active"><a href="#section-3">￥249.00</a></li>
-                                <li class="active"><a href="#section-4">￥549.00</a></li>
-                                <li class="active"><a href="#section-5">￥1999.00</a></li>
-                            </ul>
-                        </div>
-                        <div id="navList" class="col-sm-9 col-md-9 column" style="height:400px;overflow-y:auto;">
-                            <h2 id="section-1" style="border-bottom:1px dashed #ddd;" ><span style="font-size:20px;font-weight:bold;">￥1.00</span><span style="font-size:12px;margin-left:60px;">无限额，223位支持者</span></h2>
-                            <p>配送费用：全国包邮</p>
-                            <p>预计发放时间：项目筹款成功后的30天内</p>
-                            <button type="button" class="btn  btn-warning btn-lg " onclick="window.location.href='pay-step-1.html'">支持</button>
-                            <br><br>
-                            <p>每满1750人抽取一台活性富氢净水直饮机，至少抽取一台。抽取名额（小数点后一位四舍五入）=参与人数÷1750人，由苏宁官方抽取。</p>
-                            <hr>
-                            <h2 id="section-2" style="border-bottom:1px dashed #ddd;" ><span style="font-size:20px;font-weight:bold;">￥149.00</span><span style="font-size:12px;margin-left:60px;">无限额，223位支持者</span></h2>
-                            <p>配送费用：全国包邮</p>
-                            <p>预计发放时间：项目筹款成功后的30天内</p>
-                            <button type="button" class="btn  btn-warning btn-lg " onclick="window.location.href='pay-step-1.html'">支持</button>
-                            <br><br>
-                            <p>每满1750人抽取一台活性富氢净水直饮机，至少抽取一台。抽取名额（小数点后一位四舍五入）=参与人数÷1750人，由苏宁官方抽取。</p>
-                            <hr>
-                            <h2 id="section-3" style="border-bottom:1px dashed #ddd;" ><span style="font-size:20px;font-weight:bold;">￥249.00</span><span style="font-size:12px;margin-left:60px;">无限额，223位支持者</span></h2>
-                            <p>配送费用：全国包邮</p>
-                            <p>预计发放时间：项目筹款成功后的30天内</p>
-                            <button type="button" class="btn  btn-warning btn-lg " onclick="window.location.href='pay-step-1.html'">支持</button>
-                            <br><br>
-                            <p>每满1750人抽取一台活性富氢净水直饮机，至少抽取一台。抽取名额（小数点后一位四舍五入）=参与人数÷1750人，由苏宁官方抽取。</p>
-                            <hr>
-                            <h2 id="section-4" style="border-bottom:1px dashed #ddd;" ><span style="font-size:20px;font-weight:bold;">￥549.00</span><span style="font-size:12px;margin-left:60px;">无限额，223位支持者</span></h2>
-                            <p>配送费用：全国包邮</p>
-                            <p>预计发放时间：项目筹款成功后的30天内</p>
-                            <button type="button" class="btn  btn-warning btn-lg " onclick="window.location.href='pay-step-1.html'">支持</button>
-                            <br><br>
-                            <p>每满1750人抽取一台活性富氢净水直饮机，至少抽取一台。抽取名额（小数点后一位四舍五入）=参与人数÷1750人，由苏宁官方抽取。</p>
-                            <hr>
-                            <h2 id="section-5" style="border-bottom:1px dashed #ddd;" ><span style="font-size:20px;font-weight:bold;">￥1999.00</span><span style="font-size:12px;margin-left:60px;">无限额，223位支持者</span></h2>
-                            <p>配送费用：全国包邮</p>
-                            <p>预计发放时间：项目筹款成功后的30天内</p>
-                            <button type="button" class="btn  btn-warning btn-lg " onclick="window.location.href='pay-step-1.html'">支持</button>
-                            <br><br>
-                            <p>每满1750人抽取一台活性富氢净水直饮机，至少抽取一台。抽取名额（小数点后一位四舍五入）=参与人数÷1750人，由苏宁官方抽取。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
---%>
 
 <script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
@@ -364,7 +270,7 @@
             },
             success : function (result) {
                 if (result.success){
-                    window.location.href="${APP_PATH}/potalProject/toReport.htm?id=${potalProject.id}&memberid=${member.id}";
+                    window.location.href="${APP_PATH}/potalProject/toReport.htm";
                 } else {
                     //查询数据失败
                     layer.msg("您可能还没有登录，请先登录");

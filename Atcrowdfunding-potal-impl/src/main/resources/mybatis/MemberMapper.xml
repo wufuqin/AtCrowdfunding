@@ -19,6 +19,7 @@
         <result column="tel" property="tel" jdbcType="VARCHAR" />
         <result column="status" property="status" jdbcType="VARCHAR" />
         <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
     </resultMap>
 
     <!--根据id删除-->
@@ -56,6 +57,16 @@
             usertype = #{usertype,jdbcType=CHAR},
             realname = #{realname,jdbcType=VARCHAR},
             cardnum = #{cardnum,jdbcType=VARCHAR},
+            tel = #{tel,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!--更新会员收货地址信息-->
+    <update id="updateMemberAddressInfoById" parameterType="com.atguigu.atcrowdfunding.bean.Member" >
+        update t_member
+        set
+            realname = #{realname,jdbcType=VARCHAR},
+            address = #{address,jdbcType=VARCHAR},
             tel = #{tel,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
@@ -114,7 +125,7 @@
 
     <!--根据会员id查询会员信息-->
     <select id="getMemberById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-        select id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype , tel, introduction
+        select id, loginacct, userpswd, username, email, authstatus, usertype, realname, cardnum, accttype , tel, introduction, address
         from t_member
         where id = #{id,jdbcType=INTEGER}
     </select>

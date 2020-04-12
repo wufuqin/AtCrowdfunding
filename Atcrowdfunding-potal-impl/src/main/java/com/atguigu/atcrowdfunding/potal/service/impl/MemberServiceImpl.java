@@ -180,7 +180,11 @@ public class MemberServiceImpl implements MemberService {
         return memberMapper.updateMemberStatusByLoginacct(loginacct);
     }
 
-
+    //更新会员收货地址信息
+    @Override
+    public void updateMemberAddressInfoById(Member member) {
+        memberMapper.updateMemberAddressInfoById(member);
+    }
 
 
 }
