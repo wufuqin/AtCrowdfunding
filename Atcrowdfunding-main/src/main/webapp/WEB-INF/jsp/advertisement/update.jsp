@@ -63,7 +63,7 @@
                             <input type="text" class="form-control" id="name" name="name" value="${advertisement.name}" placeholder="请输入广告名称">
                         </div>
 
-                        <div class="form-group" style="width: 300px">
+                        <div class="form-group" style="width: 350px">
                             <label for="url">选择广告区域</label>
                             <select class="form-control" id="url" name="url" >
 
@@ -94,7 +94,7 @@
                             <input type="file" class="form-control" id="advertPicture" value="${advertisement.iconpath}" placeholder="请输入广告图片">
                         </div>--%>
                         <div class="form-group" style="width: 350px">
-                            <img src="http://47.95.223.197/test/pic/${advertisement.iconpath}" style="width: 300px; height: 200px">
+                            <img src="http://47.95.223.197/test/pic/${advertisement.iconpath}" style="width: 350px; height: 200px">
                         </div>
 
                         <button type="submit" class="btn btn-success">修改</button>

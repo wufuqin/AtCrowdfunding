@@ -52,11 +52,11 @@
             </select>
         </div>
 
-        <div class="checkbox">
-            <label>
+        <div>
+            <%--<label>
                 <input type="checkbox" value="remember-me"> 记住我
             </label>
-            <br>
+            <br>--%>
             <label>
                 <a href="${APP_PATH}/forget.htm">忘记密码</a>
             </label>

@@ -6,7 +6,6 @@ import com.atguigu.atcrowdfunding.potal.service.MemberService;
 import com.atguigu.atcrowdfunding.potal.service.PotalProjectService;
 import com.atguigu.atcrowdfunding.util.AjaxResult;
 import com.atguigu.atcrowdfunding.util.Const;
-import org.aspectj.weaver.AjAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +32,7 @@ public class PotalProjectController {
     public String index(Integer id, Integer memberid, Map<String, Object> map, HttpSession session){
         //对当前项目的数据进行回显
         Project potalProject = potalProjectService.queryPotalProjectInfoById(id); //根据id查询项目信息
-        Member companyMember = memberService.getMemberById(memberid); //根据id查询会员信息
+        Member companyMember = memberService.getMemberById(memberid); //根据id查询企业会员信息
         map.put("potalProject", potalProject);
         map.put("companyMember",companyMember);
 
@@ -43,7 +42,7 @@ public class PotalProjectController {
         return "potalProject/index";
     }
 
-    //检查用户是否登录
+    //检查用户是否登录和实名认证
     @ResponseBody
     @RequestMapping("/checkMemberLoginStatus")
     public Object checkMemberLoginStatus(HttpSession session){
@@ -56,9 +55,13 @@ public class PotalProjectController {
                 result.setSuccess(false);
             }
             if (!"".equals(session.getAttribute(Const.LOGIN_MEMBER))){
+                if (!member.getAuthstatus().equals("2")){
+                    result.setMessage("您实名认证，请先完成实名认证");
+                    result.setSuccess(false);
+                    return result;
+                }
                 result.setSuccess(true);
             }
-
         } catch (Exception e) {
             result.setMessage("支持失败");
             result.setSuccess(false);
@@ -133,7 +136,7 @@ public class PotalProjectController {
         return "potalProject/order";
     }
 
-
+    //项目搜索功能
 
 
 }

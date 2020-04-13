@@ -211,12 +211,11 @@
                                 <div class="col-md-12 column">
                                     <div class="alert alert-warning alert-dismissable" style="text-align:right; border:2px solid #ffc287;">
                                         <ul style="list-style:none;" >
-                                            <li style="margin-top:10px;">支持金额：<span style="color:red;">￥${potalProject.supportNeedMoney}</span></li>
                                             <li style="margin-top:10px;">配送费用：<span style="color:red;">${potalProject.express}</span></li>
                                             <li style="margin-top:10px;margin-bottom:10px;"><h2>支付总金额：<span style="color:red;">￥${potalProject.supportNeedMoney}</span></h2></li>
 
                                             <li style="margin-top:10px;">
-                                                <button id="payBtn" type="button" class="btn btn-success btn-lg" onclick="window.location.href='#'"><i class="glyphicon glyphicon-credit-card"></i> 立即付款</button>
+                                                <button  style="width: 120px" id="payBtn" type="button" class="btn btn-success btn-lg" onclick="window.location.href='#'"> 立即付款</button>
                                             </li>
 
                                         </ul>

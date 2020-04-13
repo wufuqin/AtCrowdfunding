@@ -55,7 +55,8 @@
                     <h3 class="panel-title"><i class="glyphicon glyphicon-th"></i> 数据列表</h3>
                 </div>
                 <div class="panel-body">
-                    <%--<form class="form-inline" role="form" style="float:left;">
+
+                    <br><%--<form class="form-inline" role="form" style="float:left;">
                         <div class="form-group has-feedback">
                             <div class="input-group">
                                 <div class="input-group-addon">查询条件</div>
@@ -64,7 +65,6 @@
                         </div>
                         <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
                     </form>--%>
-                    <br>
                     <hr style="clear:both;">
                     <div class="table-responsive">
                         <table class="table  table-bordered">
@@ -72,7 +72,7 @@
                             <tr>
                                 <th class="text-center" width="50">序号</th>
                                 <th class="text-center">广告名称</th>
-                                <th class="text-center">地址</th>
+                                <th class="text-center">发布区域</th>
                                 <th class="text-center">状态</th>
                                 <th class="text-center" width="100">操作</th>
                             </tr>
@@ -154,7 +154,11 @@
                         content+="<tr>";
                         content+="<td class='text-center'>"+(i+1)+"</td>";
                         content+="<td class='text-center' >"+n.name+"</td>";
-                        content+="<td class='text-center' >"+n.url+"</td>";
+                        if(n.url=='top'){
+                            content+="	<td class='text-center' >轮播图广告</td>";
+                        }else if(n.url=='body'){
+                            content+="	<td class='text-center' >一般广告</td>";
+                        }
                         content+="<td class='text-center'>未审核</td>";
                         content+='<td class="text-center">';
                         content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/authAdvertisement/show.htm?id='+n.id+'\'" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-eye-open"></i>审核</button>';

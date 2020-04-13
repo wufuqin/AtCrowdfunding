@@ -193,7 +193,7 @@
             <input type="text" class="form-control" id="address" name="address" value="${memberInfo.address}" placeholder="请输入地址">
         </div>
 
-        <button type="submit" onclick="memberAddressInfo()" class="btn btn-info">确认</button>
+        <button style="width: 480px" type="submit" onclick="memberAddressInfo()" class="btn btn-info">确认</button>
     </form>
 
 </div> <!-- /container -->

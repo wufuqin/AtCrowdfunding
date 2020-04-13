@@ -54,10 +54,9 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">创意众筹平台后台管理系统</h1>
-
           <div class="row placeholders">
               <div class="item active">
-                  <img src="${APP_PATH}/img/my_carousel-1.jpg" style="width: 100%" height="520">
+                  <img src="${APP_PATH}/img/my_carousel-1.jpg" style="width: 100%; height: 550px">
               </div>
           </div>
         </div>
@@ -79,7 +78,6 @@
                     }
                 }
             });
-            //layer.msg('登录成功');
         });
 </script>
   </body>

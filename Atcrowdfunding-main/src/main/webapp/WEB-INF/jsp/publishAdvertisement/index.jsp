@@ -154,7 +154,11 @@
                         content+="<tr>";
                         content+="<td class='text-center'>"+(i+1)+"</td>";
                         content+="<td class='text-center' >"+n.name+"</td>";
-                        content+="<td class='text-center' >"+n.url+"</td>";
+                        if(n.url=='top'){
+                            content+="	<td class='text-center' >轮播图广告</td>";
+                        }else if(n.url=='body'){
+                            content+="	<td class='text-center' >一般广告</td>";
+                        }
                         content+="<td class='text-center'>审核完成</td>";
                         content+='<td class="text-center">';
                         content+='<button type="button" onclick="window.location.href=\'${APP_PATH}/advertisement/show.htm?id='+n.id+'\'" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-eye-open"></i>审核</button>';

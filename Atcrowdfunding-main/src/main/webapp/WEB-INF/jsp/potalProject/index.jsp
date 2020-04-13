@@ -265,19 +265,21 @@
         $.ajax({
             type : "POST",
             url : "${APP_PATH}/potalProject/checkMemberLoginStatus.do",
+            //dataType : "jsonp",
             beforeSend : function () {
                 return true;
             },
             success : function (result) {
                 if (result.success){
                     window.location.href="${APP_PATH}/potalProject/toReport.htm";
-                } else {
-                    //查询数据失败
-                    layer.msg("您可能还没有登录，请先登录");
+                }else if (result.success) {
+                    layer.msg(result.message);
+                }else {
+                    layer.msg("请检查您是否已经登录和是否已经完成实名认证");
                 }
             },
             error : function () {
-                layer.msg("您可能还没有登录，请先登录");
+                layer.msg("请检查您是否已经登录和是否已经完成实名认证");
             }
         });
     }

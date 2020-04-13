@@ -109,7 +109,6 @@
             <%--包含头部页面--%>
             <jsp:include page="/WEB-INF/jsp/common/memberTop.jsp"/>
         </nav>
-
     </div>
 </div>
 
@@ -264,6 +263,7 @@
 
                     $.each(data,function (i,n) {
                         if (i == "0"){
+                            <%--content += '<div class="item active" onclick="window.location.href=\'${APP_PATH}/potalProject/index.htm?id='+n.id+'&memberid='+n.memberid+'\'" style="cursor:pointer;">\n' +--%>
                             content += '<div class="item active" onclick="window.location.href=\'#\'" style="cursor:pointer;">\n' +
                                 '<img src="http://47.95.223.197/test/pic/'+n.iconpath+'" alt="First slide">\n' +
                                 '</div>'
@@ -365,17 +365,15 @@
                     //查询数据成功
                     var page = result.page;
                     var data = page.datas;
-
                     var content = "";
                     content += '<div class="row">';
-
                     $.each(data,function (i,n) {
                         content+="<div class='col-md-3'>";
                         content+="<div class='thumbnail'>";
-                        content+="<img id='potalProject' src='http://47.95.223.197/test/pic/"+n.filename+"' style='width: 300px; height: 150px;'>";
+                        content+="<img src='http://47.95.223.197/test/pic/"+n.filename+"' style='width: 300px; height: 150px;'>";
                         content+="<div class='caption'>";
                         content+="<h3 class='break'>";
-                        content+="<a id='potalProject' href='${APP_PATH}/potalProject/index.htm?id="+n.id+"&memberid="+n.memberid+"'>"+n.name+"</a>";
+                        content+="<a href='${APP_PATH}/potalProject/index.htm?id="+n.id+"&memberid="+n.memberid+"'>"+n.name+"</a>";
                         content+="</h3>";
                         content+="<p>";
                         content+="<div style='float:left;'><i class='glyphicon glyphicon-screenshot' title='目标金额' ></i> ￥"+n.money+" </div>";
@@ -383,8 +381,8 @@
                         content+="</p>";
                         content+="<br>";
                         content+="<div class='progress' style='margin-bottom: 4px;'>";
-                        content+="<div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width: 90%'>";
-                        content+="<span >90% </span>";
+                        content+="<div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width:"+n.completion+"%; color: green'>";
+                        content+="<span >"+n.completion+"% </span>";
                         content+="</div>";
                         content+="</div>";
                         content+="<div><span style='float:right;'><i class='glyphicon glyphicon-star-empty' ></i></span>  <span ><i class='glyphicon glyphicon-user' title='支持人数'></i> </span>支持人数:"+n.supporter+"</div>";
@@ -428,9 +426,6 @@
                     //查询数据成功
                     var page = result.page;
                     var data = page.datas;
-
-                    //alert(data);
-
                     var content = "";
                     content += '<div class="row">';
 
@@ -443,13 +438,13 @@
                         content+="<a href='${APP_PATH}/potalProject/index.htm?id="+n.id+"&memberid="+n.memberid+"'>"+n.name+"</a>";
                         content+="</h3>";
                         content+="<p>";
-                        content+="<div style='float:left;'><i class='glyphicon glyphicon-screenshot' title='目标金额' ></i> $"+n.money+" </div>";
+                        content+="<div style='float:left;'><i class='glyphicon glyphicon-screenshot' title='目标金额' ></i> ￥"+n.money+" </div>";
                         content+="<div style='float:right;'><i title='截至日期' class='glyphicon glyphicon-calendar'></i>"+n.createdate+" </div>";
                         content+="</p>";
                         content+="<br>";
                         content+="<div class='progress' style='margin-bottom: 4px;'>";
-                        content+="<div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width: 90%'>";
-                        content+="<span >90% </span>";
+                        content+="<div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width: "+n.completion+"%; color: green'>";
+                        content+="<span >"+n.completion+"% </span>";
                         content+="</div>";
                         content+="</div>";
                         content+="<div><span style='float:right;'><i class='glyphicon glyphicon-star-empty' ></i></span>  <span ><i class='glyphicon glyphicon-user' title='支持人数'></i> </span>支持人数:"+n.supporter+"</div>";
@@ -502,16 +497,16 @@
                         content+="<img src='http://47.95.223.197/test/pic/"+n.filename+"' style='width: 300px; height: 150px;'>";
                         content+="<div class='caption'>";
                         content+="<h3 class='break'>";
-                        content+="<a href='${APP_PATH}/potalProject/index.htm?id="+n.id+"'>"+n.name+"</a>";
+                        content+="<a href='${APP_PATH}/potalProject/index.htm?id="+n.id+"&memberid="+n.memberid+"'>"+n.name+"</a>";
                         content+="</h3>";
                         content+="<p>";
-                        content+="<div style='float:left;'><i class='glyphicon glyphicon-screenshot' title='目标金额' ></i> $"+n.money+" </div>";
+                        content+="<div style='float:left;'><i class='glyphicon glyphicon-screenshot' title='目标金额' ></i> ￥"+n.money+" </div>";
                         content+="<div style='float:right;'><i title='截至日期' class='glyphicon glyphicon-calendar'></i>"+n.createdate+" </div>";
                         content+="</p>";
                         content+="<br>";
                         content+="<div class='progress' style='margin-bottom: 4px;'>";
-                        content+="<div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width: 90%'>";
-                        content+="<span >90% </span>";
+                        content+="<div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width: "+n.completion+"%; color: green'>";
+                        content+="<span >"+n.completion+"% </span>";
                         content+="</div>";
                         content+="</div>";
                         content+="<div><span style='float:right;'><i class='glyphicon glyphicon-star-empty' ></i></span>  <span ><i class='glyphicon glyphicon-user' title='支持人数'></i> </span>支持人数:"+n.supporter+"</div>";
@@ -562,16 +557,16 @@
                         content+="<img src='http://47.95.223.197/test/pic/"+n.filename+"' style='width: 300px; height: 150px;'>";
                         content+="<div class='caption'>";
                         content+="<h3 class='break'>";
-                        content+="<a href='${APP_PATH}/potalProject/index.htm?id="+n.id+"'>"+n.name+"</a>";
+                        content+="<a href='${APP_PATH}/potalProject/index.htm?id="+n.id+"&memberid="+n.memberid+"'>"+n.name+"</a>";
                         content+="</h3>";
                         content+="<p>";
-                        content+="<div style='float:left;'><i class='glyphicon glyphicon-screenshot' title='目标金额' ></i> $"+n.money+" </div>";
+                        content+="<div style='float:left;'><i class='glyphicon glyphicon-screenshot' title='目标金额' ></i> ￥"+n.money+" </div>";
                         content+="<div style='float:right;'><i title='截至日期' class='glyphicon glyphicon-calendar'></i>"+n.createdate+" </div>";
                         content+="</p>";
                         content+="<br>";
                         content+="<div class='progress' style='margin-bottom: 4px;'>";
-                        content+="<div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width: 90%'>";
-                        content+="<span >90% </span>";
+                        content+="<div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width: "+n.completion+"%; color: green'>";
+                        content+="<span >"+n.completion+"% </span>";
                         content+="</div>";
                         content+="</div>";
                         content+="<div><span style='float:right;'><i class='glyphicon glyphicon-star-empty' ></i></span>  <span ><i class='glyphicon glyphicon-user' title='支持人数'></i> </span>支持人数:"+n.supporter+"</div>";

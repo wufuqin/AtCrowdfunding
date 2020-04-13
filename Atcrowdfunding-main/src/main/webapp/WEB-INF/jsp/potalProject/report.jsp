@@ -198,7 +198,7 @@
                                     </table>
                                     <div style="float:right;">
                                         <p>总价(含运费)：<span style="font-size:16px;color:#F60;">￥${potalProject.supportNeedMoney}</span></p>
-                                        <button type="button" class="btn btn-info btn-lg" style="float:right;" onclick="window.location.href='${APP_PATH}/potalProject/toMemberAddress.htm?id=${potalProject.id}'"><i class="glyphicon glyphicon-credit-card"></i> 确定</button>
+                                        <button style="width: 120px" type="button" class="btn btn-info btn-lg" style="float:right;" onclick="window.location.href='${APP_PATH}/potalProject/toMemberAddress.htm?id=${potalProject.id}'"> 确定</button>
                                     </div>
                                 </div>
 
