@@ -55,4 +55,8 @@ public interface ProjectService {
 
     //查询其他类项目
     Page queryPublishOthersProject(Integer pageno, Integer pagesize);
+
+    //根据会员商家id查询商家发布的众筹项目
+    Page queryPageShowMerchantProject(HashMap<String, Object> paramMap);
+
 }

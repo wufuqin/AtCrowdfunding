@@ -1,3 +1,4 @@
+/*
 package com.test;
 
 import com.atguigu.atcrowdfunding.util.FtpUtil;
@@ -7,9 +8,11 @@ import org.junit.Test;
 import java.io.File;
 import java.io.FileInputStream;
 
+*/
 /**
  * 测试使用svftp上传文件到 47.95.223.197 云服务器
- */
+ *//*
+
 public class TestFtpClient {
 
     @Test
@@ -34,9 +37,11 @@ public class TestFtpClient {
 
     }
 
-    /**
+    */
+/**
      * 测试工具类
-     */
+     *//*
+
     @Test
     public void testFtpUtil() throws Exception {
         //读取本地文件
@@ -87,3 +92,4 @@ public class TestFtpClient {
 
 
 
+*/

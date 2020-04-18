@@ -77,6 +77,12 @@ public interface ProjectMapper {
 
     //查询查询已经发布的其他类项目数据总的记录条数
     Integer queryPublishOthersProjectCount();
+
+    //获取查询出来的分页数据
+    List queryShowMerchantProjectList(HashMap<String, Object> paramMap);
+
+    //查询总的记录条数
+    Integer queryShowMerchantProjectCount(HashMap<String, Object> paramMap);
 }
 
 

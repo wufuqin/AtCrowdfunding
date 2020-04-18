@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="${APP_PATH}/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${APP_PATH}/css/font-awesome.min.css">
     <link rel="stylesheet" href="${APP_PATH}/css/theme.css">
+    <link rel="stylesheet" href="${APP_PATH}/jquery/pagination/pagination.css">
     <style>
         #footer {
             padding: 15px 0;
@@ -91,33 +92,100 @@
                 </div>
             </div>
             <div class="list-group">
-                <div class="list-group-item active">
-                    资产总览<span class="badge"><i class="glyphicon glyphicon-chevron-right"></i></span>
-                </div>
-                <div class="list-group-item " style="cursor:pointer;" onclick="window.location.href='minecrowdfunding.html'">
+                <div class="list-group-item" style="cursor:pointer;" onclick="window.location.href='${APP_PATH}/member.htm'">
                     我的众筹<span class="badge"><i class="glyphicon glyphicon-chevron-right"></i></span>
                 </div>
+
             </div>
         </div>
+
         <div class="col-sm-9 col-md-9 column">
-            <blockquote style="border-left: 5px solid #f60;color:#f60;padding: 0 0 0 20px;">
-                <b>
-                    我的钱包
-                </b>
-            </blockquote>
-            <div id="main" style="width: 600px;height:400px;"></div>
-            <blockquote style="border-left: 5px solid #f60;color:#f60;padding: 0 0 0 20px;">
-                <b>
-                    理财
-                </b>
-            </blockquote>
-            <div id="main1" style="width: 600px;height:400px;"></div>
-            <blockquote style="border-left: 5px solid #f60;color:#f60;padding: 0 0 0 20px;">
-                <b>
-                    比例
-                </b>
-            </blockquote>
-            <div id="main2" style="width: 600px;height:400px;"></div>
+            <div id="myTabContent" class="tab-content" style="margin-top:10px;">
+                <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
+
+                    <ul id="myTab1" class="nav nav-tabs">
+                        <li role="presentation" class="active"><a href="#support">我支持的</a></li>
+                        <li role="presentation"><a href="#add">我发起的</a></li>
+                    </ul>
+                    <div id="myTab1" class="tab-content" style="margin-top:10px;">
+                        <div role="tabpanel" class="tab-pane fade active in" id="support" aria-labelledby="home-tab">
+                            <div class="container-fluid">
+                                <div class="row clearfix">
+                                    <div class="col-md-12 column">
+                                        <span class="label label-warning">全部</span> <span class="label" style="color:#000;">已支付</span> <span class="label " style="color:#000;">未支付</span>
+                                    </div>
+                                    <div class="col-md-12 column" style="margin-top:10px;padding:0;">
+                                        <table class="table table-bordered" style="text-align:center;">
+                                            <thead>
+                                            <tr style="background-color:#ddd;">
+                                                <td>项目信息</td>
+                                                <td width="90">支持日期</td>
+                                                <td width="120">支持金额（元）</td>
+                                                <td width="80">回报数量</td>
+                                                <td width="80">交易状态</td>
+                                                <td width="120">操作</td>
+                                            </tr>
+                                            </thead>
+
+                                            <tbody id="mySupport">
+                                                <%--展示项目数据--%>
+                                            </tbody>
+
+                                            <%-- 分页导航条 --%>
+                                            <tfoot>
+                                            <tr >
+                                                <td colspan="6" align="center">
+                                                    <%--使用pagination分页插件--%>
+                                                    <%--显示分页的容器--%>
+                                                    <div id="Pagination1" class="pagination"></div>
+                                                </td>
+                                            </tr>
+                                            </tfoot>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade  " id="add" aria-labelledby="add-tab">
+                            <div class="container-fluid">
+                                <div class="row clearfix">
+                                    <div class="col-md-12 column">
+                                        <span class="label label-warning">全部</span> <span class="label" style="color:#000;">众筹中</span> <span class="label " style="color:#000;">众筹成功</span>  <span class="label " style="color:#000;">众筹失败</span>
+                                    </div>
+                                    <div class="col-md-12 column" style="padding:0;margin-top:10px;">
+                                        <table class="table table-bordered" style="text-align:center;">
+                                            <thead>
+                                            <tr style="background-color:#ddd;">
+                                                <td>项目信息</td>
+                                                <td width="120">募集金额（元）</td>
+                                                <td width="80">当前状态</td>
+                                                <td width="120">操作</td>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="myProjet">
+
+                                            </tbody>
+                                            <%-- 分页导航条 --%>
+                                            <tfoot>
+                                            <tr >
+                                                <td colspan="6" align="center">
+                                                    <%--使用pagination分页插件--%>
+                                                    <%--显示分页的容器--%>
+                                                    <div id="Pagination2" class="pagination"></div>
+                                                </td>
+                                            </tr>
+                                            </tfoot>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -127,6 +195,7 @@
 <script src="${APP_PATH}/script/back-to-top.js"></script>
 <script src="${APP_PATH}/script/echarts.js"></script>
 <script src="${APP_PATH}/jquery/layer/layer.js"></script>
+<script src="${APP_PATH}/jquery/pagination/jquery.pagination.js"></script>
 <script>
     $('#myTab a').click(function (e) {
         e.preventDefault()
@@ -135,182 +204,121 @@
     $('#myTab1 a').click(function (e) {
         e.preventDefault();
         $(this).tab('show')
-    })
+    });
 
-    var myChart = echarts.init(document.getElementById('main'));
+    $(function () {
+        //加载已经发布的众筹项目
+        showMerchantProject(0);
+    });
 
-    // 指定图表的配置项和数据
-    option = {
-        title: {
-            text: '七日年化收益率(%)'
-        },
-        tooltip: {
-            trigger: 'axis'
-        },
-        legend: {
-            data:['基金','股票']
-        },
-        toolbox: {
-            show: false,
-            feature: {
-                dataZoom: {
-                    yAxisIndex: 'none'
-                },
-                dataView: {readOnly: false},
-                magicType: {type: ['line', 'bar']},
-                restore: {},
-                saveAsImage: {}
-            }
-        },
-        xAxis:  {
-            type: 'category',
-            boundaryGap: false,
-            data: ['2017-05-16','2017-05-17','2017-05-18','2017-05-19','2017-05-20','2017-05-21','2017-05-22']
-        },
-        yAxis: {
-            type: 'value',
-            axisLabel: {
-                formatter: '{value} '
-            }
-        },
-        series: [
-            {
-                name:'基金',
-                type:'line',
-                data:[1, 1, 5, 3, 2, 3, 2],
-                markPoint: {
-                    data: [
-                        {type: 'max', name: '最大值'},
-                        {type: 'min', name: '最小值'}
-                    ]
-                },
-                markLine: {
-                    data: [
-                        {type: 'average', name: '平均值'}
-                    ]
+</script>
+
+<%--加载商家的项目数据--%>
+<script>
+    function showMerchantProject(pageIndex) {
+        $.ajax({
+            type : "POST",
+            data : {
+                "pageno" : pageIndex + 1,
+                "pagesize" : 3
+            },
+            url : "${APP_PATH}/member/showMerchantProject.do",
+            beforeSend : function () {
+                loadingIndex = layer.msg('数据加载中...', {icon: 16});
+                return true;
+            },
+            success : function (result) {
+                layer.close(loadingIndex);
+                if (result.success){
+                    //查询数据成功
+                    var page = result.page;
+                    var data = page.datas;
+                    var content = '';
+                    /* 对后台返回的数据进行拼串展示 */
+                    $.each(data,function(i,n){
+                        content+='<tr>';
+                        content+='<td style="vertical-align:middle;">';
+                        content+='<div class="thumbnail">';
+                        content+='<div class="caption">';
+                        content+='<p>';
+                        content+=''+n.name+'';
+                        content+='</p>';
+                        content+='<p>';
+                        content+='<div style="float:left;"><i class="glyphicon glyphicon-screenshot" title="目标金额" ></i> 已完成 100% </div>';
+                        content+='<div style="float:right;"><i title="截至日期" class="glyphicon glyphicon-calendar"></i> 剩余8天 </div>';
+                        content+='</p>';
+                        content+='<br>';
+                        content+='<div class="progress" style="margin-bottom: 4px;">';
+                        content+='<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">';
+                        content+='<span >众筹中</span>';
+                        content+='</div>';
+                        content+='</div>';
+                        content+='</div>';
+                        content+='</div>';
+                        content+='</td>';
+                        content+='<td style="vertical-align:middle;">1.00<br>(运费：0.00 )</td>';
+                        content+='<td style="vertical-align:middle;">草稿</td>';
+                        content+='<td style="vertical-align:middle;">';
+                        content+='<div class="btn-group-vertical" role="group" aria-label="Vertical button group">';
+                        content+='<button type="button" class="btn btn-default">项目预览</button>';
+                        content+='<button type="button" class="btn btn-default">删除项目</button>';
+                        content+='<button type="button" class="btn btn-default">问题管理</button>';
+                        content+='</div>';
+                        content+='</td>';
+                        content+='</tr>';
+                    });
+                    // 将拼接到的数据放入 tbody标签的指定位置
+                    $("#myProjet").html(content);
+
+                    // 创建分页
+                    $("#Pagination2").pagination(page.totalsize, {
+                        num_edge_entries: 2, //边缘页数
+                        num_display_entries: 1, //主体页数
+                        callback: showMerchantProject, //当前函数
+                        items_per_page:3, //每页显示多少条
+                        current_page :(page.pageno-1), //当前页
+                        prev_text : "上一页",
+                        next_text : "下一页"
+                    });
+
+                } else {
+                    layer.msg(result.message);
                 }
             },
-            {
-                name:'股票',
-                type:'line',
-                data:[1, -2, 2, 5, 3, 2, 4],
-                markPoint: {
-                    data: [
-                        {name: '周最低', value: -2, xAxis: 1, yAxis: -1.5}
-                    ]
-                },
-                markLine: {
-                    data: [
-                        {type: 'average', name: '平均值'},
-                        [{
-                            symbol: 'none',
-                            x: '90%',
-                            yAxis: 'max'
-                        }, {
-                            symbol: 'circle',
-                            label: {
-                                normal: {
-                                    position: 'start',
-                                    formatter: '最大值'
-                                }
-                            },
-                            type: 'max',
-                            name: '最高点'
-                        }]
-                    ]
-                }
+            error : function () {
+                layer.msg("数据加载失败");
             }
-        ]
-    };
-    myChart.setOption(option);
-    var myChart1 = echarts.init(document.getElementById('main1'));
-
-    // 指定图表的配置项和数据
-    option1 = {
-        color: ['#3398DB'],
-        tooltip : {
-            trigger: 'axis',
-            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-            }
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis : [
-            {
-                type : 'category',
-                data : ['基金', '票据', '定期理财', '变现贷'],
-                axisTick: {
-                    alignWithLabel: true
-                }
-            }
-        ],
-        yAxis : [
-            {
-                type : 'value'
-            }
-        ],
-        series : [
-            {
-                name:'直接访问',
-                type:'bar',
-                barWidth: '60%',
-                data:[10, 52, 200, 334, 390, 330, 220]
-            }
-        ]
-    };
-
-    // 使用刚指定的配置项和数据显示图表。
-    myChart1.setOption(option1);
-
-    var myChart2 = echarts.init(document.getElementById('main2'));
-
-    // 指定图表的配置项和数据
-    option2 = {
-        title : {
-            text: '某站点用户访问来源',
-            subtext: '纯属虚构',
-            x:'center'
-        },
-        tooltip : {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        legend: {
-            orient: 'vertical',
-            left: 'left',
-            data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
-        },
-        series : [
-            {
-                name: '访问来源',
-                type: 'pie',
-                radius : '55%',
-                center: ['50%', '60%'],
-                data:[
-                    {value:335, name:'直接访问'},
-                    {value:310, name:'邮件营销'},
-                    {value:234, name:'联盟广告'},
-                    {value:135, name:'视频广告'},
-                    {value:1548, name:'搜索引擎'}
-                ],
-                itemStyle: {
-                    emphasis: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
-            }
-        ]
-    };
-
-    // 使用刚指定的配置项和数据显示图表。
-    myChart2.setOption(option2);
+        });
+    }
 </script>
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -272,6 +272,33 @@ public class ProjectServiceImpl implements ProjectService {
         return page;
     }
 
+    //根据会员商家id查询商家发布的众筹项目
+    @Override
+    public Page queryPageShowMerchantProject(HashMap<String, Object> paramMap) {
+        //创建一个分页对象，将查询的对应分页信息传入
+        Page page = new Page((Integer) paramMap.get("pageno"), (Integer) paramMap.get("pagesize"));
+
+        //获取索引
+        Integer startIndex = page.getStartIndex();
+        //将索引信息存入map集合
+        paramMap.put("startIndex",startIndex);
+
+        //获取查询出来的分页数据
+        List datas = projectMapper.queryShowMerchantProjectList(paramMap);
+
+        //设置分页数据到Page分页对象中
+        page.setDatas(datas);
+
+        //查询总的记录条数
+        Integer totalsize = projectMapper.queryShowMerchantProjectCount(paramMap);
+
+        //设置总记录数到Page分页对象中
+        page.setTotalsize(totalsize);
+        page.setTotalno(totalsize);
+
+        return page;
+    }
+
 }
 
 

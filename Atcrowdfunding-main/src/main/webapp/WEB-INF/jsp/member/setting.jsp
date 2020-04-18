@@ -91,10 +91,7 @@
                 </div>
             </div>
             <div class="list-group">
-                <div class="list-group-item active">
-                    资产总览<span class="badge"><i class="glyphicon glyphicon-chevron-right"></i></span>
-                </div>
-                <div class="list-group-item " style="cursor:pointer;" onclick="window.location.href='minecrowdfunding.html'">
+                <div class="list-group-item" style="cursor:pointer;" onclick="window.location.href='${APP_PATH}/member.htm'">
                     我的众筹<span class="badge"><i class="glyphicon glyphicon-chevron-right"></i></span>
                 </div>
             </div>

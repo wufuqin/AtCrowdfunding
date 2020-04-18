@@ -1,3 +1,4 @@
+/*
 package com.test;
 
 import org.junit.Test;
@@ -6,9 +7,11 @@ import javax.xml.crypto.Data;
 import java.util.Date;
 import java.util.UUID;
 
+*/
 /**
  * 测试UUID
- */
+ *//*
+
 public class TestUUID {
 
     public static void main(String[] args) {
@@ -29,3 +32,4 @@ public class TestUUID {
     }
 }
 
+*/

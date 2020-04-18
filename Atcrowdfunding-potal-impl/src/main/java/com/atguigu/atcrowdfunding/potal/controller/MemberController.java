@@ -5,6 +5,7 @@ import com.atguigu.atcrowdfunding.bean.Member;
 import com.atguigu.atcrowdfunding.bean.MemberCert;
 import com.atguigu.atcrowdfunding.bean.Ticket;
 import com.atguigu.atcrowdfunding.manager.service.CertService;
+import com.atguigu.atcrowdfunding.manager.service.ProjectService;
 import com.atguigu.atcrowdfunding.potal.listener.PassListener;
 import com.atguigu.atcrowdfunding.potal.listener.RefuseListener;
 import com.atguigu.atcrowdfunding.potal.service.MemberService;
@@ -55,6 +56,9 @@ public class MemberController {
 
     @Autowired
     private TaskService taskService ;
+
+    @Autowired
+    private ProjectService projectService;
 
     //去到实名认证账户类型选择页面
     @RequestMapping("/acctType")
@@ -462,6 +466,34 @@ public class MemberController {
         }
         return result;
     }
+
+    //加载已经发布的众筹项目
+    @ResponseBody
+    @RequestMapping("/showMerchantProject")
+    public Object showMerchantProject(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "3") Integer pagesize,Integer memberid){
+        AjaxResult result = new AjaxResult();
+        try {
+            //创建一个map集合
+            HashMap<String, Object> paramMap = new HashMap<String, Object>();
+            //将查询条件存入map集合
+            paramMap.put("pageno", pageno);
+            paramMap.put("pagesize", pagesize);
+            paramMap.put("memberid", memberid);
+
+            //调用service层查询方法，返回一个分页数据对象(根据会员商家id查询商家发布的众筹项目)
+            Page page = projectService.queryPageShowMerchantProject(paramMap);
+            //设置查询状态
+            result.setSuccess(true);
+            //存储查询到的数据
+            result.setPage(page);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("查询数据失败...");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 
 }
 

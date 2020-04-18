@@ -7,6 +7,7 @@
         只加载用户拥有的权限
 --%>
 <ul style="padding-left:0px;" class="list-group">
+
     <c:forEach items="${sessionScope.permissionRoot.children }" var="permission">
     <c:if test="${empty permission.children}">
     <li class="list-group-item tree-closed" >
