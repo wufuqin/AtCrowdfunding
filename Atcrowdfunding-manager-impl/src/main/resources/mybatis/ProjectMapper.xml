@@ -218,9 +218,7 @@
     <select id="queryShowMerchantProjectList" resultMap="BaseResultMap">
         select id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion, memberid, createdate, follower, projectType
         from t_project
-        <where>
-            <if test="memberid != null">memberid like concat("%",#{memberid},"%")</if>
-        </where>
+        where memberid = #{memberid}
         limit #{startIndex},#{pagesize}
     </select>
 
@@ -228,9 +226,22 @@
     <select id="queryShowMerchantProjectCount"  resultType="int">
         select count(*)
         from t_project
-        <where>
-            <if test="memberid != null">memberid like concat("%",#{memberid},"%")</if>
-        </where>
+        where memberid = #{memberid}
+    </select>
+
+    <!-- 根据会员商家id查询商家发布的众筹项目,查询分页数据 -->
+    <select id="queryMemberSupportProjectList" resultMap="BaseResultMap">
+        select distinct t_project.id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion,createdate, follower, projectType
+        from t_member_project_support,t_project
+        where t_member_project_support.projectid = t_project.id and t_member_project_support.memberid = #{memberid}
+        limit #{startIndex},#{pagesize}
+    </select>
+
+    <!-- 根据会员商家id查询商家发布的众筹项目,查询总的记录条数 -->
+    <select id="queryMemberSupportProjectCount"  resultType="int">
+        select count(*)
+        from t_member_project_support,t_project
+        where t_member_project_support.projectid = t_project.id and t_member_project_support.memberid = #{memberid}
     </select>
 
 </mapper>

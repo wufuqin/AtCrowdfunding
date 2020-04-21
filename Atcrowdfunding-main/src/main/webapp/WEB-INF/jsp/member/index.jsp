@@ -164,7 +164,7 @@
                                                 <td width="120">操作</td>
                                             </tr>
                                             </thead>
-                                            <tbody id="myProjet">
+                                            <tbody id="myProject">
 
                                             </tbody>
                                             <%-- 分页导航条 --%>
@@ -209,11 +209,94 @@
     $(function () {
         //加载已经发布的众筹项目
         showMerchantProject(0);
+        //加载会员支持的项目数据
+        showMemberSupportProject(0);
     });
 
 </script>
 
-<%--加载商家的项目数据--%>
+<%--加载会员支持的项目数据--%>
+<script>
+    function showMemberSupportProject(pageIndex) {
+        $.ajax({
+            type : "POST",
+            data : {
+                "pageno" : pageIndex + 1,
+                "pagesize" : 2
+            },
+            url : "${APP_PATH}/member/showMemberSupportProject.do",
+            beforeSend : function () {
+                loadingIndex = layer.msg('数据加载中...', {icon: 16});
+                return true;
+            },
+            success : function (result) {
+                layer.close(loadingIndex);
+                if (result.success){
+                    //查询数据成功
+                    var page = result.page;
+                    var data = page.datas;
+                    var content = '';
+                    /* 对后台返回的数据进行拼串展示 */
+                    $.each(data,function(i,n){
+                        content+='<tr>';
+                        content+='<td style="vertical-align:middle;">';
+                        content+='<div class="thumbnail">';
+                        content+='<div class="caption">';
+                        content+='<h3>';
+                        content+='<h3>'+n.name+'</h3>';
+                        content+='<p>订单编号:2x002231111</p>';
+                        content+='<p>';
+                        content+='<div style="float:left;"><i class="glyphicon glyphicon-screenshot" title="目标金额" ></i> '+n.name+' </div>';
+                        content+='<div style="float:right;"><i title="截至日期" class="glyphicon glyphicon-calendar"></i> 剩余8天 </div>';
+                        content+='<div style="float:right;"><i title="截至日期" class="glyphicon glyphicon-calendar"></i> 剩余8天 </div>';
+                        content+='</p>';
+                        content+='<br>';
+                        content+='<div class="progress" style="margin-bottom: 4px;">';
+                        content+='<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">';
+                        content+='<span >众筹成功</span>';
+                        content+='</div>';
+                        content+='</div>';
+                        content+='</div>';
+                        content+='</div>';
+                        content+='</td>';
+                        content+='<td style="vertical-align:middle;">2017-05-23 11:31:22</td>';
+                        content+='<td style="vertical-align:middle;">1.00<br>(运费：0.00 )</td>';
+                        content+='<td style="vertical-align:middle;">1</td>';
+                        content+='<td style="vertical-align:middle;">交易关闭</td>';
+                        content+='<td style="vertical-align:middle;">';
+                        content+='<div class="btn-group-vertical" role="group" aria-label="Vertical button group">';
+                        content+='<button type="button" class="btn btn-default">删除订单</button>';
+                        content+='<button type="button" class="btn btn-default">交易详情</button>';
+                        content+='</div>';
+                        content+='</td>';
+                        content+='</tr>';
+                    });
+                    // 将拼接到的数据放入 tbody标签的指定位置
+                    $("#mySupport").html(content);
+
+                    // 创建分页
+                    $("#Pagination1").pagination(page.totalsize, {
+                        num_edge_entries: 2, //边缘页数
+                        num_display_entries: 1, //主体页数
+                        callback: showMemberSupportProject, //当前函数
+                        items_per_page:3, //每页显示多少条
+                        current_page :(page.pageno-1), //当前页
+                        prev_text : "上一页",
+                        next_text : "下一页"
+                    });
+
+                } else {
+                    layer.msg(result.message);
+                }
+            },
+            error : function () {
+                layer.msg("数据加载失败");
+            }
+        });
+    }
+</script>
+
+<%--加载商家发起的项目数据--%>
 <script>
     function showMerchantProject(pageIndex) {
         $.ajax({
@@ -268,7 +351,7 @@
                         content+='</tr>';
                     });
                     // 将拼接到的数据放入 tbody标签的指定位置
-                    $("#myProjet").html(content);
+                    $("#myProject").html(content);
 
                     // 创建分页
                     $("#Pagination2").pagination(page.totalsize, {

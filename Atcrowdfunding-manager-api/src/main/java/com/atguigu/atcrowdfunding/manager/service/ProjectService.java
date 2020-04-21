@@ -59,4 +59,6 @@ public interface ProjectService {
     //根据会员商家id查询商家发布的众筹项目
     Page queryPageShowMerchantProject(HashMap<String, Object> paramMap);
 
+    //根据会员id查询会员已经支持的项目数据
+    Page queryPageMemberSupportProject(HashMap<String, Object> paramMap);
 }

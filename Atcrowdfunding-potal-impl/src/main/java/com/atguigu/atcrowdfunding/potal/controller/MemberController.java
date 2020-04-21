@@ -470,15 +470,17 @@ public class MemberController {
     //加载已经发布的众筹项目
     @ResponseBody
     @RequestMapping("/showMerchantProject")
-    public Object showMerchantProject(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "3") Integer pagesize,Integer memberid){
+    public Object showMerchantProject(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "3") Integer pagesize, HttpSession session){
         AjaxResult result = new AjaxResult();
+        //获取当前登录的用户
+        Member member = (Member) session.getAttribute(Const.LOGIN_MEMBER);
         try {
             //创建一个map集合
             HashMap<String, Object> paramMap = new HashMap<String, Object>();
             //将查询条件存入map集合
             paramMap.put("pageno", pageno);
             paramMap.put("pagesize", pagesize);
-            paramMap.put("memberid", memberid);
+            paramMap.put("memberid", member.getId());
 
             //调用service层查询方法，返回一个分页数据对象(根据会员商家id查询商家发布的众筹项目)
             Page page = projectService.queryPageShowMerchantProject(paramMap);
@@ -494,6 +496,34 @@ public class MemberController {
         return result;
     }
 
+    //加载会员已经支持的项目数据
+    @ResponseBody
+    @RequestMapping("/showMemberSupportProject")
+    public Object showMemberSupportProject(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "3") Integer pagesize, HttpSession session){
+        AjaxResult result = new AjaxResult();
+        //获取当前登录的用户
+        Member member = (Member) session.getAttribute(Const.LOGIN_MEMBER);
+        try {
+            //创建一个map集合
+            HashMap<String, Object> paramMap = new HashMap<String, Object>();
+            //将查询条件存入map集合
+            paramMap.put("pageno", pageno);
+            paramMap.put("pagesize", pagesize);
+            paramMap.put("memberid", member.getId());
+
+            //调用service层查询方法，返回一个分页数据对象(根据会员id查询会员已经支持的项目数据)
+            Page page = projectService.queryPageMemberSupportProject(paramMap);
+            //设置查询状态
+            result.setSuccess(true);
+            //存储查询到的数据
+            result.setPage(page);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("查询数据失败...");
+            e.printStackTrace();
+        }
+        return result;
+    }
 
 }
 

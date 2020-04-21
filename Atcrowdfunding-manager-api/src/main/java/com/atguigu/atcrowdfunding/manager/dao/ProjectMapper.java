@@ -83,6 +83,12 @@ public interface ProjectMapper {
 
     //查询总的记录条数
     Integer queryShowMerchantProjectCount(HashMap<String, Object> paramMap);
+
+    //根据会员id查询会员已经支持的项目数据,获取查询出来的分页数据
+    List queryMemberSupportProjectList(HashMap<String, Object> paramMap);
+
+    //根据会员id查询会员已经支持的项目数据,获取查询出来的分页数据
+    Integer queryMemberSupportProjectCount(HashMap<String, Object> paramMap);
 }
 
 
