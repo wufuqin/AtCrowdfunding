@@ -6,6 +6,7 @@ import com.atguigu.atcrowdfunding.potal.service.MemberService;
 import com.atguigu.atcrowdfunding.potal.service.PotalProjectService;
 import com.atguigu.atcrowdfunding.util.AjaxResult;
 import com.atguigu.atcrowdfunding.util.Const;
+import com.atguigu.atcrowdfunding.util.CreateOrderIdUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -135,9 +136,6 @@ public class PotalProjectController {
         }
         return "potalProject/order";
     }
-
-    //项目搜索功能
-
 
 }
 
