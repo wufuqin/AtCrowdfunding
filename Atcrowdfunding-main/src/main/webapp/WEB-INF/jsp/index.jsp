@@ -265,15 +265,15 @@
                         if (i == "0"){
                             <%--content += '<div class="item active" onclick="window.location.href=\'${APP_PATH}/potalProject/index.htm?id='+n.id+'&memberid='+n.memberid+'\'" style="cursor:pointer;">\n' +--%>
                             content += '<div class="item active" onclick="window.location.href=\'#\'" style="cursor:pointer;">\n' +
-                                '<img src="http://47.95.223.197/test/pic/'+n.iconpath+'" alt="First slide">\n' +
+                                '<img src="http://替换/test/pic/'+n.iconpath+'" alt="First slide">\n' +
                                 '</div>'
                         }else if (i == "1") {
                             content += '<div class="item" onclick="window.location.href=\'#\'" style="cursor:pointer;">\n' +
-                                '<img src="http://47.95.223.197/test/pic/'+n.iconpath+'" alt="Second slide">\n' +
+                                '<img src="http://替换/test/pic/'+n.iconpath+'" alt="Second slide">\n' +
                                 '</div>'
                         }else if (i == "2") {
                             content += '<div class="item" onclick="window.location.href=\'#\'" style="cursor:pointer;">\n' +
-                                '<img src="http://47.95.223.197/test/pic/'+n.iconpath+'" alt="Third slide">\n' +
+                                '<img src="http://替换/test/pic/'+n.iconpath+'" alt="Third slide">\n' +
                                 '</div>'
                         }
                     });
@@ -326,7 +326,7 @@
                     /* 对后台返回的数据进行拼串展示 */
                     $.each(data,function(i,n){
                         content+="<div class='col-lg-4'>";
-                        content+="<img src=\'http://47.95.223.197/test/pic/"+n.iconpath+"\' style=\'width: 100px; height: 100px;\'>";
+                        content+="<img src=\'http://替换/test/pic/"+n.iconpath+"\' style=\'width: 100px; height: 100px;\'>";
                         content+="<h2>"+n.name+"</h2>";
                         content+="<p><a class='btn btn-default' href='#' role='button'>项目详情 &raquo;</a></p>";
                         content+="</div>";
@@ -370,7 +370,7 @@
                     $.each(data,function (i,n) {
                         content+="<div class='col-md-3'>";
                         content+="<div class='thumbnail'>";
-                        content+="<img src='http://47.95.223.197/test/pic/"+n.filename+"' style='width: 300px; height: 150px;'>";
+                        content+="<img src='http://替换/test/pic/"+n.filename+"' style='width: 300px; height: 150px;'>";
                         content+="<div class='caption'>";
                         content+="<h3 class='break'>";
                         content+="<a href='${APP_PATH}/potalProject/index.htm?id="+n.id+"&memberid="+n.memberid+"'>"+n.name+"</a>";
@@ -432,7 +432,7 @@
                     $.each(data,function (i,n) {
                         content+="<div class='col-md-3'>";
                         content+="<div class='thumbnail'>";
-                        content+="<img src='http://47.95.223.197/test/pic/"+n.filename+"' style='width: 300px; height: 150px;'>";
+                        content+="<img src='http://替换/test/pic/"+n.filename+"' style='width: 300px; height: 150px;'>";
                         content+="<div class='caption'>";
                         content+="<h3 class='break'>";
                         content+="<a href='${APP_PATH}/potalProject/index.htm?id="+n.id+"&memberid="+n.memberid+"'>"+n.name+"</a>";
@@ -494,7 +494,7 @@
                     $.each(data,function (i,n) {
                         content+="<div class='col-md-3'>";
                         content+="<div class='thumbnail'>";
-                        content+="<img src='http://47.95.223.197/test/pic/"+n.filename+"' style='width: 300px; height: 150px;'>";
+                        content+="<img src='http://替换/test/pic/"+n.filename+"' style='width: 300px; height: 150px;'>";
                         content+="<div class='caption'>";
                         content+="<h3 class='break'>";
                         content+="<a href='${APP_PATH}/potalProject/index.htm?id="+n.id+"&memberid="+n.memberid+"'>"+n.name+"</a>";
@@ -554,7 +554,7 @@
                     $.each(data,function (i,n) {
                         content+="<div class='col-md-3'>";
                         content+="<div class='thumbnail'>";
-                        content+="<img src='http://47.95.223.197/test/pic/"+n.filename+"' style='width: 300px; height: 150px;'>";
+                        content+="<img src='http://替换/test/pic/"+n.filename+"' style='width: 300px; height: 150px;'>";
                         content+="<div class='caption'>";
                         content+="<h3 class='break'>";
                         content+="<a href='${APP_PATH}/potalProject/index.htm?id="+n.id+"&memberid="+n.memberid+"'>"+n.name+"</a>";

@@ -82,8 +82,6 @@ public class DispatcherController {
 
             //从session域中获取程序生成的验证码
             String checkCode_server = (String) session.getAttribute("CODE");
-            //销毁验证码，确保验证码一次性
-            session.removeAttribute("CODE");
             //判断用户输入的验证码和实际生成的验证码是否一致，不区分大小写
             if(!checkCode_server.equalsIgnoreCase(checkCode)){
             //if(!"abcd".equalsIgnoreCase("abcd")){

@@ -1,3 +1,4 @@
+/*
 package com.test;
 
 import org.apache.commons.mail.SimpleEmail;
@@ -56,3 +57,4 @@ public class TestEmail {
     }
 
 }
+*/

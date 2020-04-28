@@ -1,3 +1,4 @@
+/*
 package com.nucw;
 
 import org.junit.Test;
@@ -6,9 +7,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
+*/
 /**
  * 测试使用UUID生成订单号
- */
+ *//*
+
 public class TestUUID {
 
     @Test
@@ -26,3 +29,4 @@ public class TestUUID {
     }
 
 }
+*/

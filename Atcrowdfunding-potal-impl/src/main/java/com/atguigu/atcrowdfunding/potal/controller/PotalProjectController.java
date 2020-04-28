@@ -1,6 +1,7 @@
 package com.atguigu.atcrowdfunding.potal.controller;
 
 import com.atguigu.atcrowdfunding.bean.Member;
+import com.atguigu.atcrowdfunding.bean.MemberProjectSupport;
 import com.atguigu.atcrowdfunding.bean.Project;
 import com.atguigu.atcrowdfunding.potal.service.MemberService;
 import com.atguigu.atcrowdfunding.potal.service.PotalProjectService;
@@ -76,7 +77,7 @@ public class PotalProjectController {
     public String toReport(Map<String, Object> map, HttpSession session){
         //获取session中的项目信息
         Project portalProject = (Project) session.getAttribute("portalProject");
-        //获取session中的项目信息
+        //获取session中的发布项目的会员信息
         Member member = (Member) session.getAttribute("companyMember");
 
         //对当前项目的数据进行回显
@@ -119,6 +120,9 @@ public class PotalProjectController {
     @RequestMapping("/toOrder")
     public String toOrder(Map<String, Object> map, HttpSession session){
         try {
+            //生成订单号
+            String orderId = CreateOrderIdUtil.createOrderId();
+            map.put("orderId",orderId);
 
             //获取session中的项目信息
             Project portalProject = (Project) session.getAttribute("portalProject");
@@ -136,6 +140,33 @@ public class PotalProjectController {
         }
         return "potalProject/order";
     }
+
+    //成功支付之后最后跳转回到个人主页面
+    @RequestMapping("/fishPay")
+    public String fishPay(HttpSession session){
+
+        try {
+            //将会员成功支持的项目加入支持表中
+            Project portalProject = (Project) session.getAttribute("portalProject");  //获取会员支持的项目
+            Member member = (Member)session.getAttribute(Const.LOGIN_MEMBER);         //获取当前会员
+
+            Integer memberid = member.getId();
+            Integer projectid = portalProject.getId();
+
+            MemberProjectSupport memberProjectSupport = new MemberProjectSupport();
+
+            memberProjectSupport.setMemberid(memberid);
+            memberProjectSupport.setProjectid(projectid);
+
+            //保存会员支持的项目信息
+            potalProjectService.saveMemberSupportProject(memberProjectSupport);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "index";
+    }
+
 
 }
 

@@ -241,35 +241,34 @@
                                     </div>
                                 </form>--%>
 
-                                <form name=alipayment action="${APP_PATH}/alipay.trade.page.pay.jsp" method=post target="_blank">
+                               <form style="margin-top:20px;padding-left: 20px" name=alipayment action="${APP_PATH}/alipay.trade.page.pay.jsp" method=post target="_blank">
                                     <div id="body1" class="show" name="divcontent">
                                         <dl class="content">
                                             <dt>商户订单号 ：</dt>
                                             <dd>
-                                                <input id="WIDout_trade_no" name="WIDout_trade_no" />
+                                                <input class="form-control" style="width: 500px" id="WIDout_trade_no" name="WIDout_trade_no" value="${orderId}" />
                                             </dd>
-                                            <hr class="one_line">
+                                            <br>
                                             <dt>订单名称 ：</dt>
                                             <dd>
-                                                <input id="WIDsubject" name="WIDsubject" />
+                                                <input class="form-control" style="width: 500px" id="WIDsubject" name="WIDsubject" value="${potalProject.name}" />
                                             </dd>
-                                            <hr class="one_line">
+                                            <br>
                                             <dt>付款金额 ：</dt>
                                             <dd>
-                                                <input id="WIDtotal_amount" name="WIDtotal_amount" />
+                                                <input class="form-control" style="width: 500px" id="WIDtotal_amount" name="WIDtotal_amount" value="${potalProject.supportNeedMoney}" />
                                             </dd>
-                                            <hr class="one_line">
+                                            <br>
                                             <dt>商品描述：</dt>
                                             <dd>
-                                                <input id="WIDbody" name="WIDbody" />
+                                                <input class="form-control" style="width: 500px" id="WIDbody" name="WIDbody" value="${potalProject.remark}" />
                                             </dd>
-                                            <hr class="one_line">
+                                            <br>
                                             <dt></dt>
                                             <dd id="btn-dd">
                                                 <span class="new-btn-login-sp">
-                                                    <button class="new-btn-login" type="submit"
-                                                            style="text-align: center;">付 款</button>
-                                                </span> <span class="note-help">如果您点击“付款”按钮，即表示您同意该次的执行操作。</span>
+                                                    <button type="submit" style="width: 500px" class="form-control btn-info">付 款</button>
+                                                </span> <span style="color: red" class="note-help">如果您点击“付款”按钮，即表示您同意该次的执行操作。</span>
                                             </dd>
                                         </dl>
                                     </div>

@@ -33,6 +33,14 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
 
+    <!--保存会员支持的项目信息-->
+    <insert id="saveMemberSupportProject" parameterType="com.atguigu.atcrowdfunding.bean.MemberProjectSupport">
+		insert
+		into t_member_project_support (memberid, projectid)
+		values (#{memberid},#{projectid})
+	</insert>
+
+
 
 </mapper>
 

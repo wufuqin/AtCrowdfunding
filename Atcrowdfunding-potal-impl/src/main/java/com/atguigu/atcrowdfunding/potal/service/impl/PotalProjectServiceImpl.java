@@ -1,5 +1,6 @@
 package com.atguigu.atcrowdfunding.potal.service.impl;
 
+import com.atguigu.atcrowdfunding.bean.MemberProjectSupport;
 import com.atguigu.atcrowdfunding.bean.Project;
 import com.atguigu.atcrowdfunding.potal.dao.PotalProjectMapper;
 import com.atguigu.atcrowdfunding.potal.service.PotalProjectService;
@@ -19,6 +20,12 @@ public class PotalProjectServiceImpl implements PotalProjectService {
     @Override
     public Project queryPotalProjectInfoById(Integer id) {
         return potalProjectMapper.queryPotalProjectInfoById(id);
+    }
+
+    //保存会员支持的项目信息
+    @Override
+    public void saveMemberSupportProject(MemberProjectSupport memberProjectSupport) {
+        potalProjectMapper.saveMemberSupportProject(memberProjectSupport);
     }
 }
 
