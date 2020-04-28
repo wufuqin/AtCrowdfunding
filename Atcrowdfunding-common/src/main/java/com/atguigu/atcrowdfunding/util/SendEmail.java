@@ -18,14 +18,14 @@ public class SendEmail {
     public static void sendEmial(String addTo, String subject, String url) throws Exception {
         SimpleEmail email = new SimpleEmail();
         //设置主机名，远程服务器的主机名
-        email.setHostName("smtp.qq.com");
+
         email.setSSLOnConnect(true);
         //设置端口号
-        email.setSslSmtpPort("465");
+
         //设置编码格式
         email.setCharset("UTF-8");
         //设置登录服务器的账号和授权码
-        email.setAuthentication("1820191171@qq.com","htoclnshpfvhcfdc");
+
         //发送到那个邮箱
         email.addTo(addTo);
         //设置发送人邮箱

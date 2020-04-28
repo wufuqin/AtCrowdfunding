@@ -40,8 +40,7 @@ public class CheckCode extends HttpServlet {
     //实现短信发送工具类
     private void sendMsg(String phone, String str){
         //定义两个字符串,相当于短信发送服务的账号和密码
-        String accessKeyId = "LTAI4Fh9j6rH7F9Ndxr1i5FZ";
-        String accessSecret = "tUgOPL5WkjtJS0w7Y2DDSIUKQdCcJA";
+
 
         DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessSecret);
         IAcsClient client = new DefaultAcsClient(profile);
