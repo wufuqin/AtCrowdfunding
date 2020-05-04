@@ -1,10 +1,8 @@
 package com.atguigu.atcrowdfunding.manager.controller;
 
 import com.atguigu.atcrowdfunding.bean.Project;
-import com.atguigu.atcrowdfunding.bean.User;
 import com.atguigu.atcrowdfunding.manager.service.ProjectService;
 import com.atguigu.atcrowdfunding.util.AjaxResult;
-import com.atguigu.atcrowdfunding.util.Const;
 import com.atguigu.atcrowdfunding.util.FtpUtil;
 import com.atguigu.atcrowdfunding.util.Page;
 import org.apache.commons.fileupload.disk.DiskFileItem;
@@ -17,10 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -101,7 +96,7 @@ public class ProjectController {
     //上传图片
     @ResponseBody
     @RequestMapping("/doAdd")
-    public Object doAdd(HttpServletRequest request, Project project, HttpSession session) {
+    public Object doAdd(HttpServletRequest request, Project project) {
         AjaxResult result = new AjaxResult();
         try {
             MultipartHttpServletRequest mreq = (MultipartHttpServletRequest) request;
@@ -338,33 +333,6 @@ public class ProjectController {
         return result;
     }
 
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

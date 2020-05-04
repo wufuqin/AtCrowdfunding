@@ -24,7 +24,15 @@
 
         <!-- 邮件任务，发送邮件 -->
         <!--设置邮箱的SMTP服务器-->
-
+        <property name="mailServerHost" value="smtp.qq.com" />
+        <!--设置邮箱的端口-->
+        <property name="mailServerPort" value="465"/>
+        <!--默认发件人-->
+        <property name="mailServerDefaultFrom" value="1820191171@qq.com" />
+        <!--发送的邮箱用户名-->
+        <property name="mailServerUsername" value="1820191171@qq.com" />
+        <!--开启邮箱的授权码-->
+        <property name="mailServerPassword" value="htoclnshpfvhcfdc" />
         <property name="mailServerUseSSL" value="true" />
     </bean>
   

@@ -27,11 +27,9 @@ public class AlipayConfig {
 	public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyKnukKDAQdazA3yVfWN7pEfP0AVbNaJXfkhgW0eqyLxDBvQHNoepq+c1eJ4ZhsXiSzYTdy+YXlFKZN+nQPrp54FAxv16NmeKuIvit8VWFEEHPI4ZIAbRmeb4ZCYUt1Njkza4TlKBGqbGP7z2JWB3bKbBI06rSEjX8Yjh5Pmbvs5ysoFh2rQ5lGYgh/xTwGAUwulEmqVPw07u2K902LDcJr81ZnfzpVveUYWNCgpuSHj2lNnTaAvCrXxwKzwZ80k21qcufzPmGZnb9db8VSj7X8Fe9UGF/888QK3dbN9G0nV6BMs39vSsnJtU9bZAXaUaaZ1lm0o7U65xEKfJFUoNywIDAQAB";
 
 	// 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-	//public static String notify_url = "http://localhost:8080/notify_url.jsp";
-	public static String notify_url = "http://"+Const.path+"/notify_url.jsp";
+	public static String notify_url = "http://"+Const.path+"/potalProject/fishPay.do";
 
 	// 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-	//public static String return_url = "http://localhost:8080/return_url.jsp";
 	public static String return_url = "http://"+Const.path+"/potalProject/fishPay.do";
 
 	// 签名方式

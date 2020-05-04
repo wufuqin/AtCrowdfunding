@@ -241,7 +241,7 @@
                                     </div>
                                 </form>--%>
 
-                               <form style="margin-top:20px;padding-left: 20px" name=alipayment action="${APP_PATH}/alipay.trade.page.pay.jsp" method=post target="_blank">
+                                <form style="margin-top:20px;padding-left: 20px" name=alipayment action="${APP_PATH}/alipay.trade.page.pay.jsp" method=post target="_blank">
                                     <div id="body1" class="show" name="divcontent">
                                         <dl class="content">
                                             <dt>商户订单号 ：</dt>
