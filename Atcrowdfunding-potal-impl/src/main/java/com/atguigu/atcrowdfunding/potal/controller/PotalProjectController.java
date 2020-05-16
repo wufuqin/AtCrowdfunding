@@ -153,6 +153,18 @@ public class PotalProjectController {
             Integer memberid = member.getId();
             Integer projectid = portalProject.getId();
 
+            //获取当前已经筹集的资金总数
+            Integer raiseMoney = portalProject.getRaiseMoney();
+            //获取每次支持需要的金额数
+            Integer supportNeedMoney = portalProject.getSupportNeedMoney();
+            //每次有人支持项目就会增加已经筹集的金额
+            raiseMoney += supportNeedMoney;
+
+            //获取当前已经支持项目的人数
+            Integer supporter = portalProject.getSupporter();
+            //对人数进行加1
+            supporter =+ 1;
+
             MemberProjectSupport memberProjectSupport = new MemberProjectSupport();
 
             memberProjectSupport.setMemberid(memberid);
@@ -160,6 +172,14 @@ public class PotalProjectController {
 
             //保存会员支持的项目信息
             potalProjectService.saveMemberSupportProject(memberProjectSupport);
+            //修改有人支持之后的项目数据
+            Project project = new Project();
+            project.setId(projectid);
+            project.setRaiseMoney(raiseMoney);  //已筹集金额
+            project.setSupporter(supporter);    //支持人数
+            potalProjectService.updateProject(project);
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

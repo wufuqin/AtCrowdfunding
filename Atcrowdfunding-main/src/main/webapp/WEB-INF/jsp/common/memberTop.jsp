@@ -60,9 +60,8 @@
         <a href="${APP_PATH}/index.htm">首页</a>
     </div>
 </div>
-<div style="float:right; font-size: 25px; padding-top: 8px; color: black">
-    Tomcat2
-</div>
+<%--服务器编号--%>
+<jsp:include page="/WEB-INF/jsp/common/topServer.jsp"/>
 
 <%--项目搜索功能--%>
 <%--

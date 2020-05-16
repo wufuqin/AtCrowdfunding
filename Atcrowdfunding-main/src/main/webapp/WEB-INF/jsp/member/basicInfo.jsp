@@ -25,14 +25,12 @@
 <body>
 <div class="navbar-wrapper">
     <div class="container">
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <%--包含头部页面--%>
             <jsp:include page="/WEB-INF/jsp/common/memberTop.jsp"/>
         </nav>
-
     </div>
 </div>
-
 <div class="container theme-showcase" role="main">
     <div class="page-header">
         <h1>实名认证 - 申请</h1>

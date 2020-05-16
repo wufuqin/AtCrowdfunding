@@ -1,9 +1,6 @@
 package com.atguigu.atcrowdfunding.potal.controller;
 
-import com.atguigu.atcrowdfunding.bean.Cert;
-import com.atguigu.atcrowdfunding.bean.Member;
-import com.atguigu.atcrowdfunding.bean.MemberCert;
-import com.atguigu.atcrowdfunding.bean.Ticket;
+import com.atguigu.atcrowdfunding.bean.*;
 import com.atguigu.atcrowdfunding.manager.service.CertService;
 import com.atguigu.atcrowdfunding.manager.service.ProjectService;
 import com.atguigu.atcrowdfunding.potal.listener.PassListener;
@@ -474,7 +471,7 @@ public class MemberController {
         AjaxResult result = new AjaxResult();
         //获取当前登录的用户
         Member member = (Member) session.getAttribute(Const.LOGIN_MEMBER);
-        try {
+            try {
             //创建一个map集合
             HashMap<String, Object> paramMap = new HashMap<String, Object>();
             //将查询条件存入map集合

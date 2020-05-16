@@ -101,24 +101,24 @@
                 <div class="panel-heading">个人信息<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"></div></div>
                 <div class="panel-body">
                     <form id="settingMemberForm">
-                        <div class="form-group" style="width: 300px">
+                        <div class="form-group" style="width: 820px">
                             <label for="loginacct">登陆账号</label>
                             <input disabled type="text" class="form-control" id="loginacct" name="loginacct" value="${sessionScope.member.loginacct}" placeholder="请输入登陆账号">
                         </div>
-                        <div class="form-group" style="width: 300px">
+                        <div class="form-group" style="width: 820px">
                             <label for="userpswd">登陆密码</label>
                             <input type="password" class="form-control" id="userpswd" name="userpswd" value="${sessionScope.member.userpswd}" placeholder="请输入登陆账号">
                         </div>
 
-                        <div class="form-group" style="width: 300px">
+                        <div class="form-group" style="width: 820px">
                             <label for="username">用户名称</label>
                             <input type="text" class="form-control" id="username" name="username" value="${sessionScope.member.username}" placeholder="请输入用户名称">
                         </div>
-                        <div class="form-group" style="width: 300px">
+                        <div class="form-group" style="width: 820px">
                             <label for="email">邮箱地址</label>
                             <input type="email" class="form-control" id="email" name="email" value="${sessionScope.member.email}" placeholder="请输入邮箱地址">
                         </div>
-                        <div class="form-group" style="width: 300px">
+                        <div class="form-group" style="width: 820px">
                             <label for="authstatus">实名认证状态</label>
                             <c:choose>
                                 <c:when test="${sessionScope.member.authstatus eq '0'}">
@@ -133,7 +133,7 @@
                             </c:choose>
 
                         </div>
-                        <div class="form-group" style="width: 300px">
+                        <div class="form-group" style="width: 820px">
                             <label for="usertype">用户类型</label>
                             <c:choose>
                                 <c:when test="${sessionScope.member.usertype eq '0'}">
@@ -146,15 +146,15 @@
 
                         </div>
 
-                        <div class="form-group" style="width: 300px">
+                        <div class="form-group" style="width: 820px">
                             <label for="realname">真实姓名</label>
                             <input disabled type="text" class="form-control" id="realname" name="realname" value="${sessionScope.member.realname}">
                         </div>
-                        <div class="form-group" style="width: 300px">
+                        <div class="form-group" style="width: 820px">
                             <label for="cardnum">身份证号</label>
                             <input disabled type="text" class="form-control" id="cardnum" name="cardnum" value="${sessionScope.member.cardnum}">
                         </div>
-                        <div class="form-group" style="width: 300px">
+                        <div class="form-group" style="width: 820px">
                             <label for="tel">手机号</label>
                             <input disabled type="text" class="form-control" id="tel" name="tel" value="${sessionScope.member.tel}">
                         </div>

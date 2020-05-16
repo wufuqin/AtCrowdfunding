@@ -3,6 +3,8 @@
     后台页面的头部
         抽取出来，在后面需要的页面中直接调用即可
 --%>
+<%--服务器编号--%>;
+<jsp:include page="/WEB-INF/jsp/common/topServer.jsp"/>
 <li style="padding-top:8px; padding-right: 40px">
     <div class="btn-group">
         <button type="button" class="btn btn-default btn-success dropdown-toggle" data-toggle="dropdown">
@@ -16,6 +18,7 @@
         </ul>
     </div>
 </li>
+
 <%--
 <li style="margin-left:10px;padding-top:8px;">
     <button type="button" class="btn btn-default btn-danger">

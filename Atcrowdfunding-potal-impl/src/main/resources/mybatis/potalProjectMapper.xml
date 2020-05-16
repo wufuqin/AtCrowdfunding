@@ -40,6 +40,14 @@
 		values (#{memberid},#{projectid})
 	</insert>
 
+    <!--修改有人支持之后的项目数据-->
+    <update id="updateProject" parameterType="com.atguigu.atcrowdfunding.bean.Project" >
+        update t_project
+        set
+          raiseMoney = #{raiseMoney,jdbcType=INTEGER},
+          supporter = #{supporter,jdbcType=INTEGER}
+          where id = #{id,jdbcType=INTEGER}
+    </update>
 
 
 </mapper>

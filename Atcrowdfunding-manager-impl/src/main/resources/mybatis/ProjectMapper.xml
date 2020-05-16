@@ -218,7 +218,7 @@
     <select id="queryShowMerchantProjectList" resultMap="BaseResultMap">
         select id, name, remark, money, day, status, deploydate, supportmoney, supporter, completion, memberid, createdate, follower, projectType
         from t_project
-        where memberid = #{memberid}
+        where memberid = #{memberid} and status = 2
         limit #{startIndex},#{pagesize}
     </select>
 
@@ -226,7 +226,7 @@
     <select id="queryShowMerchantProjectCount"  resultType="int">
         select count(*)
         from t_project
-        where memberid = #{memberid}
+        where memberid = #{memberid} and status = 2
     </select>
 
     <!-- 查询会员支持的项目,查询分页数据 -->

@@ -71,7 +71,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="thumbnail" style="    border-radius: 0px;">
-                        <img src="${APP_PATH}/img/services-box1.jpg" class="img-thumbnail" alt="">
+                        <img src="http://47.95.223.197/test/pic/services-box1.jpg" class="img-thumbnail" alt="">
                         <div class="caption" style="text-align:center;">
                             <h3>
                                 ${sessionScope.member.username}
@@ -111,19 +111,19 @@
                         <div role="tabpanel" class="tab-pane fade active in" id="support" aria-labelledby="home-tab">
                             <div class="container-fluid">
                                 <div class="row clearfix">
-                                    <div class="col-md-12 column">
+                                   <%-- <div class="col-md-12 column">
                                         <span class="label label-warning">全部</span> <span class="label" style="color:#000;">已支付</span> <span class="label " style="color:#000;">未支付</span>
-                                    </div>
+                                    </div>--%>
                                     <div class="col-md-12 column" style="margin-top:10px;padding:0;">
                                         <table class="table table-bordered" style="text-align:center;">
                                             <thead>
                                             <tr style="background-color:#ddd;">
                                                 <td>项目信息</td>
-                                                <td width="90">支持日期</td>
+                                                <%--<td width="90">支持日期</td>--%>
                                                 <td width="120">支持金额（元）</td>
                                                 <td width="80">回报数量</td>
                                                 <td width="80">交易状态</td>
-                                                <td width="120">操作</td>
+                                                <%--<td width="120">操作</td>--%>
                                             </tr>
                                             </thead>
 
@@ -151,17 +151,17 @@
                         <div role="tabpanel" class="tab-pane fade  " id="add" aria-labelledby="add-tab">
                             <div class="container-fluid">
                                 <div class="row clearfix">
-                                    <div class="col-md-12 column">
+                                   <%-- <div class="col-md-12 column">
                                         <span class="label label-warning">全部</span> <span class="label" style="color:#000;">众筹中</span> <span class="label " style="color:#000;">众筹成功</span>  <span class="label " style="color:#000;">众筹失败</span>
-                                    </div>
+                                    </div>--%>
                                     <div class="col-md-12 column" style="padding:0;margin-top:10px;">
                                         <table class="table table-bordered" style="text-align:center;">
                                             <thead>
                                             <tr style="background-color:#ddd;">
-                                                <td>项目信息</td>
-                                                <td width="120">募集金额（元）</td>
+                                                <td style="width: 100px">项目信息</td>
+                                                <td width="120">需要金额（元）</td>
                                                 <td width="80">当前状态</td>
-                                                <td width="120">操作</td>
+                                                <%--<td width="120">操作</td>--%>
                                             </tr>
                                             </thead>
                                             <tbody id="myProject">
@@ -244,31 +244,31 @@
                         content+='<div class="caption">';
                         content+='<h3>';
                         content+='<h3>'+n.name+'</h3>';
-                        content+='<p>订单编号:2x002231111</p>';
-                        content+='<p>';
-                        content+='<div style="float:left;"><i class="glyphicon glyphicon-screenshot" title="目标金额" ></i> '+n.name+' </div>';
-                        content+='<div style="float:right;"><i title="截至日期" class="glyphicon glyphicon-calendar"></i> 剩余8天 </div>';
-                        content+='<div style="float:right;"><i title="截至日期" class="glyphicon glyphicon-calendar"></i> 剩余8天 </div>';
-                        content+='</p>';
-                        content+='<br>';
-                        content+='<div class="progress" style="margin-bottom: 4px;">';
-                        content+='<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">';
-                        content+='<span >众筹成功</span>';
-                        content+='</div>';
-                        content+='</div>';
+                        // content+='<p>订单编号:2x002231111</p>';
+                        // content+='<p>';
+                        // content+='<div style="float:left;"><i class="glyphicon glyphicon-screenshot" title="目标金额" ></i> '+n.name+' </div>';
+                        // content+='<div style="float:right;"><i title="截至日期" class="glyphicon glyphicon-calendar"></i> 剩余8天 </div>';
+                        // content+='<div style="float:right;"><i title="截至日期" class="glyphicon glyphicon-calendar"></i> 剩余8天 </div>';
+                        // content+='</p>';
+                        // content+='<br>';
+                        // content+='<div class="progress" style="margin-bottom: 4px;">';
+                        // content+='<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">';
+                        // content+='<span >众筹成功</span>';
+                        // content+='</div>';
+                        // content+='</div>';
                         content+='</div>';
                         content+='</div>';
                         content+='</td>';
-                        content+='<td style="vertical-align:middle;">2017-05-23 11:31:22</td>';
-                        content+='<td style="vertical-align:middle;">1.00<br>(运费：0.00 )</td>';
+                        // content+='<td style="vertical-align:middle;">2017-05-23 11:31:22</td>';
+                        content+='<td style="vertical-align:middle;">1.00</td>';
                         content+='<td style="vertical-align:middle;">1</td>';
-                        content+='<td style="vertical-align:middle;">交易关闭</td>';
-                        content+='<td style="vertical-align:middle;">';
-                        content+='<div class="btn-group-vertical" role="group" aria-label="Vertical button group">';
-                        content+='<button type="button" class="btn btn-default">删除订单</button>';
-                        content+='<button type="button" class="btn btn-default">交易详情</button>';
-                        content+='</div>';
-                        content+='</td>';
+                        content+='<td style="vertical-align:middle;">交易成功</td>';
+                        // content+='<td style="vertical-align:middle;">';
+                        // content+='<div class="btn-group-vertical" role="group" aria-label="Vertical button group">';
+                        //content+='<button type="button" class="btn btn-default">删除订单</button>';
+                        // content+='<button type="button" class="btn btn-default">交易详情</button>';
+                        // content+='</div>';
+                        // content+='</td>';
                         content+='</tr>';
                     });
                     // 将拼接到的数据放入 tbody标签的指定位置
@@ -326,28 +326,28 @@
                         content+='<p>';
                         content+=''+n.name+'';
                         content+='</p>';
-                        content+='<p>';
-                        content+='<div style="float:left;"><i class="glyphicon glyphicon-screenshot" title="目标金额" ></i> 已完成 100% </div>';
-                        content+='<div style="float:right;"><i title="截至日期" class="glyphicon glyphicon-calendar"></i> 剩余8天 </div>';
-                        content+='</p>';
-                        content+='<br>';
-                        content+='<div class="progress" style="margin-bottom: 4px;">';
-                        content+='<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">';
-                        content+='<span >众筹中</span>';
-                        content+='</div>';
+                        // content+='<p>';
+                        // content+='<div style="float:left;"><i class="glyphicon glyphicon-screenshot" title="目标金额" ></i> 已完成 100% </div>';
+                        // content+='<div style="float:right;"><i title="截至日期" class="glyphicon glyphicon-calendar"></i> 剩余8天 </div>';
+                        // content+='</p>';
+                        // content+='<br>';
+                        // content+='<div class="progress" style="margin-bottom: 4px;">';
+                        // content+='<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">';
+                        // content+='<span >众筹中</span>';
+                        // content+='</div>';
                         content+='</div>';
                         content+='</div>';
                         content+='</div>';
                         content+='</td>';
-                        content+='<td style="vertical-align:middle;">1.00<br>(运费：0.00 )</td>';
-                        content+='<td style="vertical-align:middle;">草稿</td>';
-                        content+='<td style="vertical-align:middle;">';
-                        content+='<div class="btn-group-vertical" role="group" aria-label="Vertical button group">';
-                        content+='<button type="button" class="btn btn-default">项目预览</button>';
-                        content+='<button type="button" class="btn btn-default">删除项目</button>';
-                        content+='<button type="button" class="btn btn-default">问题管理</button>';
-                        content+='</div>';
-                        content+='</td>';
+                        content+='<td style="vertical-align:middle;">'+n.money+'</td>';
+                        content+='<td style="vertical-align:middle; color: red">众筹中</td>';
+                        // content+='<td style="vertical-align:middle;">';
+                        // content+='<div class="btn-group-vertical" role="group" aria-label="Vertical button group">';
+                        // content+='<button type="button" class="btn btn-default">项目预览</button>';
+                        // content+='<button type="button" class="btn btn-default">删除项目</button>';
+                        // content+='<button type="button" class="btn btn-default">问题管理</button>';
+                        // content+='</div>';
+                        // content+='</td>';
                         content+='</tr>';
                     });
                     // 将拼接到的数据放入 tbody标签的指定位置

@@ -27,6 +27,12 @@ public class PotalProjectServiceImpl implements PotalProjectService {
     public void saveMemberSupportProject(MemberProjectSupport memberProjectSupport) {
         potalProjectMapper.saveMemberSupportProject(memberProjectSupport);
     }
+
+    //修改有人支持之后的项目数据
+    @Override
+    public void updateProject(Project project) {
+        potalProjectMapper.updateProject(project);
+    }
 }
 
 

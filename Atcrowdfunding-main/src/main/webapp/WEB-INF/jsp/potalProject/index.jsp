@@ -111,9 +111,9 @@
                     <div style="float:left;width:70%;">
                         项目简介：${potalProject.remark}
                     </div>
-                    <div style="float:right;">
+                   <%-- <div style="float:right;">
                         <button type="button" class="btn btn-default"><i style="color:#f60" class="glyphicon glyphicon-heart"></i> 关注人数 ${potalProject.follower}</button>
-                    </div>
+                    </div>--%>
                 </div>
             </div>
         </div>
@@ -147,11 +147,11 @@
                                 <h3 >
                                     已筹资金：${potalProject.raiseMoney}
                                 </h3>
-                                <p><span>目标金额 ： ${potalProject.money}</span><span style="float:right;">达成 ： ${potalProject.completion}%</span></p>
+                                <%--<p><span>目标金额 ： ${potalProject.money}</span><span style="float:right;">达成 ： ${potalProject.completion}%</span></p>
                                 <div class="progress" style="height:10px; margin-bottom: 5px;">
                                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${potalProject.completion}%;"></div>
                                 </div>
-                                <p>剩余时间${potalProject.createdate}</p>
+                                <p>剩余时间${potalProject.createdate}</p>--%>
                                 <div>
                                     <p><span>已有${potalProject.supporter}人支持该项目</span></p>
                                 </div>

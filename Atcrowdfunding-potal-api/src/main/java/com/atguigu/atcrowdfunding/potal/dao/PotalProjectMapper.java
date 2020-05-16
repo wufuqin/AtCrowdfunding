@@ -16,6 +16,9 @@ public interface PotalProjectMapper {
 
     //保存会员支持的项目信息@Param
     void saveMemberSupportProject(MemberProjectSupport memberProjectSupport);
+
+    //修改有人支持之后的项目数据
+    void updateProject(Project project);
 }
 
 

@@ -22,6 +22,8 @@
         <div class="navbar-header">
             <div><a class="navbar-brand" href="${APP_PATH}/index.htm" style="font-size:32px;">众筹网-创意产品众筹平台</a></div>
         </div>
+        <%--服务器编号--%>;
+        <jsp:include page="/WEB-INF/jsp/common/topServer.jsp"/>
     </div>
 </nav>
 <div class="container">

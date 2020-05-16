@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="stylesheet" href="${APP_PATH}/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${APP_PATH}/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="${APP_PATH}/css/font-awesome.min.css">
     <link rel="stylesheet" href="${APP_PATH}/css/carousel.css">
     <link rel="stylesheet" href="${APP_PATH}/jquery/pagination/pagination.css">
@@ -112,17 +112,43 @@
     </div>
 </div>
 
-<!--  轮播图 -->
-<div id="myCarousel" class="carousel slide" data-ride="carousel"></div>
+<br>
+<br>
 
-<%--轮播图下面的广告--%>
-<div class="container marketing">
-    <div class="row" id="publishAdvertisementBox"></div>
-    <div id="Pagination" class="pagination" style="padding-left: 500px"></div>
+<!--  轮播图 -->
+<div style="padding-left: 120px">
+    <div class="row">
+        <div id="myCarousel" class="carousel slide col-md-5" style="width: 50%;height: 400px" data-ride="carousel"></div>
+
+        <div class="col-md-5">
+            <table class="table table-hover">
+
+                <h1>温馨提示！</h1>
+                <h4>1. 商家如何发布众筹项目？</h4>
+                <h5>(1)拥有一个完成实名制认证的商家账号</h5>
+                <h5>(2)通过线下提交项目及材料，通过审核之后项目即可发布。</h5>
+
+                <h4>2. 平台会员如何参与众筹项目？</h4>
+                <h5>(1)拥有一个完成实名制认证的会员账号或者商家账号。</h5>
+                <h5>(2)选择好自己想要支持的项目之后完成响应的支持流程即可成功参与众筹。</h5>
+
+                <h2 style="color: red">注意！！！</h2>
+                <h5 style="color: red">投资有风险，出手需谨慎！</h5>
+            </table>
+        </div>
+
+    </div>
+
 </div>
 
+<%--轮播图下面的广告--%>
+<%--<div style="padding-left: 100px">
+    <div class="row" id="publishAdvertisementBox"></div>
+    <div id="Pagination" class="pagination" style="padding-left: 500px"></div>
+</div>--%>
+
 <%--科技--%>
-<div id="Technology" class="container">
+<div id="Technology" style="padding-left: 100px;padding-right: 100px;">
     <div class="row clearfix">
         <div class="col-md-12 column">
             <div class="box ui-draggable" id="mainBox">
@@ -144,7 +170,7 @@
 </div>
 
 <%--设计--%>
-<div id="Design" class="container">
+<div id="Design" style="padding-left: 100px;padding-right: 100px">
     <div class="row clearfix">
         <div class="col-md-12 column">
             <div class="box ui-draggable" id="mainBox">
@@ -166,7 +192,7 @@
 </div>
 
 <%--农业--%>
-<div id="Agriculture" class="container">
+<div id="Agriculture" style="padding-left: 100px;padding-right: 100px">
     <div class="row clearfix">
         <div class="col-md-12 column">
             <div class="box ui-draggable" id="mainBox">
@@ -187,7 +213,7 @@
 </div>
 
 <%--其他--%>
-<div id="Others" class="container">
+<div id="Others" style="padding-left: 100px;padding-right: 100px">
     <div class="row clearfix">
         <div class="col-md-12 column">
             <div class="box ui-draggable" id="mainBox">
@@ -264,16 +290,16 @@
                     $.each(data,function (i,n) {
                         if (i == "0"){
                             <%--content += '<div class="item active" onclick="window.location.href=\'${APP_PATH}/potalProject/index.htm?id='+n.id+'&memberid='+n.memberid+'\'" style="cursor:pointer;">\n' +--%>
-                            content += '<div class="item active" onclick="window.location.href=\'#\'" style="cursor:pointer;">\n' +
-                                '<img src="http://47.95.223.197/test/pic/'+n.iconpath+'" alt="First slide">\n' +
+                            content += '<div class="item active" style="height: 400px" onclick="window.location.href=\'#\'" style="cursor:pointer;">\n' +
+                                '<img style="height: 400px" src="http://47.95.223.197/test/pic/'+n.iconpath+'" alt="First slide" >\n' +
                                 '</div>'
                         }else if (i == "1") {
-                            content += '<div class="item" onclick="window.location.href=\'#\'" style="cursor:pointer;">\n' +
-                                '<img src="http://47.95.223.197/test/pic/'+n.iconpath+'" alt="Second slide">\n' +
+                            content += '<div class="item" style="height: 400px" onclick="window.location.href=\'#\'" style="cursor:pointer;">\n' +
+                                '<img style="height: 400px" src="http://47.95.223.197/test/pic/'+n.iconpath+'" alt="Second slide">\n' +
                                 '</div>'
                         }else if (i == "2") {
-                            content += '<div class="item" onclick="window.location.href=\'#\'" style="cursor:pointer;">\n' +
-                                '<img src="http://47.95.223.197/test/pic/'+n.iconpath+'" alt="Third slide">\n' +
+                            content += '<div class="item" style="height: 400px" onclick="window.location.href=\'#\'" style="cursor:pointer;">\n' +
+                                '<img style="height: 400px" src="http://47.95.223.197/test/pic/'+n.iconpath+'" alt="Third slide">\n' +
                                 '</div>'
                         }
                     });
@@ -300,7 +326,6 @@
             }
         });
     }
-
 </script>
 
 <%--加载发布一般的广告--%>
@@ -377,15 +402,15 @@
                         content+="</h3>";
                         content+="<p>";
                         content+="<div style='float:left;'><i class='glyphicon glyphicon-screenshot' title='目标金额' ></i> ￥"+n.money+" </div>";
-                        content+="<div style='float:right;'><i title='截至日期' class='glyphicon glyphicon-calendar'></i>"+n.createdate+" </div>";
+                        // content+="<div style='float:right;'><i title='截至日期' class='glyphicon glyphicon-calendar'></i>"+n.createdate+" </div>";
                         content+="</p>";
                         content+="<br>";
-                        content+="<div class='progress' style='margin-bottom: 4px;'>";
-                        content+="<div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width:"+n.completion+"%; color: green'>";
-                        content+="<span >"+n.completion+"% </span>";
-                        content+="</div>";
-                        content+="</div>";
-                        content+="<div><span style='float:right;'><i class='glyphicon glyphicon-star-empty' ></i></span>  <span ><i class='glyphicon glyphicon-user' title='支持人数'></i> </span>支持人数:"+n.supporter+"</div>";
+                        // content+="<div class='progress' style='margin-bottom: 4px;'>";
+                        // content+="<div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width:"+n.completion+"%; color: green'>";
+                        // content+="<span >"+n.completion+"% </span>";
+                        // content+="</div>";
+                        // content+="</div>";
+                        // content+="<div><span style='float:right;'><i class='glyphicon glyphicon-star-empty' ></i></span>  <span ><i class='glyphicon glyphicon-user' title='支持人数'></i> </span>支持人数:"+n.supporter+"</div>";
                         content+="</div>";
                         content+="</div>";
                         content+="</div>";
@@ -405,7 +430,6 @@
             }
         });
     }
-
 </script>
 
 <%--加载设计类项目--%>
@@ -439,15 +463,15 @@
                         content+="</h3>";
                         content+="<p>";
                         content+="<div style='float:left;'><i class='glyphicon glyphicon-screenshot' title='目标金额' ></i> ￥"+n.money+" </div>";
-                        content+="<div style='float:right;'><i title='截至日期' class='glyphicon glyphicon-calendar'></i>"+n.createdate+" </div>";
+                        // content+="<div style='float:right;'><i title='截至日期' class='glyphicon glyphicon-calendar'></i>"+n.createdate+" </div>";
                         content+="</p>";
                         content+="<br>";
-                        content+="<div class='progress' style='margin-bottom: 4px;'>";
-                        content+="<div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width: "+n.completion+"%; color: green'>";
-                        content+="<span >"+n.completion+"% </span>";
-                        content+="</div>";
-                        content+="</div>";
-                        content+="<div><span style='float:right;'><i class='glyphicon glyphicon-star-empty' ></i></span>  <span ><i class='glyphicon glyphicon-user' title='支持人数'></i> </span>支持人数:"+n.supporter+"</div>";
+                        // content+="<div class='progress' style='margin-bottom: 4px;'>";
+                        // content+="<div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width: "+n.completion+"%; color: green'>";
+                        // content+="<span >"+n.completion+"% </span>";
+                        // content+="</div>";
+                        // content+="</div>";
+                        // content+="<div><span style='float:right;'><i class='glyphicon glyphicon-star-empty' ></i></span>  <span ><i class='glyphicon glyphicon-user' title='支持人数'></i> </span>支持人数:"+n.supporter+"</div>";
                         content+="</div>";
                         content+="</div>";
                         content+="</div>";
@@ -501,15 +525,15 @@
                         content+="</h3>";
                         content+="<p>";
                         content+="<div style='float:left;'><i class='glyphicon glyphicon-screenshot' title='目标金额' ></i> ￥"+n.money+" </div>";
-                        content+="<div style='float:right;'><i title='截至日期' class='glyphicon glyphicon-calendar'></i>"+n.createdate+" </div>";
+                        // content+="<div style='float:right;'><i title='截至日期' class='glyphicon glyphicon-calendar'></i>"+n.createdate+" </div>";
                         content+="</p>";
                         content+="<br>";
-                        content+="<div class='progress' style='margin-bottom: 4px;'>";
-                        content+="<div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width: "+n.completion+"%; color: green'>";
-                        content+="<span >"+n.completion+"% </span>";
-                        content+="</div>";
-                        content+="</div>";
-                        content+="<div><span style='float:right;'><i class='glyphicon glyphicon-star-empty' ></i></span>  <span ><i class='glyphicon glyphicon-user' title='支持人数'></i> </span>支持人数:"+n.supporter+"</div>";
+                        // content+="<div class='progress' style='margin-bottom: 4px;'>";
+                        // content+="<div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width: "+n.completion+"%; color: green'>";
+                        // content+="<span >"+n.completion+"% </span>";
+                        // content+="</div>";
+                        // content+="</div>";
+                        // content+="<div><span style='float:right;'><i class='glyphicon glyphicon-star-empty' ></i></span>  <span ><i class='glyphicon glyphicon-user' title='支持人数'></i> </span>支持人数:"+n.supporter+"</div>";
                         content+="</div>";
                         content+="</div>";
                         content+="</div>";
@@ -521,11 +545,11 @@
 
                 } else {
                     //查询数据失败
-                    layer.msg("设计类项目加载失败");
+                    layer.msg("农业类项目加载失败");
                 }
             },
             error : function () {
-                layer.msg("设计类项目加载失败");
+                layer.msg("农业类项目加载失败");
             }
         });
     }
@@ -561,15 +585,15 @@
                         content+="</h3>";
                         content+="<p>";
                         content+="<div style='float:left;'><i class='glyphicon glyphicon-screenshot' title='目标金额' ></i> ￥"+n.money+" </div>";
-                        content+="<div style='float:right;'><i title='截至日期' class='glyphicon glyphicon-calendar'></i>"+n.createdate+" </div>";
+                        // content+="<div style='float:right;'><i title='截至日期' class='glyphicon glyphicon-calendar'></i>"+n.createdate+" </div>";
                         content+="</p>";
                         content+="<br>";
-                        content+="<div class='progress' style='margin-bottom: 4px;'>";
-                        content+="<div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width: "+n.completion+"%; color: green'>";
-                        content+="<span >"+n.completion+"% </span>";
-                        content+="</div>";
-                        content+="</div>";
-                        content+="<div><span style='float:right;'><i class='glyphicon glyphicon-star-empty' ></i></span>  <span ><i class='glyphicon glyphicon-user' title='支持人数'></i> </span>支持人数:"+n.supporter+"</div>";
+                        // content+="<div class='progress' style='margin-bottom: 4px;'>";
+                        // content+="<div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width: "+n.completion+"%; color: green'>";
+                        // content+="<span >"+n.completion+"% </span>";
+                        // content+="</div>";
+                        // content+="</div>";
+                        // content+="<div><span style='float:right;'><i class='glyphicon glyphicon-star-empty' ></i></span>  <span ><i class='glyphicon glyphicon-user' title='支持人数'></i> </span>支持人数:"+n.supporter+"</div>";
                         content+="</div>";
                         content+="</div>";
                         content+="</div>";
@@ -579,11 +603,11 @@
 
                 } else {
                     //查询数据失败
-                    layer.msg("设计类项目加载失败");
+                    layer.msg("其他类项目加载失败");
                 }
             },
             error : function () {
-                layer.msg("设计类项目加载失败");
+                layer.msg("其他类项目加载失败");
             }
         });
     }
