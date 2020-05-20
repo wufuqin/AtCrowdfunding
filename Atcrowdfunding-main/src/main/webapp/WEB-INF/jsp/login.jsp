@@ -50,8 +50,9 @@
         </div>
         <div class="form-group has-success has-feedback">
             <select class="form-control" id="type" name="type" >
+                <option value="null" selected>请选择账户类型</option>
                 <option value="member">会员</option>
-                <option value="user" selected>管理</option>
+                <option value="user">管理</option>
             </select>
         </div>
 
@@ -90,7 +91,6 @@
         var userpswd = $("#userpswd");
         var checkCode = $("#checkCode");
         var type = $("#type");
-
         $.ajax({
             type : "POST",
             data : {
@@ -113,6 +113,7 @@
                         window.location.href = "${APP_PATH}/member.htm";   //跳转到前台主页面
                     }else {
                         layer.msg("选择的登录类型不合法");
+                        refreshCode(); //自动切换验证码
                     }
                 }else {
                     layer.msg(result.message);
