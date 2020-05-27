@@ -57,8 +57,7 @@
 	</update>
 
 	<!-- 根据id查询 -->
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="java.lang.Integer">
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		select id, loginacct, userpswd, username, email, createtime
 		from t_user
 		where id = #{id,jdbcType=INTEGER}

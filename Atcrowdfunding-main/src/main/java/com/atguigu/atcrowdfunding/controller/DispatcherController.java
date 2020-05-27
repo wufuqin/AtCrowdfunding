@@ -1,27 +1,23 @@
 package com.atguigu.atcrowdfunding.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.atguigu.atcrowdfunding.bean.Member;
-import com.atguigu.atcrowdfunding.bean.Permission;
+import com.atguigu.atcrowdfunding.bean.*;
+import com.atguigu.atcrowdfunding.potal.service.DrawService;
 import com.atguigu.atcrowdfunding.potal.service.MemberService;
-import com.atguigu.atcrowdfunding.util.AjaxResult;
-import com.atguigu.atcrowdfunding.util.MD5Util;
-import com.atguigu.atcrowdfunding.util.SendEmail;
+import com.atguigu.atcrowdfunding.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.atguigu.atcrowdfunding.bean.User;
 import com.atguigu.atcrowdfunding.manager.service.UserService;
-import com.atguigu.atcrowdfunding.util.Const;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -36,6 +32,9 @@ public class DispatcherController {
 
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private DrawService drawService;
 
     //会员登录成功之后的主页面
     @RequestMapping("/afterSuccessfulLoginIndex")
@@ -314,6 +313,163 @@ public class DispatcherController {
         //修改会员的账号激活状态 status = "Y"
         memberService.updateMemberStatusByLoginacct(loginacct);
         return "activateAccount";
+    }
+
+//============================================================================================================================
+    //去到抽签页面
+    @RequestMapping("/draw")
+    public String draw(){
+        return "draw/draw";
+    }
+
+    //去到查看抽签信息页面
+    @RequestMapping("/showDrawInfo")
+    public String showDrawInfo(){
+        return "draw/showDrawInfo";
+    }
+
+    //完成抽签
+    @ResponseBody
+    @RequestMapping("/doDraw")
+    public synchronized Object doDraw(Draw draw, HttpSession session){
+        AjaxResult result = new AjaxResult();
+
+        //设置时间格式
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //创建一个日期对象
+        Date date = new Date();
+        String createTime = sdf.format(date);
+        draw.setCreateTime(createTime);  //抽签时间
+
+        try {
+            //生成抽签号
+            /*//int drawId = RandomNumber.rand();
+            //查询数据库，判断本次抽签号与学号是否已经存在
+            List<String> studentIdList = drawService.queryStudentId(draw.getStudentId()); //学号是否存在
+            if (studentIdList.size()>= 1){
+                result.setMessage("您已经抽过签了");
+                result.setSuccess(false);
+                return result;
+            }
+            List<Integer> drawIdList = drawService.queryDrawId(drawId);         //签号是否存在
+            if (drawIdList.size()>= 1){
+                result.setMessage("当前签已经被抽走，请重新抽签");
+                result.setSuccess(false);
+                return result;
+            }*/
+
+            //查询数据库中的抽签号
+            List<DrawId> drawIdList = drawService.queryDrawIdList();
+
+            //将集合中的第一个数当做抽签号
+            Integer drawId = drawIdList.get(0).getDraw();
+
+            //查询数据库，判断本次抽签号与学号是否已经存在
+            List<String> studentIdList = drawService.queryStudentId(draw.getStudentId()); //学号是否存在
+            if (studentIdList.size()>= 1){
+                result.setMessage("您已经抽过签了");
+                result.setSuccess(false);
+                return result;
+            }
+            List<Integer> List = drawService.queryDrawId(drawId);         //签号是否存在
+            if (List.size()>= 1){
+                result.setMessage("当前签已经被抽走，请重新抽签");
+                result.setSuccess(false);
+                return result;
+            }
+
+
+            draw.setDraw(drawId);
+            session.setAttribute("drawId",drawId);
+            //添加新的抽签信息
+            drawService.AddDrawInfo(draw);
+            //删除抽签号表中的对应签号
+            drawService.deleteDrawIdInfoByDraw(drawId);
+
+            result.setSuccess(true);
+            return result;
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("抽签失败,请重新抽签");
+            e.printStackTrace();
+            return result;
+        }
+    }
+
+    //去到抽签成功提示页面
+    @RequestMapping("/showDrawId")
+    public String showDrawId(HttpSession session, Map<String, Integer> map){
+        //取出session中的签号
+        int drawId = (Integer) session.getAttribute("drawId");
+        map.put("drawId",drawId);
+
+        return "draw/showDrawId";
+    }
+
+    //加载完成抽签的数据
+    @ResponseBody
+    @RequestMapping("drawInfo")
+    public Object doIndex(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno, @RequestParam(value = "pagesize", required = false, defaultValue = "38") Integer pagesize){
+        //创建一个用于存储查询得到的数据集对象
+        AjaxResult result = new AjaxResult();
+        try {
+            //调用service层查询方法，返回一个分页数据对象
+            Page page = drawService.queryDrawPage(pageno, pagesize);
+            //设置查询状态
+            result.setSuccess(true);
+            //存储查询到的数据
+            result.setPage(page);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("查询数据失败...");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    //批量删除抽签数据
+    @ResponseBody
+    @RequestMapping("/doDeleteBatch")
+    public Object doDeleteBatch(Integer[] id){
+        AjaxResult result = new AjaxResult();
+        try {
+            int count = drawService.deleteBatchDraw(id);
+            result.setSuccess(count == id.length);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("删除数据失败");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    //开启新一轮抽签
+    @ResponseBody
+    @RequestMapping("/newDraw")
+    public Object newDraw(){
+        AjaxResult result = new AjaxResult();
+        DrawId drawId = new DrawId();
+
+        try {
+            //删两个表中的全部数据
+            drawService.deleteDrawTableInfo();    //删除抽签表中的所有数据
+            drawService.deleteDrawIdTableInfo();  //删除抽签号表中的全部数据
+
+            //重新添加数据到抽签号表中
+            List<Integer> randList = RandomNumber.rand();  //获得一个1-38的随机数集合
+            for (Integer number : randList) {
+                //循环添加数据到抽签号表中
+                drawId.setDraw(number);
+                drawService.addDrawId(drawId);
+            }
+
+            result.setSuccess(true);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("初始化数据失败");
+            e.printStackTrace();
+        }
+        return result;
     }
 
 }

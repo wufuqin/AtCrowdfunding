@@ -45,6 +45,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		uri.add("/project/publishOthersProject.do"); //其他项目
 		uri.add("/potalProject/index.htm"); //其他项目
 
+		uri.add("/draw.htm"); //抽签页面
+		uri.add("/doDraw.do"); //完成抽签
+		uri.add("/showDrawInfo.htm"); //抽签信息页面
+		uri.add("/showDrawId.htm"); //抽签成功跳转页面
+		uri.add("/drawInfo.do"); //查询抽签数据抽签
+		uri.add("/doDeleteBatch.do"); //批量删除抽签数据
+		uri.add("/newDraw.do"); //开启新一轮抽签
+
 		//获取请求路径.
 		String servletPath = request.getServletPath();
 		

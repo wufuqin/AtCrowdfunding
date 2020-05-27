@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.atguigu.atcrowdfunding.potal.dao.DrawMapper" >
+
+    <!--抽签模块的映射配置文件-->
+
+    <!--封装结果集-->
+    <resultMap id="BaseResultMap" type="com.atguigu.atcrowdfunding.bean.Draw" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="draw" property="draw" jdbcType="INTEGER" />
+        <result column="studentId" property="studentId" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="createTime" property="createTime" jdbcType="CHAR" />
+    </resultMap>
+
+	<resultMap id="BaseResultMapDraw" type="com.atguigu.atcrowdfunding.bean.DrawId" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="draw" property="draw" jdbcType="INTEGER" />
+	</resultMap>
+
+    <!--学号是否存在-->
+    <select id="queryStudentId" parameterType="String" resultMap="BaseResultMap">
+		select studentId
+		from t_draw
+		where studentId=#{studentId}
+	</select>
+
+	<!--学号是否存在-->
+	<select id="queryDrawId" parameterType="int" resultMap="BaseResultMap">
+		select draw
+		from t_draw
+		where draw=#{draw}
+	</select>
+
+    <!--添加新的抽签信息-->
+    <insert id="AddDrawInfo" parameterType="com.atguigu.atcrowdfunding.bean.Draw">
+		insert
+		into t_draw (id, draw, studentId, name, createTime)
+		values
+		(#{id,jdbcType=INTEGER},
+		 #{draw,jdbcType=INTEGER},
+		 #{studentId,jdbcType=CHAR},
+		 #{name,jdbcType=VARCHAR},
+		 #{createTime,jdbcType=CHAR})
+	</insert>
+
+	<!-- 查询分页数据 -->
+	<select id="queryDrawList" resultMap="BaseResultMap">
+		select id, draw, studentId, name, createTime
+		from t_draw
+		order by draw asc
+		limit #{startIndex},#{pagesize}
+	</select>
+
+	<!-- 查询总的记录条数 -->
+	<select id="queryDrawCount"  resultType="int">
+		select count(*)
+		from t_draw
+	</select>
+
+	<!-- 根据id批量删除抽签数据 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete
+		from t_draw
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+
+    <!-- 删除抽签表中的所有数据 -->
+    <delete id="deleteDrawTableInfo">
+		delete
+		from t_draw
+	</delete>
+
+    <!-- 删除抽签号表中的全部数据 -->
+    <delete id="deleteDrawIdTableInfo">
+		delete
+		from t_drawid
+	</delete>
+
+    <!--循环添加数据到抽签号表中-->
+    <insert id="addDrawId" parameterType="com.atguigu.atcrowdfunding.bean.DrawId">
+		insert
+		into t_drawid (id, draw)
+		values
+		(#{id,jdbcType=INTEGER},
+		 #{draw,jdbcType=INTEGER})
+	</insert>
+
+	<!--查询数据库中的抽签号-->
+	<select id="queryDrawIdList" parameterType="com.atguigu.atcrowdfunding.bean.DrawId" resultMap="BaseResultMapDraw">
+		select draw
+		from t_drawid
+	</select>
+
+	<!-- 根据id批量删除抽签数据 -->
+	<delete id="deleteDrawIdInfoByDraw" parameterType="java.lang.Integer">
+		delete
+		from t_drawid
+		where draw = #{drawId,jdbcType=INTEGER}
+	</delete>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
